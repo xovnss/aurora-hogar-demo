@@ -1,4 +1,4 @@
-// Temas de temporada para el catálogo de clientes.
+// Tema del catálogo (solo el normal, en naranja).
 // Cada tema recolorea TODO el catálogo (botones, encabezado, logo, secciones…) y
 // cambia el hero (portada grande), el logo y las portadas de cada sección por
 // imágenes hechas a la medida de la temporada. Rosy elige el tema en /subir.
@@ -39,60 +39,18 @@ export function secImgTema(t: Tema, sectionId: string): string | null {
   return `${t.secDir}/${slug}.jpg`;
 }
 
-const SECS_FULL = ["bano", "cocina-y-mesa", "cortinas", "decoracion", "halloween", "liquidacion", "navidad", "novedades", "recamara", "sala"];
+const SECS_FULL = ["bano", "cocina-y-mesa", "cortinas", "decoracion", "liquidacion", "novedades", "recamara", "sala"];
 
 export const TEMAS: Tema[] = [
   {
-    id: "ninguno", label: "Normal", emoji: "🩵",
+    id: "ninguno", label: "Normal", emoji: "🧡",
     vars: {
       "--color-aurora": "#f97316", "--color-aurora-dark": "#c2410c",
       "--color-aurora-deep": "#7c2d12", "--color-aurora-light": "#fff1e6", "--color-cream": "#fffdfb",
     },
     hero: "/temas/normal/hero.jpg", logo: "/temas/normal/logo.png",
     secDir: "/temas/normal/sec", secSet: SECS_FULL,
-    swatch: ["#7c2d12", "#f97316"], caen: [], ocultaTemp: [],
-  },
-  {
-    id: "inauguracion", label: "Inauguración", emoji: "🎉",
-    vars: {
-      "--color-aurora": "#2f5fd0", "--color-aurora-dark": "#9a3412",
-      "--color-aurora-deep": "#14307a", "--color-aurora-light": "#e8edfb", "--color-cream": "#f5f8ff",
-    },
-    hero: "/temas/inauguracion/hero.jpg", logo: "/temas/inauguracion/logo.png",
-    secDir: "/temas/inauguracion/sec", secSet: SECS_FULL,
-    swatch: ["#9a3412", "#c9a227"], caen: ["✨"], ocultaTemp: [],
-  },
-  {
-    id: "halloween", label: "Halloween", emoji: "🎃",
-    vars: {
-      "--color-aurora": "#d2691e", "--color-aurora-dark": "#a8511a",
-      "--color-aurora-deep": "#3f2a1d", "--color-aurora-light": "#fceee1", "--color-cream": "#fbf6f1",
-    },
-    hero: "/temas/halloween/hero.jpg", logo: "/temas/halloween/logo.png",
-    // Octubre: Ximena pidió (3-oct-2026) que la sección de Navidad SÍ salga en el tema de
-    // Halloween, porque la mercancía navideña ya está en piso y se vende desde octubre.
-    secDir: "/temas/halloween/sec", secSet: SECS_FULL,
-    swatch: ["#3f2a1d", "#d2691e"], caen: ["🦇", "🕸️"], ocultaTemp: [],
-  },
-  {
-    id: "navidad", label: "Navidad", emoji: "🎄",
-    vars: {
-      "--color-aurora": "#2f7d4a", "--color-aurora-dark": "#1f5c33",
-      "--color-aurora-deep": "#143d22", "--color-aurora-light": "#e7f2ea", "--color-cream": "#f4faf5",
-    },
-    hero: "/temas/navidad/hero.jpg", logo: "/temas/navidad/logo.png",
-    secDir: "/temas/navidad/sec", secSet: SECS_FULL.filter((s) => s !== "halloween"),
-    swatch: ["#143d22", "#c1121f"], caen: ["❄️"], ocultaTemp: ["halloween"],
-  },
-  {
-    id: "madres", label: "Día de las Madres", emoji: "🌷",
-    vars: {
-      "--color-aurora": "#6f7d5c", "--color-aurora-dark": "#5c6a49",
-      "--color-aurora-deep": "#4a5740", "--color-aurora-light": "#f7edf1", "--color-cream": "#fbf5f7",
-    },
-    hero: "/temas/madres/hero.jpg", logo: "/temas/madres/logo.png",
-    secDir: "/temas/madres/sec", secSet: SECS_FULL,
-    swatch: ["#6f7d5c", "#e7a9bf"], caen: ["🌸"], ocultaTemp: ["halloween", "navidad"],
+    swatch: ["#7c2d12", "#f97316"], caen: [], ocultaTemp: ["halloween", "navidad"],
   },
 ];
 

@@ -283,7 +283,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             disabled={agotado}
             onClick={agregar}
             className={`order-4 mt-3 rounded-full px-6 py-3 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-gray-300 disabled:shadow-none sm:py-3.5 ${
-              // Sigue el tema de temporada (naranja en Halloween, etc.), igual que el botón
+              // Sigue el tema de temporada (naranja), igual que el botón
               // "Agregar" de las tarjetas. Antes estaba fijo en azul marino. (Ximena, 10-oct-2026)
               added ? "bg-green-500" : "bg-gradient-to-r from-aurora-deep to-aurora-dark"
             }`}

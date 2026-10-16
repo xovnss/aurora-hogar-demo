@@ -142,18 +142,6 @@ export const FAMILIAS: Familia[] = [
     colores: ["Gris", "Marfil", "Café"],
     descripcion: "🏡 *Tapete de pelo alto*\n📏 *Medida:* 1.60 × 2.30 m.\n✨ *Detalles:* suave al pisar, base antiderrapante.",
   },
-  {
-    linea: "ADO-NAV", nombre: "Adorno Navideño", catalogo: "Decoración", categoria: "Navidad",
-    publico: 320, socio: 220, tags: [2],
-    colores: ["Modelo 1", "Modelo 2", "Modelo 3", "Modelo 4", "Modelo 5"],
-    descripcion: "🎄 *Adorno navideño*\n✨ *Detalles:* figura de peluche para repisa o mesa.",
-  },
-  {
-    linea: "COR-NAV", nombre: "Cortina Navideña Bordada", catalogo: "Decoración", categoria: "Navidad",
-    publico: 590, socio: 390, tags: [2],
-    colores: ["Modelo 1", "Modelo 2", "Modelo 3"],
-    descripcion: "🎄 *Cortina navideña*\n✨ *Detalles:* bordado de temporada, se quita y se guarda para el año que entra.",
-  },
 ];
 
 const SIZE_NAMES: Record<string, string> = { I: "Individual", M: "Matrimonial", Q: "Queen", K: "King" };

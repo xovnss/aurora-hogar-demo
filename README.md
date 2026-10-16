@@ -41,8 +41,7 @@ blanca** en PDF (media hoja por producto, con índice y portada).
 |---|---|
 | Productos, precios, colores y medidas | `src/lib/demo-datos.ts` → la lista `FAMILIAS` |
 | Nombre de la tienda | `src/lib/config.ts` → `SITE.name` |
-| Logo | `public/aurora.png` (fondo claro), `public/aurora-blanco.png` (fondo oscuro) y `public/temas/<tema>/logo.png` |
-| Tema de temporada | `.env.local` → `NEXT_PUBLIC_TEMA_DEMO` = `ninguno`, `navidad` o `halloween` |
+| Logo | `public/aurora.png` (fondo claro), `public/aurora-blanco.png` (fondo oscuro) y `public/temas/normal/logo.png` |
 | WhatsApp del pedido | `.env.local` → `NEXT_PUBLIC_WHATSAPP` |
 
 ## Cómo está hecha por dentro

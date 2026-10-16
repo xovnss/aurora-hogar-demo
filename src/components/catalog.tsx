@@ -371,8 +371,8 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <img src={portadaUrl || t.hero} alt={`Catálogo Aurora ${mes} — Duerme bien, vive bien`}
             className="absolute inset-0 h-full w-full object-cover object-left sm:object-center md:object-top" />
           {/* Botones: en celular centrados hasta abajo; en compu a la izquierda a media altura */}
-          <div className="absolute left-[6%] top-[58%] flex flex-wrap justify-start gap-3 sm:left-[3%] sm:top-[62%] md:top-[66%] xl:left-[4.5%] xl:top-[70%] sm:gap-4">
-            <button onClick={irAComprar} className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-aurora-deep to-aurora-dark px-7 py-3 text-base font-bold text-white shadow-[0_10px_26px_-8px_rgba(14,38,80,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_-8px_rgba(14,38,80,0.82)] sm:gap-2 sm:px-12 sm:py-5 sm:text-xl xl:px-10 xl:py-4 xl:text-lg">
+          <div className="absolute left-[6%] top-[63%] flex flex-wrap justify-start gap-3 sm:left-[3%] sm:top-[62%] md:top-[66%] xl:left-[4.5%] xl:top-[70%] sm:gap-4">
+            <button onClick={irAComprar} className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-aurora-deep to-aurora-dark px-7 py-3 text-base font-bold text-white shadow-[0_10px_26px_-8px_rgba(124,45,18,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_-8px_rgba(124,45,18,0.82)] sm:gap-2 sm:px-12 sm:py-5 sm:text-xl xl:px-10 xl:py-4 xl:text-lg">
               Comprar ahora <span className="transition group-hover:translate-x-1 sm:text-xl">→</span>
             </button>
             {hayLiq && (
