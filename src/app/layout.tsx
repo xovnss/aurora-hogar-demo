@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`h-full antialiased ${poppins.variable} ${fraunces.variable}`}>
-      <body className="min-h-full">
+      <body className="min-h-full pb-16">
         <CartProvider>{children}</CartProvider>
         <DemoNav />
       </body>

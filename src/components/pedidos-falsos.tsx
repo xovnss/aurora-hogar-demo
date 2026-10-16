@@ -45,7 +45,7 @@ export default function PedidosFalsos({ products }: { products: Product[] }) {
 
   if (!t) return null;
   return (
-    <div className={`fixed bottom-5 left-5 z-40 w-[430px] max-w-[calc(100vw-2rem)] transition-all duration-500 ${show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-5 opacity-0"}`}>
+    <div className={`fixed bottom-16 left-4 sm:bottom-5 sm:left-5 z-40 w-[430px] max-w-[calc(100vw-2rem)] transition-all duration-500 ${show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-5 opacity-0"}`}>
       <div className="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-gradient-to-br from-[#7c2d12] to-[#c2410c] p-3 text-white shadow-[0_24px_55px_-18px_rgba(80, 45, 14,.8)]">
         <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-white/15 ring-2 ring-white/25">
           {t.prod.imageUrl ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={t.prod.imageUrl} alt="" className="h-full w-full object-cover" /> : null}

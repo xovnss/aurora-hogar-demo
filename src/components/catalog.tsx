@@ -287,7 +287,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
 
       {/* Header */}
       <header className="sticky top-0 z-30 border-b border-black/5 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 pt-2 pb-2.5">
+        <div className="relative mx-auto flex max-w-7xl items-center gap-4 px-4 pt-2 pb-2.5">
           {/* Menú ☰ (celular): adentro van todas las pestañas */}
           <button onClick={() => setMenuOpen((v) => !v)} aria-label="Menú" aria-expanded={menuOpen}
             className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-aurora-deep transition hover:bg-aurora-light xl:hidden">
@@ -301,7 +301,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
               </span>
             )}
           </button>
-          <span className="shrink-0 -mt-2">
+          <span className={"shrink-0 -mt-2 max-xl:absolute max-xl:left-1/2 max-xl:-translate-x-1/2 " + (searchOpen ? "max-sm:hidden" : "")}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={t.logo} alt="Aurora" className="h-12 w-auto sm:h-16" />
           </span>
@@ -371,7 +371,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <img src={portadaUrl || t.hero} alt={`Catálogo Aurora ${mes} — Duerme bien, vive bien`}
             className="absolute inset-0 h-full w-full object-cover object-left sm:object-center md:object-top" />
           {/* Botones: en celular centrados hasta abajo; en compu a la izquierda a media altura */}
-          <div className="absolute left-[6%] top-[63%] flex flex-wrap justify-start gap-3 sm:left-[3%] sm:top-[62%] md:top-[66%] xl:left-[4.5%] xl:top-[70%] sm:gap-4">
+          <div className="absolute left-1/2 top-[63%] flex -translate-x-1/2 flex-wrap justify-center gap-3 sm:left-[3%] sm:translate-x-0 sm:justify-start sm:top-[62%] md:top-[66%] xl:left-[4.5%] xl:top-[70%] sm:gap-4">
             <button onClick={irAComprar} className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-aurora-deep to-aurora-dark px-7 py-3 text-base font-bold text-white shadow-[0_10px_26px_-8px_rgba(124,45,18,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_-8px_rgba(124,45,18,0.82)] sm:gap-2 sm:px-12 sm:py-5 sm:text-xl xl:px-10 xl:py-4 xl:text-lg">
               Comprar ahora <span className="transition group-hover:translate-x-1 sm:text-xl">→</span>
             </button>
@@ -392,14 +392,14 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
       {!buscando && (
         <section id="comprar" className="w-full px-4 pt-6 pb-6 sm:px-8 sm:pt-16 sm:pb-16">
           <h2 className="mb-5 text-center font-display text-2xl font-bold text-aurora-deep sm:mb-11 sm:text-3xl">Compra por categoría</h2>
-          <div className="no-scrollbar mx-auto flex max-w-7xl snap-x gap-x-6 [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto overflow-x-auto px-1 py-3 sm:gap-x-10 xl:gap-x-12">
+          <div className="mx-auto grid max-w-sm grid-cols-3 justify-items-center gap-x-3 gap-y-5 px-1 py-3 sm:flex sm:max-w-7xl sm:snap-x sm:justify-start sm:gap-x-10 sm:overflow-x-auto sm:no-scrollbar xl:gap-x-12 sm:[&>*:first-child]:ml-auto sm:[&>*:last-child]:mr-auto">
             {secciones.map((s) => {
               const on = sec?.id === s.id;
               const usaFoto = !s.special || s.special === "navidad" || s.special === "halloween";
               const img = secImgTema(t, s.id) || CAT_IMG[s.id] || (usaFoto ? secImg[s.id] : "");
               return (
                 <button key={s.id} onClick={() => irASeccion(s.id)} className="group flex shrink-0 snap-start flex-col items-center gap-2.5">
-                  <span className={"relative flex aspect-square w-[72px] items-center justify-center overflow-hidden rounded-full ring-2 ring-offset-2 ring-offset-white transition sm:w-[124px] " + (on ? "ring-aurora" : "ring-transparent group-hover:ring-aurora/40")}>
+                  <span className={"relative flex aspect-square w-[84px] items-center justify-center overflow-hidden rounded-full ring-2 ring-offset-2 ring-offset-white transition sm:w-[124px] " + (on ? "ring-aurora" : "ring-transparent group-hover:ring-aurora/40")}>
                     {img ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={img} alt={s.id} className="h-full w-full object-cover" />
@@ -435,7 +435,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
       {/* Categorías de la sección (se ocultan al buscar) */}
       {!buscando && sec && (
         <section className="sticky top-[64px] z-20 mt-8 w-full bg-white/85 px-4 backdrop-blur">
-          <div className="no-scrollbar mx-auto flex max-w-7xl gap-2 overflow-x-auto py-3 sm:flex-wrap sm:justify-center sm:overflow-visible">
+          <div className="no-scrollbar mx-auto flex max-w-7xl gap-2 overflow-x-auto py-3 sm:flex-wrap sm:justify-center sm:overflow-visible [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto">
             <Chip label="Todas" active={cat === "Todas"} onClick={() => pick("Todas")} />
             {categorias.map(([c]) => (
               <Chip key={c} label={c} active={cat === c} onClick={() => pick(c)} />
@@ -446,7 +446,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
 
       {/* Filtros: medida y precio (10-oct-2026). Solo salen si hay de dónde escoger. */}
       {(medidas.length > 1 || base.length > 6) && (
-        <section className="mx-auto mt-1 flex max-w-7xl flex-wrap items-center gap-2 px-4">
+        <section className="mx-auto mt-1 flex max-w-7xl flex-wrap items-center justify-center gap-2 px-4 sm:justify-start">
           {medidas.length > 1 && (
             <>
               <span className="text-[12px] font-bold uppercase tracking-wide text-stone-400">Medida</span>
