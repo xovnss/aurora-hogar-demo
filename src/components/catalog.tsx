@@ -392,7 +392,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
       {!buscando && (
         <section id="comprar" className="w-full px-4 pt-6 pb-6 sm:px-8 sm:pt-16 sm:pb-16">
           <h2 className="mb-5 text-center font-display text-2xl font-bold text-aurora-deep sm:mb-11 sm:text-3xl">Compra por categoría</h2>
-          <div className="no-scrollbar mx-auto flex max-w-7xl snap-x gap-x-6 overflow-x-auto px-1 py-3 sm:gap-x-10 xl:gap-x-12">
+          <div className="no-scrollbar mx-auto flex max-w-7xl snap-x gap-x-6 [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto overflow-x-auto px-1 py-3 sm:gap-x-10 xl:gap-x-12">
             {secciones.map((s) => {
               const on = sec?.id === s.id;
               const usaFoto = !s.special || s.special === "navidad" || s.special === "halloween";
