@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme {
+  --color-aurora: #5ba3dc;
+  --color-aurora-dark: #2e6da4;
+  --color-aurora-deep: #0e2650;
+  --color-aurora-light: #eaf4fb;
+  --color-cream: #fbfdff;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1f2a37;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Decoración de temporada: objetos que caen por la pantalla */
+@keyframes pf-caer {
+  0% { transform: translateY(-12vh) rotate(0deg); }
+  100% { transform: translateY(114vh) rotate(360deg); }
+}
+.pf-caer { position: absolute; top: 0; will-change: transform; animation: pf-caer linear infinite; }
+@media (prefers-reduced-motion: reduce) { .pf-caer { display: none; } }
+
+/* Poppins para toda la plataforma (títulos en bold, el resto normal) */
+.font-display { font-family: var(--font-display), ui-sans-serif, "Segoe UI", system-ui, sans-serif; letter-spacing: -0.01em; }
+/* Serif editorial (títulos del catálogo, estilo Casper) */
+.font-serif { font-family: var(--font-serif), Georgia, "Times New Roman", serif; }
+
+/* Fondo del catálogo: blanco con nubes suaves azul claro (grupos de puffs para look realista) */
+.pf-clouds {
+  background-color: #ffffff;
+  background-image:
+    /* nube arriba-izquierda */
+    radial-gradient(22% 26% at 9% 13%, rgba(198, 223, 247, 0.7), transparent 70%),
+    radial-gradient(26% 30% at 15% 11%, rgba(198, 223, 247, 0.7), transparent 70%),
+    radial-gradient(20% 24% at 21% 14%, rgba(198, 223, 247, 0.6), transparent 70%),
+    /* nube arriba-derecha */
+    radial-gradient(20% 24% at 80% 8%, rgba(206, 229, 250, 0.6), transparent 70%),
+    radial-gradient(24% 28% at 87% 7%, rgba(206, 229, 250, 0.6), transparent 70%),
+    /* nube centro-derecha */
+    radial-gradient(24% 30% at 82% 46%, rgba(196, 222, 247, 0.5), transparent 72%),
+    radial-gradient(20% 26% at 90% 48%, rgba(196, 222, 247, 0.45), transparent 72%),
+    /* nube abajo-izquierda */
+    radial-gradient(24% 30% at 12% 78%, rgba(206, 229, 250, 0.5), transparent 72%),
+    radial-gradient(20% 26% at 19% 80%, rgba(206, 229, 250, 0.45), transparent 72%),
+    /* nube abajo-centro */
+    radial-gradient(24% 30% at 50% 90%, rgba(198, 223, 247, 0.45), transparent 72%),
+    radial-gradient(20% 26% at 57% 92%, rgba(198, 223, 247, 0.4), transparent 72%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* ================= Plataforma interna — estilo CourseCo, colores Aurora (claro/pro) ================= */
+@layer components {
+.pf-page {
+  background: linear-gradient(180deg, #e9f0fa 0%, #f4f8fd 60%, #e8eff8 100%);
+  color: #1e2b40;
+}
+/* Sidebar con degradado Aurora + glassmorphism (deja ver un poco el fondo) */
+.pf-side {
+  background: linear-gradient(180deg, rgba(14, 38, 80, 0.92) 0%, rgba(23, 64, 121, 0.88) 55%, rgba(46, 109, 164, 0.82) 100%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+/* Tarjeta blanca limpia (estilo CourseCo) */
+.pf-card {
+  background: #ffffff;
+  border: 1px solid #e6ecf5;
+  border-radius: 22px;
+  box-shadow: 0 12px 32px -20px rgba(23, 42, 77, 0.30);
+}
+/* Banner heredado (ya no se usa en cabeceras) */
+.pf-head { background: linear-gradient(100deg, #2e6da4, #5ba3dc); }
+/* Icono pastel de sección (el emoji conserva sus colores normales) */
+.pf-sticker {
+  background: #e8f1fb;
+  border: 1px solid #d6e6f6;
+}
+/* Inputs limpios (tintes por celda los sobrescriben desde la capa utilities) */
+.pf-input {
+  background: #f5f8fc;
+  border: 1px solid #e3eaf3;
+  border-radius: 12px;
+  color: #0e2038;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.pf-input::placeholder { color: #94a3b8; font-weight: 400; }
+.pf-input:focus {
+  border-color: #5ba3dc;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(91, 163, 220, 0.20);
+}
+/* Botón principal: degradado Aurora (azul marino → azul cielo) */
+.pf-btn {
+  background: linear-gradient(100deg, #2e6da4, #5ba3dc);
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px -14px rgba(46, 109, 164, 0.65);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+.pf-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 16px 30px -14px rgba(46, 109, 164, 0.7); filter: brightness(1.04); }
+.pf-btn:disabled { background: #cbd5e1; color: #eef2f7; box-shadow: none; cursor: default; }
+/* Botón secundario claro */
+.pf-btn-ghost {
+  background: #ffffff;
+  border: 1px solid #e3eaf3;
+  color: #2e6da4;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pf-btn-ghost:hover { background: #f4f8fd; border-color: #cddff0; }
+/* Chip azul claro */
+.pf-chip {
+  background: #eaf4fb;
+  border: 1px solid #d6e6f6;
+  color: #2e6da4;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: background 0.15s;
+}
+.pf-chip:hover:not(:disabled) { background: #dcecf8; }
+.pf-chip:disabled { opacity: 0.5; }
+/* Título con degradado Aurora */
+.grad-text {
+  background: linear-gradient(100deg, #0e2650, #2e6da4 65%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+}
+
+/* Inputs numéricos sin flechitas (evita que el precio cambie al desplazarse/scroll) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
