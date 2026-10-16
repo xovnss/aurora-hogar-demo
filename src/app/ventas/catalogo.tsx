@@ -12,7 +12,7 @@ import type { Ficha } from "./ui";
 const SIZE_ORDER = ["Individual", "Matrimonial", "Matri Queen", "Queen", "King", "King Jumbo", "California King"];
 const norm = (s: string) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
-type Precios = "no" | "publico" | "miembro";
+type Precios = "no" | "publico" | "socio";
 type Layout = "compacto" | "revista" | "detallado";
 
 export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
@@ -114,7 +114,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
 
   return (
     <div className="mx-auto max-w-6xl pb-28">
-      <div className="mb-3 rounded-2xl bg-sky-50 px-4 py-3 ring-1 ring-sky-100">
+      <div className="mb-3 rounded-2xl bg-orange-50 px-4 py-3 ring-1 ring-orange-100">
         <p className="text-[13px] font-bold text-aurora-dark">📒 Catálogo para compartir</p>
         <p className="mt-0.5 text-[12px] leading-snug text-slate-500">
           Elige los productos y baja un PDF. Como viene <b>sin precios y sin la marca</b>, la revendedora
@@ -126,19 +126,19 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
         {/* ----- opciones ----- */}
         <div className="space-y-3">
           <div className="pf-card p-4">
-            <label className="mb-1 block text-[13px] font-bold text-[#0e2650]">Nombre de la tienda (opcional)</label>
+            <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Nombre de la tienda (opcional)</label>
             <input value={tienda} onChange={(e) => setTienda(e.target.value)} placeholder="Ej. Blancos Ivonne" className={inp} />
             <p className="mt-1 text-[11px] text-slate-400">Va en la portada y en cada hoja. Déjalo vacío si no quieres ningún nombre.</p>
-            <label className="mb-1 mt-3 block text-[13px] font-bold text-[#0e2650]">Contacto (opcional)</label>
+            <label className="mb-1 mt-3 block text-[13px] font-bold text-[#7c2d12]">Contacto (opcional)</label>
             <input value={contacto} onChange={(e) => setContacto(e.target.value)} placeholder="WhatsApp o @usuario" className={inp} />
           </div>
 
           <div className="pf-card p-4">
-            <p className="mb-2 text-[13px] font-bold text-[#0e2650]">Precios</p>
+            <p className="mb-2 text-[13px] font-bold text-[#7c2d12]">Precios</p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setPrecios("no")} className={pill(precios === "no")}>Sin precios</button>
               <button onClick={() => setPrecios("publico")} className={pill(precios === "publico")}>Público</button>
-              <button onClick={() => setPrecios("miembro")} className={pill(precios === "miembro")}>Miembros</button>
+              <button onClick={() => setPrecios("socio")} className={pill(precios === "socio")}>Socios</button>
             </div>
             {precios !== "no" && (
               <p className="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-[12px] font-semibold text-amber-700 ring-1 ring-amber-200">
@@ -146,13 +146,13 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
               </p>
             )}
 
-            <p className="mb-2 mt-4 text-[13px] font-bold text-[#0e2650]">Marca</p>
+            <p className="mb-2 mt-4 text-[13px] font-bold text-[#7c2d12]">Marca</p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setMarca(false)} className={pill(!marca)}>Sin marca (blanca)</button>
               <button onClick={() => setMarca(true)} className={pill(marca)}>Con logo Aurora</button>
             </div>
 
-            <p className="mb-2 mt-4 text-[13px] font-bold text-[#0e2650]">Cómo se ve</p>
+            <p className="mb-2 mt-4 text-[13px] font-bold text-[#7c2d12]">Cómo se ve</p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setLayout("revista")} className={pill(layout === "revista")}>Catálogo (media hoja)</button>
               <button onClick={() => setLayout("compacto")} className={pill(layout === "compacto")}>Lista (4 por hoja)</button>
@@ -167,11 +167,11 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
             </p>
 
             <label className="mt-4 flex cursor-pointer items-center gap-2 text-[13px] font-semibold text-slate-600">
-              <input type="checkbox" checked={portada} onChange={(e) => setPortada(e.target.checked)} className="h-4 w-4 accent-[#2e6da4]" />
+              <input type="checkbox" checked={portada} onChange={(e) => setPortada(e.target.checked)} className="h-4 w-4 accent-[#c2410c]" />
               Incluir portada
             </label>
             <label className="mt-2 flex cursor-pointer items-center gap-2 text-[13px] font-semibold text-slate-600">
-              <input type="checkbox" checked={indice} onChange={(e) => setIndice(e.target.checked)} className="h-4 w-4 accent-[#2e6da4]" />
+              <input type="checkbox" checked={indice} onChange={(e) => setIndice(e.target.checked)} className="h-4 w-4 accent-[#c2410c]" />
               Incluir índice (por sección, con número de hoja)
             </label>
           </div>
@@ -191,7 +191,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
           <div className="mt-2 flex flex-wrap gap-1.5">
             {secciones.map((s) => (
               <button key={s} onClick={() => { setSeccion(s); setQ(""); }}
-                className={"rounded-full px-3 py-1.5 text-[12px] font-bold transition " + (seccion === s && !nq ? "bg-[#0e2650] text-white" : "bg-gray-50 text-gray-500 ring-1 ring-gray-200 hover:ring-aurora")}>
+                className={"rounded-full px-3 py-1.5 text-[12px] font-bold transition " + (seccion === s && !nq ? "bg-[#7c2d12] text-white" : "bg-gray-50 text-gray-500 ring-1 ring-gray-200 hover:ring-aurora")}>
                 {s === "Liquidaciones" ? "🔥 " : ""}{s}
                 <span className="ml-1.5 opacity-60">{s === "Todos" ? fichas.length : fichas.filter((f) => secOf(f) === s).length}</span>
               </button>
@@ -217,7 +217,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
                       {on ? "✓" : "+"}
                     </span>
                   </div>
-                  <p className="truncate px-2 py-1.5 text-[11px] font-bold text-[#0e2650]">{f.base}</p>
+                  <p className="truncate px-2 py-1.5 text-[11px] font-bold text-[#7c2d12]">{f.base}</p>
                 </button>
               );
             })}
@@ -229,7 +229,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
       {/* ----- barra de abajo ----- */}
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3">
-          <p className="text-[13px] font-bold text-[#0e2650]">
+          <p className="text-[13px] font-bold text-[#7c2d12]">
             {elegidos.length === 0 ? "Aún no eliges productos" : `${elegidos.length} ${elegidos.length === 1 ? "producto" : "productos"} · ${hojas} ${hojas === 1 ? "hoja" : "hojas"}${portada ? " + portada" : ""}${indice ? " + índice" : ""}`}
           </p>
           {avance && avance.total > 1 && (

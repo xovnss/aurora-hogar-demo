@@ -212,7 +212,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             <p className="order-1 mt-2 whitespace-pre-line text-sm leading-relaxed text-gray-600">{renderNegritas(sel.descripcion)}</p>
           ) : null}
 
-          {/* Precios de la opción elegida — Público y Miembros lado a lado, mismo tamaño (van abajo) */}
+          {/* Precios de la opción elegida — Público y Socios lado a lado, mismo tamaño (van abajo) */}
           <div className="order-3 mt-3 space-y-2 rounded-2xl bg-gray-50 p-3">
             {esSaldo ? (
               <div className="rounded-xl bg-white p-4 text-center shadow-sm">
@@ -228,12 +228,12 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
               </div>
               {sel.precioMiembro != null ? (
                 <div className="rounded-xl bg-aurora-light/70 p-3 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-aurora">Miembros</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-aurora">Socios</p>
                   <p className="mt-0.5 text-2xl font-extrabold text-aurora">{money(sel.precioMiembro)}</p>
                 </div>
               ) : (
                 <div className="rounded-xl border border-dashed border-gray-200 p-3 text-center">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-300">Miembros</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-300">Socios</p>
                   <p className="mt-0.5 text-sm italic text-gray-300">—</p>
                 </div>
               )}
@@ -262,7 +262,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
 
             {sel.precioMiembro != null && (
               <div className="flex items-center justify-between gap-2 border-t border-gray-200 pt-2">
-                <p className="text-[11px] leading-snug text-gray-500">💙 {SITE.memberNote}</p>
+                <p className="text-[11px] leading-snug text-gray-500">🧡 {SITE.memberNote}</p>
                 {SITE.communityUrl && (
                   <a href={SITE.communityUrl} target="_blank" rel="noopener"
                      className="shrink-0 rounded-full bg-aurora-dark px-3 py-1 text-[11px] font-bold text-white hover:opacity-90">

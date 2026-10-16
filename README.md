@@ -27,7 +27,7 @@ Las contraseñas se cambian en `.env.local` (hay un `.env.example` de partida).
 ## Qué se puede enseñar
 
 **Catálogo:** secciones y subcategorías, buscador, filtros por medida y por precio, ficha con
-selector de color y medida, precio público y de miembros, "Mi lista" y el pedido por WhatsApp.
+selector de color y medida, precio público y de socios, "Mi lista" y el pedido por WhatsApp.
 
 **Fichas:** buscador, ficha con todos los colores, cotización y el **catálogo de etiqueta
 blanca** en PDF (media hoja por producto, con índice y portada).

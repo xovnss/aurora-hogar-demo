@@ -354,7 +354,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             {SITE.communityUrl && (
               <a href={SITE.communityUrl} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)}
                 className="mt-1 flex items-center justify-between rounded-2xl bg-gradient-to-r from-aurora-deep to-aurora-dark px-4 py-3.5 text-[1.05rem] font-bold text-white">
-                💙 Únete a la comunidad<span>→</span>
+                🧡 Únete a la comunidad<span>→</span>
               </a>
             )}
           </nav>
@@ -423,7 +423,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:gap-4 sm:px-6 sm:py-7">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 sm:text-[11px]">Comunidad Aurora</p>
-                <p className="mt-0.5 text-base font-extrabold sm:mt-1 sm:text-3xl">💙 Únete a nuestra comunidad</p>
+                <p className="mt-0.5 text-base font-extrabold sm:mt-1 sm:text-3xl">🧡 Únete a nuestra comunidad</p>
                 <p className="mt-0.5 text-[11px] leading-snug text-white/80 sm:mt-1 sm:text-sm">Obtén precios especiales en <b>TODOS</b> los productos.</p>
               </div>
               <span className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-aurora-dark sm:px-5 sm:py-2.5 sm:text-sm">Unirme →</span>
@@ -516,7 +516,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             <p className="mt-3 max-w-xs text-sm text-gray-500">Tienda de blancos. Sábanas, colchas, cortinas, toallas y todo para renovar tu hogar con comodidad y estilo.</p>
           </div>
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-wide text-[#16305b]">Categorías</p>
+            <p className="text-[13px] font-bold uppercase tracking-wide text-[#6b2410]">Categorías</p>
             <ul className="mt-3 space-y-1.5">
               {secciones.filter((s) => !s.special).slice(0, 6).map((s) => (
                 <li key={s.id}>
@@ -526,8 +526,8 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             </ul>
           </div>
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-wide text-[#16305b]">Comunidad</p>
-            <p className="mt-3 text-sm text-gray-500">Únete para el <b className="text-aurora-dark">precio de miembros</b> y enterarte de las ofertas.</p>
+            <p className="text-[13px] font-bold uppercase tracking-wide text-[#6b2410]">Comunidad</p>
+            <p className="mt-3 text-sm text-gray-500">Únete para el <b className="text-aurora-dark">precio de socios</b> y enterarte de las ofertas.</p>
             {SITE.communityUrl && (
               <a href={SITE.communityUrl} target="_blank" rel="noopener" className="mt-3 inline-block rounded-full bg-aurora px-4 py-2 text-sm font-bold text-white hover:bg-aurora-dark">Unirme →</a>
             )}

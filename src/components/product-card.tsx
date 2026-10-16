@@ -50,13 +50,13 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
       </div>
 
       <div className="flex flex-1 flex-col p-3.5 sm:p-4">
-        <h3 className="line-clamp-2 min-h-[2.5rem] text-[14.5px] font-semibold leading-snug text-[#16305b] sm:text-[15px]" title={g.base}>
+        <h3 className="line-clamp-2 min-h-[2.5rem] text-[14.5px] font-semibold leading-snug text-[#6b2410] sm:text-[15px]" title={g.base}>
           {g.base}
         </h3>
         <p className="mt-0.5 truncate text-[11.5px] text-gray-400">{desc}</p>
 
-        {/* Precios: SIEMPRE dos renglones (público arriba chico, miembros abajo grande).
-            El de miembros es el que más se vende, por eso es el número que domina. */}
+        {/* Precios: SIEMPRE dos renglones (público arriba chico, socios abajo grande).
+            El de socios es el que más se vende, por eso es el número que domina. */}
         <div className="mt-2.5">
           <p className="text-[12px] leading-none text-gray-400">
             <span className="uppercase tracking-wide">{rango ? "Desde" : "Público"}</span>{" "}
@@ -65,7 +65,7 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
           {g.minMiembro != null ? (
             <p className="mt-1 flex items-baseline gap-1.5 leading-none">
               <span className="text-[21px] font-extrabold text-aurora-dark">{money(g.minMiembro)}</span>
-              <span className="text-[11px] font-bold uppercase tracking-wide text-aurora">miembros</span>
+              <span className="text-[11px] font-bold uppercase tracking-wide text-aurora">socios</span>
             </p>
           ) : (
             <p className="mt-1 text-[21px] font-extrabold leading-none text-aurora-dark">{money(g.minPublico)}</p>

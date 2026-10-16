@@ -8,7 +8,7 @@ const TAMANOS = new Set([128, 256, 384, 512, 1024, 1920]);
 
 // Paleta suave; el color sale del id, así cada producto siempre tiene el suyo.
 const FONDOS = [
-  ["#eef2f7", "#dbe4ef"], ["#f6eeea", "#ead9d1"], ["#eaf1ec", "#d3e3d8"],
+  ["#fdf0e6", "#dbe4ef"], ["#f6eeea", "#ead9d1"], ["#eaf1ec", "#d3e3d8"],
   ["#f2eef7", "#ddd3ea"], ["#f7f2e8", "#ebdfc6"], ["#e9f0f4", "#cfe0e8"],
 ];
 

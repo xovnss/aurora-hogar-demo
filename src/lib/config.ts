@@ -3,7 +3,7 @@ export const SITE = {
   name: "Aurora Hogar",
   // Número de WhatsApp a donde llega el pedido (solo dígitos con lada). Ej: "5277112345678"
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "",
-  // Link a la comunidad (para el precio de miembros)
+  // Link a la comunidad (para el precio de socios)
   communityUrl: process.env.NEXT_PUBLIC_COMMUNITY_URL || "",
   // Si quedan <= a este número, se muestra "¡Solo quedan X!"
   lowStock: Number(process.env.NEXT_PUBLIC_LOW_STOCK || 10),
@@ -13,10 +13,10 @@ export const SITE = {
   // Mostrar los productos aunque estén en CERO, marcados como "Agotado" (Ximena, 5-oct-2026).
   // Antes se escondían; ahora la clienta los ve y puede preguntar si va a entrar mercancía.
   mostrarAgotados: (process.env.NEXT_PUBLIC_MOSTRAR_AGOTADOS ?? "true") !== "false",
-  brand: "#5BA3DC",
-  brandDark: "#2E6DA4",
-  // Aclaración del precio de miembros (se valida al cerrar el pedido con un asesor)
-  memberNote: "Tu precio de miembros se aplica al finalizar tu pedido con un asesor.",
+  brand: "#f97316",
+  brandDark: "#c2410c",
+  // Aclaración del precio de socios (se valida al cerrar el pedido con un asesor)
+  memberNote: "Tu precio de socios se aplica al finalizar tu pedido con un asesor.",
 };
 
 export function waLink(message: string) {

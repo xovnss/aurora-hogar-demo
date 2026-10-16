@@ -45,22 +45,22 @@ export const TEMAS: Tema[] = [
   {
     id: "ninguno", label: "Normal", emoji: "🩵",
     vars: {
-      "--color-aurora": "#5ba3dc", "--color-aurora-dark": "#2e6da4",
-      "--color-aurora-deep": "#0e2650", "--color-aurora-light": "#eaf4fb", "--color-cream": "#fbfdff",
+      "--color-aurora": "#f97316", "--color-aurora-dark": "#c2410c",
+      "--color-aurora-deep": "#7c2d12", "--color-aurora-light": "#fff1e6", "--color-cream": "#fffdfb",
     },
     hero: "/temas/normal/hero.jpg", logo: "/temas/normal/logo.png",
     secDir: "/temas/normal/sec", secSet: SECS_FULL,
-    swatch: ["#0e2650", "#5ba3dc"], caen: [], ocultaTemp: [],
+    swatch: ["#7c2d12", "#f97316"], caen: [], ocultaTemp: [],
   },
   {
     id: "inauguracion", label: "Inauguración", emoji: "🎉",
     vars: {
-      "--color-aurora": "#2f5fd0", "--color-aurora-dark": "#1e40af",
+      "--color-aurora": "#2f5fd0", "--color-aurora-dark": "#9a3412",
       "--color-aurora-deep": "#14307a", "--color-aurora-light": "#e8edfb", "--color-cream": "#f5f8ff",
     },
     hero: "/temas/inauguracion/hero.jpg", logo: "/temas/inauguracion/logo.png",
     secDir: "/temas/inauguracion/sec", secSet: SECS_FULL,
-    swatch: ["#1e40af", "#c9a227"], caen: ["✨"], ocultaTemp: [],
+    swatch: ["#9a3412", "#c9a227"], caen: ["✨"], ocultaTemp: [],
   },
   {
     id: "halloween", label: "Halloween", emoji: "🎃",

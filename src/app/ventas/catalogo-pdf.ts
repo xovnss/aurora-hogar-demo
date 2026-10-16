@@ -37,7 +37,7 @@ export type CatOpts = {
   productos: CatProd[];
   tienda?: string;        // nombre que va en la portada y en el pie (etiqueta blanca)
   contacto?: string;      // teléfono / @usuario de quien comparte
-  precios: "no" | "publico" | "miembro";
+  precios: "no" | "publico" | "socio";
   marca: boolean;         // true = sale el logo y los datos de Aurora
   layout: "compacto" | "revista" | "detallado";
   portada: boolean;
@@ -120,7 +120,7 @@ function corta(doc: jsPDF, texto: string, ancho: number, maxLineas: number): str
 
 function precioTexto(p: CatProd, modo: CatOpts["precios"]): string | null {
   if (modo === "no") return null;
-  if (modo === "miembro" && p.mem) return rango(p.mem[0], p.mem[1]);
+  if (modo === "socio" && p.mem) return rango(p.mem[0], p.mem[1]);
   return rango(p.pub[0], p.pub[1]);
 }
 
@@ -429,9 +429,9 @@ async function bloqueRevista(
   if (pr) {
     doc.setFont("helvetica", "bold").setFontSize(14).setTextColor(...NAVY);
     doc.text(pr, x + w - PAD, y + PAD + 10, { align: "right" });
-    if (opts.precios === "miembro") {
+    if (opts.precios === "socio") {
       doc.setFont("helvetica", "normal").setFontSize(6.8).setTextColor(...GRIS);
-      doc.text("precio de miembro", x + w - PAD, y + PAD + 14, { align: "right" });
+      doc.text("precio de socio", x + w - PAD, y + PAD + 14, { align: "right" });
     }
   }
 

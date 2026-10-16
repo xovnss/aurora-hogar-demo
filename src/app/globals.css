@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-aurora: #5ba3dc;
-  --color-aurora-dark: #2e6da4;
-  --color-aurora-deep: #0e2650;
-  --color-aurora-light: #eaf4fb;
-  --color-cream: #fbfdff;
+  --color-aurora: #f97316;
+  --color-aurora-dark: #c2410c;
+  --color-aurora-deep: #7c2d12;
+  --color-aurora-light: #fff1e6;
+  --color-cream: #fffdfb;
 }
 
 :root {
@@ -62,7 +62,7 @@ body {
 /* ================= Plataforma interna — estilo CourseCo, colores Aurora (claro/pro) ================= */
 @layer components {
 .pf-page {
-  background: linear-gradient(180deg, #e9f0fa 0%, #f4f8fd 60%, #e8eff8 100%);
+  background: linear-gradient(180deg, #e9f0fa 0%, #fff8f2 60%, #e8eff8 100%);
   color: #1e2b40;
 }
 /* Sidebar con degradado Aurora + glassmorphism (deja ver un poco el fondo) */
@@ -80,16 +80,16 @@ body {
   box-shadow: 0 12px 32px -20px rgba(23, 42, 77, 0.30);
 }
 /* Banner heredado (ya no se usa en cabeceras) */
-.pf-head { background: linear-gradient(100deg, #2e6da4, #5ba3dc); }
+.pf-head { background: linear-gradient(100deg, #c2410c, #f97316); }
 /* Icono pastel de sección (el emoji conserva sus colores normales) */
 .pf-sticker {
   background: #e8f1fb;
-  border: 1px solid #d6e6f6;
+  border: 1px solid #fbd9bd;
 }
 /* Inputs limpios (tintes por celda los sobrescriben desde la capa utilities) */
 .pf-input {
   background: #f5f8fc;
-  border: 1px solid #e3eaf3;
+  border: 1px solid #f7e3d3;
   border-radius: 12px;
   color: #0e2038;
   font-weight: 500;
@@ -98,13 +98,13 @@ body {
 }
 .pf-input::placeholder { color: #94a3b8; font-weight: 400; }
 .pf-input:focus {
-  border-color: #5ba3dc;
+  border-color: #f97316;
   background: #ffffff;
   box-shadow: 0 0 0 3px rgba(91, 163, 220, 0.20);
 }
 /* Botón principal: degradado Aurora (azul marino → azul cielo) */
 .pf-btn {
-  background: linear-gradient(100deg, #2e6da4, #5ba3dc);
+  background: linear-gradient(100deg, #c2410c, #f97316);
   color: #ffffff;
   font-weight: 700;
   border-radius: 14px;
@@ -112,22 +112,22 @@ body {
   transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
 }
 .pf-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 16px 30px -14px rgba(46, 109, 164, 0.7); filter: brightness(1.04); }
-.pf-btn:disabled { background: #cbd5e1; color: #eef2f7; box-shadow: none; cursor: default; }
+.pf-btn:disabled { background: #cbd5e1; color: #fdf0e6; box-shadow: none; cursor: default; }
 /* Botón secundario claro */
 .pf-btn-ghost {
   background: #ffffff;
-  border: 1px solid #e3eaf3;
-  color: #2e6da4;
+  border: 1px solid #f7e3d3;
+  color: #c2410c;
   border-radius: 14px;
   font-weight: 600;
   transition: background 0.15s, border-color 0.15s;
 }
-.pf-btn-ghost:hover { background: #f4f8fd; border-color: #cddff0; }
+.pf-btn-ghost:hover { background: #fff8f2; border-color: #cddff0; }
 /* Chip azul claro */
 .pf-chip {
-  background: #eaf4fb;
-  border: 1px solid #d6e6f6;
-  color: #2e6da4;
+  background: #fff1e6;
+  border: 1px solid #fbd9bd;
+  color: #c2410c;
   border-radius: 9999px;
   font-weight: 700;
   transition: background 0.15s;
@@ -136,7 +136,7 @@ body {
 .pf-chip:disabled { opacity: 0.5; }
 /* Título con degradado Aurora */
 .grad-text {
-  background: linear-gradient(100deg, #0e2650, #2e6da4 65%);
+  background: linear-gradient(100deg, #7c2d12, #c2410c 65%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 }

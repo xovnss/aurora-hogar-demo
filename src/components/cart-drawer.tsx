@@ -9,7 +9,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
   // Disponible por SKU; si no hay mapa, se asume disponible.
   const disp = (sku: string) => (stock ? (stock.get(sku) ?? 0) : Infinity);
   const efPub = (i: CartItem) => i.liq ?? i.price;                 // lo que paga el público
-  const efMem = (i: CartItem) => i.liq ?? i.mem ?? i.price;        // lo que pagaría un miembro
+  const efMem = (i: CartItem) => i.liq ?? i.mem ?? i.price;        // lo que pagaría un socio
   const totalPublico = items.reduce((s, i) => s + efPub(i) * i.qty, 0);
   const totalMiembro = items.reduce((s, i) => s + efMem(i) * i.qty, 0);
   const hayMiembro = items.some((i) => i.mem != null && i.liq == null);
@@ -25,10 +25,10 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
       .map((i) =>
         i.liq != null
           ? `• ${i.qty}x ${i.name} (${i.sku}) — 🔥 Liquidación ${money(i.liq)} c/u`
-          : `• ${i.qty}x ${i.name} (${i.sku}) — ${money(i.price)}${i.mem != null ? ` (miembros ${money(i.mem)})` : ""} c/u`
+          : `• ${i.qty}x ${i.name} (${i.sku}) — ${money(i.price)}${i.mem != null ? ` (socios ${money(i.mem)})` : ""} c/u`
       )
       .join("\n");
-    const msg = `¡Hola Aurora! 🛏️ Quiero hacer este pedido:\n\n${lineas}\n\nTotal público: ${money(tp)}${hm ? `\n💙 Total miembros: ${money(tm)}` : ""}\n\n(Si soy miembro, aplícame mi precio de miembro.)`;
+    const msg = `¡Hola Aurora! 🛏️ Quiero hacer este pedido:\n\n${lineas}\n\nTotal público: ${money(tp)}${hm ? `\n🧡 Total socios: ${money(tm)}` : ""}\n\n(Si soy socio, aplícame mi precio de socio.)`;
     if (!SITE.whatsapp) {
       alert("Falta configurar el número de WhatsApp de la tienda.");
       return;
@@ -69,7 +69,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
                     ) : (
                       <p className="text-[11px] text-gray-400">
                         {i.sku} · {money(i.price)}
-                        {i.mem != null && <> · <span className="font-bold text-aurora">💙 {money(i.mem)}</span></>}
+                        {i.mem != null && <> · <span className="font-bold text-aurora">🧡 {money(i.mem)}</span></>}
                       </p>
                     )}
                     {disp(i.sku) <= 0 ? (
@@ -98,17 +98,17 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
             </div>
             {hayMiembro && (
               <div className="mb-1 flex items-center justify-between">
-                <span className="text-sm font-bold text-aurora">💙 Total miembros</span>
+                <span className="text-sm font-bold text-aurora">🧡 Total socios</span>
                 <span className="text-2xl font-extrabold text-aurora">{money(totalMiembro)}</span>
               </div>
             )}
             {hayMiembro && ahorro > 0 && (
               <p className="mb-2 rounded-lg bg-green-50 px-3 py-1.5 text-center text-[12px] font-bold text-green-600">
-                🎉 Como miembro ahorras {money(ahorro)}
+                🎉 Como socio ahorras {money(ahorro)}
               </p>
             )}
             <p className="mb-3 rounded-lg bg-aurora-light px-3 py-2 text-[11px] leading-snug text-aurora-dark">
-              💙 {SITE.memberNote}
+              🧡 {SITE.memberNote}
             </p>
             <button
               onClick={pedirWhatsApp}
