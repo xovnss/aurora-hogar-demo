@@ -8,8 +8,8 @@ const TAMANOS = new Set([128, 256, 384, 512, 1024, 1920]);
 
 // Paleta suave; el color sale del id, así cada producto siempre tiene el suyo.
 const FONDOS = [
-  ["#fdf0e6", "#dbe4ef"], ["#f6eeea", "#ead9d1"], ["#eaf1ec", "#d3e3d8"],
-  ["#f2eef7", "#ddd3ea"], ["#f7f2e8", "#ebdfc6"], ["#e9f0f4", "#cfe0e8"],
+  ["#fdf0e6", "#efe3db"], ["#f6eeea", "#ead9d1"], ["#eaf1ec", "#d3e3d8"],
+  ["#f2eef7", "#ddd3ea"], ["#f7f2e8", "#ebdfc6"], ["#f4ebe9", "#e8d3cf"],
 ];
 
 const escapa = (s: string) =>
@@ -55,11 +55,11 @@ export async function GET(request: Request) {
     <path d="M${lado * 0.17} ${lado * 0.68} q ${lado * 0.165} -${lado * 0.1} ${lado * 0.33} 0 q ${lado * 0.165} ${lado * 0.1} ${lado * 0.33} 0"/>
   </g>
   <text x="50%" y="${y0}" text-anchor="middle" font-family="Poppins, Helvetica, Arial, sans-serif"
-        font-size="${fuente}" font-weight="600" fill="#3c4a5e">
+        font-size="${fuente}" font-weight="600" fill="#5e4a3c">
     ${lineas.map((l, i) => `<tspan x="50%" dy="${i === 0 ? 0 : fuente * 1.25}">${escapa(l)}</tspan>`).join("")}
   </text>
   <text x="50%" y="${lado * 0.9}" text-anchor="middle" font-family="Poppins, Helvetica, Arial, sans-serif"
-        font-size="${Math.round(lado * 0.036)}" fill="#8a97a8">foto de ejemplo</text>
+        font-size="${Math.round(lado * 0.036)}" fill="#a8968a">foto de ejemplo</text>
 </svg>`;
 
   return new Response(svg, {

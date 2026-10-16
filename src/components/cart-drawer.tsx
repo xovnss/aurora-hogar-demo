@@ -49,25 +49,25 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
       >
         <div className="flex items-center justify-between border-b p-4">
           <h2 className="text-lg font-bold text-aurora-dark">Mi lista ({count})</h2>
-          <button onClick={onClose} className="rounded-full p-1 text-gray-500 hover:bg-gray-100" aria-label="Cerrar">✕</button>
+          <button onClick={onClose} className="rounded-full p-1 text-stone-500 hover:bg-stone-100" aria-label="Cerrar">✕</button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
           {items.length === 0 ? (
-            <p className="mt-10 text-center text-gray-400">Tu lista está vacía.<br />Agrega productos y pídelos por WhatsApp.</p>
+            <p className="mt-10 text-center text-stone-400">Tu lista está vacía.<br />Agrega productos y pídelos por WhatsApp.</p>
           ) : (
             <ul className="space-y-3">
               {items.map((i) => (
-                <li key={i.sku} className="flex items-center gap-3 rounded-xl border border-gray-100 p-2">
+                <li key={i.sku} className="flex items-center gap-3 rounded-xl border border-stone-100 p-2">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-gray-800">{i.name}</p>
+                    <p className="truncate text-sm font-semibold text-stone-800">{i.name}</p>
                     {i.liq != null ? (
-                      <p className="text-[11px] text-gray-400">
+                      <p className="text-[11px] text-stone-400">
                         {i.sku} · <span className="line-through">{money(i.price)}</span>{" "}
                         <span className="font-bold text-red-600">🔥 {money(i.liq)}</span>
                       </p>
                     ) : (
-                      <p className="text-[11px] text-gray-400">
+                      <p className="text-[11px] text-stone-400">
                         {i.sku} · {money(i.price)}
                         {i.mem != null && <> · <span className="font-bold text-aurora">🧡 {money(i.mem)}</span></>}
                       </p>
@@ -79,11 +79,11 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
                     ) : null}
                   </div>
                   <div className="flex items-center gap-1">
-                    <button onClick={() => setQty(i.sku, i.qty - 1)} className="h-7 w-7 rounded-lg bg-gray-100 font-bold">−</button>
+                    <button onClick={() => setQty(i.sku, i.qty - 1)} className="h-7 w-7 rounded-lg bg-stone-100 font-bold">−</button>
                     <span className="w-6 text-center text-sm font-semibold">{i.qty}</span>
-                    <button onClick={() => setQty(i.sku, i.qty + 1)} className="h-7 w-7 rounded-lg bg-gray-100 font-bold">+</button>
+                    <button onClick={() => setQty(i.sku, i.qty + 1)} className="h-7 w-7 rounded-lg bg-stone-100 font-bold">+</button>
                   </div>
-                  <button onClick={() => remove(i.sku)} className="text-gray-300 hover:text-red-500" aria-label="Quitar">🗑</button>
+                  <button onClick={() => remove(i.sku)} className="text-stone-300 hover:text-red-500" aria-label="Quitar">🗑</button>
                 </li>
               ))}
             </ul>
@@ -93,8 +93,8 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
         {items.length > 0 && (
           <div className="border-t p-4">
             <div className={"flex items-center justify-between text-sm " + (hayMiembro ? "mb-0.5" : "mb-2")}>
-              <span className="text-gray-500">Total público</span>
-              <span className={hayMiembro ? "font-bold text-gray-500" : "text-xl font-extrabold text-aurora-dark"}>{money(totalPublico)}</span>
+              <span className="text-stone-500">Total público</span>
+              <span className={hayMiembro ? "font-bold text-stone-500" : "text-xl font-extrabold text-aurora-dark"}>{money(totalPublico)}</span>
             </div>
             {hayMiembro && (
               <div className="mb-1 flex items-center justify-between">
@@ -116,7 +116,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
             >
               <span>Pedir por WhatsApp</span>
             </button>
-            <button onClick={clear} className="mt-2 w-full text-center text-xs text-gray-400 hover:text-red-500">
+            <button onClick={clear} className="mt-2 w-full text-center text-xs text-stone-400 hover:text-red-500">
               Vaciar lista
             </button>
           </div>

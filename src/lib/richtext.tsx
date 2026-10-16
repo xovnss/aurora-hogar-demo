@@ -10,7 +10,7 @@ export function renderNegritas(text: string): React.ReactNode {
   let m: RegExpExecArray | null;
   while ((m = re.exec(text)) !== null) {
     if (m.index > last) out.push(text.slice(last, m.index));
-    out.push(<strong key={i++} className="font-bold text-gray-800">{m[1]}</strong>);
+    out.push(<strong key={i++} className="font-bold text-stone-800">{m[1]}</strong>);
     last = m.index + m[0].length;
   }
   if (last < text.length) out.push(text.slice(last));

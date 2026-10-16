@@ -10,9 +10,9 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
       <p style={{ margin: 0, maxWidth: 380, color: "#9a6b4f", fontSize: 14 }}>A veces la conexión con el servidor tarda. No se perdió nada.</p>
       <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
         <button onClick={() => reset()} style={{ border: 0, cursor: "pointer", borderRadius: 999, background: "#7c2d12", color: "#fff", fontWeight: 700, fontSize: 14, padding: "10px 22px" }}>🔄 Reintentar</button>
-        <button onClick={() => location.reload()} style={{ cursor: "pointer", borderRadius: 999, background: "#fff", border: "1px solid #cbd6e2", color: "#9a6b4f", fontWeight: 700, fontSize: 14, padding: "10px 18px" }}>Recargar</button>
+        <button onClick={() => location.reload()} style={{ cursor: "pointer", borderRadius: 999, background: "#fff", border: "1px solid #e2d3cb", color: "#9a6b4f", fontWeight: 700, fontSize: 14, padding: "10px 18px" }}>Recargar</button>
       </div>
-      {error?.digest && <p style={{ fontSize: 10, color: "#b6c2d1", margin: 0 }}>ref: {error.digest}</p>}
+      {error?.digest && <p style={{ fontSize: 10, color: "#d1c0b6", margin: 0 }}>ref: {error.digest}</p>}
     </div>
   );
 }

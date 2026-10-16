@@ -9,10 +9,10 @@
 // por sección con número de hoja.
 import { jsPDF } from "jspdf";
 
-const NAVY: [number, number, number] = [14, 38, 80];
-const GRIS: [number, number, number] = [110, 128, 150];
-const GRIS_SUAVE: [number, number, number] = [222, 230, 240];
-const NEGRO_SUAVE: [number, number, number] = [40, 48, 60];
+const NAVY: [number, number, number] = [80, 45, 14];
+const GRIS: [number, number, number] = [150, 125, 110];
+const GRIS_SUAVE: [number, number, number] = [240, 229, 222];
+const NEGRO_SUAVE: [number, number, number] = [60, 49, 40];
 
 const M = 12; // margen mm
 const money = (n: number) => "$" + Math.round(n).toLocaleString("es-MX");

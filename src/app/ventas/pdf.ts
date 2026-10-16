@@ -3,11 +3,11 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-const NAVY: [number, number, number] = [14, 38, 80];
-const AZUL: [number, number, number] = [46, 109, 164];
-const CIELO: [number, number, number] = [99, 164, 219];
-const GRIS: [number, number, number] = [90, 116, 146];
-const GRIS_CLARO: [number, number, number] = [237, 242, 248];
+const NAVY: [number, number, number] = [80, 45, 14];
+const AZUL: [number, number, number] = [164, 81, 46];
+const CIELO: [number, number, number] = [219, 134, 99];
+const GRIS: [number, number, number] = [146, 111, 90];
+const GRIS_CLARO: [number, number, number] = [248, 241, 237];
 const ORO: [number, number, number] = [196, 151, 42];
 const BLANCO: [number, number, number] = [255, 255, 255];
 

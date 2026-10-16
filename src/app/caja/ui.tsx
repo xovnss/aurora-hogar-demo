@@ -33,7 +33,7 @@ export function CajaLogin() {
       <img src="/aurora-blanco.png" alt="Aurora" className="mb-5 h-12 w-auto" />
       <form onSubmit={submit} className="w-full max-w-sm rounded-[28px] border-4 border-white/20 bg-white p-7 shadow-2xl">
         <h1 className="font-display text-2xl font-bold text-[#7c2d12]">Corte de caja</h1>
-        <p className="mt-0.5 mb-4 text-sm text-gray-500">Arqueo, salidas y cuadre 🧮</p>
+        <p className="mt-0.5 mb-4 text-sm text-stone-500">Arqueo, salidas y cuadre 🧮</p>
         <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} autoFocus placeholder="Contraseña"
           className="pf-input w-full px-4 py-3 text-center" />
         {err && <p className="mt-2 text-center text-sm text-red-600">{err}</p>}
@@ -54,10 +54,10 @@ function DenomCounter({ value, onChange }: { value: Record<string, number>; onCh
         return (
           <div key={d} className="flex items-center gap-2">
             <span className="w-16 text-right text-[13px] font-semibold text-[#7c2d12]">{dLabel(d)}</span>
-            <span className="text-gray-300">×</span>
+            <span className="text-stone-300">×</span>
             <input inputMode="numeric" value={c || ""} onChange={(e) => set(d, e.target.value)} placeholder="0"
               className="pf-input w-16 px-2 py-1.5 text-center" />
-            <span className="flex-1 text-right text-[12px] tabular-nums text-gray-500">{c > 0 ? money(d * c) : ""}</span>
+            <span className="flex-1 text-right text-[12px] tabular-nums text-stone-500">{c > 0 ? money(d * c) : ""}</span>
           </div>
         );
       })}
@@ -363,7 +363,7 @@ export function CajaApp() {
               {/* ARQUEO DE CAJA — fondo/cambio, SIN las ventas */}
               <div className={card}>
                 <h2 className="text-[15px] font-bold text-[#7c2d12]">💼 Arqueo de caja</h2>
-                <p className="mb-3 text-[12px] text-gray-400">El efectivo de cambio (fondo) con que abrió y cerró la caja. Esto <b>NO</b> incluye las ventas.</p>
+                <p className="mb-3 text-[12px] text-stone-400">El efectivo de cambio (fondo) con que abrió y cerró la caja. Esto <b>NO</b> incluye las ventas.</p>
 
                 <p className="text-[13px] font-bold text-[#7c2d12]">🔓 ¿Con cuánto INICIÓ?</p>
                 <div className="my-2 flex items-center gap-2 rounded-xl bg-orange-50/70 p-2.5">
@@ -372,18 +372,18 @@ export function CajaApp() {
                     placeholder="0" className="pf-input w-24 px-2 py-1.5 text-right" />
                 </div>
                 {conteo.fondoFijo > 0 ? (
-                  <p className="text-[12px] text-gray-400">Usando cantidad fija. Borra el campo para contar por denominación.</p>
+                  <p className="text-[12px] text-stone-400">Usando cantidad fija. Borra el campo para contar por denominación.</p>
                 ) : (
                   <DenomCounter value={conteo.apertura} onChange={(v) => setConteo({ ...conteo, apertura: v })} />
                 )}
-                <div className="mt-2 flex justify-between border-t border-gray-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
                   <span className="font-bold">Inició con</span><span className="text-lg font-bold tabular-nums">{money(fondo)}</span>
                 </div>
 
                 <p className="mt-5 text-[13px] font-bold text-[#7c2d12]">🔒 ¿Con cuánto TERMINÓ? (solo el fondo, sin las ventas)</p>
-                <p className="mb-2 text-[12px] text-gray-400">Cuenta los billetes y monedas de cambio que quedaron:</p>
+                <p className="mb-2 text-[12px] text-stone-400">Cuenta los billetes y monedas de cambio que quedaron:</p>
                 <DenomCounter value={conteo.cierre} onChange={(v) => setConteo({ ...conteo, cierre: v })} />
-                <div className="mt-2 flex justify-between border-t border-gray-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
                   <span className="font-bold">Terminó con</span><span className="text-lg font-bold tabular-nums">{money(efeContado)}</span>
                 </div>
 
@@ -399,30 +399,30 @@ export function CajaApp() {
               {/* VENTAS DEL DÍA — esto debe cuadrar con Odoo */}
               <div className={card}>
                 <h2 className="text-[15px] font-bold text-[#7c2d12]">🧾 Ventas del día</h2>
-                <p className="mb-3 text-[12px] text-gray-400">Lo que cobraron de ventas. Debe coincidir con lo que registró Odoo.</p>
+                <p className="mb-3 text-[12px] text-stone-400">Lo que cobraron de ventas. Debe coincidir con lo que registró Odoo.</p>
 
                 <div className="grid grid-cols-3 gap-2">
                   <div className="rounded-xl bg-[#fff8f2] p-3 text-center">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">💵 Efectivo (Odoo)</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-stone-400">💵 Efectivo (Odoo)</p>
                     <p className="mt-1 text-lg font-bold tabular-nums text-[#7c2d12]">{money(efeOdoo)}</p>
                   </div>
                   <div className="rounded-xl bg-[#fff8f2] p-3 text-center">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">💳 Tarjeta (Odoo)</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-stone-400">💳 Tarjeta (Odoo)</p>
                     <p className="mt-1 text-lg font-bold tabular-nums text-[#7c2d12]">{money(tarOdoo)}</p>
                   </div>
                   <div className="rounded-xl bg-[#fff8f2] p-3 text-center">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">🏦 Transf. (Odoo)</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-stone-400">🏦 Transf. (Odoo)</p>
                     <p className="mt-1 text-lg font-bold tabular-nums text-[#7c2d12]">{money(trfOdoo)}</p>
                   </div>
                 </div>
 
                 <label className="mt-4 block text-[13px] font-semibold text-[#7c2d12]">💵 Efectivo de ventas recibido</label>
-                <p className="mb-1 text-[12px] text-gray-400">El efectivo que entró por ventas (sin el fondo).</p>
+                <p className="mb-1 text-[12px] text-stone-400">El efectivo que entró por ventas (sin el fondo).</p>
                 <input inputMode="decimal" value={conteo.efectivoRecibido || ""} onChange={(e) => setConteo({ ...conteo, efectivoRecibido: parseFloat(e.target.value.replace(/[^\d.]/g, "")) || 0 })}
                   placeholder="0" className={inpNum} />
 
                 <label className="mt-4 block text-[13px] font-semibold text-[#7c2d12]">💳 Terminales (tarjeta real)</label>
-                <p className="mb-2 text-[12px] text-gray-400">Pon cada terminal que usaron (1 a 3) con su total.</p>
+                <p className="mb-2 text-[12px] text-stone-400">Pon cada terminal que usaron (1 a 3) con su total.</p>
                 <div className="space-y-2">
                   {terminales.map((t, i) => (
                     <div key={i} className="flex items-center gap-2">
@@ -437,12 +437,12 @@ export function CajaApp() {
                 {terminales.length < 3 && (
                   <button onClick={addTerminal} className="mt-2 rounded-lg border border-aurora/40 px-3 py-1.5 text-[13px] font-bold text-aurora hover:bg-aurora/5">+ Agregar terminal</button>
                 )}
-                <div className="mt-2 flex justify-between border-t border-gray-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
                   <span className="font-bold">Total terminal</span><span className="text-lg font-bold tabular-nums">{money(terminal)}</span>
                 </div>
 
                 <label className="mt-4 block text-[13px] font-semibold text-[#7c2d12]">🏦 Transferencias recibidas</label>
-                <p className="mb-1 text-[12px] text-gray-400">Suma de las transferencias que cobraron (Odoo registró <b>{money(trfOdoo)}</b>).</p>
+                <p className="mb-1 text-[12px] text-stone-400">Suma de las transferencias que cobraron (Odoo registró <b>{money(trfOdoo)}</b>).</p>
                 <input inputMode="decimal" value={conteo.transferenciaRecibida || ""} onChange={(e) => setConteo({ ...conteo, transferenciaRecibida: parseFloat(e.target.value.replace(/[^\d.]/g, "")) || 0 })}
                   placeholder="0" className={inpNum} />
                 {(trfOdoo > 0 || trfRecibido > 0) && (
@@ -455,11 +455,11 @@ export function CajaApp() {
               {/* Entradas y salidas de efectivo — movimientos de caja, cada uno con su vale */}
               <div className={card}>
                 <h2 className="text-[15px] font-bold text-[#7c2d12]">💵 Entradas y salidas de efectivo</h2>
-                <p className="mb-3 text-[12px] text-gray-400">Dinero que <b>salió</b> o <b>entró</b> de la caja aparte de las ventas. El botón 🖨️ imprime el <b>vale de ese movimiento</b> (ticket aparte del corte).</p>
+                <p className="mb-3 text-[12px] text-stone-400">Dinero que <b>salió</b> o <b>entró</b> de la caja aparte de las ventas. El botón 🖨️ imprime el <b>vale de ese movimiento</b> (ticket aparte del corte).</p>
 
                 {/* SALIDAS */}
                 <p className="text-[13px] font-bold text-[#7c2d12]">Salidas (efectivo que salió del cajón)</p>
-                <p className="mb-1 text-[11px] text-gray-500">🔴 <b>Gasto</b>: el dinero se fue (agua, envío, almuerzo). 🔵 <b>Traspaso</b>: se lo llevaron pero sigue siendo de la tienda (entregado a Iván). Los dos bajan el efectivo del cajón, pero el traspaso <b>no</b> cuenta como gasto en el corte.</p>
+                <p className="mb-1 text-[11px] text-stone-500">🔴 <b>Gasto</b>: el dinero se fue (agua, envío, almuerzo). 🔵 <b>Traspaso</b>: se lo llevaron pero sigue siendo de la tienda (entregado a Iván). Los dos bajan el efectivo del cajón, pero el traspaso <b>no</b> cuenta como gasto en el corte.</p>
                 <div className="mt-2 space-y-2">
                   {salidas.map((s, i) => {
                     const tras = s.tipo === "traspaso";
@@ -467,11 +467,11 @@ export function CajaApp() {
                     <div key={i} className={"rounded-xl border-2 p-2 " + (tras ? "border-orange-300 bg-orange-50" : "border-orange-200 bg-orange-50/60")}>
                       <div className="mb-2 flex gap-1">
                         <button onClick={() => updSalida(i, { tipo: "gasto" })}
-                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (!tras ? "bg-[#c2410c] text-white shadow" : "bg-white text-gray-500 hover:bg-orange-100")}>
+                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (!tras ? "bg-[#c2410c] text-white shadow" : "bg-white text-stone-500 hover:bg-orange-100")}>
                           🔴 Gasto
                         </button>
                         <button onClick={() => updSalida(i, { tipo: "traspaso" })}
-                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (tras ? "bg-orange-600 text-white shadow" : "bg-white text-gray-500 hover:bg-orange-100")}>
+                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (tras ? "bg-orange-600 text-white shadow" : "bg-white text-stone-500 hover:bg-orange-100")}>
                           🔵 Traspaso
                         </button>
                       </div>
@@ -487,13 +487,13 @@ export function CajaApp() {
                     </div>
                     );
                   })}
-                  {salidas.length === 0 && <p className="text-[12px] text-gray-400">Sin salidas registradas.</p>}
+                  {salidas.length === 0 && <p className="text-[12px] text-stone-400">Sin salidas registradas.</p>}
                 </div>
                 <button onClick={addSalida} className="mt-2 rounded-lg border border-aurora/40 px-3 py-1.5 text-[13px] font-bold text-aurora hover:bg-aurora/5">+ Agregar salida</button>
-                <div className="mt-2 space-y-1 border-t border-gray-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 space-y-1 border-t border-stone-100 pt-2 text-[#7c2d12]">
                   <div className="flex justify-between text-[13px]"><span>🔴 Gastos</span><span className="font-bold tabular-nums text-[#c2410c]">{money(totalGastos)}</span></div>
                   <div className="flex justify-between text-[13px]"><span>🔵 Traspasos</span><span className="font-bold tabular-nums text-orange-700">{money(totalTraspasos)}</span></div>
-                  <div className="flex justify-between border-t border-gray-100 pt-1"><span className="font-bold">Total salidas</span><span className="text-lg font-bold tabular-nums">{money(totalSalidas)}</span></div>
+                  <div className="flex justify-between border-t border-stone-100 pt-1"><span className="font-bold">Total salidas</span><span className="text-lg font-bold tabular-nums">{money(totalSalidas)}</span></div>
                 </div>
 
                 {/* ENTRADAS */}
@@ -509,21 +509,21 @@ export function CajaApp() {
                       <button onClick={() => delEntrada(i)} className="px-1 text-red-400 hover:text-red-600">✕</button>
                     </div>
                   ))}
-                  {entradas.length === 0 && <p className="text-[12px] text-gray-400">Sin entradas registradas.</p>}
+                  {entradas.length === 0 && <p className="text-[12px] text-stone-400">Sin entradas registradas.</p>}
                 </div>
                 <button onClick={addEntrada} className="mt-2 rounded-lg border border-emerald-500/40 px-3 py-1.5 text-[13px] font-bold text-emerald-700 hover:bg-emerald-50">+ Agregar entrada</button>
-                <div className="mt-2 flex justify-between border-t border-gray-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
                   <span className="font-bold">Total entradas</span><span className="text-lg font-bold tabular-nums text-emerald-700">{money(totalEntradas)}</span>
                 </div>
 
                 <button onClick={printMovs} className="mt-4 w-full rounded-xl bg-[#7c2d12] px-4 py-2.5 text-sm font-bold text-white shadow hover:bg-[#9a3412]">🖨️ Imprimir movimientos</button>
-                <p className="mt-1 text-center text-[11px] text-gray-400">Imprime solo entradas y salidas (aparte del corte).</p>
+                <p className="mt-1 text-center text-[11px] text-stone-400">Imprime solo entradas y salidas (aparte del corte).</p>
               </div>
 
               {/* Envíos que cobra la caja: recolección en tienda y contra entrega (15-oct-2026) */}
               <div className={card}>
                 <h2 className="text-[15px] font-bold text-[#7c2d12]">📦 Envíos por cobrar en caja</h2>
-                <p className="mb-3 text-[12px] text-gray-400">
+                <p className="mb-3 text-[12px] text-stone-400">
                   Pedidos de <b>recolección en tienda</b> y <b>contra entrega</b>: el cliente paga aquí, en el mostrador.
                   Márcalo en cuanto recibas el dinero. Se arrastran los de días anteriores hasta que se cobren.
                 </p>
@@ -547,16 +547,16 @@ export function CajaApp() {
                         <span className="shrink-0 text-base font-bold tabular-nums text-[#7c2d12]">{money(l.total)}</span>
                       </div>
                       <button onClick={() => marcarEnvio(l, true)} disabled={cobrando === l.id}
-                        className="mt-2 w-full rounded-lg bg-emerald-600 px-3 py-2 text-[13px] font-bold text-white shadow-sm hover:bg-emerald-700 disabled:bg-gray-300">
+                        className="mt-2 w-full rounded-lg bg-emerald-600 px-3 py-2 text-[13px] font-bold text-white shadow-sm hover:bg-emerald-700 disabled:bg-stone-300">
                         {cobrando === l.id ? "Marcando…" : "💵 Ya me pagaron este"}
                       </button>
                     </div>
                   ))}
-                  {envVisibles.length === 0 && <p className="text-[12px] text-gray-400">No hay envíos pendientes de cobro. 🎉</p>}
+                  {envVisibles.length === 0 && <p className="text-[12px] text-stone-400">No hay envíos pendientes de cobro. 🎉</p>}
                 </div>
                 {envViejos.length > 0 && (
                   <button onClick={() => setVerViejos(!verViejos)}
-                    className="mt-2 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-[12px] font-bold text-gray-500 hover:bg-gray-50">
+                    className="mt-2 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-[12px] font-bold text-stone-500 hover:bg-stone-50">
                     {verViejos ? "Ocultar los de hace más de 15 días" : `+ Ver ${envViejos.length} pendientes de hace más de 15 días (${money(envViejos.reduce((a, e) => a + (e.total || 0), 0))})`}
                   </button>
                 )}
@@ -574,7 +574,7 @@ export function CajaApp() {
                           <div className="flex shrink-0 items-center gap-2">
                             <span className="text-[13px] font-bold tabular-nums text-emerald-700">{money(l.total)}</span>
                             <button onClick={() => marcarEnvio(l, false)} disabled={cobrando === l.id}
-                              className="rounded-lg border border-gray-200 bg-white px-2 py-1 text-[11px] font-bold text-gray-500 hover:bg-gray-50 disabled:text-gray-300">
+                              className="rounded-lg border border-stone-200 bg-white px-2 py-1 text-[11px] font-bold text-stone-500 hover:bg-stone-50 disabled:text-stone-300">
                               deshacer
                             </button>
                           </div>
@@ -585,14 +585,14 @@ export function CajaApp() {
                 )}
 
                 {envOtros.length > 0 && (
-                  <p className="mt-3 text-[11px] text-gray-400">
+                  <p className="mt-3 text-[11px] text-stone-400">
                     {envOtros.length} {envOtros.length === 1 ? "pedido ya se cobró" : "pedidos ya se cobraron"} por transferencia o depósito (los marcó Envíos).
                   </p>
                 )}
 
-                <div className="mt-3 space-y-1 border-t border-gray-100 pt-2 text-[#7c2d12]">
+                <div className="mt-3 space-y-1 border-t border-stone-100 pt-2 text-[#7c2d12]">
                   <div className="flex justify-between text-[13px]"><span>Pendientes ({envPend.length})</span><span className="font-bold tabular-nums text-amber-700">{money(totalEnvPend)}</span></div>
-                  <div className="flex justify-between border-t border-gray-100 pt-1"><span className="font-bold">Cobrado hoy en caja</span><span className="text-lg font-bold tabular-nums text-emerald-700">{money(totalEnvCobrado)}</span></div>
+                  <div className="flex justify-between border-t border-stone-100 pt-1"><span className="font-bold">Cobrado hoy en caja</span><span className="text-lg font-bold tabular-nums text-emerald-700">{money(totalEnvCobrado)}</span></div>
                 </div>
                 <p className="mt-2 rounded-lg bg-orange-50 px-3 py-2 text-[11px] leading-snug text-orange-800 ring-1 ring-orange-100">
                   💡 Este dinero <b>no pasa por el punto de venta</b>, así que el cajón va a traer {money(totalEnvCobrado)} de más contra lo que dice Odoo. Es normal: cuéntalo aparte.
@@ -627,19 +627,19 @@ export function CajaApp() {
                   </div>
                 </div>
               ) : (
-                <p className="text-center text-sm text-gray-400">Pon el efectivo recibido y la terminal para ver si cuadra.</p>
+                <p className="text-center text-sm text-stone-400">Pon el efectivo recibido y la terminal para ver si cuadra.</p>
               )}
 
               {/* Notas del corte */}
               <div className={card}>
                 <h2 className="mb-1 text-[15px] font-bold text-[#7c2d12]">📝 Notas del corte</h2>
-                <p className="mb-2 text-[12px] text-gray-400">Si algo no cuadra, explica por qué (ej. “se cobró un pago con tarjeta pero se marcó como efectivo”).</p>
+                <p className="mb-2 text-[12px] text-stone-400">Si algo no cuadra, explica por qué (ej. “se cobró un pago con tarjeta pero se marcó como efectivo”).</p>
                 <textarea value={conteo.notas || ""} onChange={(e) => setConteo({ ...conteo, notas: e.target.value })}
                   placeholder="Escribe aquí cualquier aclaración del corte…" rows={3}
                   className="pf-input w-full px-3 py-2 text-sm" />
               </div>
 
-              <p className="text-center text-[12px] text-gray-400">Todo se guarda solo. Usa 🖨️ Ticket para imprimir el corte en la térmica. ☁️ Aurora</p>
+              <p className="text-center text-[12px] text-stone-400">Todo se guarda solo. Usa 🖨️ Ticket para imprimir el corte en la térmica. ☁️ Aurora</p>
             </>
           )}
         </div>

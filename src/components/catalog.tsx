@@ -321,9 +321,9 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
                 <input ref={searchRef} value={q} onChange={(e) => { setQ(e.target.value); setShown(PAGE); }}
                   onKeyDown={(e) => { if (e.key === "Enter") verProductos(); }}
                   onBlur={() => { if (!q.trim()) setSearchOpen(false); }}
-                  placeholder="Buscar…" className="w-40 rounded-full border border-gray-200 bg-gray-50 py-2.5 pl-4 pr-9 text-sm outline-none focus:border-aurora focus:bg-white sm:w-64" />
+                  placeholder="Buscar…" className="w-40 rounded-full border border-stone-200 bg-stone-50 py-2.5 pl-4 pr-9 text-sm outline-none focus:border-aurora focus:bg-white sm:w-64" />
                 <button onClick={() => { setQ(""); setSearchOpen(false); }} aria-label="Cerrar"
-                  className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-gray-200 text-xs text-gray-600 hover:bg-gray-300">✕</button>
+                  className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-stone-200 text-xs text-stone-600 hover:bg-stone-300">✕</button>
               </div>
             ) : (
               <button onClick={() => setSearchOpen(true)} aria-label="Buscar"
@@ -407,7 +407,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
                       <span className="flex h-full w-full items-center justify-center bg-aurora-light text-3xl">{s.emoji}</span>
                     )}
                   </span>
-                  <span className={"text-center text-[13px] font-bold leading-tight sm:text-sm " + (on ? "text-aurora" : "text-gray-700")}>{s.id}</span>
+                  <span className={"text-center text-[13px] font-bold leading-tight sm:text-sm " + (on ? "text-aurora" : "text-stone-700")}>{s.id}</span>
                 </button>
               );
             })}
@@ -449,7 +449,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         <section className="mx-auto mt-1 flex max-w-7xl flex-wrap items-center gap-2 px-4">
           {medidas.length > 1 && (
             <>
-              <span className="text-[12px] font-bold uppercase tracking-wide text-gray-400">Medida</span>
+              <span className="text-[12px] font-bold uppercase tracking-wide text-stone-400">Medida</span>
               <Chip label="Todas" active={medida === "Todas"} onClick={() => { setMedida("Todas"); setShown(PAGE); }} />
               {medidas.map(([mName, n]) => (
                 <Chip key={mName} label={`${mName} (${n})`} active={medida === mName}
@@ -458,9 +458,9 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             </>
           )}
           <span className="flex shrink-0 items-center gap-2">
-            <span className="text-[12px] font-bold uppercase tracking-wide text-gray-400">Precio</span>
+            <span className="text-[12px] font-bold uppercase tracking-wide text-stone-400">Precio</span>
             <select value={precio} onChange={(e) => { setPrecio(e.target.value); setShown(PAGE); }}
-              className="rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm font-semibold text-gray-600 outline-none focus:border-aurora">
+              className="rounded-full border border-stone-200 bg-white px-4 py-1.5 text-sm font-semibold text-stone-600 outline-none focus:border-aurora">
               {RANGOS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
             </select>
           </span>
@@ -475,7 +475,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
       {/* Grid */}
       <main id="productos" className="mx-auto max-w-7xl px-4 py-4">
         <div className="mb-3 flex items-center justify-between">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-stone-500">
             {buscando ? (
               <><b className="text-aurora-dark">{filtrados.length}</b> resultado{filtrados.length === 1 ? "" : "s"} para “{nq}”</>
             ) : (
@@ -485,7 +485,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         </div>
 
         {visibles.length === 0 ? (
-          <div className="py-16 text-center text-gray-400">
+          <div className="py-16 text-center text-stone-400">
             <p>No se encontraron productos{buscando ? ` para “${nq}”` : ""}{hayFiltro ? " con esos filtros" : ""}.</p>
             {hayFiltro && <button onClick={limpiarFiltros} className="mt-2 font-semibold text-aurora underline">Quitar filtros</button>}
             {buscando && <button onClick={() => setQ("")} className="mt-2 block w-full font-semibold text-aurora underline">Limpiar búsqueda</button>}
@@ -513,27 +513,27 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={t.logo} alt="Aurora" className="h-10 w-auto" />
             </span>
-            <p className="mt-3 max-w-xs text-sm text-gray-500">Tienda de blancos. Sábanas, colchas, cortinas, toallas y todo para renovar tu hogar con comodidad y estilo.</p>
+            <p className="mt-3 max-w-xs text-sm text-stone-500">Tienda de blancos. Sábanas, colchas, cortinas, toallas y todo para renovar tu hogar con comodidad y estilo.</p>
           </div>
           <div>
             <p className="text-[13px] font-bold uppercase tracking-wide text-[#6b2410]">Categorías</p>
             <ul className="mt-3 space-y-1.5">
               {secciones.filter((s) => !s.special).slice(0, 6).map((s) => (
                 <li key={s.id}>
-                  <button onClick={() => { elegirSeccion(s.id); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="text-sm text-gray-500 hover:text-aurora">{s.emoji} {s.id}</button>
+                  <button onClick={() => { elegirSeccion(s.id); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="text-sm text-stone-500 hover:text-aurora">{s.emoji} {s.id}</button>
                 </li>
               ))}
             </ul>
           </div>
           <div>
             <p className="text-[13px] font-bold uppercase tracking-wide text-[#6b2410]">Comunidad</p>
-            <p className="mt-3 text-sm text-gray-500">Únete para el <b className="text-aurora-dark">precio de socios</b> y enterarte de las ofertas.</p>
+            <p className="mt-3 text-sm text-stone-500">Únete para el <b className="text-aurora-dark">precio de socios</b> y enterarte de las ofertas.</p>
             {SITE.communityUrl && (
               <a href={SITE.communityUrl} target="_blank" rel="noopener" className="mt-3 inline-block rounded-full bg-aurora px-4 py-2 text-sm font-bold text-white hover:bg-aurora-dark">Unirme →</a>
             )}
           </div>
         </div>
-        <p className="border-t border-black/5 py-5 text-center text-xs text-gray-400">© {now.getFullYear()} Aurora · Tienda de blancos · Demo</p>
+        <p className="border-t border-black/5 py-5 text-center text-xs text-stone-400">© {now.getFullYear()} Aurora · Tienda de blancos · Demo</p>
       </footer>
 
       {selected && <ProductDetail g={selected} skuInicial={selSku} onClose={cerrarFicha} />}
@@ -547,7 +547,7 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
     <button
       onClick={onClick}
       className={`shrink-0 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-        active ? "bg-aurora text-white shadow" : "bg-white text-gray-600 border border-gray-200 hover:border-aurora"
+        active ? "bg-aurora text-white shadow" : "bg-white text-stone-600 border border-stone-200 hover:border-aurora"
       }`}
     >
       {label}

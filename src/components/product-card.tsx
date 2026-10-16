@@ -26,11 +26,11 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
   return (
     <div
       onClick={onOpen}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-black/[0.06] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_-22px_rgba(20,48,91,.4)] hover:ring-black/10 ${
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-black/[0.06] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_-22px_rgba(91, 51, 20,.4)] hover:ring-black/10 ${
         agotado ? "opacity-60" : ""
       }`}
     >
-      <div className="relative w-full overflow-hidden bg-[#f3f6fb]" style={{ aspectRatio: "1 / 1" }}>
+      <div className="relative w-full overflow-hidden bg-[#fbf7f3]" style={{ aspectRatio: "1 / 1" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={thumb} srcSet={srcSet} sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
           alt={g.base} loading="lazy"
@@ -45,7 +45,7 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
         {g.hasLiq && g.minLiq == null && !agotado && (
           <span className="absolute left-2.5 top-2.5 rounded-full bg-red-500 px-2.5 py-1 text-[11px] font-bold text-white shadow-md">🔥 Liquidación</span>
         )}
-        {agotado && <span className="absolute bottom-2.5 right-2.5 rounded-full bg-gray-800 px-2.5 py-1 text-[11px] font-bold text-white">Agotado</span>}
+        {agotado && <span className="absolute bottom-2.5 right-2.5 rounded-full bg-stone-800 px-2.5 py-1 text-[11px] font-bold text-white">Agotado</span>}
         {!agotado && pocas && <span className="absolute bottom-2.5 right-2.5 rounded-full bg-amber-500 px-2.5 py-1 text-[11px] font-bold text-white shadow-md">¡Solo {g.stock}!</span>}
       </div>
 
@@ -53,14 +53,14 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
         <h3 className="line-clamp-2 min-h-[2.5rem] text-[14.5px] font-semibold leading-snug text-[#6b2410] sm:text-[15px]" title={g.base}>
           {g.base}
         </h3>
-        <p className="mt-0.5 truncate text-[11.5px] text-gray-400">{desc}</p>
+        <p className="mt-0.5 truncate text-[11.5px] text-stone-400">{desc}</p>
 
         {/* Precios: SIEMPRE dos renglones (público arriba chico, socios abajo grande).
             El de socios es el que más se vende, por eso es el número que domina. */}
         <div className="mt-2.5">
-          <p className="text-[12px] leading-none text-gray-400">
+          <p className="text-[12px] leading-none text-stone-400">
             <span className="uppercase tracking-wide">{rango ? "Desde" : "Público"}</span>{" "}
-            <span className="font-semibold text-gray-500">{money(g.minPublico)}</span>
+            <span className="font-semibold text-stone-500">{money(g.minPublico)}</span>
           </p>
           {g.minMiembro != null ? (
             <p className="mt-1 flex items-baseline gap-1.5 leading-none">
@@ -77,7 +77,7 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
         <button
           onClick={(e) => { e.stopPropagation(); if (multi) onOpen?.(); else add(g.variants[0]); }}
           disabled={agotado && !multi}
-          className="mt-auto w-full rounded-full bg-aurora py-2.5 text-[13.5px] font-bold text-white shadow-sm transition hover:bg-aurora-dark active:scale-[.98] disabled:cursor-not-allowed disabled:bg-gray-300"
+          className="mt-auto w-full rounded-full bg-aurora py-2.5 text-[13.5px] font-bold text-white shadow-sm transition hover:bg-aurora-dark active:scale-[.98] disabled:cursor-not-allowed disabled:bg-stone-300"
         >
           {multi ? `Ver ${g.variants.length} modelos` : agotado ? "Agotado" : "Agregar"}
         </button>

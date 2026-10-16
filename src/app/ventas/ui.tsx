@@ -40,7 +40,7 @@ export function VentasLogin() {
       <img src="/aurora-blanco.png" alt="Aurora" className="mb-5 h-12 w-auto" />
       <form onSubmit={submit} className="w-full max-w-sm rounded-[28px] border-4 border-white/20 bg-white p-7 shadow-2xl">
         <h1 className="font-display text-2xl font-bold text-[#7c2d12]">Fichas para ventas</h1>
-        <p className="mt-0.5 mb-4 text-sm text-gray-500">Manda los colores de un producto en una sola imagen 👇</p>
+        <p className="mt-0.5 mb-4 text-sm text-stone-500">Manda los colores de un producto en una sola imagen 👇</p>
         <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} autoFocus placeholder="Contraseña"
           className="pf-input w-full px-4 py-3 text-center" />
         {err && <p className="mt-2 text-center text-sm text-red-600">{err}</p>}
@@ -126,8 +126,8 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-slate-200/70 bg-white/80 px-4 py-3.5 backdrop-blur md:px-6">
-            <button onClick={() => setMenu(true)} aria-label="Menú" className="rounded-xl border border-slate-200 px-2.5 py-1 text-lg leading-none text-slate-600 md:hidden">☰</button>
+          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-stone-200/70 bg-white/80 px-4 py-3.5 backdrop-blur md:px-6">
+            <button onClick={() => setMenu(true)} aria-label="Menú" className="rounded-xl border border-stone-200 px-2.5 py-1 text-lg leading-none text-stone-600 md:hidden">☰</button>
             {modo === "fichas"
               ? <input value={q} onChange={(e) => setQ(e.target.value)} autoFocus placeholder="Busca el producto por nombre o código…"
                   className="pf-input w-full px-4 py-2.5 text-[15px]" />
@@ -138,9 +138,9 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
               <>
                 <div className="mb-3 flex flex-wrap items-center gap-2">
                   <h1 className="grad-text font-display text-xl font-bold">{seccion === "Todos" ? "Todos los productos" : seccion}</h1>
-                  <span className="text-[13px] text-slate-400">· {lista.length} productos · toca uno para ver su ficha</span>
+                  <span className="text-[13px] text-stone-400">· {lista.length} productos · toca uno para ver su ficha</span>
                   <button onClick={refrescar} disabled={refrescando} title="Trae el stock actualizado de Odoo y quita los que quedaron en 0"
-                    className="ml-auto rounded-full bg-aurora px-4 py-1.5 text-[13px] font-bold text-white shadow-sm hover:bg-aurora-dark disabled:bg-gray-300">
+                    className="ml-auto rounded-full bg-aurora px-4 py-1.5 text-[13px] font-bold text-white shadow-sm hover:bg-aurora-dark disabled:bg-stone-300">
                     {refrescando ? "Actualizando…" : "🔄 Actualizar stock"}
                   </button>
                 </div>
@@ -148,19 +148,19 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
                   {lista.map((f) => (
                     <button key={f.key} onClick={() => setSel(f.key)}
                       className="pf-card overflow-hidden text-left transition hover:-translate-y-0.5">
-                      <div className="aspect-square w-full bg-slate-50">
+                      <div className="aspect-square w-full bg-stone-50">
                         {f.image
                           ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={f.image} alt="" loading="lazy" className="h-full w-full object-cover" />
-                          : <div className="grid h-full w-full place-items-center text-[11px] text-slate-400">sin foto</div>}
+                          : <div className="grid h-full w-full place-items-center text-[11px] text-stone-400">sin foto</div>}
                       </div>
                       <div className="p-3">
                         <p className="truncate text-[13px] font-bold text-[#7c2d12]">{f.base}</p>
-                        <p className="mt-0.5 text-[11px] text-slate-400">{f.categoria} · {f.colorCount} {f.colorCount === 1 ? "opción" : "colores"}</p>
+                        <p className="mt-0.5 text-[11px] text-stone-400">{f.categoria} · {f.colorCount} {f.colorCount === 1 ? "opción" : "colores"}</p>
                         <p className="mt-1 text-sm font-extrabold text-aurora-dark">{rango(f.minPublico, f.maxPublico)}</p>
                       </div>
                     </button>
                   ))}
-                  {lista.length === 0 && <p className="col-span-full py-12 text-center text-sm text-slate-400">{q ? `Sin resultados para “${q}”.` : "Aún no hay productos en esta sección."}</p>}
+                  {lista.length === 0 && <p className="col-span-full py-12 text-center text-sm text-stone-400">{q ? `Sin resultados para “${q}”.` : "Aún no hay productos en esta sección."}</p>}
                 </div>
               </>
             )}
@@ -316,10 +316,10 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
           <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Agregar productos</label>
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Busca por nombre o código…" className={inp} />
           {resultados.length > 0 && (
-            <div className="mt-2 max-h-80 overflow-y-auto rounded-xl border border-slate-100">
+            <div className="mt-2 max-h-80 overflow-y-auto rounded-xl border border-stone-100">
               {resultados.map((pr) => (
-                <button key={pr.key} onClick={() => agregar(pr)} className="flex w-full items-center gap-2 border-b border-slate-50 p-2 text-left hover:bg-slate-50">
-                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-slate-100">
+                <button key={pr.key} onClick={() => agregar(pr)} className="flex w-full items-center gap-2 border-b border-stone-50 p-2 text-left hover:bg-stone-50">
+                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-stone-100">
                     {pr.image ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={pr.image} alt="" className="h-full w-full object-cover" /> : null}
                   </div>
                   <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[#7c2d12]">{pr.nombre}</span>
@@ -329,7 +329,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
               ))}
             </div>
           )}
-          <div className="mt-3 border-t border-slate-100 pt-3">
+          <div className="mt-3 border-t border-stone-100 pt-3">
             <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Agregar envío</label>
             <div className="flex gap-2">
               <input value={envioTmp} onChange={(e) => setEnvioTmp(e.target.value.replace(/[^\d.]/g, ""))} inputMode="decimal" placeholder="Costo del envío ($)" className={inp} />
@@ -340,11 +340,11 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
 
         {items.length > 0 && (
           <div className="pf-card mt-3 p-3">
-            <p className="mb-2 text-[12px] font-bold text-slate-500">{items.length} producto(s) en la cotización</p>
+            <p className="mb-2 text-[12px] font-bold text-stone-500">{items.length} producto(s) en la cotización</p>
             <div className="space-y-2">
               {items.map((x) => (
                 <div key={x.key} className="flex items-center gap-2">
-                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-slate-100">
+                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-stone-100">
                     {x.image ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={x.image} alt="" className="h-full w-full object-cover" /> : null}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -353,16 +353,16 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                       const f = fichaByKey.get(x.fichaKey);
                       return !x.envio && f && f.variants.length > 1 ? (
                         <select value={x.key} onChange={(e) => cambiarVariante(x.key, e.target.value)}
-                          className="mt-0.5 w-full rounded border border-slate-200 py-0.5 text-[11px] text-slate-600">
+                          className="mt-0.5 w-full rounded border border-stone-200 py-0.5 text-[11px] text-stone-600">
                           {f.variants.map((v) => <option key={v.sku} value={v.sku}>{varLabel(f, v)}</option>)}
                         </select>
                       ) : null;
                     })()}
                   </div>
                   <div className="flex shrink-0 items-center gap-1">
-                    <button onClick={() => setQty(x.key, x.qty - 1)} className="grid h-6 w-6 place-items-center rounded-full bg-slate-100 text-sm font-bold">-</button>
-                    <input value={x.qty} onChange={(e) => setQty(x.key, parseInt(e.target.value) || 1)} className="w-9 rounded border border-slate-200 py-0.5 text-center text-[12px]" />
-                    <button onClick={() => setQty(x.key, x.qty + 1)} className="grid h-6 w-6 place-items-center rounded-full bg-slate-100 text-sm font-bold">+</button>
+                    <button onClick={() => setQty(x.key, x.qty - 1)} className="grid h-6 w-6 place-items-center rounded-full bg-stone-100 text-sm font-bold">-</button>
+                    <input value={x.qty} onChange={(e) => setQty(x.key, parseInt(e.target.value) || 1)} className="w-9 rounded border border-stone-200 py-0.5 text-center text-[12px]" />
+                    <button onClick={() => setQty(x.key, x.qty + 1)} className="grid h-6 w-6 place-items-center rounded-full bg-stone-100 text-sm font-bold">+</button>
                   </div>
                   <button onClick={() => quitar(x.key)} className="shrink-0 px-1 text-[13px] font-bold text-red-400 hover:text-red-600">✕</button>
                 </div>
@@ -374,7 +374,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
 
       <div>
         {items.length === 0 ? (
-          <div className="pf-card grid place-items-center p-10 text-center text-sm text-slate-400">
+          <div className="pf-card grid place-items-center p-10 text-center text-sm text-stone-400">
             Agrega productos para armar la cotización.<br />No se crea pedido en Odoo — no aparta el producto.
           </div>
         ) : (
@@ -383,12 +383,12 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
               <button onClick={descargarFormal} disabled={bajandoPdf} className="rounded-full border-2 border-[#c4972a] bg-[#fdf7e6] px-5 py-2 text-[13px] font-bold text-[#8a6a15] shadow-sm hover:bg-[#faedc9] disabled:opacity-50">
                 {bajandoPdf ? "Generando PDF…" : "📄 Cotización formal (PDF)"}
               </button>
-              <button onClick={compartir} disabled={bajando} className="rounded-full bg-aurora px-5 py-2 text-[13px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-gray-300">
+              <button onClick={compartir} disabled={bajando} className="rounded-full bg-aurora px-5 py-2 text-[13px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-stone-300">
                 {bajando ? "Generando…" : "📥 Descargar / Compartir"}
               </button>
             </div>
-            <div ref={cardRef} className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-lg">
-              <div className="flex items-start justify-between gap-3 px-5 py-4 text-white" style={{ background: "#63a4db" }}>
+            <div ref={cardRef} className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-lg">
+              <div className="flex items-start justify-between gap-3 px-5 py-4 text-white" style={{ background: "#db8663" }}>
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Cotización</p>
                   {cliente ? <h1 className="text-lg font-black leading-tight">{cliente}</h1> : null}
@@ -399,15 +399,15 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                 <img src="/aurora.png" alt="Aurora" className="h-9 w-auto shrink-0 object-contain" />
               </div>
 
-              <div className="divide-y divide-gray-100 px-4 py-1">
+              <div className="divide-y divide-stone-100 px-4 py-1">
                 {items.map((x) => (
                   <div key={x.key} className="flex items-center gap-3 py-2.5">
-                    <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+                    <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-stone-200 bg-stone-50">
                       {x.image ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={x.image} alt="" className="h-full w-full object-cover" /> : null}
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-[13px] font-bold leading-snug text-[#7c2d12]">{x.nombre}</p>
-                      <p className="mt-0.5 text-[11px] text-slate-500">{x.envio ? "Costo de envío" : <>{x.qty} pza(s){x.pub > precioDe(x) ? <> · <span className="line-through">{money(x.pub)}</span></> : null} · <b className={x.liq != null ? "text-red-600" : "text-[#7c2d12]"}>{x.liq != null ? "🔥 " : ""}{money(precioDe(x))}</b></>}</p>
+                      <p className="mt-0.5 text-[11px] text-stone-500">{x.envio ? "Costo de envío" : <>{x.qty} pza(s){x.pub > precioDe(x) ? <> · <span className="line-through">{money(x.pub)}</span></> : null} · <b className={x.liq != null ? "text-red-600" : "text-[#7c2d12]"}>{x.liq != null ? "🔥 " : ""}{money(precioDe(x))}</b></>}</p>
                     </div>
                     <p className="shrink-0 text-[14px] font-extrabold text-[#7c2d12]">{money(precioDe(x) * x.qty)}</p>
                   </div>
@@ -415,7 +415,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
               </div>
 
               {ahorro > 0 && (
-                <div className="mx-4 my-2 rounded-xl px-4 py-3 text-center text-[13px] text-[#7c2d12]" style={{ background: "#a6d6ff" }}>
+                <div className="mx-4 my-2 rounded-xl px-4 py-3 text-center text-[13px] text-[#7c2d12]" style={{ background: "#ffc0a6" }}>
                   <b>{hayLiq ? "¡Aprovecha los precios de liquidación 🔥!" : "¡Gracias por ser socio de la comunidad Aurora!"}</b><br />En esta compra ahorras <b>{money(ahorro)}</b>
                 </div>
               )}
@@ -548,15 +548,15 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
       <div className="mx-auto max-w-3xl px-3 py-4">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
-            <button onClick={onBack} className="text-sm font-semibold text-gray-500 hover:text-aurora">← Volver</button>
+            <button onClick={onBack} className="text-sm font-semibold text-stone-500 hover:text-aurora">← Volver</button>
             <button onClick={refrescar} disabled={refrescando} title="Actualizar la cantidad disponible desde Odoo"
-              className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-[13px] font-bold text-aurora shadow-sm hover:bg-gray-50 disabled:opacity-50">
+              className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-[13px] font-bold text-aurora shadow-sm hover:bg-stone-50 disabled:opacity-50">
               {refrescando ? "Actualizando…" : "🔄 Actualizar"}
             </button>
           </div>
           <div className="flex gap-2">
             <button onClick={() => descargar("cliente")} disabled={!!bajando}
-              className="rounded-full bg-aurora px-4 py-1.5 text-[13px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-gray-300"
+              className="rounded-full bg-aurora px-4 py-1.5 text-[13px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-stone-300"
               title="PNG con logo y precio (para clientes)">
               {bajando === "cliente" ? "Generando…" : "📥 Cliente"}
             </button>
@@ -569,13 +569,13 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
         </div>
 
         {sizes.length > 1 && (
-          <div className="mb-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-sm">
-            <p className="mb-2 text-[11px] font-extrabold uppercase tracking-widest text-gray-400">Elige la medida</p>
+          <div className="mb-3 rounded-2xl border border-stone-100 bg-white p-3 shadow-sm">
+            <p className="mb-2 text-[11px] font-extrabold uppercase tracking-widest text-stone-400">Elige la medida</p>
             <div className="flex flex-wrap gap-2">
               {sizes.map((s) => (
                 <button key={s} onClick={() => setSize(s)}
-                  className={"rounded-xl px-4 py-2 text-sm font-bold transition " + (size === s ? "bg-aurora text-white shadow ring-2 ring-aurora/30" : "bg-gray-50 text-gray-600 ring-1 ring-gray-200 hover:ring-aurora")}>
-                  {s} <span className={"ml-1 text-[11px] " + (size === s ? "text-white/80" : "text-gray-400")}>{bySize.get(s)!.length}</span>
+                  className={"rounded-xl px-4 py-2 text-sm font-bold transition " + (size === s ? "bg-aurora text-white shadow ring-2 ring-aurora/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-aurora")}>
+                  {s} <span className={"ml-1 text-[11px] " + (size === s ? "text-white/80" : "text-stone-400")}>{bySize.get(s)!.length}</span>
                 </button>
               ))}
             </div>
@@ -583,7 +583,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
         )}
 
         {/* === LA FICHA (esto es lo que se manda / se descarga) === */}
-        <div ref={cardRef} className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-lg ring-1 ring-black/5">
+        <div ref={cardRef} className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-lg ring-1 ring-black/5">
           <div className="bg-gradient-to-r from-[#6b2410] via-aurora-dark to-aurora px-5 py-4 text-white">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
@@ -604,11 +604,11 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
                   <>
                     <p className="whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wide text-[#6b2410]/60">🧡 Precio Socios</p>
                     <p className="mt-1.5 text-[30px] font-black leading-tight text-[#6b2410]">{rango(Math.min(...mems), Math.max(...mems))}</p>
-                    <p className="mt-1 text-[13px] font-semibold text-gray-400">Público: {rango(min, max)}</p>
+                    <p className="mt-1 text-[13px] font-semibold text-stone-400">Público: {rango(min, max)}</p>
                   </>
                 ) : (
                   <>
-                    <p className="text-[11px] font-extrabold uppercase tracking-wide text-gray-400">Precio</p>
+                    <p className="text-[11px] font-extrabold uppercase tracking-wide text-stone-400">Precio</p>
                     <p className="mt-1.5 text-[34px] font-black leading-tight text-[#6b2410]">{rango(min, max)}</p>
                   </>
                 )}
@@ -634,23 +634,23 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
               </div>
             )}
 
-            {descSel && <p className="mt-3 whitespace-pre-line text-[13px] leading-snug text-gray-600">{renderNegritas(descSel)}</p>}
+            {descSel && <p className="mt-3 whitespace-pre-line text-[13px] leading-snug text-stone-600">{renderNegritas(descSel)}</p>}
 
             <div className="mb-2 mt-4 flex items-center gap-2">
               <span className="h-4 w-1 rounded-full bg-aurora" />
-              <p className="text-[13px] font-extrabold text-gray-700">{vs.length === 1 ? "Producto" : "Colores / modelos disponibles"}</p>
+              <p className="text-[13px] font-extrabold text-stone-700">{vs.length === 1 ? "Producto" : "Colores / modelos disponibles"}</p>
               <span className="rounded-full bg-aurora/10 px-2 py-0.5 text-[11px] font-black text-aurora-dark">{vs.length}</span>
             </div>
             <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-5 md:grid-cols-6">
               {vs.map((v) => (
                 <div key={v.sku} className="text-center">
                   <button type="button" onClick={() => v.imageUrl && setZoom(v)}
-                    className="block w-full overflow-hidden rounded-xl ring-1 ring-gray-200/70 shadow-sm transition hover:ring-2 hover:ring-aurora">
+                    className="block w-full overflow-hidden rounded-xl ring-1 ring-stone-200/70 shadow-sm transition hover:ring-2 hover:ring-aurora">
                     {v.imageUrl
                       ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={v.imageUrl} alt="" className="aspect-square w-full object-cover" />
-                      : <div className="grid aspect-square w-full place-items-center bg-gray-100 text-[9px] text-gray-400">sin foto</div>}
+                      : <div className="grid aspect-square w-full place-items-center bg-stone-100 text-[9px] text-stone-400">sin foto</div>}
                   </button>
-                  <p className="mt-1 text-[10px] font-bold leading-tight text-gray-700">{conMedida ? (v.color || v.label) : v.label}</p>
+                  <p className="mt-1 text-[10px] font-bold leading-tight text-stone-700">{conMedida ? (v.color || v.label) : v.label}</p>
                   {varia && <p className="text-[10px] font-semibold text-aurora-dark">{money(v.pub)}</p>}
                   {/* Este número YA es lo vendible: no incluye lo apartado en pedidos ni en cotizaciones.
                       El desglose 🏪 Tienda / 📦 Bodega se quitó el 6-oct-2026 a petición de Ximena: toda la
@@ -687,7 +687,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
         </div>
         {/* === fin ficha === */}
 
-        <button onClick={onBack} className="mt-3 w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-500 hover:bg-gray-50">
+        <button onClick={onBack} className="mt-3 w-full rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm font-semibold text-stone-500 hover:bg-stone-50">
           ← Buscar otro producto
         </button>
       </div>

@@ -10,7 +10,7 @@ const money = (n: number) => "$" + Math.round(n).toLocaleString("es-MX");
 const natCmp = (a: string, b: string) =>
   (a || "").localeCompare(b || "", "es", { numeric: true, sensitivity: "base" });
 
-const SEL = "w-full rounded-full border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 outline-none focus:border-aurora";
+const SEL = "w-full rounded-full border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-700 outline-none focus:border-aurora";
 
 export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGroup; skuInicial?: string | null; onClose: () => void }) {
   const { add } = useCart();
@@ -104,7 +104,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
         <button
           onClick={onClose}
           aria-label="Cerrar"
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-lg text-gray-600 shadow hover:bg-white"
+          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-lg text-stone-600 shadow hover:bg-white"
         >
           ✕
         </button>
@@ -130,7 +130,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
                    className="max-h-[26vh] w-full cursor-zoom-in object-contain sm:max-h-[72vh]" />
             ) : (
               /* Sin foto: antes salía el ícono de imagen rota. Mejor decirlo con todas sus letras. */
-              <div className="grid aspect-square max-h-[26vh] w-full place-items-center rounded-xl bg-white/70 text-[12px] font-semibold text-slate-400 sm:max-h-[72vh]">
+              <div className="grid aspect-square max-h-[26vh] w-full place-items-center rounded-xl bg-white/70 text-[12px] font-semibold text-stone-400 sm:max-h-[72vh]">
                 Este modelo aún no tiene foto
               </div>
             )}
@@ -169,14 +169,14 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             <span className="mb-2 w-fit rounded-full bg-red-500 px-2 py-0.5 text-[11px] font-bold text-white">🔥 LIQUIDACIÓN</span>
           )}
           <h2 className="font-display pr-28 text-xl font-bold leading-tight text-aurora-deep sm:pr-32 sm:text-2xl">{g.base}</h2>
-          <p className="mt-0.5 text-[11px] text-gray-400">{sel.sku}</p>
+          <p className="mt-0.5 text-[11px] text-stone-400">{sel.sku}</p>
 
           {/* Selector: MEDIDA y COLOR / DISEÑO como menús desplegables */}
           {multi && (
             <div className={"order-2 mt-3 gap-2.5 " + (hasSizeStep && hasColorStep ? "grid grid-cols-1 sm:grid-cols-2" : "space-y-2.5")}>
               {hasSizeStep && (
                 <label className="block">
-                  <span className="mb-1 block text-sm font-semibold text-gray-700">Elige la medida</span>
+                  <span className="mb-1 block text-sm font-semibold text-stone-700">Elige la medida</span>
                   <select value={sel.size} onChange={(e) => pickSize(e.target.value)} className={SEL}>
                     {sizeList.map((s) => {
                       const ps = g.variants.filter((v) => v.size === s).map((v) => v.precioPublico);
@@ -189,7 +189,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
 
               {hasColorStep && (
                 <label className="block">
-                  <span className="mb-1 block text-sm font-semibold text-gray-700">Elige el color / diseño ({colorOpts.length})</span>
+                  <span className="mb-1 block text-sm font-semibold text-stone-700">Elige el color / diseño ({colorOpts.length})</span>
                   <select value={sel.color} onChange={(e) => pickColor(e.target.value)} className={SEL}>
                     {colorOpts.map((v) => <option key={v.color} value={v.color}>{v.color} — {money(v.precioPublico)}</option>)}
                   </select>
@@ -198,7 +198,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
 
               {!hasSizeStep && !hasColorStep && (
                 <label className="block">
-                  <span className="mb-1 block text-sm font-semibold text-gray-700">Elige una opción</span>
+                  <span className="mb-1 block text-sm font-semibold text-stone-700">Elige una opción</span>
                   <select value={sel.sku} onChange={(e) => { const v = g.variants.find((x) => x.sku === e.target.value); if (v) setSel(v); }} className={SEL}>
                     {pasos.map((v) => <option key={v.sku} value={v.sku}>{v.label} — {money(v.precioPublico)}</option>)}
                   </select>
@@ -209,21 +209,21 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
 
           {/* Descripción — va ARRIBA, junto al precio */}
           {sel.descripcion ? (
-            <p className="order-1 mt-2 whitespace-pre-line text-sm leading-relaxed text-gray-600">{renderNegritas(sel.descripcion)}</p>
+            <p className="order-1 mt-2 whitespace-pre-line text-sm leading-relaxed text-stone-600">{renderNegritas(sel.descripcion)}</p>
           ) : null}
 
           {/* Precios de la opción elegida — Público y Socios lado a lado, mismo tamaño (van abajo) */}
-          <div className="order-3 mt-3 space-y-2 rounded-2xl bg-gray-50 p-3">
+          <div className="order-3 mt-3 space-y-2 rounded-2xl bg-stone-50 p-3">
             {esSaldo ? (
               <div className="rounded-xl bg-white p-4 text-center shadow-sm">
                 <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">🏷️ Precio de saldo</p>
                 <p className="mt-1 text-3xl font-extrabold text-aurora-dark">{money(sel.precioLiquidacion ?? sel.precioPublico)}</p>
-                <p className="mt-1 text-[11px] text-gray-400">Producto con detalle · precio final</p>
+                <p className="mt-1 text-[11px] text-stone-400">Producto con detalle · precio final</p>
               </div>
             ) : (<>
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-xl bg-white p-3 text-center shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">Público</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-stone-400">Público</p>
                 <p className="mt-0.5 text-2xl font-extrabold text-aurora-dark">{money(sel.precioPublico)}</p>
               </div>
               {sel.precioMiembro != null ? (
@@ -232,9 +232,9 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
                   <p className="mt-0.5 text-2xl font-extrabold text-aurora">{money(sel.precioMiembro)}</p>
                 </div>
               ) : (
-                <div className="rounded-xl border border-dashed border-gray-200 p-3 text-center">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-300">Socios</p>
-                  <p className="mt-0.5 text-sm italic text-gray-300">—</p>
+                <div className="rounded-xl border border-dashed border-stone-200 p-3 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-stone-300">Socios</p>
+                  <p className="mt-0.5 text-sm italic text-stone-300">—</p>
                 </div>
               )}
             </div>
@@ -261,8 +261,8 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             )}
 
             {sel.precioMiembro != null && (
-              <div className="flex items-center justify-between gap-2 border-t border-gray-200 pt-2">
-                <p className="text-[11px] leading-snug text-gray-500">🧡 {SITE.memberNote}</p>
+              <div className="flex items-center justify-between gap-2 border-t border-stone-200 pt-2">
+                <p className="text-[11px] leading-snug text-stone-500">🧡 {SITE.memberNote}</p>
                 {SITE.communityUrl && (
                   <a href={SITE.communityUrl} target="_blank" rel="noopener"
                      className="shrink-0 rounded-full bg-aurora-dark px-3 py-1 text-[11px] font-bold text-white hover:opacity-90">
@@ -282,7 +282,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
           <button
             disabled={agotado}
             onClick={agregar}
-            className={`order-4 mt-3 rounded-full px-6 py-3 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-gray-300 disabled:shadow-none sm:py-3.5 ${
+            className={`order-4 mt-3 rounded-full px-6 py-3 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-stone-300 disabled:shadow-none sm:py-3.5 ${
               // Sigue el tema de temporada (naranja), igual que el botón
               // "Agregar" de las tarjetas. Antes estaba fijo en azul marino. (Ximena, 10-oct-2026)
               added ? "bg-green-500" : "bg-gradient-to-r from-aurora-deep to-aurora-dark"
