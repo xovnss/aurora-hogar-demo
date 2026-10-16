@@ -513,7 +513,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={t.logo} alt="Aurora" className="h-10 w-auto" />
             </span>
-            <p className="mt-3 max-w-xs text-sm text-gray-500">Tienda de blancos en Pachuca, Hgo. Sábanas, colchas, cortinas, toallas y todo para renovar tu hogar con comodidad y estilo.</p>
+            <p className="mt-3 max-w-xs text-sm text-gray-500">Tienda de blancos. Sábanas, colchas, cortinas, toallas y todo para renovar tu hogar con comodidad y estilo.</p>
           </div>
           <div>
             <p className="text-[13px] font-bold uppercase tracking-wide text-[#16305b]">Categorías</p>
@@ -533,7 +533,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             )}
           </div>
         </div>
-        <p className="border-t border-black/5 py-5 text-center text-xs text-gray-400">© {now.getFullYear()} Aurora · Tienda de blancos · Pachuca, Hgo.</p>
+        <p className="border-t border-black/5 py-5 text-center text-xs text-gray-400">© {now.getFullYear()} Aurora · Tienda de blancos · Demo</p>
       </footer>
 
       {selected && <ProductDetail g={selected} skuInicial={selSku} onClose={cerrarFicha} />}

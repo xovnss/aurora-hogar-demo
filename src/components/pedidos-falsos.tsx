@@ -12,8 +12,6 @@ const NOMBRES = [
   "Luis Ramírez", "Carlos Sánchez", "José Martínez", "Miguel Ángel Rojas", "Fernando Lara",
 ];
 const CIUDADES = [
-  // Hidalgo y centro
-  "Pachuca", "Tulancingo", "Tizayuca", "Mineral de la Reforma", "Ixmiquilpan",
   // México (todo el país)
   "CDMX", "Guadalajara", "Monterrey", "Puebla", "Querétaro", "Toluca", "León",
   "Mérida", "Cancún", "Tijuana", "Veracruz", "Oaxaca", "Chihuahua", "Culiacán",
