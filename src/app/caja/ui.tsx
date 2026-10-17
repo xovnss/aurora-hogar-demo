@@ -329,7 +329,7 @@ export function CajaApp() {
           <div className="mx-auto flex max-w-lg items-center justify-between">
             <div className="flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/aurora.png" alt="Aurora" className="h-9 w-auto" />
+              <img src="/aurora-blanco.png" alt="Aurora" className="h-9 w-auto" />
               <div>
                 <h1 className="text-xl font-bold leading-tight">Corte de caja</h1>
                 <p className="text-[12px] text-white/70">Arqueo · salidas · cuadre</p>

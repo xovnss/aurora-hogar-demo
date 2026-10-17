@@ -85,7 +85,7 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
     <div className="flex h-full flex-col text-white">
       <div className="px-5 pb-5 pt-7">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/aurora.png" alt="Aurora" className="h-12 w-auto" />
+        <img src="/aurora-blanco.png" alt="Aurora" className="h-12 w-auto" />
         <p className="font-display mt-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Fichas · Ventas</p>
       </div>
       <div className="flex-1 space-y-1 overflow-y-auto px-3 pb-4">
