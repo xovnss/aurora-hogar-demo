@@ -35,11 +35,11 @@ export function VentasLogin() {
     start(async () => { const r = await loginVentasAction(pass); if (r.ok) router.refresh(); else setErr(r.error); });
   }
   return (
-    <div className="font-display flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-[#7c2d12] via-[#9a3412] to-[#c2410c] px-4 py-10">
+    <div className="font-display flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-[#1c1717] via-[#8a0707] to-[#b50808] px-4 py-10">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/aurora-blanco.png" alt="Aurora" className="mb-5 h-12 w-auto" />
+      <img src="/bam-blanco.png" alt="BAM!" className="mb-5 h-12 w-auto" />
       <form onSubmit={submit} className="w-full max-w-sm rounded-[28px] border-4 border-white/20 bg-white p-7 shadow-2xl">
-        <h1 className="font-display text-2xl font-bold text-[#7c2d12]">Fichas para ventas</h1>
+        <h1 className="font-display text-2xl font-bold text-[#1c1717]">Fichas para ventas</h1>
         <p className="mt-0.5 mb-4 text-sm text-stone-500">Manda los colores de un producto en una sola imagen 👇</p>
         <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} autoFocus placeholder="Contraseña"
           className="pf-input w-full px-4 py-3 text-center" />
@@ -48,7 +48,7 @@ export function VentasLogin() {
           {pending ? "Entrando…" : "Entrar"}
         </button>
       </form>
-      <p className="mt-5 text-[12px] font-semibold text-white/50">☁️ Aurora · Blancos y Decoración</p>
+      <p className="mt-5 text-[12px] font-semibold text-white/50">☁️ BAM! · a brand made for you</p>
     </div>
   );
 }
@@ -85,28 +85,28 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
     <div className="flex h-full flex-col text-white">
       <div className="px-5 pb-5 pt-7">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/aurora-blanco.png" alt="Aurora" className="h-12 w-auto" />
+        <img src="/bam-blanco.png" alt="BAM!" className="h-12 w-auto" />
         <p className="font-display mt-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Fichas · Ventas</p>
       </div>
       <div className="flex-1 space-y-1 overflow-y-auto px-3 pb-4">
-        <p className="px-3 pb-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-orange-200/60">Secciones</p>
+        <p className="px-3 pb-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-red-200/60">Secciones</p>
         {secciones.map((s) => {
           const activa = seccion === s && modo === "fichas";
           return (
             <button key={s} onClick={() => { setSeccion(s); setModo("fichas"); setMenu(false); }}
-              className={"flex w-full items-center justify-between gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm transition " + (activa ? "bg-gradient-to-r from-[#c2410c] to-[#f97316] font-bold text-white shadow-sm" : "font-semibold text-white/65 hover:bg-white/10 hover:text-white")}>
+              className={"flex w-full items-center justify-between gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm transition " + (activa ? "bg-gradient-to-r from-[#b50808] to-[#e10b0b] font-bold text-white shadow-sm" : "font-semibold text-white/65 hover:bg-white/10 hover:text-white")}>
               <span>{s === "Liquidaciones" ? "🔥 " : ""}{s}</span>
               <span className={"rounded-full px-2 py-0.5 text-[10px] font-bold " + (activa ? "bg-white/25" : "bg-white/10")}>{cuenta(s)}</span>
             </button>
           );
         })}
-        <p className="px-3 pb-1.5 pt-4 text-[10px] font-extrabold uppercase tracking-[0.16em] text-orange-200/60">Herramientas</p>
+        <p className="px-3 pb-1.5 pt-4 text-[10px] font-extrabold uppercase tracking-[0.16em] text-red-200/60">Herramientas</p>
         <button onClick={() => { setModo("cotiz"); setMenu(false); }}
-          className={"flex w-full items-center gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm transition " + (modo === "cotiz" ? "bg-gradient-to-r from-[#c2410c] to-[#f97316] font-bold text-white shadow-sm" : "font-semibold text-white/65 hover:bg-white/10 hover:text-white")}>
+          className={"flex w-full items-center gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm transition " + (modo === "cotiz" ? "bg-gradient-to-r from-[#b50808] to-[#e10b0b] font-bold text-white shadow-sm" : "font-semibold text-white/65 hover:bg-white/10 hover:text-white")}>
           🧾 Cotización
         </button>
         <button onClick={() => { setModo("catalogo"); setMenu(false); }}
-          className={"flex w-full items-center gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm transition " + (modo === "catalogo" ? "bg-gradient-to-r from-[#c2410c] to-[#f97316] font-bold text-white shadow-sm" : "font-semibold text-white/65 hover:bg-white/10 hover:text-white")}>
+          className={"flex w-full items-center gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm transition " + (modo === "catalogo" ? "bg-gradient-to-r from-[#b50808] to-[#e10b0b] font-bold text-white shadow-sm" : "font-semibold text-white/65 hover:bg-white/10 hover:text-white")}>
           📒 Catálogo para compartir
         </button>
       </div>
@@ -140,7 +140,7 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
                   <h1 className="grad-text font-display text-xl font-bold">{seccion === "Todos" ? "Todos los productos" : seccion}</h1>
                   <span className="text-[13px] text-stone-400">· {lista.length} productos · toca uno para ver su ficha</span>
                   <button onClick={refrescar} disabled={refrescando} title="Trae el stock actualizado de Odoo y quita los que quedaron en 0"
-                    className="ml-auto rounded-full bg-aurora px-4 py-1.5 text-[13px] font-bold text-white shadow-sm hover:bg-aurora-dark disabled:bg-stone-300">
+                    className="ml-auto rounded-full bg-brand px-4 py-1.5 text-[13px] font-bold text-white shadow-sm hover:bg-brand-dark disabled:bg-stone-300">
                     {refrescando ? "Actualizando…" : "🔄 Actualizar stock"}
                   </button>
                 </div>
@@ -154,9 +154,9 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
                           : <div className="grid h-full w-full place-items-center text-[11px] text-stone-400">sin foto</div>}
                       </div>
                       <div className="p-3">
-                        <p className="truncate text-[13px] font-bold text-[#7c2d12]">{f.base}</p>
+                        <p className="truncate text-[13px] font-bold text-[#1c1717]">{f.base}</p>
                         <p className="mt-0.5 text-[11px] text-stone-400">{f.categoria} · {f.colorCount} {f.colorCount === 1 ? "opción" : "colores"}</p>
-                        <p className="mt-1 text-sm font-extrabold text-aurora-dark">{rango(f.minPublico, f.maxPublico)}</p>
+                        <p className="mt-1 text-sm font-extrabold text-brand-dark">{rango(f.minPublico, f.maxPublico)}</p>
                       </div>
                     </button>
                   ))}
@@ -245,7 +245,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
     try {
       await Promise.all(imgs.map(async (img) => {
         try {
-          if (img.src.includes("aurora")) return;
+          if (img.src.includes("/bam-")) return;
           img.loading = "eager";
           if (!img.complete || !img.naturalWidth) {
             await Promise.race([
@@ -262,14 +262,14 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
         } catch { /* deja la original */ }
       }));
       const dataUrl = await toPng(node, { pixelRatio: 2, backgroundColor: "#ffffff" });
-      const nombre = ("Cotizacion Aurora" + (cliente ? " - " + cliente.replace(/[^a-zA-Z0-9 ]/g, "") : "")).slice(0, 80) + ".png";
+      const nombre = ("Cotizacion BAM!" + (cliente ? " - " + cliente.replace(/[^a-zA-Z0-9 ]/g, "") : "")).slice(0, 80) + ".png";
       const blob = await (await fetch(dataUrl)).blob();
       const file = new File([blob], nombre, { type: "image/png" });
       // Celular: compartir (WhatsApp). Compu: descargar directo (la hoja de compartir de Windows no descarga).
       const esMovil = /Android|iPhone|iPad|iPod|Mobile|Silk/i.test(navigator.userAgent || "");
       const nav = navigator as Navigator & { canShare?: (d: { files: File[] }) => boolean };
       if (esMovil && nav.canShare && nav.canShare({ files: [file] })) {
-        try { await nav.share({ files: [file], title: "Cotización Aurora" } as ShareData); return; }
+        try { await nav.share({ files: [file], title: "Cotización BAM!" } as ShareData); return; }
         catch { /* pasa a descarga */ }
       }
       const url = URL.createObjectURL(blob);
@@ -302,9 +302,9 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
     <div className="mx-auto grid max-w-5xl gap-4 lg:grid-cols-2">
       <div>
         <div className="pf-card p-4">
-          <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Cliente (opcional)</label>
+          <label className="mb-1 block text-[13px] font-bold text-[#1c1717]">Cliente (opcional)</label>
           <input value={cliente} onChange={(e) => setCliente(e.target.value)} placeholder="Nombre del cliente" className={inp + " mb-3"} />
-          <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Asesor</label>
+          <label className="mb-1 block text-[13px] font-bold text-[#1c1717]">Asesor</label>
           <select value={asesor} onChange={(e) => setAsesor(e.target.value)} className={inp + " mb-3"}>
             <option value="">Selecciona…</option>
             <option>Ximena</option>
@@ -313,7 +313,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
             <option>Lorena</option>
             <option>Carlos</option>
           </select>
-          <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Agregar productos</label>
+          <label className="mb-1 block text-[13px] font-bold text-[#1c1717]">Agregar productos</label>
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Busca por nombre o código…" className={inp} />
           {resultados.length > 0 && (
             <div className="mt-2 max-h-80 overflow-y-auto rounded-xl border border-stone-100">
@@ -322,18 +322,18 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                   <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-stone-100">
                     {pr.image ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={pr.image} alt="" className="h-full w-full object-cover" /> : null}
                   </div>
-                  <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[#7c2d12]">{pr.nombre}</span>
-                  <span className={"shrink-0 text-[13px] font-bold " + (pr.liq != null ? "text-red-600" : "text-aurora-dark")}>{pr.liq != null ? "🔥 " : ""}{money(pr.liq != null ? pr.liq : pr.mem)}</span>
-                  <span className="shrink-0 rounded-full bg-aurora px-2 py-0.5 text-[13px] font-bold text-white">+</span>
+                  <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[#1c1717]">{pr.nombre}</span>
+                  <span className={"shrink-0 text-[13px] font-bold " + (pr.liq != null ? "text-red-600" : "text-brand-dark")}>{pr.liq != null ? "🔥 " : ""}{money(pr.liq != null ? pr.liq : pr.mem)}</span>
+                  <span className="shrink-0 rounded-full bg-brand px-2 py-0.5 text-[13px] font-bold text-white">+</span>
                 </button>
               ))}
             </div>
           )}
           <div className="mt-3 border-t border-stone-100 pt-3">
-            <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Agregar envío</label>
+            <label className="mb-1 block text-[13px] font-bold text-[#1c1717]">Agregar envío</label>
             <div className="flex gap-2">
               <input value={envioTmp} onChange={(e) => setEnvioTmp(e.target.value.replace(/[^\d.]/g, ""))} inputMode="decimal" placeholder="Costo del envío ($)" className={inp} />
-              <button onClick={agregarEnvio} className="shrink-0 rounded-xl bg-aurora px-4 text-sm font-bold text-white hover:bg-aurora-dark">Agregar</button>
+              <button onClick={agregarEnvio} className="shrink-0 rounded-xl bg-brand px-4 text-sm font-bold text-white hover:bg-brand-dark">Agregar</button>
             </div>
           </div>
         </div>
@@ -348,7 +348,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                     {x.image ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={x.image} alt="" className="h-full w-full object-cover" /> : null}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="block truncate text-[12px] font-semibold text-[#7c2d12]">{x.nombre}</span>
+                    <span className="block truncate text-[12px] font-semibold text-[#1c1717]">{x.nombre}</span>
                     {(() => {
                       const f = fichaByKey.get(x.fichaKey);
                       return !x.envio && f && f.variants.length > 1 ? (
@@ -383,12 +383,12 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
               <button onClick={descargarFormal} disabled={bajandoPdf} className="rounded-full border-2 border-[#c4972a] bg-[#fdf7e6] px-5 py-2 text-[13px] font-bold text-[#8a6a15] shadow-sm hover:bg-[#faedc9] disabled:opacity-50">
                 {bajandoPdf ? "Generando PDF…" : "📄 Cotización formal (PDF)"}
               </button>
-              <button onClick={compartir} disabled={bajando} className="rounded-full bg-aurora px-5 py-2 text-[13px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-stone-300">
+              <button onClick={compartir} disabled={bajando} className="rounded-full bg-brand px-5 py-2 text-[13px] font-bold text-white shadow hover:bg-brand-dark disabled:bg-stone-300">
                 {bajando ? "Generando…" : "📥 Descargar / Compartir"}
               </button>
             </div>
             <div ref={cardRef} className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-lg">
-              <div className="flex items-start justify-between gap-3 px-5 py-4 text-white" style={{ background: "#db8663" }}>
+              <div className="flex items-start justify-between gap-3 px-5 py-4 text-white" style={{ background: "#db636c" }}>
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Cotización</p>
                   {cliente ? <h1 className="text-lg font-black leading-tight">{cliente}</h1> : null}
@@ -396,7 +396,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                   {asesor ? <p className="text-[11px] font-semibold text-white/90">Te atendió: {asesor}</p> : null}
                 </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/aurora.png" alt="Aurora" className="h-9 w-auto shrink-0 object-contain" />
+                <img src="/bam-logo.png" alt="BAM!" className="h-9 w-auto shrink-0 object-contain" />
               </div>
 
               <div className="divide-y divide-stone-100 px-4 py-1">
@@ -406,29 +406,29 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                       {x.image ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={x.image} alt="" className="h-full w-full object-cover" /> : null}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[13px] font-bold leading-snug text-[#7c2d12]">{x.nombre}</p>
-                      <p className="mt-0.5 text-[11px] text-stone-500">{x.envio ? "Costo de envío" : <>{x.qty} pza(s){x.pub > precioDe(x) ? <> · <span className="line-through">{money(x.pub)}</span></> : null} · <b className={x.liq != null ? "text-red-600" : "text-[#7c2d12]"}>{x.liq != null ? "🔥 " : ""}{money(precioDe(x))}</b></>}</p>
+                      <p className="text-[13px] font-bold leading-snug text-[#1c1717]">{x.nombre}</p>
+                      <p className="mt-0.5 text-[11px] text-stone-500">{x.envio ? "Costo de envío" : <>{x.qty} pza(s){x.pub > precioDe(x) ? <> · <span className="line-through">{money(x.pub)}</span></> : null} · <b className={x.liq != null ? "text-red-600" : "text-[#1c1717]"}>{x.liq != null ? "🔥 " : ""}{money(precioDe(x))}</b></>}</p>
                     </div>
-                    <p className="shrink-0 text-[14px] font-extrabold text-[#7c2d12]">{money(precioDe(x) * x.qty)}</p>
+                    <p className="shrink-0 text-[14px] font-extrabold text-[#1c1717]">{money(precioDe(x) * x.qty)}</p>
                   </div>
                 ))}
               </div>
 
               {ahorro > 0 && (
-                <div className="mx-4 my-2 rounded-xl px-4 py-3 text-center text-[13px] text-[#7c2d12]" style={{ background: "#ffc0a6" }}>
-                  <b>{hayLiq ? "¡Aprovecha los precios de liquidación 🔥!" : "¡Gracias por ser socio de la comunidad Aurora!"}</b><br />En esta compra ahorras <b>{money(ahorro)}</b>
+                <div className="mx-4 my-2 rounded-xl px-4 py-3 text-center text-[13px] text-[#1c1717]" style={{ background: "#ffa6ad" }}>
+                  <b>{hayLiq ? "¡Aprovecha los precios de liquidación 🔥!" : "¡Gracias por ser socio de la club BAM!!"}</b><br />En esta compra ahorras <b>{money(ahorro)}</b>
                 </div>
               )}
 
               <div className="px-5 py-2 text-right">
-                <span className="text-[20px] font-black text-[#7c2d12]">TOTAL: </span>
+                <span className="text-[20px] font-black text-[#1c1717]">TOTAL: </span>
                 <span className="text-[20px] font-semibold text-black">{money(totalVenta)}</span>
               </div>
 
-              <div className="flex items-center justify-between gap-2 px-5 py-3 text-white" style={{ background: "#7c2d12" }}>
+              <div className="flex items-center justify-between gap-2 px-5 py-3 text-white" style={{ background: "#1c1717" }}>
                 <div className="min-w-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/aurora.png" alt="Aurora" className="h-9 w-auto object-contain" />
+                  <img src="/bam-logo.png" alt="BAM!" className="h-9 w-auto object-contain" />
                   <p className="mt-0.5 text-[9px] font-semibold text-white/70">Cotización — no aparta el producto. Precios sujetos a disponibilidad.</p>
                 </div>
                 {WHATSAPP ? (
@@ -449,7 +449,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
 /* ---------- Ficha (lo que se manda en un pantallazo) ---------- */
 // Mismo orden que el catálogo (chica → grande): la ficha arranca en la medida más chica
 // (normalmente Matrimonial), que es la que coincide con la descripción/medidas del producto.
-const SIZE_ORDER = ["Individual", "Matrimonial", "Matri Queen", "Queen", "King", "King Jumbo", "California King"];
+const SIZE_ORDER = ["XS", "S", "M", "L", "XL"];
 
 function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
   // agrupa las variantes por MEDIDA (las sin medida caen en "Otras")
@@ -472,7 +472,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
   function refrescar() { setRefrescando(true); refrescarCatalogoAction().then(() => router.refresh()).finally(() => setTimeout(() => setRefrescando(false), 900)); }
   const vs = bySize.get(size) || f.variants;
   const conMedida = size !== "Otras" && sizes.length > 1;
-  // La descripción sigue a la medida elegida (igual que el catálogo): así no queda "Medida: King"
+  // La descripción sigue a la medida elegida (igual que el catálogo): así no queda "Talla: King"
   // con medidas de Matrimonial. Si la variante no trae descripción, usa la del producto.
   const descSel = (vs.find((v) => (v.descripcion || "").trim())?.descripcion || f.descripcion || "").trim();
 
@@ -487,7 +487,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
       //    propio canvas (sin depender de la red). Con timeout para no colgarse en celular.
       await Promise.all(imgs.map(async (img) => {
         try {
-          if (img.src.includes("aurora")) return; // el logo se deja tal cual (transparencia)
+          if (img.src.includes("/bam-")) return; // el logo se deja tal cual (transparencia)
           img.loading = "eager";
           if (!img.complete || !img.naturalWidth) {
             await Promise.race([
@@ -548,20 +548,20 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
       <div className="mx-auto max-w-3xl px-3 py-4">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
-            <button onClick={onBack} className="text-sm font-semibold text-stone-500 hover:text-aurora">← Volver</button>
+            <button onClick={onBack} className="text-sm font-semibold text-stone-500 hover:text-brand">← Volver</button>
             <button onClick={refrescar} disabled={refrescando} title="Actualizar la cantidad disponible desde Odoo"
-              className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-[13px] font-bold text-aurora shadow-sm hover:bg-stone-50 disabled:opacity-50">
+              className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-[13px] font-bold text-brand shadow-sm hover:bg-stone-50 disabled:opacity-50">
               {refrescando ? "Actualizando…" : "🔄 Actualizar"}
             </button>
           </div>
           <div className="flex gap-2">
             <button onClick={() => descargar("cliente")} disabled={!!bajando}
-              className="rounded-full bg-aurora px-4 py-1.5 text-[13px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-stone-300"
+              className="rounded-full bg-brand px-4 py-1.5 text-[13px] font-bold text-white shadow hover:bg-brand-dark disabled:bg-stone-300"
               title="PNG con logo y precio (para clientes)">
               {bajando === "cliente" ? "Generando…" : "📥 Cliente"}
             </button>
             <button onClick={() => descargar("revendedor")} disabled={!!bajando}
-              className="rounded-full border border-aurora bg-white px-4 py-1.5 text-[13px] font-bold text-aurora shadow-sm hover:bg-aurora/5 disabled:opacity-50"
+              className="rounded-full border border-brand bg-white px-4 py-1.5 text-[13px] font-bold text-brand shadow-sm hover:bg-brand/5 disabled:opacity-50"
               title="PNG SIN logo ni precio (para revendedores)">
               {bajando === "revendedor" ? "Generando…" : "📥 Revendedor"}
             </button>
@@ -570,11 +570,11 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
 
         {sizes.length > 1 && (
           <div className="mb-3 rounded-2xl border border-stone-100 bg-white p-3 shadow-sm">
-            <p className="mb-2 text-[11px] font-extrabold uppercase tracking-widest text-stone-400">Elige la medida</p>
+            <p className="mb-2 text-[11px] font-extrabold uppercase tracking-widest text-stone-400">Elige tu talla</p>
             <div className="flex flex-wrap gap-2">
               {sizes.map((s) => (
                 <button key={s} onClick={() => setSize(s)}
-                  className={"rounded-xl px-4 py-2 text-sm font-bold transition " + (size === s ? "bg-aurora text-white shadow ring-2 ring-aurora/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-aurora")}>
+                  className={"rounded-xl px-4 py-2 text-sm font-bold transition " + (size === s ? "bg-brand text-white shadow ring-2 ring-brand/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-brand")}>
                   {s} <span className={"ml-1 text-[11px] " + (size === s ? "text-white/80" : "text-stone-400")}>{bySize.get(s)!.length}</span>
                 </button>
               ))}
@@ -584,32 +584,32 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
 
         {/* === LA FICHA (esto es lo que se manda / se descarga) === */}
         <div ref={cardRef} className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-lg ring-1 ring-black/5">
-          <div className="bg-gradient-to-r from-[#6b2410] via-aurora-dark to-aurora px-5 py-4 text-white">
+          <div className="bg-gradient-to-r from-[#2b1111] via-brand-dark to-brand px-5 py-4 text-white">
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">{f.categoria}</p>
                 <h1 className="text-xl font-black leading-tight">{f.base}</h1>
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/aurora.png" alt="Aurora" className="x-marca h-9 w-auto shrink-0 object-contain" />
+              <img src="/bam-logo.png" alt="BAM!" className="x-marca h-9 w-auto shrink-0 object-contain" />
             </div>
-            {conMedida && <span className="mt-1.5 inline-block rounded-full bg-white/20 px-3 py-0.5 text-[11px] font-bold backdrop-blur">Medida: {size}</span>}
+            {conMedida && <span className="mt-1.5 inline-block rounded-full bg-white/20 px-3 py-0.5 text-[11px] font-bold backdrop-blur">Talla: {size}</span>}
           </div>
 
           <div className="px-5 py-4">
             {/* PRECIOS — Socios protagonista (azul marino), Público chico en gris */}
-            <div className="x-precio flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-br from-orange-50 to-white p-4 ring-1 ring-orange-100">
+            <div className="x-precio flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-br from-red-50 to-white p-4 ring-1 ring-red-100">
               <div>
                 {mems.length > 0 ? (
                   <>
-                    <p className="whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wide text-[#6b2410]/60">🧡 Precio Socios</p>
-                    <p className="mt-1.5 text-[30px] font-black leading-tight text-[#6b2410]">{rango(Math.min(...mems), Math.max(...mems))}</p>
+                    <p className="whitespace-nowrap text-[11px] font-extrabold uppercase tracking-wide text-[#2b1111]/60">🧡 Precio Socios</p>
+                    <p className="mt-1.5 text-[30px] font-black leading-tight text-[#2b1111]">{rango(Math.min(...mems), Math.max(...mems))}</p>
                     <p className="mt-1 text-[13px] font-semibold text-stone-400">Público: {rango(min, max)}</p>
                   </>
                 ) : (
                   <>
                     <p className="text-[11px] font-extrabold uppercase tracking-wide text-stone-400">Precio</p>
-                    <p className="mt-1.5 text-[34px] font-black leading-tight text-[#6b2410]">{rango(min, max)}</p>
+                    <p className="mt-1.5 text-[34px] font-black leading-tight text-[#2b1111]">{rango(min, max)}</p>
                   </>
                 )}
               </div>
@@ -622,11 +622,11 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
             </div>
 
             {f.tarifas.length > 0 && (
-              <div className="mt-3 rounded-2xl bg-orange-50 p-3 ring-1 ring-orange-100">
-                <p className="text-[12px] font-extrabold text-aurora-dark">🖐️ Precios por mayoreo</p>
+              <div className="mt-3 rounded-2xl bg-red-50 p-3 ring-1 ring-red-100">
+                <p className="text-[12px] font-extrabold text-brand-dark">🖐️ Precios por mayoreo</p>
                 <div className="mt-1.5 flex flex-wrap gap-2">
                   {f.tarifas.map((t) => (
-                    <span key={t.qty} className="rounded-lg bg-white px-2.5 py-1 text-[12px] font-bold text-[#6b2410] ring-1 ring-orange-200">
+                    <span key={t.qty} className="rounded-lg bg-white px-2.5 py-1 text-[12px] font-bold text-[#2b1111] ring-1 ring-red-200">
                       {t.qty}+ pzs · {money(t.price)} c/u
                     </span>
                   ))}
@@ -637,26 +637,26 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
             {descSel && <p className="mt-3 whitespace-pre-line text-[13px] leading-snug text-stone-600">{renderNegritas(descSel)}</p>}
 
             <div className="mb-2 mt-4 flex items-center gap-2">
-              <span className="h-4 w-1 rounded-full bg-aurora" />
+              <span className="h-4 w-1 rounded-full bg-brand" />
               <p className="text-[13px] font-extrabold text-stone-700">{vs.length === 1 ? "Producto" : "Colores / modelos disponibles"}</p>
-              <span className="rounded-full bg-aurora/10 px-2 py-0.5 text-[11px] font-black text-aurora-dark">{vs.length}</span>
+              <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[11px] font-black text-brand-dark">{vs.length}</span>
             </div>
             <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-5 md:grid-cols-6">
               {vs.map((v) => (
                 <div key={v.sku} className="text-center">
                   <button type="button" onClick={() => v.imageUrl && setZoom(v)}
-                    className="block w-full overflow-hidden rounded-xl ring-1 ring-stone-200/70 shadow-sm transition hover:ring-2 hover:ring-aurora">
+                    className="block w-full overflow-hidden rounded-xl ring-1 ring-stone-200/70 shadow-sm transition hover:ring-2 hover:ring-brand">
                     {v.imageUrl
                       ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={v.imageUrl} alt="" className="aspect-square w-full object-cover" />
                       : <div className="grid aspect-square w-full place-items-center bg-stone-100 text-[9px] text-stone-400">sin foto</div>}
                   </button>
                   <p className="mt-1 text-[10px] font-bold leading-tight text-stone-700">{conMedida ? (v.color || v.label) : v.label}</p>
-                  {varia && <p className="text-[10px] font-semibold text-aurora-dark">{money(v.pub)}</p>}
+                  {varia && <p className="text-[10px] font-semibold text-brand-dark">{money(v.pub)}</p>}
                   {/* Este número YA es lo vendible: no incluye lo apartado en pedidos ni en cotizaciones.
                       El desglose 🏪 Tienda / 📦 Bodega se quitó el 6-oct-2026 a petición de Ximena: toda la
                       mercancía vive en Bodega Torres, así que "Tienda: 0" salía en TODO y las asesoras
                       creían que el producto ya se había acabado en piso. */}
-                  <p className={`x-stock mt-0.5 rounded-md px-1.5 py-0.5 text-[9px] font-bold ${v.stock > 0 ? "bg-aurora/10 text-aurora-dark" : "bg-red-100 text-red-600"}`}>
+                  <p className={`x-stock mt-0.5 rounded-md px-1.5 py-0.5 text-[9px] font-bold ${v.stock > 0 ? "bg-brand/10 text-brand-dark" : "bg-red-100 text-red-600"}`}>
                     {v.stock > 0 ? `Disponibles: ${v.stock} piezas` : "Sin disponibles"}
                   </p>
                   {/* Es el número de piezas APARTADAS (comprometidas en pedidos y cotizaciones), pero
@@ -671,11 +671,11 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
             </div>
           </div>
 
-          <div className="x-marca flex items-center justify-between gap-2 bg-gradient-to-r from-[#6b2410] to-aurora px-5 py-3 text-white">
+          <div className="x-marca flex items-center justify-between gap-2 bg-gradient-to-r from-[#2b1111] to-brand px-5 py-3 text-white">
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/aurora.png" alt="Aurora" className="h-11 w-auto object-contain" />
-              <p className="mt-0.5 text-[10px] font-semibold text-white/70">Blancos y Decoración</p>
+              <img src="/bam-logo.png" alt="BAM!" className="h-11 w-auto object-contain" />
+              <p className="mt-0.5 text-[10px] font-semibold text-white/70">a brand made for you</p>
             </div>
             {WHATSAPP && (
               <div className="text-right">

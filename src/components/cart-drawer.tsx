@@ -28,7 +28,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
           : `• ${i.qty}x ${i.name} (${i.sku}) — ${money(i.price)}${i.mem != null ? ` (socios ${money(i.mem)})` : ""} c/u`
       )
       .join("\n");
-    const msg = `¡Hola Aurora! 🛏️ Quiero hacer este pedido:\n\n${lineas}\n\nTotal público: ${money(tp)}${hm ? `\n🧡 Total socios: ${money(tm)}` : ""}\n\n(Si soy socio, aplícame mi precio de socio.)`;
+    const msg = `¡Hola BAM! 🖤 Quiero hacer este pedido:\n\n${lineas}\n\nTotal público: ${money(tp)}${hm ? `\n🧡 Total socios: ${money(tm)}` : ""}\n\n(Si soy socio, aplícame mi precio de socio.)`;
     if (!SITE.whatsapp) {
       alert("Falta configurar el número de WhatsApp de la tienda.");
       return;
@@ -48,7 +48,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
         }`}
       >
         <div className="flex items-center justify-between border-b p-4">
-          <h2 className="text-lg font-bold text-aurora-dark">Mi lista ({count})</h2>
+          <h2 className="text-lg font-bold text-brand-dark">Mi lista ({count})</h2>
           <button onClick={onClose} className="rounded-full p-1 text-stone-500 hover:bg-stone-100" aria-label="Cerrar">✕</button>
         </div>
 
@@ -69,7 +69,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
                     ) : (
                       <p className="text-[11px] text-stone-400">
                         {i.sku} · {money(i.price)}
-                        {i.mem != null && <> · <span className="font-bold text-aurora">🧡 {money(i.mem)}</span></>}
+                        {i.mem != null && <> · <span className="font-bold text-brand">🧡 {money(i.mem)}</span></>}
                       </p>
                     )}
                     {disp(i.sku) <= 0 ? (
@@ -94,12 +94,12 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
           <div className="border-t p-4">
             <div className={"flex items-center justify-between text-sm " + (hayMiembro ? "mb-0.5" : "mb-2")}>
               <span className="text-stone-500">Total público</span>
-              <span className={hayMiembro ? "font-bold text-stone-500" : "text-xl font-extrabold text-aurora-dark"}>{money(totalPublico)}</span>
+              <span className={hayMiembro ? "font-bold text-stone-500" : "text-xl font-extrabold text-brand-dark"}>{money(totalPublico)}</span>
             </div>
             {hayMiembro && (
               <div className="mb-1 flex items-center justify-between">
-                <span className="text-sm font-bold text-aurora">🧡 Total socios</span>
-                <span className="text-2xl font-extrabold text-aurora">{money(totalMiembro)}</span>
+                <span className="text-sm font-bold text-brand">🧡 Total socios</span>
+                <span className="text-2xl font-extrabold text-brand">{money(totalMiembro)}</span>
               </div>
             )}
             {hayMiembro && ahorro > 0 && (
@@ -107,7 +107,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
                 🎉 Como socio ahorras {money(ahorro)}
               </p>
             )}
-            <p className="mb-3 rounded-lg bg-aurora-light px-3 py-2 text-[11px] leading-snug text-aurora-dark">
+            <p className="mb-3 rounded-lg bg-brand-light px-3 py-2 text-[11px] leading-snug text-brand-dark">
               🧡 {SITE.memberNote}
             </p>
             <button

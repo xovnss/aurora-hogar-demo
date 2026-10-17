@@ -3,14 +3,15 @@ import { Poppins, Fraunces } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/cart-context";
 import DemoNav from "@/components/demo-nav";
+import ChatWidget from "@/components/chat-widget";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display" });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"], variable: "--font-display" });
 // Serif elegante para títulos del catálogo (estilo editorial tipo Casper)
 const fraunces = Fraunces({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
-  title: "Aurora — Catálogo",
-  description: "Catálogo de Aurora · Tienda de blancos de ejemplo. Sábanas, colchas, cobertores, cortinas, toallas y más.",
+  title: "BAM! — a brand made for you",
+  description: "BAM! · Playeras oversize con mensaje. Demo de tienda con chatbot de tallas, existencias por sucursal y envíos.",
 };
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="es" className={`h-full antialiased ${poppins.variable} ${fraunces.variable}`}>
       <body className="min-h-full pb-16">
         <CartProvider>{children}</CartProvider>
+        <ChatWidget />
         <DemoNav />
       </body>
     </html>

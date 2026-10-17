@@ -3,6 +3,7 @@
 // puede aparecer además en su sección de temporada. Rosy las marca desde /subir.
 export const TAG_NAVIDAD = 2;
 export const TAG_HALLOWEEN = 3;
+export const TAG_NUEVO = 4; // producto recién salido: aparece además en "Novedades"
 
 export type Temporada = { id: string; tagId: number; emoji: string };
 // El orden aquí es el orden en que salen las secciones en el catálogo.

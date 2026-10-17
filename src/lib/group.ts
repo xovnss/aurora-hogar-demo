@@ -1,6 +1,6 @@
 import type { Product } from "./types";
 import { searchText, norm } from "./search";
-import { TAG_NAVIDAD, TAG_HALLOWEEN } from "./tags";
+import { TAG_NAVIDAD, TAG_HALLOWEEN, TAG_NUEVO } from "./tags";
 
 export type Variant = Product & { label: string; size: string; color: string };
 
@@ -36,14 +36,10 @@ export function tieneTag(variants: Product[], tagId: number): boolean {
   return variants.some((v) => (v.tags || []).includes(tagId));
 }
 
-const SIZE_NAMES: Record<string, string> = {
-  K: "King", M: "Matrimonial", Q: "Queen", I: "Individual", MQ: "Matri Queen",
-};
-const SIZE_CODES = new Set(["K", "M", "Q", "I", "MQ"]);
-const SIZE_ORDER = ["K", "Q", "MQ", "M", "I"];
-const SIZE_SHORT: Record<string, string> = {
-  K: "King", Q: "Queen", MQ: "Matri Queen", M: "Matrimonial", I: "Individual",
-};
+const SIZE_NAMES: Record<string, string> = { XS: "XS", S: "S", M: "M", L: "L", XL: "XL" };
+const SIZE_CODES = new Set(["XS", "S", "M", "L", "XL"]);
+const SIZE_ORDER = ["XS", "S", "M", "L", "XL"];
+const SIZE_SHORT: Record<string, string> = { XS: "XS", S: "S", M: "M", L: "L", XL: "XL" };
 
 // Un token es "modelo/diseño" (NO se agrupa) si es M1, M2… o un número suelto.
 const isModel = (t: string) => /^m\d+$/i.test(t) || /^\d+$/.test(t);
@@ -139,7 +135,7 @@ export function buildGroups(products: Product[]): ProductGroup[] {
       const size = sizeCode ? SIZE_NAMES[sizeCode] : "";
       let color = label;
       if (size) {
-        color = label.replace(new RegExp(size, "i"), "").replace(/[-–]/g, " ").replace(/\s+/g, " ").trim();
+        color = label.replace(new RegExp("[-–\\s]*\\b" + size + "\\s*$", "i"), "").replace(/[-–]/g, " ").replace(/\s+/g, " ").trim();
       }
       return { ...p, label, size, color };
     });
@@ -185,6 +181,7 @@ export function buildGroups(products: Product[]): ProductGroup[] {
       blob: norm(variants.map((v) => searchText(v)).join(" ")),
       sizeTags,
       colorCount: colorSet.size,
+      novedad: tieneTag(variants, TAG_NUEVO),
       esNavidad: tieneTag(variants, TAG_NAVIDAD),
       esHalloween: tieneTag(variants, TAG_HALLOWEEN),
     });

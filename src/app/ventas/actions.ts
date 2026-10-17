@@ -18,7 +18,7 @@ export async function logoutVentasAction() {
 
 // Refresca el catálogo (stock) — el botón "Actualizar" de las fichas.
 export async function refrescarCatalogoAction() {
-  revalidateTag("aurora-catalog", "max");
+  revalidateTag("bam-catalog", "max");
   revalidatePath("/ventas");
   return { ok: true as const };
 }

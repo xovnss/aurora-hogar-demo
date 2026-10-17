@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-aurora: #f97316;
-  --color-aurora-dark: #c2410c;
-  --color-aurora-deep: #7c2d12;
-  --color-aurora-light: #fff1e6;
-  --color-cream: #fffdfb;
+  --color-brand: #e10b0b;
+  --color-brand-dark: #b50808;
+  --color-brand-deep: #1c1717;
+  --color-brand-light: #ffe8e6;
+  --color-cream: #faf7f2;
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #37281f;
+  --foreground: #1c1717;
 }
 
 body {
@@ -35,39 +35,18 @@ body {
 /* Serif editorial (títulos del catálogo, estilo Casper) */
 .font-serif { font-family: var(--font-serif), Georgia, "Times New Roman", serif; }
 
-/* Fondo del catálogo: blanco con nubes suaves azul claro (grupos de puffs para look realista) */
-.pf-clouds {
-  background-color: #ffffff;
-  background-image:
-    /* nube arriba-izquierda */
-    radial-gradient(22% 26% at 9% 13%, rgba(247, 214, 198, 0.7), transparent 70%),
-    radial-gradient(26% 30% at 15% 11%, rgba(247, 214, 198, 0.7), transparent 70%),
-    radial-gradient(20% 24% at 21% 14%, rgba(247, 214, 198, 0.6), transparent 70%),
-    /* nube arriba-derecha */
-    radial-gradient(20% 24% at 80% 8%, rgba(250, 220, 206, 0.6), transparent 70%),
-    radial-gradient(24% 28% at 87% 7%, rgba(250, 220, 206, 0.6), transparent 70%),
-    /* nube centro-derecha */
-    radial-gradient(24% 30% at 82% 46%, rgba(247, 213, 196, 0.5), transparent 72%),
-    radial-gradient(20% 26% at 90% 48%, rgba(247, 213, 196, 0.45), transparent 72%),
-    /* nube abajo-izquierda */
-    radial-gradient(24% 30% at 12% 78%, rgba(250, 220, 206, 0.5), transparent 72%),
-    radial-gradient(20% 26% at 19% 80%, rgba(250, 220, 206, 0.45), transparent 72%),
-    /* nube abajo-centro */
-    radial-gradient(24% 30% at 50% 90%, rgba(247, 214, 198, 0.45), transparent 72%),
-    radial-gradient(20% 26% at 57% 92%, rgba(247, 214, 198, 0.4), transparent 72%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
+/* Fondo del catálogo: crema lisa, estilo editorial */
+.pf-clouds { background-color: #faf7f2; }
 
-/* ================= Plataforma interna — estilo CourseCo, colores Aurora (claro/pro) ================= */
+/* ================= Plataforma interna — estilo CourseCo, colores BAM! (claro/pro) ================= */
 @layer components {
 .pf-page {
-  background: linear-gradient(180deg, #faf0e9 0%, #fff8f2 60%, #f8eee8 100%);
-  color: #402d1e;
+  background: linear-gradient(180deg, #faeae9 0%, #fff3f2 60%, #f8e8e8 100%);
+  color: #40211e;
 }
-/* Sidebar con degradado Aurora + glassmorphism (deja ver un poco el fondo) */
+/* Sidebar con degradado BAM! + glassmorphism (deja ver un poco el fondo) */
 .pf-side {
-  background: linear-gradient(180deg, rgba(80, 45, 14, 0.92) 0%, rgba(121, 64, 23, 0.88) 55%, rgba(164, 81, 46, 0.82) 100%);
+  background: linear-gradient(180deg, rgba(80, 21, 14, 0.92) 0%, rgba(121, 28, 23, 0.88) 55%, rgba(164, 46, 54, 0.82) 100%);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   backdrop-filter: blur(16px) saturate(150%);
   border-right: 1px solid rgba(255, 255, 255, 0.12);
@@ -75,68 +54,68 @@ body {
 /* Tarjeta blanca limpia (estilo CourseCo) */
 .pf-card {
   background: #ffffff;
-  border: 1px solid #f5ece6;
+  border: 1px solid #f5e7e6;
   border-radius: 22px;
-  box-shadow: 0 12px 32px -20px rgba(77, 49, 23, 0.30);
+  box-shadow: 0 12px 32px -20px rgba(77, 29, 23, 0.30);
 }
 /* Banner heredado (ya no se usa en cabeceras) */
-.pf-head { background: linear-gradient(100deg, #c2410c, #f97316); }
+.pf-head { background: linear-gradient(100deg, #b50808, #e10b0b); }
 /* Icono pastel de sección (el emoji conserva sus colores normales) */
 .pf-sticker {
-  background: #fbefe8;
-  border: 1px solid #fbd9bd;
+  background: #fbe8e8;
+  border: 1px solid #fbc2bd;
 }
 /* Inputs limpios (tintes por celda los sobrescriben desde la capa utilities) */
 .pf-input {
-  background: #fcf8f5;
-  border: 1px solid #f7e3d3;
+  background: #fcf5f5;
+  border: 1px solid #f7d6d3;
   border-radius: 12px;
-  color: #381f0e;
+  color: #38100e;
   font-weight: 500;
   outline: none;
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
 }
-.pf-input::placeholder { color: #b8a394; font-weight: 400; }
+.pf-input::placeholder { color: #b89694; font-weight: 400; }
 .pf-input:focus {
-  border-color: #f97316;
+  border-color: #e10b0b;
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(220, 126, 91, 0.20);
+  box-shadow: 0 0 0 3px rgba(220, 91, 103, 0.20);
 }
-/* Botón principal: degradado Aurora (azul marino → azul cielo) */
+/* Botón principal: degradado BAM! (azul marino → azul cielo) */
 .pf-btn {
-  background: linear-gradient(100deg, #c2410c, #f97316);
+  background: linear-gradient(100deg, #b50808, #e10b0b);
   color: #ffffff;
   font-weight: 700;
   border-radius: 14px;
-  box-shadow: 0 12px 24px -14px rgba(164, 81, 46, 0.65);
+  box-shadow: 0 12px 24px -14px rgba(164, 46, 54, 0.65);
   transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
 }
-.pf-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 16px 30px -14px rgba(164, 81, 46, 0.7); filter: brightness(1.04); }
-.pf-btn:disabled { background: #e1d3cb; color: #fdf0e6; box-shadow: none; cursor: default; }
+.pf-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 16px 30px -14px rgba(164, 46, 54, 0.7); filter: brightness(1.04); }
+.pf-btn:disabled { background: #e1cbcb; color: #fde8e6; box-shadow: none; cursor: default; }
 /* Botón secundario claro */
 .pf-btn-ghost {
   background: #ffffff;
-  border: 1px solid #f7e3d3;
-  color: #c2410c;
+  border: 1px solid #f7d6d3;
+  color: #b50808;
   border-radius: 14px;
   font-weight: 600;
   transition: background 0.15s, border-color 0.15s;
 }
-.pf-btn-ghost:hover { background: #fff8f2; border-color: #f0d8cd; }
+.pf-btn-ghost:hover { background: #fff3f2; border-color: #f0cdcf; }
 /* Chip azul claro */
 .pf-chip {
-  background: #fff1e6;
-  border: 1px solid #fbd9bd;
-  color: #c2410c;
+  background: #ffe8e6;
+  border: 1px solid #fbc2bd;
+  color: #b50808;
   border-radius: 9999px;
   font-weight: 700;
   transition: background 0.15s;
 }
-.pf-chip:hover:not(:disabled) { background: #f8e3dc; }
+.pf-chip:hover:not(:disabled) { background: #f8dcdf; }
 .pf-chip:disabled { opacity: 0.5; }
-/* Título con degradado Aurora */
+/* Título con degradado BAM! */
 .grad-text {
-  background: linear-gradient(100deg, #7c2d12, #c2410c 65%);
+  background: linear-gradient(100deg, #1c1717, #b50808 65%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 }

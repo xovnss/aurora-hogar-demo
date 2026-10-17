@@ -28,18 +28,18 @@ export function CajaLogin() {
     start(async () => { const r = await loginCajaAction(pass); if (r.ok) router.refresh(); else setErr(r.error); });
   }
   return (
-    <div className="font-display flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-[#7c2d12] via-[#9a3412] to-[#c2410c] px-4 py-10">
+    <div className="font-display flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-[#1c1717] via-[#8a0707] to-[#b50808] px-4 py-10">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/aurora-blanco.png" alt="Aurora" className="mb-5 h-12 w-auto" />
+      <img src="/bam-blanco.png" alt="BAM!" className="mb-5 h-12 w-auto" />
       <form onSubmit={submit} className="w-full max-w-sm rounded-[28px] border-4 border-white/20 bg-white p-7 shadow-2xl">
-        <h1 className="font-display text-2xl font-bold text-[#7c2d12]">Corte de caja</h1>
+        <h1 className="font-display text-2xl font-bold text-[#1c1717]">Corte de caja</h1>
         <p className="mt-0.5 mb-4 text-sm text-stone-500">Arqueo, salidas y cuadre 🧮</p>
         <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} autoFocus placeholder="Contraseña"
           className="pf-input w-full px-4 py-3 text-center" />
         {err && <p className="mt-2 text-center text-sm text-red-600">{err}</p>}
         <button disabled={pending} className="pf-btn mt-4 w-full px-4 py-3">{pending ? "Entrando…" : "Entrar"}</button>
       </form>
-      <p className="mt-5 text-[12px] font-semibold text-white/50">☁️ Aurora · Caja</p>
+      <p className="mt-5 text-[12px] font-semibold text-white/50">☁️ BAM! · Caja</p>
     </div>
   );
 }
@@ -53,7 +53,7 @@ function DenomCounter({ value, onChange }: { value: Record<string, number>; onCh
         const c = value?.[String(d)] || 0;
         return (
           <div key={d} className="flex items-center gap-2">
-            <span className="w-16 text-right text-[13px] font-semibold text-[#7c2d12]">{dLabel(d)}</span>
+            <span className="w-16 text-right text-[13px] font-semibold text-[#1c1717]">{dLabel(d)}</span>
             <span className="text-stone-300">×</span>
             <input inputMode="numeric" value={c || ""} onChange={(e) => set(d, e.target.value)} placeholder="0"
               className="pf-input w-16 px-2 py-1.5 text-center" />
@@ -91,7 +91,7 @@ export function CajaApp() {
         if (r.ok) {
           setData(r.data); setSalidas(r.data.salidas); setEntradas(r.data.entradas || []); setConteo(r.data.conteo);
           setCaja(r.data.caja);
-          try { localStorage.setItem("caja-aurora-id", String(r.data.caja)); } catch { /* sin memoria del navegador */ }
+          try { localStorage.setItem("caja-bam-id", String(r.data.caja)); } catch { /* sin memoria del navegador */ }
         } else setErr(r.error);
       })
       .catch(() => setErr("No se pudo cargar. Recarga la página con Cmd+Shift+R (versión nueva) y vuelve a intentar."))
@@ -116,7 +116,7 @@ export function CajaApp() {
   }
   useEffect(() => {
     let guardada = 0;
-    try { guardada = parseInt(localStorage.getItem("caja-aurora-id") || "0") || 0; } catch { /* sin memoria */ }
+    try { guardada = parseInt(localStorage.getItem("caja-bam-id") || "0") || 0; } catch { /* sin memoria */ }
     setCaja(guardada);
     load(fecha, guardada);
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
@@ -217,7 +217,7 @@ export function CajaApp() {
   const nombreCaja = data?.cajas?.find((c) => c.id === data?.caja)?.nombre || "";
   const centra = (t: string) => " ".repeat(Math.max(0, Math.floor((W - t.length) / 2))) + t;
   const ticket = [
-    "            AURORA",
+    "            BAM!",
     "        CORTE DE CAJA",
     ...(nombreCaja ? [centra(nombreCaja.toUpperCase())] : []),
     "          " + fecha,
@@ -265,7 +265,7 @@ export function CajaApp() {
   // ---- Vale individual de entrada/salida (ticket SEPARADO del corte) ----
   function valeText(tipo: "Entrada" | "Salida", m: SalidaCaja) {
     return [
-      "            AURORA",
+      "            BAM!",
       tipo === "Entrada" ? "     ENTRADA DE EFECTIVO" : "      SALIDA DE EFECTIVO",
       "       " + fecha + (m.hora ? "   " + m.hora : ""),
       "=".repeat(W),
@@ -279,7 +279,7 @@ export function CajaApp() {
       "",
       "Recibe:  ____________________",
       "",
-      "   Aurora · Movimiento de caja",
+      "   BAM! · Movimiento de caja",
       ...(nombreCaja ? [centra(nombreCaja.toUpperCase())] : []),
     ].join("\n");
   }
@@ -290,7 +290,7 @@ export function CajaApp() {
   // ---- Ticket SOLO de movimientos: todas las entradas y salidas del día ----
   function movsText() {
     return [
-      "            AURORA",
+      "            BAM!",
       "   MOVIMIENTOS DE EFECTIVO",
       "          " + fecha,
       "=".repeat(W),
@@ -307,7 +307,7 @@ export function CajaApp() {
       fila("NETO", money(totalEntradas - totalSalidas)),
       "  (entradas - salidas)",
       "",
-      "  Aurora · Movimientos de caja",
+      "  BAM! · Movimientos de caja",
       ...(nombreCaja ? [centra(nombreCaja.toUpperCase())] : []),
     ].join("\n");
   }
@@ -320,16 +320,16 @@ export function CajaApp() {
   const inpNum = "pf-input w-full px-3 py-2.5 text-right text-base font-bold tabular-nums";
 
   return (
-    <div className="font-display min-h-screen bg-[#fff8f2] pb-16">
+    <div className="font-display min-h-screen bg-[#fff3f2] pb-16">
       <style>{`@media print { body { background:#fff !important; } .no-print { display:none !important; } .ticket { display:block !important; } }`}</style>
 
       <div className="no-print">
         {/* Encabezado */}
-        <div className="bg-gradient-to-br from-[#7c2d12] to-[#c2410c] px-4 pt-6 pb-5 text-white">
+        <div className="bg-gradient-to-br from-[#1c1717] to-[#b50808] px-4 pt-6 pb-5 text-white">
           <div className="mx-auto flex max-w-lg items-center justify-between">
             <div className="flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/aurora-blanco.png" alt="Aurora" className="h-9 w-auto" />
+              <img src="/bam-blanco.png" alt="BAM!" className="h-9 w-auto" />
               <div>
                 <h1 className="text-xl font-bold leading-tight">Corte de caja</h1>
                 <p className="text-[12px] text-white/70">Arqueo · salidas · cuadre</p>
@@ -341,19 +341,19 @@ export function CajaApp() {
 
         <div className="mx-auto max-w-lg space-y-4 px-4">
           <div className="mt-4 flex items-end gap-3 rounded-2xl bg-white p-4 shadow-sm">
-            <label className="text-sm font-semibold text-[#7c2d12]">Día<br />
+            <label className="text-sm font-semibold text-[#1c1717]">Día<br />
               <input type="date" value={fecha} onChange={(e) => { setFecha(e.target.value); load(e.target.value); }} className="pf-input mt-1 px-3 py-2 font-normal" />
             </label>
             {(data?.cajas?.length ?? 0) > 1 && (
-              <label className="text-sm font-semibold text-[#7c2d12]">Caja<br />
+              <label className="text-sm font-semibold text-[#1c1717]">Caja<br />
                 <select value={caja || ""} onChange={(e) => { const c = parseInt(e.target.value); setCaja(c); load(fecha, c); }}
                   className="pf-input mt-1 px-3 py-2 font-normal">
                   {data!.cajas.map((c) => <option key={c.id} value={c.id}>{c.nombre}</option>)}
                 </select>
               </label>
             )}
-            {loading && <span className="pb-2 text-sm text-[#c2410c]">Cargando…</span>}
-            <button disabled={loading} onClick={() => { setVale(null); setTimeout(() => window.print(), 60); }} className="ml-auto rounded-xl bg-[#7c2d12] px-4 py-2.5 text-sm font-bold text-white shadow hover:bg-[#9a3412] disabled:opacity-40">🖨️ Ticket corte</button>
+            {loading && <span className="pb-2 text-sm text-[#b50808]">Cargando…</span>}
+            <button disabled={loading} onClick={() => { setVale(null); setTimeout(() => window.print(), 60); }} className="ml-auto rounded-xl bg-[#1c1717] px-4 py-2.5 text-sm font-bold text-white shadow hover:bg-[#8a0707] disabled:opacity-40">🖨️ Ticket corte</button>
           </div>
 
           {err && <p className="rounded-xl bg-red-50 p-3 text-center text-sm text-red-600">{err}</p>}
@@ -362,12 +362,12 @@ export function CajaApp() {
             <>
               {/* ARQUEO DE CAJA — fondo/cambio, SIN las ventas */}
               <div className={card}>
-                <h2 className="text-[15px] font-bold text-[#7c2d12]">💼 Arqueo de caja</h2>
+                <h2 className="text-[15px] font-bold text-[#1c1717]">💼 Arqueo de caja</h2>
                 <p className="mb-3 text-[12px] text-stone-400">El efectivo de cambio (fondo) con que abrió y cerró la caja. Esto <b>NO</b> incluye las ventas.</p>
 
-                <p className="text-[13px] font-bold text-[#7c2d12]">🔓 ¿Con cuánto INICIÓ?</p>
-                <div className="my-2 flex items-center gap-2 rounded-xl bg-orange-50/70 p-2.5">
-                  <span className="text-[13px] font-semibold text-[#7c2d12]">Cantidad fija:</span>
+                <p className="text-[13px] font-bold text-[#1c1717]">🔓 ¿Con cuánto INICIÓ?</p>
+                <div className="my-2 flex items-center gap-2 rounded-xl bg-red-50/70 p-2.5">
+                  <span className="text-[13px] font-semibold text-[#1c1717]">Cantidad fija:</span>
                   <input inputMode="decimal" value={conteo.fondoFijo || ""} onChange={(e) => setConteo({ ...conteo, fondoFijo: parseFloat(e.target.value.replace(/[^\d.]/g, "")) || 0 })}
                     placeholder="0" className="pf-input w-24 px-2 py-1.5 text-right" />
                 </div>
@@ -376,14 +376,14 @@ export function CajaApp() {
                 ) : (
                   <DenomCounter value={conteo.apertura} onChange={(v) => setConteo({ ...conteo, apertura: v })} />
                 )}
-                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#1c1717]">
                   <span className="font-bold">Inició con</span><span className="text-lg font-bold tabular-nums">{money(fondo)}</span>
                 </div>
 
-                <p className="mt-5 text-[13px] font-bold text-[#7c2d12]">🔒 ¿Con cuánto TERMINÓ? (solo el fondo, sin las ventas)</p>
+                <p className="mt-5 text-[13px] font-bold text-[#1c1717]">🔒 ¿Con cuánto TERMINÓ? (solo el fondo, sin las ventas)</p>
                 <p className="mb-2 text-[12px] text-stone-400">Cuenta los billetes y monedas de cambio que quedaron:</p>
                 <DenomCounter value={conteo.cierre} onChange={(v) => setConteo({ ...conteo, cierre: v })} />
-                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#1c1717]">
                   <span className="font-bold">Terminó con</span><span className="text-lg font-bold tabular-nums">{money(efeContado)}</span>
                 </div>
 
@@ -398,30 +398,30 @@ export function CajaApp() {
 
               {/* VENTAS DEL DÍA — esto debe cuadrar con Odoo */}
               <div className={card}>
-                <h2 className="text-[15px] font-bold text-[#7c2d12]">🧾 Ventas del día</h2>
+                <h2 className="text-[15px] font-bold text-[#1c1717]">🧾 Ventas del día</h2>
                 <p className="mb-3 text-[12px] text-stone-400">Lo que cobraron de ventas. Debe coincidir con lo que registró Odoo.</p>
 
                 <div className="grid grid-cols-3 gap-2">
-                  <div className="rounded-xl bg-[#fff8f2] p-3 text-center">
+                  <div className="rounded-xl bg-[#fff3f2] p-3 text-center">
                     <p className="text-[11px] font-semibold uppercase tracking-wide text-stone-400">💵 Efectivo (Odoo)</p>
-                    <p className="mt-1 text-lg font-bold tabular-nums text-[#7c2d12]">{money(efeOdoo)}</p>
+                    <p className="mt-1 text-lg font-bold tabular-nums text-[#1c1717]">{money(efeOdoo)}</p>
                   </div>
-                  <div className="rounded-xl bg-[#fff8f2] p-3 text-center">
+                  <div className="rounded-xl bg-[#fff3f2] p-3 text-center">
                     <p className="text-[11px] font-semibold uppercase tracking-wide text-stone-400">💳 Tarjeta (Odoo)</p>
-                    <p className="mt-1 text-lg font-bold tabular-nums text-[#7c2d12]">{money(tarOdoo)}</p>
+                    <p className="mt-1 text-lg font-bold tabular-nums text-[#1c1717]">{money(tarOdoo)}</p>
                   </div>
-                  <div className="rounded-xl bg-[#fff8f2] p-3 text-center">
+                  <div className="rounded-xl bg-[#fff3f2] p-3 text-center">
                     <p className="text-[11px] font-semibold uppercase tracking-wide text-stone-400">🏦 Transf. (Odoo)</p>
-                    <p className="mt-1 text-lg font-bold tabular-nums text-[#7c2d12]">{money(trfOdoo)}</p>
+                    <p className="mt-1 text-lg font-bold tabular-nums text-[#1c1717]">{money(trfOdoo)}</p>
                   </div>
                 </div>
 
-                <label className="mt-4 block text-[13px] font-semibold text-[#7c2d12]">💵 Efectivo de ventas recibido</label>
+                <label className="mt-4 block text-[13px] font-semibold text-[#1c1717]">💵 Efectivo de ventas recibido</label>
                 <p className="mb-1 text-[12px] text-stone-400">El efectivo que entró por ventas (sin el fondo).</p>
                 <input inputMode="decimal" value={conteo.efectivoRecibido || ""} onChange={(e) => setConteo({ ...conteo, efectivoRecibido: parseFloat(e.target.value.replace(/[^\d.]/g, "")) || 0 })}
                   placeholder="0" className={inpNum} />
 
-                <label className="mt-4 block text-[13px] font-semibold text-[#7c2d12]">💳 Terminales (tarjeta real)</label>
+                <label className="mt-4 block text-[13px] font-semibold text-[#1c1717]">💳 Terminales (tarjeta real)</label>
                 <p className="mb-2 text-[12px] text-stone-400">Pon cada terminal que usaron (1 a 3) con su total.</p>
                 <div className="space-y-2">
                   {terminales.map((t, i) => (
@@ -435,13 +435,13 @@ export function CajaApp() {
                   ))}
                 </div>
                 {terminales.length < 3 && (
-                  <button onClick={addTerminal} className="mt-2 rounded-lg border border-aurora/40 px-3 py-1.5 text-[13px] font-bold text-aurora hover:bg-aurora/5">+ Agregar terminal</button>
+                  <button onClick={addTerminal} className="mt-2 rounded-lg border border-brand/40 px-3 py-1.5 text-[13px] font-bold text-brand hover:bg-brand/5">+ Agregar terminal</button>
                 )}
-                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#1c1717]">
                   <span className="font-bold">Total terminal</span><span className="text-lg font-bold tabular-nums">{money(terminal)}</span>
                 </div>
 
-                <label className="mt-4 block text-[13px] font-semibold text-[#7c2d12]">🏦 Transferencias recibidas</label>
+                <label className="mt-4 block text-[13px] font-semibold text-[#1c1717]">🏦 Transferencias recibidas</label>
                 <p className="mb-1 text-[12px] text-stone-400">Suma de las transferencias que cobraron (Odoo registró <b>{money(trfOdoo)}</b>).</p>
                 <input inputMode="decimal" value={conteo.transferenciaRecibida || ""} onChange={(e) => setConteo({ ...conteo, transferenciaRecibida: parseFloat(e.target.value.replace(/[^\d.]/g, "")) || 0 })}
                   placeholder="0" className={inpNum} />
@@ -454,24 +454,24 @@ export function CajaApp() {
 
               {/* Entradas y salidas de efectivo — movimientos de caja, cada uno con su vale */}
               <div className={card}>
-                <h2 className="text-[15px] font-bold text-[#7c2d12]">💵 Entradas y salidas de efectivo</h2>
+                <h2 className="text-[15px] font-bold text-[#1c1717]">💵 Entradas y salidas de efectivo</h2>
                 <p className="mb-3 text-[12px] text-stone-400">Dinero que <b>salió</b> o <b>entró</b> de la caja aparte de las ventas. El botón 🖨️ imprime el <b>vale de ese movimiento</b> (ticket aparte del corte).</p>
 
                 {/* SALIDAS */}
-                <p className="text-[13px] font-bold text-[#7c2d12]">Salidas (efectivo que salió del cajón)</p>
+                <p className="text-[13px] font-bold text-[#1c1717]">Salidas (efectivo que salió del cajón)</p>
                 <p className="mb-1 text-[11px] text-stone-500">🔴 <b>Gasto</b>: el dinero se fue (agua, envío, almuerzo). 🔵 <b>Traspaso</b>: se lo llevaron pero sigue siendo de la tienda (entregado a Iván). Los dos bajan el efectivo del cajón, pero el traspaso <b>no</b> cuenta como gasto en el corte.</p>
                 <div className="mt-2 space-y-2">
                   {salidas.map((s, i) => {
                     const tras = s.tipo === "traspaso";
                     return (
-                    <div key={i} className={"rounded-xl border-2 p-2 " + (tras ? "border-orange-300 bg-orange-50" : "border-orange-200 bg-orange-50/60")}>
+                    <div key={i} className={"rounded-xl border-2 p-2 " + (tras ? "border-red-300 bg-red-50" : "border-red-200 bg-red-50/60")}>
                       <div className="mb-2 flex gap-1">
                         <button onClick={() => updSalida(i, { tipo: "gasto" })}
-                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (!tras ? "bg-[#c2410c] text-white shadow" : "bg-white text-stone-500 hover:bg-orange-100")}>
+                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (!tras ? "bg-[#b50808] text-white shadow" : "bg-white text-stone-500 hover:bg-red-100")}>
                           🔴 Gasto
                         </button>
                         <button onClick={() => updSalida(i, { tipo: "traspaso" })}
-                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (tras ? "bg-orange-600 text-white shadow" : "bg-white text-stone-500 hover:bg-orange-100")}>
+                          className={"flex-1 rounded-lg px-2 py-1.5 text-[12px] font-bold transition " + (tras ? "bg-red-600 text-white shadow" : "bg-white text-stone-500 hover:bg-red-100")}>
                           🔵 Traspaso
                         </button>
                       </div>
@@ -480,8 +480,8 @@ export function CajaApp() {
                           placeholder={tras ? "¿A quién se entregó? (ej. Iván)" : "Concepto (ej. pago proveedor, agua…)"}
                           className="pf-input flex-1 px-3 py-2 text-sm" />
                         <input inputMode="decimal" value={s.monto || ""} onChange={(e) => updSalida(i, { monto: parseFloat(e.target.value.replace(/[^\d.]/g, "")) || 0 })}
-                          placeholder="$" className={"pf-input w-24 px-2 py-2 text-right text-sm font-bold tabular-nums " + (tras ? "text-orange-700" : "text-[#c2410c]")} />
-                        <button onClick={() => printVale("Salida", s)} title="Imprimir vale de este movimiento" className="rounded-lg bg-[#7c2d12] px-2 py-2 text-sm text-white hover:bg-[#9a3412]">🖨️</button>
+                          placeholder="$" className={"pf-input w-24 px-2 py-2 text-right text-sm font-bold tabular-nums " + (tras ? "text-red-700" : "text-[#b50808]")} />
+                        <button onClick={() => printVale("Salida", s)} title="Imprimir vale de este movimiento" className="rounded-lg bg-[#1c1717] px-2 py-2 text-sm text-white hover:bg-[#8a0707]">🖨️</button>
                         <button onClick={() => delSalida(i)} className="px-1 text-red-400 hover:text-red-600">✕</button>
                       </div>
                     </div>
@@ -489,10 +489,10 @@ export function CajaApp() {
                   })}
                   {salidas.length === 0 && <p className="text-[12px] text-stone-400">Sin salidas registradas.</p>}
                 </div>
-                <button onClick={addSalida} className="mt-2 rounded-lg border border-aurora/40 px-3 py-1.5 text-[13px] font-bold text-aurora hover:bg-aurora/5">+ Agregar salida</button>
-                <div className="mt-2 space-y-1 border-t border-stone-100 pt-2 text-[#7c2d12]">
-                  <div className="flex justify-between text-[13px]"><span>🔴 Gastos</span><span className="font-bold tabular-nums text-[#c2410c]">{money(totalGastos)}</span></div>
-                  <div className="flex justify-between text-[13px]"><span>🔵 Traspasos</span><span className="font-bold tabular-nums text-orange-700">{money(totalTraspasos)}</span></div>
+                <button onClick={addSalida} className="mt-2 rounded-lg border border-brand/40 px-3 py-1.5 text-[13px] font-bold text-brand hover:bg-brand/5">+ Agregar salida</button>
+                <div className="mt-2 space-y-1 border-t border-stone-100 pt-2 text-[#1c1717]">
+                  <div className="flex justify-between text-[13px]"><span>🔴 Gastos</span><span className="font-bold tabular-nums text-[#b50808]">{money(totalGastos)}</span></div>
+                  <div className="flex justify-between text-[13px]"><span>🔵 Traspasos</span><span className="font-bold tabular-nums text-red-700">{money(totalTraspasos)}</span></div>
                   <div className="flex justify-between border-t border-stone-100 pt-1"><span className="font-bold">Total salidas</span><span className="text-lg font-bold tabular-nums">{money(totalSalidas)}</span></div>
                 </div>
 
@@ -512,17 +512,17 @@ export function CajaApp() {
                   {entradas.length === 0 && <p className="text-[12px] text-stone-400">Sin entradas registradas.</p>}
                 </div>
                 <button onClick={addEntrada} className="mt-2 rounded-lg border border-emerald-500/40 px-3 py-1.5 text-[13px] font-bold text-emerald-700 hover:bg-emerald-50">+ Agregar entrada</button>
-                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#7c2d12]">
+                <div className="mt-2 flex justify-between border-t border-stone-100 pt-2 text-[#1c1717]">
                   <span className="font-bold">Total entradas</span><span className="text-lg font-bold tabular-nums text-emerald-700">{money(totalEntradas)}</span>
                 </div>
 
-                <button onClick={printMovs} className="mt-4 w-full rounded-xl bg-[#7c2d12] px-4 py-2.5 text-sm font-bold text-white shadow hover:bg-[#9a3412]">🖨️ Imprimir movimientos</button>
+                <button onClick={printMovs} className="mt-4 w-full rounded-xl bg-[#1c1717] px-4 py-2.5 text-sm font-bold text-white shadow hover:bg-[#8a0707]">🖨️ Imprimir movimientos</button>
                 <p className="mt-1 text-center text-[11px] text-stone-400">Imprime solo entradas y salidas (aparte del corte).</p>
               </div>
 
               {/* Envíos que cobra la caja: recolección en tienda y contra entrega (15-oct-2026) */}
               <div className={card}>
-                <h2 className="text-[15px] font-bold text-[#7c2d12]">📦 Envíos por cobrar en caja</h2>
+                <h2 className="text-[15px] font-bold text-[#1c1717]">📦 Envíos por cobrar en caja</h2>
                 <p className="mb-3 text-[12px] text-stone-400">
                   Pedidos de <b>recolección en tienda</b> y <b>contra entrega</b>: el cliente paga aquí, en el mostrador.
                   Márcalo en cuanto recibas el dinero. Se arrastran los de días anteriores hasta que se cobren.
@@ -534,17 +534,17 @@ export function CajaApp() {
                     <div key={l.id} className="rounded-xl border-2 border-amber-200 bg-amber-50/60 p-2.5">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
-                          <p className="truncate text-[13px] font-bold text-[#7c2d12]">{l.name} · {l.cliente}</p>
+                          <p className="truncate text-[13px] font-bold text-[#1c1717]">{l.name} · {l.cliente}</p>
                           <p className="mt-0.5 text-[11px] font-semibold text-amber-700">
                             {tipoEnv(l.tipo)}{l.viejo ? ` · del ${l.fecha}` : ""}
                           </p>
                           {l.pagadoOdoo && (
-                            <p className="mt-1 rounded-md bg-white px-2 py-1 text-[11px] font-semibold leading-snug text-orange-700 ring-1 ring-orange-200">
+                            <p className="mt-1 rounded-md bg-white px-2 py-1 text-[11px] font-semibold leading-snug text-red-700 ring-1 ring-red-200">
                               ⚠️ La vendedora ya le puso <b>PAGADO</b> en Odoo. Pregunta antes de cobrarlo: puede que ya lo hayan pagado.
                             </p>
                           )}
                         </div>
-                        <span className="shrink-0 text-base font-bold tabular-nums text-[#7c2d12]">{money(l.total)}</span>
+                        <span className="shrink-0 text-base font-bold tabular-nums text-[#1c1717]">{money(l.total)}</span>
                       </div>
                       <button onClick={() => marcarEnvio(l, true)} disabled={cobrando === l.id}
                         className="mt-2 w-full rounded-lg bg-emerald-600 px-3 py-2 text-[13px] font-bold text-white shadow-sm hover:bg-emerald-700 disabled:bg-stone-300">
@@ -568,7 +568,7 @@ export function CajaApp() {
                       {envCobrados.map((l) => (
                         <div key={l.id} className="flex items-center justify-between gap-2 rounded-lg border border-emerald-200 bg-emerald-50/60 px-2.5 py-2">
                           <div className="min-w-0">
-                            <p className="truncate text-[12.5px] font-bold text-[#7c2d12]">{l.name} · {l.cliente}</p>
+                            <p className="truncate text-[12.5px] font-bold text-[#1c1717]">{l.name} · {l.cliente}</p>
                             <p className="text-[11px] text-emerald-700">{tipoEnv(l.tipo)}</p>
                           </div>
                           <div className="flex shrink-0 items-center gap-2">
@@ -590,17 +590,17 @@ export function CajaApp() {
                   </p>
                 )}
 
-                <div className="mt-3 space-y-1 border-t border-stone-100 pt-2 text-[#7c2d12]">
+                <div className="mt-3 space-y-1 border-t border-stone-100 pt-2 text-[#1c1717]">
                   <div className="flex justify-between text-[13px]"><span>Pendientes ({envPend.length})</span><span className="font-bold tabular-nums text-amber-700">{money(totalEnvPend)}</span></div>
                   <div className="flex justify-between border-t border-stone-100 pt-1"><span className="font-bold">Cobrado hoy en caja</span><span className="text-lg font-bold tabular-nums text-emerald-700">{money(totalEnvCobrado)}</span></div>
                 </div>
-                <p className="mt-2 rounded-lg bg-orange-50 px-3 py-2 text-[11px] leading-snug text-orange-800 ring-1 ring-orange-100">
+                <p className="mt-2 rounded-lg bg-red-50 px-3 py-2 text-[11px] leading-snug text-red-800 ring-1 ring-red-100">
                   💡 Este dinero <b>no pasa por el punto de venta</b>, así que el cajón va a traer {money(totalEnvCobrado)} de más contra lo que dice Odoo. Es normal: cuéntalo aparte.
                 </p>
               </div>
 
               {/* 3b. Efectivo final del día (recibido − gastos) */}
-              <div className="rounded-2xl border-2 border-[#7c2d12] bg-[#7c2d12] p-4 text-white shadow-md">
+              <div className="rounded-2xl border-2 border-[#1c1717] bg-[#1c1717] p-4 text-white shadow-md">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-[15px] font-bold">💰 Efectivo final</p>
@@ -632,14 +632,14 @@ export function CajaApp() {
 
               {/* Notas del corte */}
               <div className={card}>
-                <h2 className="mb-1 text-[15px] font-bold text-[#7c2d12]">📝 Notas del corte</h2>
+                <h2 className="mb-1 text-[15px] font-bold text-[#1c1717]">📝 Notas del corte</h2>
                 <p className="mb-2 text-[12px] text-stone-400">Si algo no cuadra, explica por qué (ej. “se cobró un pago con tarjeta pero se marcó como efectivo”).</p>
                 <textarea value={conteo.notas || ""} onChange={(e) => setConteo({ ...conteo, notas: e.target.value })}
                   placeholder="Escribe aquí cualquier aclaración del corte…" rows={3}
                   className="pf-input w-full px-3 py-2 text-sm" />
               </div>
 
-              <p className="text-center text-[12px] text-stone-400">Todo se guarda solo. Usa 🖨️ Ticket para imprimir el corte en la térmica. ☁️ Aurora</p>
+              <p className="text-center text-[12px] text-stone-400">Todo se guarda solo. Usa 🖨️ Ticket para imprimir el corte en la térmica. ☁️ BAM!</p>
             </>
           )}
         </div>

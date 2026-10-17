@@ -3,9 +3,9 @@ import { createHash } from "crypto";
 
 const COOKIE = "caja_auth";
 // Contraseña propia del cuadre de caja (para las cajeras).
-const PASSCODE = process.env.CAJA_PASSCODE || "caja-aurora";
+const PASSCODE = process.env.CAJA_PASSCODE || "demo";
 
-const token = () => createHash("sha256").update(PASSCODE + "::aurora-caja-v1").digest("hex");
+const token = () => createHash("sha256").update(PASSCODE + "::bam-caja-v1").digest("hex");
 
 export function checkCajaPass(input: string): boolean {
   return input.trim() === PASSCODE;

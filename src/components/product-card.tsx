@@ -9,9 +9,7 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
   // La tarjeta pide la foto del tamaño que de verdad ocupa: el celular baja ~30 KB y la
   // computadora ~100 KB, en vez de los ~330 KB de la foto grande. (10-oct-2026)
   const thumb = g.thumb || g.image || "";
-  const srcSet = thumb.includes("/img?")
-    ? [256, 384, 512].map((n) => `${thumb.replace(/&s=\d+/, "")}&s=${n} ${n}w`).join(", ")
-    : undefined;
+  const srcSet = undefined;
   const { add } = useCart();
   const multi = g.variants.length > 1;
   const agotado = !SITE.ignoreStock && g.stock <= 0;
@@ -19,18 +17,18 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
   const rango = g.minPublico !== g.maxPublico;
   // descriptor breve (medidas · colores) — estilo limpio, sin racimo de etiquetas
   const desc = [
-    g.sizeTags.length ? g.sizeTags.slice(0, 3).join(" · ") : "",
+    g.sizeTags.length > 1 ? `${g.sizeTags[0]} a ${g.sizeTags[g.sizeTags.length - 1]}` : g.sizeTags[0] || "",
     g.colorCount > 1 ? `${g.colorCount} colores` : "",
   ].filter(Boolean).join("  ·  ") || g.categoria;
 
   return (
     <div
       onClick={onOpen}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-black/[0.06] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_-22px_rgba(91, 51, 20,.4)] hover:ring-black/10 ${
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.06] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_-22px_rgba(91,25,20,.4)] hover:ring-black/10 ${
         agotado ? "opacity-60" : ""
       }`}
     >
-      <div className="relative w-full overflow-hidden bg-[#fbf7f3]" style={{ aspectRatio: "1 / 1" }}>
+      <div className="relative w-full overflow-hidden bg-stone-100" style={{ aspectRatio: "1 / 1" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={thumb} srcSet={srcSet} sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
           alt={g.base} loading="lazy"
@@ -50,7 +48,7 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
       </div>
 
       <div className="flex flex-1 flex-col p-3.5 sm:p-4">
-        <h3 className="line-clamp-2 min-h-[2.5rem] text-[14.5px] font-semibold leading-snug text-[#6b2410] sm:text-[15px]" title={g.base}>
+        <h3 className="line-clamp-2 min-h-[2.5rem] text-[14.5px] font-semibold leading-snug text-[#2b1111] sm:text-[15px]" title={g.base}>
           {g.base}
         </h3>
         <p className="mt-0.5 truncate text-[11.5px] text-stone-400">{desc}</p>
@@ -64,11 +62,11 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
           </p>
           {g.minMiembro != null ? (
             <p className="mt-1 flex items-baseline gap-1.5 leading-none">
-              <span className="text-[21px] font-extrabold text-aurora-dark">{money(g.minMiembro)}</span>
-              <span className="text-[11px] font-bold uppercase tracking-wide text-aurora">socios</span>
+              <span className="text-[21px] font-extrabold text-brand-dark">{money(g.minMiembro)}</span>
+              <span className="text-[11px] font-bold uppercase tracking-wide text-brand">socios</span>
             </p>
           ) : (
-            <p className="mt-1 text-[21px] font-extrabold leading-none text-aurora-dark">{money(g.minPublico)}</p>
+            <p className="mt-1 text-[21px] font-extrabold leading-none text-brand-dark">{money(g.minPublico)}</p>
           )}
         </div>
 
@@ -77,9 +75,9 @@ export default function ProductCard({ g, onOpen }: { g: ProductGroup; onOpen?: (
         <button
           onClick={(e) => { e.stopPropagation(); if (multi) onOpen?.(); else add(g.variants[0]); }}
           disabled={agotado && !multi}
-          className="mt-auto w-full rounded-full bg-aurora py-2.5 text-[13.5px] font-bold text-white shadow-sm transition hover:bg-aurora-dark active:scale-[.98] disabled:cursor-not-allowed disabled:bg-stone-300"
+          className="mt-auto w-full rounded-full bg-brand py-2.5 text-[13.5px] font-bold text-white shadow-sm transition hover:bg-brand-dark active:scale-[.98] disabled:cursor-not-allowed disabled:bg-stone-300"
         >
-          {multi ? `Ver ${g.variants.length} modelos` : agotado ? "Agotado" : "Agregar"}
+          {multi ? "Elegir talla" : agotado ? "Agotado" : "Agregar"}
         </button>
       </div>
     </div>

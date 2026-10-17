@@ -2,9 +2,9 @@ import { cookies } from "next/headers";
 import { createHash } from "crypto";
 
 const COOKIE = "ventas_auth";
-const PASSCODE = process.env.VENTAS_PASSCODE || process.env.ADMIN_PASSCODE || "aurora2026";
+const PASSCODE = process.env.VENTAS_PASSCODE || process.env.ADMIN_PASSCODE || "demo";
 
-const token = () => createHash("sha256").update(PASSCODE + "::aurora-ventas-v1").digest("hex");
+const token = () => createHash("sha256").update(PASSCODE + "::bam-ventas-v1").digest("hex");
 
 export function checkVentasPass(input: string): boolean {
   return input.trim() === PASSCODE;

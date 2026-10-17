@@ -1,4 +1,4 @@
-// Cotización FORMAL en PDF (para el cliente) — jsPDF + autotable, con la marca Aurora.
+// Cotización FORMAL en PDF (para el cliente) — jsPDF + autotable, con la marca BAM!.
 // La arma la app de fichas (/ventas) con los mismos productos/precios de la cotización.
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -28,7 +28,7 @@ async function cargarLogo(): Promise<string | null> {
   try {
     const img = new Image();
     img.crossOrigin = "anonymous";
-    await new Promise<void>((resolve, reject) => { img.onload = () => resolve(); img.onerror = reject; img.src = "/aurora-logo.png"; });
+    await new Promise<void>((resolve, reject) => { img.onload = () => resolve(); img.onerror = reject; img.src = "/bam-logo-tag.png"; });
     const w = 360, h = Math.round((img.naturalHeight / img.naturalWidth) * w);
     const c = document.createElement("canvas"); c.width = w; c.height = h;
     c.getContext("2d")!.drawImage(img, 0, 0, w, h);
@@ -55,7 +55,7 @@ export async function pdfCotizacion(opts: {
     const h = 13, w = (p.width / p.height) * h;
     doc.addImage(logo, "PNG", M, 13, w, h);
   } else {
-    doc.setFont("helvetica", "bold").setFontSize(22).setTextColor(...NAVY).text("AURORA", M, 22);
+    doc.setFont("helvetica", "bold").setFontSize(22).setTextColor(...NAVY).text("BAM!", M, 22);
   }
   doc.setFont("helvetica", "bold").setFontSize(22).setTextColor(...NAVY).text("COTIZACIÓN", W - M, 19, { align: "right" });
   doc.setFont("helvetica", "normal").setFontSize(9.5).setTextColor(...GRIS);
@@ -128,10 +128,10 @@ export async function pdfCotizacion(opts: {
   const tel = (opts.whatsapp || "").replace(/\D/g, "").slice(-10);
   const telFmt = tel.length === 10 ? `${tel.slice(0, 3)} ${tel.slice(3, 6)} ${tel.slice(6)}` : (opts.whatsapp || "771 330 8628");
   doc.setFont("helvetica", "normal").setFontSize(8.5).setTextColor(...GRIS)
-    .text(`WhatsApp ${telFmt}    ·    @aurora.mx    ·    aurora.mx`, W / 2, fy + 8, { align: "center" });
+    .text(`WhatsApp ${telFmt}    ·    @bam.demo    ·    bam.demo`, W / 2, fy + 8, { align: "center" });
 
   // ---- Guardar / compartir ----
-  const nombre = `Cotizacion Aurora${opts.cliente ? " - " + opts.cliente.replace(/[^\w ]/g, "").trim() : ""}.pdf`.slice(0, 80);
+  const nombre = `Cotizacion BAM!${opts.cliente ? " - " + opts.cliente.replace(/[^\w ]/g, "").trim() : ""}.pdf`.slice(0, 80);
   // En CELULAR: abrir "Compartir" (para mandarlo directo por WhatsApp).
   // En COMPUTADORA: DESCARGAR el archivo (se guarda en Descargas) — la hoja de compartir de
   // Windows no tiene opción de "guardar", por eso allá se sentía que "no dejaba descargar".
@@ -140,7 +140,7 @@ export async function pdfCotizacion(opts: {
   const file = new File([blob], nombre, { type: "application/pdf" });
   const nav = navigator as Navigator & { canShare?: (d: { files: File[] }) => boolean };
   if (esMovil && nav.canShare && nav.canShare({ files: [file] })) {
-    try { await nav.share({ files: [file], title: "Cotización Aurora" } as ShareData); return; } catch { /* pasa a descarga */ }
+    try { await nav.share({ files: [file], title: "Cotización BAM!" } as ShareData); return; } catch { /* pasa a descarga */ }
   }
   doc.save(nombre);
 }

@@ -1,5 +1,5 @@
 // Catálogo en PDF armado desde la app de fichas (/ventas).
-// Pensado para ETIQUETA BLANCA: por defecto sale SIN precios y SIN la marca Aurora,
+// Pensado para ETIQUETA BLANCA: por defecto sale SIN precios y SIN la marca BAM!,
 // para que una revendedora lo comparta con sus propias clientas y le ponga su precio.
 // (9-oct-2026, a petición de Ximena.)
 //
@@ -38,7 +38,7 @@ export type CatOpts = {
   tienda?: string;        // nombre que va en la portada y en el pie (etiqueta blanca)
   contacto?: string;      // teléfono / @usuario de quien comparte
   precios: "no" | "publico" | "socio";
-  marca: boolean;         // true = sale el logo y los datos de Aurora
+  marca: boolean;         // true = sale el logo y los datos de BAM!
   layout: "compacto" | "revista" | "detallado";
   portada: boolean;
   indice: boolean;
@@ -87,7 +87,7 @@ async function cargarLogo(): Promise<string | null> {
   try {
     const img = new Image();
     img.crossOrigin = "anonymous";
-    await new Promise<void>((res, rej) => { img.onload = () => res(); img.onerror = rej; img.src = "/aurora-logo.png"; });
+    await new Promise<void>((res, rej) => { img.onload = () => res(); img.onerror = rej; img.src = "/bam-logo-tag.png"; });
     const w = 360, h = Math.round((img.naturalHeight / img.naturalWidth) * w);
     const c = document.createElement("canvas"); c.width = w; c.height = h;
     c.getContext("2d")!.drawImage(img, 0, 0, w, h);
@@ -203,7 +203,7 @@ export async function armaCatalogo(opts: CatOpts): Promise<{ doc: jsPDF; nombre:
     doc.setFont("helvetica", "normal").setFontSize(10).setTextColor(150, 180, 215);
     doc.text("CATÁLOGO", W / 2, yTitulo - 12, { align: "center", charSpace: 2.2 });
     doc.setFont("helvetica", "bold").setFontSize(30).setTextColor(255, 255, 255);
-    const t = corta(doc, tienda || "Blancos y Decoración", W - 44, 2);
+    const t = corta(doc, tienda || "BAM!", W - 44, 2);
     doc.text(t, W / 2, yTitulo, { align: "center" });
 
     const yReg = yTitulo + t.length * 10 + 2;
@@ -295,7 +295,7 @@ export async function armaCatalogo(opts: CatOpts): Promise<{ doc: jsPDF; nombre:
     doc.setDrawColor(...GRIS_SUAVE).line(M, H - 11, W - M, H - 11);
     doc.setFontSize(8).setTextColor(...GRIS);
     const pie = opts.marca
-      ? "Aurora · Blancos y Decoración" + (opts.contacto ? "   ·   " + opts.contacto : "")
+      ? "BAM! · a brand made for you" + (opts.contacto ? "   ·   " + opts.contacto : "")
       : [tienda, opts.contacto].filter(Boolean).join("   ·   ");
     if (pie) doc.text(pie, M, H - 6);
     doc.text(`${p - desde + 1} / ${paginas - desde + 1}`, W - M, H - 6, { align: "right" });
@@ -304,7 +304,7 @@ export async function armaCatalogo(opts: CatOpts): Promise<{ doc: jsPDF; nombre:
   /* ----- ya con los números, se escribe el índice en las hojas apartadas ----- */
   if (plan) dibujaIndice(doc, W, H, plan, paginaDe, idxHoja1, desde);
 
-  const base = tienda ? "Catalogo " + tienda : opts.marca ? "Catalogo Aurora" : "Catalogo";
+  const base = tienda ? "Catalogo " + tienda : opts.marca ? "Catalogo BAM!" : "Catalogo";
   const nombre = (base + " " + hoy.toLocaleDateString("es-MX")).replace(/[\\/:*?"<>|]+/g, "-").slice(0, 80) + ".pdf";
   return { doc, nombre, base };
 }
@@ -463,7 +463,7 @@ async function bloqueRevista(
     iy += lineas.length * (tam * 0.46) + 3.4;
   };
 
-  if (p.medidas.length) dato("Medidas", corta(doc, p.medidas.join("  ·  "), iwInfo, 3), 9);
+  if (p.medidas.length) dato("Tallas", corta(doc, p.medidas.join("  ·  "), iwInfo, 3), 9);
   if (p.colores.length > 1) {
     dato("Colores", [`${p.colores.length} opciones`], 9);
   }
@@ -628,7 +628,7 @@ async function hojaDetallada(
 
   let iy = y + 5;
   if (p.medidas.length) {
-    doc.setFont("helvetica", "bold").setFontSize(9).setTextColor(...NEGRO_SUAVE).text("Medidas", infoX, iy);
+    doc.setFont("helvetica", "bold").setFontSize(9).setTextColor(...NEGRO_SUAVE).text("Tallas", infoX, iy);
     iy += 4.6;
     doc.setFont("helvetica", "normal").setFontSize(9.5).setTextColor(...GRIS);
     const l = corta(doc, p.medidas.join(", "), infoW, 3);

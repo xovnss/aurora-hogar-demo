@@ -10,7 +10,7 @@ const money = (n: number) => "$" + Math.round(n).toLocaleString("es-MX");
 const natCmp = (a: string, b: string) =>
   (a || "").localeCompare(b || "", "es", { numeric: true, sensitivity: "base" });
 
-const SEL = "w-full rounded-full border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-700 outline-none focus:border-aurora";
+const SEL = "w-full rounded-full border border-stone-200 bg-white px-4 py-3 text-sm font-semibold text-stone-700 outline-none focus:border-brand";
 
 export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGroup; skuInicial?: string | null; onClose: () => void }) {
   const { add } = useCart();
@@ -47,7 +47,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
   const shownImg = gallery[imgIdx] || big;
 
   // Medidas disponibles (ordenadas de chica a grande) y colores/diseños de la medida elegida
-  const ORDEN = ["Individual", "Matrimonial", "Matri Queen", "Queen", "King", "King Jumbo", "California King"];
+  const ORDEN = ["XS", "S", "M", "L", "XL"];
   const sizeList = ORDEN.filter((nm) => g.variants.some((v) => v.size === nm));
   const hasSizeStep = sizeList.length > 1;
 
@@ -114,17 +114,17 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
           onClick={compartir}
           aria-label="Compartir este producto"
           title="Copiar el link de este producto"
-          className="absolute right-14 top-3 z-20 flex h-9 items-center gap-1 rounded-full bg-white/90 px-3 text-[13px] font-bold text-aurora-dark shadow hover:bg-white"
+          className="absolute right-14 top-3 z-20 flex h-9 items-center gap-1 rounded-full bg-white/90 px-3 text-[13px] font-bold text-brand-dark shadow hover:bg-white"
         >
           {copiado ? "✓ Link copiado" : "🔗 Compartir"}
         </button>
 
         {/* Imagen grande + galería (izquierda) */}
-        <div className="flex flex-col items-center justify-center gap-2 bg-aurora-light/40 p-2 sm:w-1/2 sm:gap-3 sm:p-5">
+        <div className="flex flex-col items-center justify-center gap-2 bg-brand-light/40 p-2 sm:w-1/2 sm:gap-3 sm:p-5">
           {/* Foto + flechitas para pasar de un modelo a otro sin abrir el desplegable */}
           <div className="relative w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {/* Clic en la foto = verla en grande: en blancos la textura es lo que vende. */}
+            {/* Clic en la foto = verla en grande: aquí el estampado es lo que vende. */}
             {shownImg ? (
               <img src={shownImg} alt={g.base} onClick={() => setZoom(shownImg)}
                    className="max-h-[26vh] w-full cursor-zoom-in object-contain sm:max-h-[72vh]" />
@@ -137,14 +137,14 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             {hayPasos && (
               <>
                 <button onClick={() => mover(-1)} aria-label="Modelo anterior"
-                  className="absolute left-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-aurora-deep shadow-md transition hover:bg-white active:scale-95 sm:left-2 sm:h-12 sm:w-12">
+                  className="absolute left-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-brand-deep shadow-md transition hover:bg-white active:scale-95 sm:left-2 sm:h-12 sm:w-12">
                   ‹
                 </button>
                 <button onClick={() => mover(1)} aria-label="Modelo siguiente"
-                  className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-aurora-deep shadow-md transition hover:bg-white active:scale-95 sm:right-2 sm:h-12 sm:w-12">
+                  className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xl font-bold text-brand-deep shadow-md transition hover:bg-white active:scale-95 sm:right-2 sm:h-12 sm:w-12">
                   ›
                 </button>
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-aurora-deep/80 px-2.5 py-0.5 text-[11px] font-bold text-white">
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-brand-deep/80 px-2.5 py-0.5 text-[11px] font-bold text-white">
                   {pasoIdx + 1} / {pasos.length}
                 </span>
               </>
@@ -154,7 +154,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             <div className="flex flex-wrap justify-center gap-2">
               {gallery.map((src, i) => (
                 <button key={i} onClick={() => setImgIdx(i)}
-                  className={"h-14 w-14 overflow-hidden rounded-full border-2 transition " + (i === imgIdx ? "border-aurora" : "border-transparent opacity-60 hover:opacity-100")}>
+                  className={"h-14 w-14 overflow-hidden rounded-full border-2 transition " + (i === imgIdx ? "border-brand" : "border-transparent opacity-60 hover:opacity-100")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={src} alt="" className="h-full w-full object-cover" />
                 </button>
@@ -168,7 +168,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
           {sel.precioLiquidacion != null && (
             <span className="mb-2 w-fit rounded-full bg-red-500 px-2 py-0.5 text-[11px] font-bold text-white">🔥 LIQUIDACIÓN</span>
           )}
-          <h2 className="font-display pr-28 text-xl font-bold leading-tight text-aurora-deep sm:pr-32 sm:text-2xl">{g.base}</h2>
+          <h2 className="font-display pr-28 text-xl font-bold leading-tight text-brand-deep sm:pr-32 sm:text-2xl">{g.base}</h2>
           <p className="mt-0.5 text-[11px] text-stone-400">{sel.sku}</p>
 
           {/* Selector: MEDIDA y COLOR / DISEÑO como menús desplegables */}
@@ -176,7 +176,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             <div className={"order-2 mt-3 gap-2.5 " + (hasSizeStep && hasColorStep ? "grid grid-cols-1 sm:grid-cols-2" : "space-y-2.5")}>
               {hasSizeStep && (
                 <label className="block">
-                  <span className="mb-1 block text-sm font-semibold text-stone-700">Elige la medida</span>
+                  <span className="mb-1 block text-sm font-semibold text-stone-700">Elige tu talla</span>
                   <select value={sel.size} onChange={(e) => pickSize(e.target.value)} className={SEL}>
                     {sizeList.map((s) => {
                       const ps = g.variants.filter((v) => v.size === s).map((v) => v.precioPublico);
@@ -217,19 +217,19 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             {esSaldo ? (
               <div className="rounded-xl bg-white p-4 text-center shadow-sm">
                 <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">🏷️ Precio de saldo</p>
-                <p className="mt-1 text-3xl font-extrabold text-aurora-dark">{money(sel.precioLiquidacion ?? sel.precioPublico)}</p>
+                <p className="mt-1 text-3xl font-extrabold text-brand-dark">{money(sel.precioLiquidacion ?? sel.precioPublico)}</p>
                 <p className="mt-1 text-[11px] text-stone-400">Producto con detalle · precio final</p>
               </div>
             ) : (<>
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-xl bg-white p-3 text-center shadow-sm">
                 <p className="text-xs font-semibold uppercase tracking-wide text-stone-400">Público</p>
-                <p className="mt-0.5 text-2xl font-extrabold text-aurora-dark">{money(sel.precioPublico)}</p>
+                <p className="mt-0.5 text-2xl font-extrabold text-brand-dark">{money(sel.precioPublico)}</p>
               </div>
               {sel.precioMiembro != null ? (
-                <div className="rounded-xl bg-aurora-light/70 p-3 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-aurora">Socios</p>
-                  <p className="mt-0.5 text-2xl font-extrabold text-aurora">{money(sel.precioMiembro)}</p>
+                <div className="rounded-xl bg-brand-light/70 p-3 text-center shadow-sm">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand">Socios</p>
+                  <p className="mt-0.5 text-2xl font-extrabold text-brand">{money(sel.precioMiembro)}</p>
                 </div>
               ) : (
                 <div className="rounded-xl border border-dashed border-stone-200 p-3 text-center">
@@ -247,13 +247,13 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             )}
 
             {sel.tarifas.length > 0 && (
-              <div className="rounded-xl bg-aurora-light/70 px-3 py-2">
-                <p className="text-sm font-bold text-aurora-dark">🖐️ Precios por mayoreo</p>
+              <div className="rounded-xl bg-brand-light/70 px-3 py-2">
+                <p className="text-sm font-bold text-brand-dark">🖐️ Precios por mayoreo</p>
                 <div className="mt-1 space-y-0.5">
                   {sel.tarifas.map((t) => (
                     <div key={t.qty} className="flex items-center justify-between">
-                      <span className="text-[13px] font-semibold text-aurora-dark">Llévate {t.qty} o más</span>
-                      <span className="text-base font-extrabold text-aurora-dark">{money(t.price)} <span className="text-[11px] font-semibold">c/u</span></span>
+                      <span className="text-[13px] font-semibold text-brand-dark">Llévate {t.qty} o más</span>
+                      <span className="text-base font-extrabold text-brand-dark">{money(t.price)} <span className="text-[11px] font-semibold">c/u</span></span>
                     </div>
                   ))}
                 </div>
@@ -265,7 +265,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
                 <p className="text-[11px] leading-snug text-stone-500">🧡 {SITE.memberNote}</p>
                 {SITE.communityUrl && (
                   <a href={SITE.communityUrl} target="_blank" rel="noopener"
-                     className="shrink-0 rounded-full bg-aurora-dark px-3 py-1 text-[11px] font-bold text-white hover:opacity-90">
+                     className="shrink-0 rounded-full bg-brand-dark px-3 py-1 text-[11px] font-bold text-white hover:opacity-90">
                     Unirme →
                   </a>
                 )}
@@ -275,7 +275,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
           </div>
 
           {!SITE.ignoreStock && sel.stock > 0 && (
-            <p className="order-4 mt-3 text-center text-[13px] font-semibold text-aurora-dark">
+            <p className="order-4 mt-3 text-center text-[13px] font-semibold text-brand-dark">
               📦 Quedan {sel.stock} {sel.stock === 1 ? "pieza" : "piezas"}
             </p>
           )}
@@ -285,7 +285,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             className={`order-4 mt-3 rounded-full px-6 py-3 text-base font-bold text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-stone-300 disabled:shadow-none sm:py-3.5 ${
               // Sigue el tema de temporada (naranja), igual que el botón
               // "Agregar" de las tarjetas. Antes estaba fijo en azul marino. (Ximena, 10-oct-2026)
-              added ? "bg-green-500" : "bg-gradient-to-r from-aurora-deep to-aurora-dark"
+              added ? "bg-green-500" : "bg-gradient-to-r from-brand-deep to-brand-dark"
             }`}
           >
             {agotado ? "No disponible" : added ? "✓ Agregado a tu lista" : multi ? `Agregar ${selDesc} a mi lista` : "Agregar a mi lista"}

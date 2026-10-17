@@ -15,7 +15,7 @@ type Ctx = {
 };
 
 const CartContext = createContext<Ctx | null>(null);
-const KEY = "aurora-cart";
+const KEY = "bam-cart";
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<Cart>({});

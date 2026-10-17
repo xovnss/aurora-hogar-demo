@@ -24,24 +24,19 @@ const RANGOS: { id: string; label: string; min: number; max: number }[] = [
 // Una "sección" es una categoría padre del archivo (Recámara, Baño…) o una especial
 // (Ofertas / Liquidación / Navidad / Halloween).
 type SeccionMeta = { id: string; emoji: string; special?: "oferta" | "liq" | "navidad" | "halloween" | "novedad" };
-const EMOJI: Record<string, string> = {
-  "Recámara": "🛏️", "Baño": "🛁", "Cortinas": "🪟", "Cocina y Mesa": "🍽️", "Sala": "🛋️", "Decoración": "🎀", "Novedades": "🆕",
-};
-// Pestañas del menú de arriba. sec = sección a la que llevan (si no, "Blancos" baja a categorías).
+const EMOJI: Record<string, string> = { "Al frente": "👕", "En la espalda": "🔙", "Novedades": "🆕" };
+// Pestañas del menú de arriba. sec = sección a la que llevan (si no, baja a las categorías).
 const TABS: { label: string; sec?: string }[] = [
-  { label: "Blancos" },
-  { label: "Decoración", sec: "Decoración" },
-  { label: "Liquidaciones", sec: "Liquidación" },
+  { label: "Todo" },
+  { label: "Al frente", sec: "Al frente" },
+  { label: "En la espalda", sec: "En la espalda" },
   { label: "Novedades", sec: "Novedades" },
+  { label: "Liquidación", sec: "Liquidación" },
 ];
-// Fotos curadas (cuadradas) para los círculos de categoría — en /public/categorias/
+// Fotos (cuadradas) para los círculos de categoría — en /public/categorias/
 const CAT_IMG: Record<string, string> = {
-  "Recámara": "/categorias/recamara.jpg",
-  "Baño": "/categorias/bano.jpg",
-  "Cortinas": "/categorias/cortinas.jpg",
-  "Cocina y Mesa": "/categorias/cocina-mesa.jpg",
-  "Sala": "/categorias/sala.jpg",
-  "Decoración": "/categorias/decoracion.jpg",
+  "Al frente": "/categorias/frente.jpg",
+  "En la espalda": "/categorias/espalda.jpg",
   "Novedades": "/categorias/novedades.jpg",
   "Liquidación": "/categorias/liquidacion.jpg",
 };
@@ -290,7 +285,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         <div className="relative mx-auto flex max-w-7xl items-center gap-4 px-4 pt-2 pb-2.5">
           {/* Menú ☰ (celular): adentro van todas las pestañas */}
           <button onClick={() => setMenuOpen((v) => !v)} aria-label="Menú" aria-expanded={menuOpen}
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-aurora-deep transition hover:bg-aurora-light xl:hidden">
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-brand-deep transition hover:bg-brand-light xl:hidden">
             {menuOpen ? (
               <span className="text-2xl leading-none">✕</span>
             ) : (
@@ -303,14 +298,14 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           </button>
           <span className={"shrink-0 -mt-2 max-xl:absolute max-xl:left-1/2 max-xl:-translate-x-1/2 " + (searchOpen ? "max-sm:hidden" : "")}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={t.logo} alt="Aurora" className="h-12 w-auto sm:h-16" />
+            <img src={t.logo} alt="BAM!" className="h-12 w-auto sm:h-16" />
           </span>
 
           {/* Pestañas (compu) — al centro */}
           <nav className="hidden flex-1 items-center justify-center gap-2 xl:flex">
             {tabsShow.map((t) => (
               <button key={t.label} onClick={() => tabClick(t.sec)}
-                className="rounded-full px-4 py-2 text-[1.05rem] font-bold text-aurora-deep transition hover:bg-aurora-light">{t.label}</button>
+                className="rounded-full px-4 py-2 text-[1.05rem] font-bold text-brand-deep transition hover:bg-brand-light">{t.label}</button>
             ))}
           </nav>
 
@@ -321,17 +316,17 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
                 <input ref={searchRef} value={q} onChange={(e) => { setQ(e.target.value); setShown(PAGE); }}
                   onKeyDown={(e) => { if (e.key === "Enter") verProductos(); }}
                   onBlur={() => { if (!q.trim()) setSearchOpen(false); }}
-                  placeholder="Buscar…" className="w-40 rounded-full border border-stone-200 bg-stone-50 py-2.5 pl-4 pr-9 text-sm outline-none focus:border-aurora focus:bg-white sm:w-64" />
+                  placeholder="Buscar…" className="w-40 rounded-full border border-stone-200 bg-stone-50 py-2.5 pl-4 pr-9 text-sm outline-none focus:border-brand focus:bg-white sm:w-64" />
                 <button onClick={() => { setQ(""); setSearchOpen(false); }} aria-label="Cerrar"
                   className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-stone-200 text-xs text-stone-600 hover:bg-stone-300">✕</button>
               </div>
             ) : (
               <button onClick={() => setSearchOpen(true)} aria-label="Buscar"
-                className="grid h-11 w-11 place-items-center rounded-full text-[1.35rem] text-aurora-deep transition hover:bg-aurora-light">🔍</button>
+                className="grid h-11 w-11 place-items-center rounded-full text-[1.35rem] text-brand-deep transition hover:bg-brand-light">🔍</button>
             )}
             {/* Mi lista (moderno) */}
             <button onClick={() => setCartOpen(true)}
-              className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-aurora-deep to-aurora-dark px-4 py-2.5 text-sm font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg sm:px-5">
+              className="relative inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-brand-deep to-brand-dark px-4 py-2.5 text-sm font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg sm:px-5">
               <span>🛒</span><span className="hidden sm:inline">Mi lista</span>
               {count > 0 && <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-bold text-white ring-2 ring-white">{count}</span>}
             </button>
@@ -343,17 +338,17 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <nav className="border-t border-black/5 bg-white px-3 pb-3 pt-2 xl:hidden">
             {tabsShow.map((t) => (
               <button key={t.label} onClick={() => { setMenuOpen(false); tabClick(t.sec); }}
-                className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-aurora-deep transition active:bg-aurora-light">
-                {t.label}<span className="text-aurora">›</span>
+                className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-brand-deep transition active:bg-brand-light">
+                {t.label}<span className="text-brand">›</span>
               </button>
             ))}
             <button onClick={() => { setMenuOpen(false); setCartOpen(true); }}
-              className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-aurora-deep transition active:bg-aurora-light">
+              className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-brand-deep transition active:bg-brand-light">
               🛒 Mi lista{count > 0 && <span className="rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white">{count}</span>}
             </button>
             {SITE.communityUrl && (
               <a href={SITE.communityUrl} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)}
-                className="mt-1 flex items-center justify-between rounded-2xl bg-gradient-to-r from-aurora-deep to-aurora-dark px-4 py-3.5 text-[1.05rem] font-bold text-white">
+                className="mt-1 flex items-center justify-between rounded-2xl bg-gradient-to-r from-brand-deep to-brand-dark px-4 py-3.5 text-[1.05rem] font-bold text-white">
                 🧡 Únete a la comunidad<span>→</span>
               </a>
             )}
@@ -363,21 +358,25 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
 
       {menuOpen && <div onClick={() => setMenuOpen(false)} className="fixed inset-0 z-20 bg-black/20 xl:hidden" aria-hidden />}
 
-      {/* Hero a todo lo ancho, pegado a la barra (full-bleed). La imagen del tema
-          (o la portada manual, si Rosy subió una) ya trae el texto incluido. */}
+      {/* Portada: en celular la portada completa (vertical); en compu un recorte horizontal.
+          Abajo, un bloque negro con el mensaje y los botones, centrados. */}
       <section>
-        <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[16/9] md:aspect-[2/1] xl:aspect-[21/9]">
+        <div className="relative overflow-hidden bg-stone-300">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={portadaUrl || t.hero} alt={`Catálogo Aurora ${mes} — Duerme bien, vive bien`}
-            className="absolute inset-0 h-full w-full object-cover object-left sm:object-center md:object-top" />
-          {/* Botones: en celular centrados hasta abajo; en compu a la izquierda a media altura */}
-          <div className="absolute left-1/2 top-[63%] flex -translate-x-1/2 flex-wrap justify-center gap-3 sm:left-[3%] sm:translate-x-0 sm:justify-start sm:top-[62%] md:top-[66%] xl:left-[4.5%] xl:top-[70%] sm:gap-4">
-            <button onClick={irAComprar} className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-aurora-deep to-aurora-dark px-7 py-3 text-base font-bold text-white shadow-[0_10px_26px_-8px_rgba(124,45,18,0.6)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_-8px_rgba(124,45,18,0.82)] sm:gap-2 sm:px-12 sm:py-5 sm:text-xl xl:px-10 xl:py-4 xl:text-lg">
-              Comprar ahora <span className="transition group-hover:translate-x-1 sm:text-xl">→</span>
+          <img src={portadaUrl || "/portada.jpg"} alt="BAM! — catálogo" className="block w-full md:hidden" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={portadaUrl || "/portada-ancha.jpg"} alt="" aria-hidden className="hidden h-[min(70vh,600px)] w-full object-cover object-[50%_32%] md:block" />
+        </div>
+        <div className="bg-brand-deep px-4 py-9 text-center text-white sm:py-12">
+          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/60">a brand made for you</p>
+          <h1 className="mx-auto mt-3 max-w-3xl font-display text-[2rem] font-black uppercase leading-[1.02] tracking-tight sm:text-5xl">Ropa con mensaje.<br />Hecha para ti.</h1>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button onClick={irAComprar} className="group inline-flex items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-base font-extrabold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-brand-dark">
+              Comprar ahora <span className="transition group-hover:translate-x-1">→</span>
             </button>
             {hayLiq && (
-              <button onClick={() => irASeccion("Liquidación")} className="hidden items-center gap-2 rounded-full bg-white/85 px-6 py-3 text-sm font-bold text-aurora-dark shadow ring-1 ring-white/70 backdrop-blur transition hover:-translate-y-0.5 hover:bg-white sm:px-10 sm:py-4 sm:text-lg xl:inline-flex">
-                Ver ofertas 🔥
+              <button onClick={() => irASeccion("Liquidación")} className="inline-flex items-center gap-2 rounded-full border-2 border-white/40 px-7 py-3 text-base font-bold text-white transition hover:border-white hover:bg-white/10">
+                Ver liquidación 🔥
               </button>
             )}
           </div>
@@ -391,7 +390,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
       {/* Comprar por categoría — círculos centrados, a todo lo ancho, con aire */}
       {!buscando && (
         <section id="comprar" className="w-full px-4 pt-6 pb-6 sm:px-8 sm:pt-16 sm:pb-16">
-          <h2 className="mb-5 text-center font-display text-2xl font-bold text-aurora-deep sm:mb-11 sm:text-3xl">Compra por categoría</h2>
+          <h2 className="mb-5 text-center font-display text-2xl font-bold text-brand-deep sm:mb-11 sm:text-3xl">Compra por categoría</h2>
           <div className="mx-auto grid max-w-sm grid-cols-3 justify-items-center gap-x-3 gap-y-5 px-1 py-3 sm:flex sm:max-w-7xl sm:snap-x sm:justify-start sm:gap-x-10 sm:overflow-x-auto sm:no-scrollbar xl:gap-x-12 sm:[&>*:first-child]:ml-auto sm:[&>*:last-child]:mr-auto">
             {secciones.map((s) => {
               const on = sec?.id === s.id;
@@ -399,15 +398,15 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
               const img = secImgTema(t, s.id) || CAT_IMG[s.id] || (usaFoto ? secImg[s.id] : "");
               return (
                 <button key={s.id} onClick={() => irASeccion(s.id)} className="group flex shrink-0 snap-start flex-col items-center gap-2.5">
-                  <span className={"relative flex aspect-square w-[84px] items-center justify-center overflow-hidden rounded-full ring-2 ring-offset-2 ring-offset-white transition sm:w-[124px] " + (on ? "ring-aurora" : "ring-transparent group-hover:ring-aurora/40")}>
+                  <span className={"relative flex aspect-square w-[84px] items-center justify-center overflow-hidden rounded-full ring-2 ring-offset-2 ring-offset-white transition sm:w-[124px] " + (on ? "ring-brand" : "ring-transparent group-hover:ring-brand/40")}>
                     {img ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={img} alt={s.id} className="h-full w-full object-cover" />
                     ) : (
-                      <span className="flex h-full w-full items-center justify-center bg-aurora-light text-3xl">{s.emoji}</span>
+                      <span className="flex h-full w-full items-center justify-center bg-brand-light text-3xl">{s.emoji}</span>
                     )}
                   </span>
-                  <span className={"text-center text-[13px] font-bold leading-tight sm:text-sm " + (on ? "text-aurora" : "text-stone-700")}>{s.id}</span>
+                  <span className={"text-center text-[13px] font-bold leading-tight sm:text-sm " + (on ? "text-brand" : "text-stone-700")}>{s.id}</span>
                 </button>
               );
             })}
@@ -419,14 +418,14 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
       {!buscando && (
         <section className="w-full pt-8">
           <a href={SITE.communityUrl || undefined} target={SITE.communityUrl ? "_blank" : undefined} rel="noopener"
-            className="block bg-gradient-to-r from-aurora-deep to-aurora-dark text-white shadow-lg transition hover:brightness-110">
+            className="block bg-gradient-to-r from-brand-deep to-brand-dark text-white shadow-lg transition hover:brightness-110">
             <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:gap-4 sm:px-6 sm:py-7">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 sm:text-[11px]">Comunidad Aurora</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 sm:text-[11px]">Club BAM!</p>
                 <p className="mt-0.5 text-base font-extrabold sm:mt-1 sm:text-3xl">🧡 Únete a nuestra comunidad</p>
                 <p className="mt-0.5 text-[11px] leading-snug text-white/80 sm:mt-1 sm:text-sm">Obtén precios especiales en <b>TODOS</b> los productos.</p>
               </div>
-              <span className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-aurora-dark sm:px-5 sm:py-2.5 sm:text-sm">Unirme →</span>
+              <span className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-brand-dark sm:px-5 sm:py-2.5 sm:text-sm">Unirme →</span>
             </div>
           </a>
         </section>
@@ -449,7 +448,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         <section className="mx-auto mt-1 flex max-w-7xl flex-wrap items-center justify-center gap-2 px-4 sm:justify-start">
           {medidas.length > 1 && (
             <>
-              <span className="text-[12px] font-bold uppercase tracking-wide text-stone-400">Medida</span>
+              <span className="text-[12px] font-bold uppercase tracking-wide text-stone-400">Talla</span>
               <Chip label="Todas" active={medida === "Todas"} onClick={() => { setMedida("Todas"); setShown(PAGE); }} />
               {medidas.map(([mName, n]) => (
                 <Chip key={mName} label={`${mName} (${n})`} active={medida === mName}
@@ -460,12 +459,12 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <span className="flex shrink-0 items-center gap-2">
             <span className="text-[12px] font-bold uppercase tracking-wide text-stone-400">Precio</span>
             <select value={precio} onChange={(e) => { setPrecio(e.target.value); setShown(PAGE); }}
-              className="rounded-full border border-stone-200 bg-white px-4 py-1.5 text-sm font-semibold text-stone-600 outline-none focus:border-aurora">
+              className="rounded-full border border-stone-200 bg-white px-4 py-1.5 text-sm font-semibold text-stone-600 outline-none focus:border-brand">
               {RANGOS.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
             </select>
           </span>
           {hayFiltro && (
-            <button onClick={limpiarFiltros} className="rounded-full px-3 py-1.5 text-sm font-bold text-aurora underline">
+            <button onClick={limpiarFiltros} className="rounded-full px-3 py-1.5 text-sm font-bold text-brand underline">
               Quitar filtros
             </button>
           )}
@@ -477,9 +476,9 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         <div className="mb-3 flex items-center justify-between">
           <p className="text-sm text-stone-500">
             {buscando ? (
-              <><b className="text-aurora-dark">{filtrados.length}</b> resultado{filtrados.length === 1 ? "" : "s"} para “{nq}”</>
+              <><b className="text-brand-dark">{filtrados.length}</b> resultado{filtrados.length === 1 ? "" : "s"} para “{nq}”</>
             ) : (
-              <><b className="text-aurora-dark">{sec?.id}</b> · {filtrados.length} productos{cat !== "Todas" ? ` en ${cat}` : ""}</>
+              <><b className="text-brand-dark">{sec?.id}</b> · {filtrados.length} productos{cat !== "Todas" ? ` en ${cat}` : ""}</>
             )}
           </p>
         </div>
@@ -487,8 +486,8 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         {visibles.length === 0 ? (
           <div className="py-16 text-center text-stone-400">
             <p>No se encontraron productos{buscando ? ` para “${nq}”` : ""}{hayFiltro ? " con esos filtros" : ""}.</p>
-            {hayFiltro && <button onClick={limpiarFiltros} className="mt-2 font-semibold text-aurora underline">Quitar filtros</button>}
-            {buscando && <button onClick={() => setQ("")} className="mt-2 block w-full font-semibold text-aurora underline">Limpiar búsqueda</button>}
+            {hayFiltro && <button onClick={limpiarFiltros} className="mt-2 font-semibold text-brand underline">Quitar filtros</button>}
+            {buscando && <button onClick={() => setQ("")} className="mt-2 block w-full font-semibold text-brand underline">Limpiar búsqueda</button>}
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-4">
@@ -499,7 +498,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         {shown < filtrados.length && (
           <div className="mt-6 text-center">
             <button onClick={() => setShown((s) => s + PAGE)}
-                    className="rounded-full border-2 border-aurora px-6 py-2 font-bold text-aurora hover:bg-aurora hover:text-white">
+                    className="rounded-full border-2 border-brand px-6 py-2 font-bold text-brand hover:bg-brand hover:text-white">
               Ver más ({filtrados.length - shown})
             </button>
           </div>
@@ -511,29 +510,29 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <div>
             <span className="inline-block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={t.logo} alt="Aurora" className="h-10 w-auto" />
+              <img src={t.logo} alt="BAM!" className="h-10 w-auto" />
             </span>
-            <p className="mt-3 max-w-xs text-sm text-stone-500">Tienda de blancos. Sábanas, colchas, cortinas, toallas y todo para renovar tu hogar con comodidad y estilo.</p>
+            <p className="mt-3 max-w-xs text-sm text-stone-500">Playeras oversize con mensaje. a brand made for you.</p>
           </div>
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-wide text-[#6b2410]">Categorías</p>
+            <p className="text-[13px] font-bold uppercase tracking-wide text-[#2b1111]">Categorías</p>
             <ul className="mt-3 space-y-1.5">
               {secciones.filter((s) => !s.special).slice(0, 6).map((s) => (
                 <li key={s.id}>
-                  <button onClick={() => { elegirSeccion(s.id); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="text-sm text-stone-500 hover:text-aurora">{s.emoji} {s.id}</button>
+                  <button onClick={() => { elegirSeccion(s.id); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="text-sm text-stone-500 hover:text-brand">{s.emoji} {s.id}</button>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-wide text-[#6b2410]">Comunidad</p>
-            <p className="mt-3 text-sm text-stone-500">Únete para el <b className="text-aurora-dark">precio de socios</b> y enterarte de las ofertas.</p>
+            <p className="text-[13px] font-bold uppercase tracking-wide text-[#2b1111]">Comunidad</p>
+            <p className="mt-3 text-sm text-stone-500">Únete para el <b className="text-brand-dark">precio de socios</b> y enterarte de las ofertas.</p>
             {SITE.communityUrl && (
-              <a href={SITE.communityUrl} target="_blank" rel="noopener" className="mt-3 inline-block rounded-full bg-aurora px-4 py-2 text-sm font-bold text-white hover:bg-aurora-dark">Unirme →</a>
+              <a href={SITE.communityUrl} target="_blank" rel="noopener" className="mt-3 inline-block rounded-full bg-brand px-4 py-2 text-sm font-bold text-white hover:bg-brand-dark">Unirme →</a>
             )}
           </div>
         </div>
-        <p className="border-t border-black/5 py-5 text-center text-xs text-stone-400">© {now.getFullYear()} Aurora · Tienda de blancos · Demo</p>
+        <p className="border-t border-black/5 py-5 text-center text-xs text-stone-400">© {now.getFullYear()} BAM! · Demo de tienda con chatbot</p>
       </footer>
 
       {selected && <ProductDetail g={selected} skuInicial={selSku} onClose={cerrarFicha} />}
@@ -547,7 +546,7 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
     <button
       onClick={onClick}
       className={`shrink-0 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-        active ? "bg-aurora text-white shadow" : "bg-white text-stone-600 border border-stone-200 hover:border-aurora"
+        active ? "bg-brand text-white shadow" : "bg-white text-stone-600 border border-stone-200 hover:border-brand"
       }`}
     >
       {label}

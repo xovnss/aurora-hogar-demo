@@ -1,11 +1,8 @@
-# Aurora Hogar — demo
+# BAM! — demo
 
-Plataforma de catálogo, fichas de ventas y caja para una tienda, en versión de demostración **sin datos reales**. El diseño, las pantallas y los
-flujos son los mismos; lo único que cambió es de dónde salen los datos.
-
-- **No se conecta a Odoo.** No hay credenciales, no hay inventario real, no hay ventas de nadie.
-- **No hay fotos reales.** Cada producto dibuja un cuadro de ejemplo con su nombre.
-- **La marca es inventada** ("Aurora Hogar"), igual que los productos y los precios.
+Tienda de playeras oversize con mensaje (**«a brand made for you»**) con catálogo, fichas de ventas,
+caja y un **chatbot de ayuda**. Es una demo: los datos son de ejemplo (sucursales, existencias y precios
+inventados); las 11 playeras y las fotos son del catálogo real de la marca.
 
 ## Cómo correrla
 
@@ -18,43 +15,35 @@ Y se abre en `http://localhost:3000`.
 
 | Pantalla | Dirección | Contraseña |
 |---|---|---|
-| Catálogo (el de las clientas) | `/` | — |
+| Catálogo | `/` | — |
 | Fichas para ventas | `/ventas` | `demo` |
 | Corte de caja | `/caja` | `demo` |
 
-Las contraseñas se cambian en `.env.local` (hay un `.env.example` de partida).
+## El chatbot
 
-## Qué se puede enseñar
+Botón flotante en el catálogo. Ayuda a:
 
-**Catálogo:** secciones y subcategorías, buscador, filtros por medida y por precio, ficha con
-selector de color y medida, precio público y de socios, "Mi lista" y el pedido por WhatsApp.
+- **Elegir talla** a partir de pecho, o altura y peso (las playeras son oversize; sugiere también una talla más pegada o más holgada).
+- **Ver cuántas piezas quedan** de cada diseño, por talla y por sucursal (CDMX, Guadalajara, Monterrey) y en bodega.
+- **Envíos, recoger en sucursal, cambios y formas de pago.**
 
-**Fichas:** buscador, ficha con todos los colores, cotización y el **catálogo de etiqueta
-blanca** en PDF (media hoja por producto, con índice y portada).
+Cómo funciona (`src/app/api/chat/route.ts` + `src/lib/chat-tools.ts`):
 
-**Caja:** arqueo billete por billete, entradas y salidas con su vale, cuadre contra lo que
-"registró el punto de venta", envíos por cobrar y el ticket del corte.
+- Con `OPENROUTER_API_KEY` usa un modelo de IA (por defecto `openai/gpt-4o-mini`, se cambia con `OPENROUTER_MODEL`) con *function calling*: el modelo llama a las herramientas `recomendar_talla`, `consultar_existencias`, `listar_disenos` e `info_envios`, y redacta con lo que regresan, sin inventar cifras.
+- Sin llave, o si el proveedor falla, responde **por reglas** (sin costo y sin red).
+- Protecciones: máximo de mensajes y de largo, límite de peticiones por IP, tope diario de llamadas al modelo (`CHAT_DAILY_LLM_CAP`) y tiempo límite. Sobre una instancia serverless estos topes son por instancia; la protección real es el límite de crédito de la llave.
 
-## Qué se cambia para que se vea distinto
+## Qué se cambia
 
 | Qué | Dónde |
 |---|---|
-| Productos, precios, colores y medidas | `src/lib/demo-datos.ts` → la lista `FAMILIAS` |
-| Nombre de la tienda | `src/lib/config.ts` → `SITE.name` |
-| Logo | `public/aurora.png` (fondo claro), `public/aurora-blanco.png` (fondo oscuro) y `public/temas/normal/logo.png` |
-| WhatsApp del pedido | `.env.local` → `NEXT_PUBLIC_WHATSAPP` |
+| Diseños, precios, colores y tallas | `src/lib/demo-datos.ts` → `FAMILIAS` |
+| Guía de tallas, sucursales y envíos | `src/lib/tallas.ts` |
+| Nombre y colores de la marca | `src/lib/config.ts`, `src/app/globals.css` |
+| Logos y fotos | `public/` |
 
-## Cómo está hecha por dentro
+## Variables de entorno
 
-Las pantallas **no se tocaron**: siguen pidiendo los datos con las mismas funciones de
-siempre. Lo que se cambió son los dos archivos que antes hablaban con Odoo:
+Ver `.env.example`. La llave de IA **nunca** se guarda en el repo: se agrega en el panel de Vercel.
 
-- `src/lib/odoo.ts` → ahora arma el catálogo desde `demo-datos.ts`.
-- `src/lib/odoo-write.ts` → ahora guarda los arqueos y los cobros **en memoria**.
-- `src/app/img/route.ts` → ahora dibuja el cuadro de ejemplo en vez de traer la foto.
-
-Por eso lo que se capture en la app de caja **dura mientras el servidor esté encendido** y se
-borra al reiniciarlo. Para una demo es lo que conviene: siempre empieza limpia.
-
-La agrupación de productos en familias, la búsqueda, los temas, los PDF y todo lo demás es
-el código de la plataforma completa; solo la fuente de datos es de ejemplo.
+Lo que se capture en caja vive en memoria del servidor y se borra al reiniciar, así que la demo siempre arranca limpia.

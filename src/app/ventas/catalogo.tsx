@@ -2,14 +2,14 @@
 
 // Catálogo para compartir (etiqueta blanca) — herramienta de la app de fichas.
 // La asesora elige productos, le pone el nombre de la revendedora y baja un PDF
-// SIN precios y SIN la marca Aurora, para que la clienta lo reparta a sus clientas.
+// SIN precios y SIN la marca BAM!, para que la clienta lo reparta a sus clientas.
 // (9-oct-2026, a petición de Ximena.)
 import { useMemo, useState } from "react";
 import { matchSearch } from "@/lib/search";
 import type { Ficha } from "./ui";
 
 // mismo orden chica → grande del catálogo y de las fichas
-const SIZE_ORDER = ["Individual", "Matrimonial", "Matri Queen", "Queen", "King", "King Jumbo", "California King"];
+const SIZE_ORDER = ["XS", "S", "M", "L", "XL"];
 const norm = (s: string) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 type Precios = "no" | "publico" | "socio";
@@ -110,12 +110,12 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
   const inp = "pf-input w-full px-4 py-2.5 text-sm";
   const pill = (activo: boolean) =>
     "rounded-xl px-3.5 py-2 text-[13px] font-bold transition " +
-    (activo ? "bg-aurora text-white shadow ring-2 ring-aurora/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-aurora");
+    (activo ? "bg-brand text-white shadow ring-2 ring-brand/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-brand");
 
   return (
     <div className="mx-auto max-w-6xl pb-28">
-      <div className="mb-3 rounded-2xl bg-orange-50 px-4 py-3 ring-1 ring-orange-100">
-        <p className="text-[13px] font-bold text-aurora-dark">📒 Catálogo para compartir</p>
+      <div className="mb-3 rounded-2xl bg-red-50 px-4 py-3 ring-1 ring-red-100">
+        <p className="text-[13px] font-bold text-brand-dark">📒 Catálogo para compartir</p>
         <p className="mt-0.5 text-[12px] leading-snug text-stone-500">
           Elige los productos y baja un PDF. Como viene <b>sin precios y sin la marca</b>, la revendedora
           lo puede mandar a sus clientas y poner su propio precio.
@@ -126,15 +126,15 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
         {/* ----- opciones ----- */}
         <div className="space-y-3">
           <div className="pf-card p-4">
-            <label className="mb-1 block text-[13px] font-bold text-[#7c2d12]">Nombre de la tienda (opcional)</label>
-            <input value={tienda} onChange={(e) => setTienda(e.target.value)} placeholder="Ej. Blancos Ivonne" className={inp} />
+            <label className="mb-1 block text-[13px] font-bold text-[#1c1717]">Nombre de la tienda (opcional)</label>
+            <input value={tienda} onChange={(e) => setTienda(e.target.value)} placeholder="Ej. BAM! Roma Norte" className={inp} />
             <p className="mt-1 text-[11px] text-stone-400">Va en la portada y en cada hoja. Déjalo vacío si no quieres ningún nombre.</p>
-            <label className="mb-1 mt-3 block text-[13px] font-bold text-[#7c2d12]">Contacto (opcional)</label>
+            <label className="mb-1 mt-3 block text-[13px] font-bold text-[#1c1717]">Contacto (opcional)</label>
             <input value={contacto} onChange={(e) => setContacto(e.target.value)} placeholder="WhatsApp o @usuario" className={inp} />
           </div>
 
           <div className="pf-card p-4">
-            <p className="mb-2 text-[13px] font-bold text-[#7c2d12]">Precios</p>
+            <p className="mb-2 text-[13px] font-bold text-[#1c1717]">Precios</p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setPrecios("no")} className={pill(precios === "no")}>Sin precios</button>
               <button onClick={() => setPrecios("publico")} className={pill(precios === "publico")}>Público</button>
@@ -146,13 +146,13 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
               </p>
             )}
 
-            <p className="mb-2 mt-4 text-[13px] font-bold text-[#7c2d12]">Marca</p>
+            <p className="mb-2 mt-4 text-[13px] font-bold text-[#1c1717]">Marca</p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setMarca(false)} className={pill(!marca)}>Sin marca (blanca)</button>
-              <button onClick={() => setMarca(true)} className={pill(marca)}>Con logo Aurora</button>
+              <button onClick={() => setMarca(true)} className={pill(marca)}>Con logo BAM!</button>
             </div>
 
-            <p className="mb-2 mt-4 text-[13px] font-bold text-[#7c2d12]">Cómo se ve</p>
+            <p className="mb-2 mt-4 text-[13px] font-bold text-[#1c1717]">Cómo se ve</p>
             <div className="flex flex-wrap gap-2">
               <button onClick={() => setLayout("revista")} className={pill(layout === "revista")}>Catálogo (media hoja)</button>
               <button onClick={() => setLayout("compacto")} className={pill(layout === "compacto")}>Lista (4 por hoja)</button>
@@ -160,18 +160,18 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
             </div>
             <p className="mt-1 text-[11px] text-stone-400">
               {layout === "revista"
-                ? "Media hoja por producto: foto grande, medidas, descripción y la fotito de cada color. Los que traen muchos colores se llevan la hoja completa."
+                ? "Media hoja por producto: foto grande, tallas, descripción y la fotito de cada diseño. Los que traen muchos colores se llevan la hoja completa."
                 : layout === "compacto"
-                  ? "Foto principal, nombre y medidas. Ligero, bueno para mandar muchos productos."
+                  ? "Foto principal, nombre y tallas. Ligero, bueno para mandar muchos productos."
                   : "Una hoja por producto con la foto de cada color y la descripción. Pesa más."}
             </p>
 
             <label className="mt-4 flex cursor-pointer items-center gap-2 text-[13px] font-semibold text-stone-600">
-              <input type="checkbox" checked={portada} onChange={(e) => setPortada(e.target.checked)} className="h-4 w-4 accent-[#c2410c]" />
+              <input type="checkbox" checked={portada} onChange={(e) => setPortada(e.target.checked)} className="h-4 w-4 accent-[#b50808]" />
               Incluir portada
             </label>
             <label className="mt-2 flex cursor-pointer items-center gap-2 text-[13px] font-semibold text-stone-600">
-              <input type="checkbox" checked={indice} onChange={(e) => setIndice(e.target.checked)} className="h-4 w-4 accent-[#c2410c]" />
+              <input type="checkbox" checked={indice} onChange={(e) => setIndice(e.target.checked)} className="h-4 w-4 accent-[#b50808]" />
               Incluir índice (por sección, con número de hoja)
             </label>
           </div>
@@ -181,7 +181,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
         <div className="pf-card p-4">
           <div className="flex flex-wrap items-center gap-2">
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Busca el producto por nombre o código…" className="pf-input min-w-[220px] flex-1 px-4 py-2.5 text-sm" />
-            <button onClick={todosVisibles} className="rounded-full bg-aurora px-3.5 py-2 text-[12px] font-bold text-white shadow-sm hover:bg-aurora-dark">
+            <button onClick={todosVisibles} className="rounded-full bg-brand px-3.5 py-2 text-[12px] font-bold text-white shadow-sm hover:bg-brand-dark">
               Agregar los {lista.length}
             </button>
             <button onClick={quitarVisibles} className="rounded-full border border-stone-200 bg-white px-3.5 py-2 text-[12px] font-bold text-stone-500 hover:bg-stone-50">
@@ -191,7 +191,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
           <div className="mt-2 flex flex-wrap gap-1.5">
             {secciones.map((s) => (
               <button key={s} onClick={() => { setSeccion(s); setQ(""); }}
-                className={"rounded-full px-3 py-1.5 text-[12px] font-bold transition " + (seccion === s && !nq ? "bg-[#7c2d12] text-white" : "bg-stone-50 text-stone-500 ring-1 ring-stone-200 hover:ring-aurora")}>
+                className={"rounded-full px-3 py-1.5 text-[12px] font-bold transition " + (seccion === s && !nq ? "bg-[#1c1717] text-white" : "bg-stone-50 text-stone-500 ring-1 ring-stone-200 hover:ring-brand")}>
                 {s === "Liquidaciones" ? "🔥 " : ""}{s}
                 <span className="ml-1.5 opacity-60">{s === "Todos" ? fichas.length : fichas.filter((f) => secOf(f) === s).length}</span>
               </button>
@@ -208,16 +208,16 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
               const on = sel.has(f.key);
               return (
                 <button key={f.key} onClick={() => toggle(f.key)}
-                  className={"overflow-hidden rounded-2xl text-left transition " + (on ? "ring-2 ring-aurora" : "ring-1 ring-stone-200 hover:ring-aurora/60")}>
+                  className={"overflow-hidden rounded-2xl text-left transition " + (on ? "ring-2 ring-brand" : "ring-1 ring-stone-200 hover:ring-brand/60")}>
                   <div className="relative aspect-square w-full bg-stone-50">
                     {f.image
                       ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={f.image} alt="" loading="lazy" className="h-full w-full object-cover" />
                       : <div className="grid h-full w-full place-items-center text-[10px] text-stone-400">sin foto</div>}
-                    <span className={"absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full text-[13px] font-black shadow " + (on ? "bg-aurora text-white" : "bg-white/90 text-stone-300")}>
+                    <span className={"absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full text-[13px] font-black shadow " + (on ? "bg-brand text-white" : "bg-white/90 text-stone-300")}>
                       {on ? "✓" : "+"}
                     </span>
                   </div>
-                  <p className="truncate px-2 py-1.5 text-[11px] font-bold text-[#7c2d12]">{f.base}</p>
+                  <p className="truncate px-2 py-1.5 text-[11px] font-bold text-[#1c1717]">{f.base}</p>
                 </button>
               );
             })}
@@ -229,14 +229,14 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
       {/* ----- barra de abajo ----- */}
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-stone-200 bg-white/95 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3">
-          <p className="text-[13px] font-bold text-[#7c2d12]">
+          <p className="text-[13px] font-bold text-[#1c1717]">
             {elegidos.length === 0 ? "Aún no eliges productos" : `${elegidos.length} ${elegidos.length === 1 ? "producto" : "productos"} · ${hojas} ${hojas === 1 ? "hoja" : "hojas"}${portada ? " + portada" : ""}${indice ? " + índice" : ""}`}
           </p>
           {avance && avance.total > 1 && (
             <p className="text-[12px] font-semibold text-stone-400">Preparando fotos {avance.hechos}/{avance.total}…</p>
           )}
           <button onClick={generar} disabled={generando || !elegidos.length}
-            className="ml-auto rounded-full bg-aurora px-5 py-2.5 text-[14px] font-bold text-white shadow hover:bg-aurora-dark disabled:bg-stone-300">
+            className="ml-auto rounded-full bg-brand px-5 py-2.5 text-[14px] font-bold text-white shadow hover:bg-brand-dark disabled:bg-stone-300">
             {generando ? "Armando el PDF…" : "📥 Bajar catálogo PDF"}
           </button>
         </div>
