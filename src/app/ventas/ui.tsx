@@ -112,7 +112,7 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
       </div>
       <div className="m-3 rounded-2xl bg-white/10 px-4 py-3">
         <p className="text-[12px] leading-snug text-white/70">Manda los colores de un producto en una sola imagen.</p>
-        <button onClick={() => logoutVentasAction().then(() => router.refresh())} className="mt-2 block text-[13px] font-bold text-white/70 hover:text-white">Salir →</button>
+        <a href="/" className="mt-2 block text-[13px] font-bold text-white/70 hover:text-white">Ir al catálogo →</a>
       </div>
     </div>
   );
@@ -140,7 +140,7 @@ export function Fichas({ fichas }: { fichas: Ficha[] }) {
                   <h1 className="grad-text font-display text-xl font-bold">{seccion === "Todos" ? "Todos los productos" : seccion}</h1>
                   <span className="text-[13px] text-stone-400">· {lista.length} productos · toca uno para ver su ficha</span>
                   <button onClick={refrescar} disabled={refrescando} title="Trae el stock actualizado de Odoo y quita los que quedaron en 0"
-                    className="ml-auto rounded-full bg-brand px-4 py-1.5 text-[13px] font-bold text-white shadow-sm hover:bg-brand-dark disabled:bg-stone-300">
+                    className="ml-auto rounded-full bg-black px-4 py-1.5 text-[13px] font-bold text-white shadow-sm hover:bg-neutral-700 disabled:bg-stone-300">
                     {refrescando ? "Actualizando…" : "🔄 Actualizar stock"}
                   </button>
                 </div>
@@ -324,7 +324,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                   </div>
                   <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[#1c1717]">{pr.nombre}</span>
                   <span className={"shrink-0 text-[13px] font-bold " + (pr.liq != null ? "text-red-600" : "text-brand-dark")}>{pr.liq != null ? "🔥 " : ""}{money(pr.liq != null ? pr.liq : pr.mem)}</span>
-                  <span className="shrink-0 rounded-full bg-brand px-2 py-0.5 text-[13px] font-bold text-white">+</span>
+                  <span className="shrink-0 rounded-full bg-black px-2 py-0.5 text-[13px] font-bold text-white">+</span>
                 </button>
               ))}
             </div>
@@ -333,7 +333,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
             <label className="mb-1 block text-[13px] font-bold text-[#1c1717]">Agregar envío</label>
             <div className="flex gap-2">
               <input value={envioTmp} onChange={(e) => setEnvioTmp(e.target.value.replace(/[^\d.]/g, ""))} inputMode="decimal" placeholder="Costo del envío ($)" className={inp} />
-              <button onClick={agregarEnvio} className="shrink-0 rounded-xl bg-brand px-4 text-sm font-bold text-white hover:bg-brand-dark">Agregar</button>
+              <button onClick={agregarEnvio} className="shrink-0 rounded-xl bg-black px-4 text-sm font-bold text-white hover:bg-neutral-700">Agregar</button>
             </div>
           </div>
         </div>
@@ -383,7 +383,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
               <button onClick={descargarFormal} disabled={bajandoPdf} className="rounded-full border-2 border-[#c4972a] bg-[#fdf7e6] px-5 py-2 text-[13px] font-bold text-[#8a6a15] shadow-sm hover:bg-[#faedc9] disabled:opacity-50">
                 {bajandoPdf ? "Generando PDF…" : "📄 Cotización formal (PDF)"}
               </button>
-              <button onClick={compartir} disabled={bajando} className="rounded-full bg-brand px-5 py-2 text-[13px] font-bold text-white shadow hover:bg-brand-dark disabled:bg-stone-300">
+              <button onClick={compartir} disabled={bajando} className="rounded-full bg-black px-5 py-2 text-[13px] font-bold text-white shadow hover:bg-neutral-700 disabled:bg-stone-300">
                 {bajando ? "Generando…" : "📥 Descargar / Compartir"}
               </button>
             </div>
@@ -556,7 +556,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
           </div>
           <div className="flex gap-2">
             <button onClick={() => descargar("cliente")} disabled={!!bajando}
-              className="rounded-full bg-brand px-4 py-1.5 text-[13px] font-bold text-white shadow hover:bg-brand-dark disabled:bg-stone-300"
+              className="rounded-full bg-black px-4 py-1.5 text-[13px] font-bold text-white shadow hover:bg-neutral-700 disabled:bg-stone-300"
               title="PNG con logo y precio (para clientes)">
               {bajando === "cliente" ? "Generando…" : "📥 Cliente"}
             </button>
@@ -574,7 +574,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
             <div className="flex flex-wrap gap-2">
               {sizes.map((s) => (
                 <button key={s} onClick={() => setSize(s)}
-                  className={"rounded-xl px-4 py-2 text-sm font-bold transition " + (size === s ? "bg-brand text-white shadow ring-2 ring-brand/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-brand")}>
+                  className={"rounded-xl px-4 py-2 text-sm font-bold transition " + (size === s ? "bg-black text-white shadow ring-2 ring-brand/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-brand")}>
                   {s} <span className={"ml-1 text-[11px] " + (size === s ? "text-white/80" : "text-stone-400")}>{bySize.get(s)!.length}</span>
                 </button>
               ))}
@@ -637,7 +637,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
             {descSel && <p className="mt-3 whitespace-pre-line text-[13px] leading-snug text-stone-600">{renderNegritas(descSel)}</p>}
 
             <div className="mb-2 mt-4 flex items-center gap-2">
-              <span className="h-4 w-1 rounded-full bg-brand" />
+              <span className="h-4 w-1 rounded-full bg-black" />
               <p className="text-[13px] font-extrabold text-stone-700">{vs.length === 1 ? "Producto" : "Colores / modelos disponibles"}</p>
               <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[11px] font-black text-brand-dark">{vs.length}</span>
             </div>

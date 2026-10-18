@@ -13,11 +13,11 @@ npm run dev
 
 Y se abre en `http://localhost:3000`.
 
-| Pantalla | Dirección | Contraseña |
+| Pantalla | Dirección | Acceso |
 |---|---|---|
 | Catálogo | `/` | — |
-| Fichas para ventas | `/ventas` | `demo` |
-| Subir productos | `/subir` | usuario `Ana` o `Luis`, contraseña `demo`, PIN `1234` (todo en memoria, se reinicia) |
+| Fichas para ventas | `/ventas` | sin contraseña |
+| Subir productos | `/subir` | sin contraseña (entras como Ana; todo en memoria, se reinicia) |
 
 ## El chatbot
 

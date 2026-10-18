@@ -367,7 +367,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/60">a brand made for you</p>
           <h1 className="mx-auto mt-3 max-w-3xl font-display text-[2rem] font-black uppercase leading-[1.02] tracking-tight sm:text-5xl">Ropa con mensaje.<br />Hecha para ti.</h1>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <button onClick={irAComprar} className="group inline-flex items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-base font-extrabold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-brand-dark">
+            <button onClick={irAComprar} className="group inline-flex items-center gap-2 rounded-full bg-black px-8 py-3.5 text-base font-extrabold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-neutral-700">
               Comprar ahora <span className="transition group-hover:translate-x-1">→</span>
             </button>
             {hayLiq && (
@@ -494,7 +494,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         {shown < filtrados.length && (
           <div className="mt-6 text-center">
             <button onClick={() => setShown((s) => s + PAGE)}
-                    className="rounded-full border-2 border-brand px-6 py-2 font-bold text-brand hover:bg-brand hover:text-white">
+                    className="rounded-full border-2 border-brand px-6 py-2 font-bold text-brand hover:bg-black hover:text-white">
               Ver más ({filtrados.length - shown})
             </button>
           </div>
@@ -524,7 +524,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             <p className="text-[13px] font-bold uppercase tracking-wide text-[#2b1111]">Comunidad</p>
             <p className="mt-3 text-sm text-stone-500">Únete para el <b className="text-brand-dark">precio de socios</b> y enterarte de las ofertas.</p>
             {SITE.communityUrl && (
-              <a href={SITE.communityUrl} target="_blank" rel="noopener" className="mt-3 inline-block rounded-full bg-brand px-4 py-2 text-sm font-bold text-white hover:bg-brand-dark">Unirme →</a>
+              <a href={SITE.communityUrl} target="_blank" rel="noopener" className="mt-3 inline-block rounded-full bg-black px-4 py-2 text-sm font-bold text-white hover:bg-neutral-700">Unirme →</a>
             )}
           </div>
         </div>
@@ -542,7 +542,7 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
     <button
       onClick={onClick}
       className={`shrink-0 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-        active ? "bg-brand text-white shadow" : "bg-white text-stone-600 border border-stone-200 hover:border-brand"
+        active ? "bg-black text-white shadow" : "bg-white text-stone-600 border border-stone-200 hover:border-brand"
       }`}
     >
       {label}

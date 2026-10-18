@@ -69,6 +69,7 @@ function tabla(): Map<number, Fila> {
       categoria,
     });
   }
+  semilla();
   return TABLA;
 }
 const vivos = () => [...tabla().values()].filter((f) => f.activo);
@@ -122,23 +123,27 @@ export async function listarDescripciones(): Promise<ProdDesc[]> {
   }));
 }
 export async function ultimosModelos(): Promise<LineaModelo[]> {
-  const porLinea = new Map<string, { nombre: string; categoria: string; nums: number[] }>();
+  // Demo: cada categoría es una "línea"; el número de modelo es el lugar del diseño dentro de ella.
+  const porCat = new Map<string, string[]>();
   for (const f of vivos()) {
-    const m = /^(.*?)-M?(\d+)(?:-[A-Z]+)?$/.exec(f.sku);
-    if (!m) continue;
-    const linea = m[1];
-    const n = parseInt(m[2]);
-    if (!porLinea.has(linea)) porLinea.set(linea, { nombre: f.name.split(" - ")[0], categoria: f.categoria, nums: [] });
-    porLinea.get(linea)!.nums.push(n);
+    const base = f.name.split(" - ")[0];
+    const l = porCat.get(f.categoria) || [];
+    if (!l.includes(base)) l.push(base);
+    porCat.set(f.categoria, l);
   }
   const out: LineaModelo[] = [];
-  for (const [linea, d] of porLinea) {
-    if (d.nums.length < 2) continue;
-    const ultimo = Math.max(...d.nums);
-    const hay = new Set(d.nums);
+  let i = 0;
+  for (const [cat, nombres] of porCat) {
+    const cuantos = nombres.length;
+    const ultimo = cuantos + (i % 3) + 1;
     const faltan: number[] = [];
-    for (let i = 1; i < ultimo; i++) if (!hay.has(i)) faltan.push(i);
-    out.push({ linea, nombre: d.nombre, categoria: d.categoria, ultimo, cuantos: d.nums.length, faltan: faltan.slice(0, 12) });
+    for (let k = 0; k < ultimo - cuantos; k++) faltan.push(2 + k * 3 <= ultimo ? 2 + k * 3 : ultimo - 1 - k);
+    out.push({
+      linea: cat.split(" / ").map((x) => x.slice(0, 3).toUpperCase()).join("-"),
+      nombre: cat.split(" / ")[1] ? `${cat.split(" / ")[0]} · ${cat.split(" / ")[1]}` : cat,
+      categoria: cat, ultimo, cuantos, faltan: [...new Set(faltan)].filter((n) => n >= 1 && n < ultimo),
+    });
+    i++;
   }
   return out.sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
 }
@@ -208,10 +213,7 @@ export function portadaUrl(_id: string | number): string { return "/portada.jpg"
 
 /* ----- bitácora ----- */
 export type Evento = { fecha: string; persona: string; texto: string };
-const BITACORA: Evento[] = [
-  { fecha: new Date(Date.now() - 36e5).toISOString(), persona: "Ana", texto: "Subió COJ-DEC-MOS · Cojín Decorativo Mostaza · 12 pz" },
-  { fecha: new Date(Date.now() - 72e5).toISOString(), persona: "Luis", texto: "Resurtió TOA-BAN-GRI · +20 pz" },
-];
+const BITACORA: Evento[] = [];
 export async function logAccion(persona: string, texto: string) {
   BITACORA.unshift({ fecha: new Date().toISOString(), persona: persona || "?", texto });
 }
@@ -228,12 +230,7 @@ export type Pendiente = {
   razon?: string; estado?: EstadoPend;
 };
 let SIG_PEND = 500;
-const PENDIENTES: Pendiente[] = [
-  {
-    id: 499, persona: "Luis", tipo: "nuevo", resumen: "🆕 Nuevo: COR-BLK-VER · Cortina Blackout Verde · $850",
-    fecha: new Date(Date.now() - 54e5).toISOString(), payload: {}, estado: "pendiente", razon: "Llegó en la entrega de ayer",
-  },
-];
+const PENDIENTES: Pendiente[] = [];
 export async function crearPendiente(persona: string, tipo: string, resumen: string, payload: Record<string, unknown>, razon = "") {
   PENDIENTES.unshift({ id: ++SIG_PEND, persona, tipo, resumen, payload, razon, fecha: new Date().toISOString(), estado: "pendiente" });
 }
@@ -302,4 +299,86 @@ export type NotaCompra = {
   id: number; folio: string; proveedor: string; refProveedor: string; fecha: string;
   estado: string; total: number; recibida: boolean; lineas: NotaLinea[];
 };
-export async function notasVsInventario(_dias = 120): Promise<NotaCompra[]> { return []; }
+export async function notasVsInventario(_dias = 120): Promise<NotaCompra[]> { tabla(); return NOTAS; }
+const NOTAS: NotaCompra[] = [];
+
+
+/* ----- datos de ejemplo para que todas las pestañas se vean vivas ----- */
+let SEMBRADO = false;
+function semilla() {
+  if (SEMBRADO || !TABLA) return;
+  SEMBRADO = true;
+  const filas = [...TABLA.values()];
+  const f = (i: number) => filas[(i * 7 + 3) % filas.length];
+  const hace = (min: number) => new Date(Date.now() - min * 60000).toISOString();
+
+  // Saldos, sin stock y archivados
+  for (const i of [2, 9, 15, 21]) { const r = f(i); r.categId = 999; r.categoria = "Saldos"; }
+  for (const i of [4, 11, 17]) { const r = f(i); r.cantidad = 0; r.cantTienda = 0; r.cantBodega = 0; }
+  for (const i of [6, 13]) f(i).activo = false;
+
+  // Historial reciente
+  const ev: [number, string, string][] = [
+    [18, "Ana", `Subió ${f(1).sku} · ${f(1).name} · 12 pz`],
+    [47, "Luis", `Resurtió ${f(5).sku} · +20 pz`],
+    [95, "Ana", `Cambió precios de ${f(8).sku}: $${f(8).publico} → $${f(8).publico - 50}`],
+    [160, "Luis", `Puso en liquidación ${f(10).sku}`],
+    [240, "Ana", `Aprobó la solicitud de Luis: inventario de ${f(12).sku}`],
+    [420, "Ana", `Archivó ${f(6).sku} · ${f(6).name}`],
+    [600, "Luis", `Eliminó ${f(30).sku} · ${f(30).name} (duplicado)`],
+    [1500, "Ana", `Eliminó ${f(33).sku} · ${f(33).name} (error de captura)`],
+    [1900, "Luis", `Subió descripción de ${f(14).sku}`],
+    [2800, "Ana", `Cambió el tema del catálogo a "ninguno"`],
+  ];
+  for (const [m, quien, texto] of ev) BITACORA.push({ fecha: hace(m), persona: quien, texto });
+
+  // Solicitudes (pendientes, aprobadas, rechazadas)
+  const pend: Pendiente[] = [
+    { id: 496, persona: "Luis", tipo: "stock", resumen: `📦 Inventario de "${f(20).name}": ${f(20).cantidad}→${f(20).cantidad + 15} pzs`, fecha: hace(35),
+      payload: { id: f(20).id, qty: f(20).cantidad + 15 }, estado: "pendiente", razon: "Llegó la entrega de hoy" },
+    { id: 497, persona: "Luis", tipo: "precios", resumen: `💲 Precios de ${f(22).sku}: $${f(22).publico} → $${f(22).publico + 100}`, fecha: hace(80),
+      payload: { id: f(22).id, publico: f(22).publico + 100, miembro: (f(22).miembro ?? f(22).publico) + 100 }, estado: "pendiente", razon: "Subió el costo de producción" },
+    { id: 498, persona: "Sofi", tipo: "liquidacion", resumen: `🔥 Liquidación para ${f(25).sku}`, fecha: hace(130),
+      payload: { id: f(25).id, on: true, price: Math.round(f(25).publico * 0.75) }, estado: "pendiente" },
+    { id: 493, persona: "Sofi", tipo: "nombre", resumen: `✏️ Nombre de ${f(26).sku}`, fecha: hace(900),
+      payload: { id: f(26).id, nombre: f(26).name }, estado: "aprobado", por: "Ana", resueltoFecha: hace(850) },
+    { id: 494, persona: "Luis", tipo: "stock", resumen: `📦 Inventario de "${f(27).name}": +10 pzs`, fecha: hace(1300),
+      payload: { id: f(27).id, qty: f(27).cantidad }, estado: "aprobado", por: "Ana", resueltoFecha: hace(1250) },
+    { id: 495, persona: "Luis", tipo: "precios", resumen: `💲 Precios de ${f(28).sku}: bajar a $${f(28).publico - 200}`, fecha: hace(2000),
+      payload: { id: f(28).id }, estado: "rechazado", por: "Ana", motivo: "Es muy poco margen, déjalo como estaba", resueltoFecha: hace(1900) },
+  ];
+  PENDIENTES.push(...pend);
+  SIG_PEND = 500;
+
+  // Ajustes de inventario
+  const aj = (m: number, persona: string, motivo: MotivoAjuste, i: number, bodega: "tienda" | "bodega", delta: number, nota: string, quien = "", proveedor = "") => {
+    const r = f(i);
+    const despues = Math.max(0, (bodega === "bodega" ? r.cantBodega : r.cantTienda));
+    AJUSTES.push({
+      id: ++SIG_AJ, fecha: hace(m), persona, motivo, tmplId: r.id, sku: r.sku, nombre: r.name,
+      bodega, antes: Math.max(0, despues - delta), delta, despues, nota, quien, proveedor, ref: "DEMO/" + SIG_AJ, precio: r.publico,
+    });
+  };
+  aj(25, "Ana", "conteo", 31, "tienda", -2, "Conteo del anaquel 3");
+  aj(70, "Luis", "devolucion", 32, "tienda", 1, "Cliente la regresó, talla incorrecta");
+  aj(190, "Ana", "merma", 34, "bodega", -1, "Llegó manchada del cuello");
+  aj(330, "Luis", "uso", 35, "tienda", -1, "Para la sesión de fotos", "Ximena");
+  aj(700, "Ana", "correccion", 36, "bodega", 4, "Se capturó mal en la entrega anterior");
+  aj(1400, "Luis", "conteo", 37, "tienda", 3, "Conteo mensual");
+  aj(2100, "Ana", "uso", 38, "bodega", -2, "Regalo para influencer", "Carlos");
+  aj(3000, "Luis", "conteo", 39, "tienda", -1, "");
+
+  // Notas de compra vs inventario
+  const lin = (i: number, pedido: number, llego: number, subido: number): NotaLinea => {
+    const r = f(i);
+    return { tmplId: r.id, sku: r.sku, nombre: r.name, imageUrl: r.imageUrl || null, pedido, llego, subido, stockHoy: r.cantidad, precio: r.publico };
+  };
+  NOTAS.push(
+    { id: 1, folio: "P00031", proveedor: "Taller Textil Roma", refProveedor: "NV-2201", fecha: hace(2900).slice(0, 10), estado: "purchase", total: 18400, recibida: true,
+      lineas: [lin(40, 24, 24, 24), lin(41, 24, 22, 22), lin(42, 12, 12, 10)] },
+    { id: 2, folio: "P00032", proveedor: "Bordados del Centro", refProveedor: "BC-884", fecha: hace(1500).slice(0, 10), estado: "purchase", total: 9600, recibida: true,
+      lineas: [lin(43, 30, 30, 0), lin(44, 20, 20, 20)] },
+    { id: 3, folio: "P00033", proveedor: "Taller Textil Roma", refProveedor: "NV-2230", fecha: hace(400).slice(0, 10), estado: "purchase", total: 25300, recibida: false,
+      lineas: [lin(45, 36, 0, 0), lin(46, 18, 0, 0), lin(47, 12, 0, 0)] },
+  );
+}

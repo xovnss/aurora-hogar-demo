@@ -107,7 +107,7 @@ export async function setStockAction(id: number, qty: number, label = "", antQty
   catch (e) { return { ok: false as const, error: msg(e) }; }
 }
 
-/* ---------- 📋 Conteos y ajustes (solo Ana y Luis) — directo a Odoo, sin aprobación, con historial ---------- */
+/* ---------- 📋 Conteos y ajustes (solo Ana y Luis) — directo, sin aprobación, con historial ---------- */
 export async function ajusteAction(a: odoo.AjusteInput) {
   try {
     await guard();

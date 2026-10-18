@@ -12,7 +12,7 @@ export default function DemoNav() {
       <Link href="/" className={item}>Catálogo</Link>
       <Link href="/ventas" className={item}>Fichas de ventas</Link>
       <Link href="/subir" className={item}>Subir productos</Link>
-      <span className="hidden px-2 text-white/60 sm:inline">contraseña: demo</span>
+      <span className="hidden px-2 text-white/60 sm:inline">sin contraseña</span>
     </nav>
   );
 }

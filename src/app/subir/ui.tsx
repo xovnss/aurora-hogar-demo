@@ -50,8 +50,8 @@ function PanelHead({ emoji, titulo, sub, right }: {
     <div className="mb-5 flex items-center gap-3">
       <span className="pf-sticker grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-xl">{emoji}</span>
       <div className="min-w-0 flex-1">
-        <h2 className="font-display text-lg font-bold leading-tight text-[#0e2650]">{titulo}</h2>
-        {sub && <p className="mt-0.5 text-[12.5px] leading-snug text-slate-500">{sub}</p>}
+        <h2 className="font-display text-lg font-bold leading-tight text-[#1c1717]">{titulo}</h2>
+        {sub && <p className="mt-0.5 text-[12.5px] leading-snug text-stone-500">{sub}</p>}
       </div>
       {right}
     </div>
@@ -118,11 +118,11 @@ function BarraSelProductos({ n, pend, onArchivar, onEliminar, onTodo, onCancelar
   return (
     <div className="sticky bottom-3 z-20 mx-auto flex max-w-3xl flex-wrap items-center gap-2 rounded-2xl border border-brand/30 bg-white/95 px-4 py-3 shadow-[0_18px_40px_-20px_rgba(14,38,80,.6)] backdrop-blur">
       <span className="font-display text-sm font-bold text-brand-dark">{n} seleccionado{n === 1 ? "" : "s"}</span>
-      <button onClick={onTodo} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-50">Todos</button>
+      <button onClick={onTodo} className="rounded-lg border border-stone-200 px-3 py-1.5 text-xs font-bold text-stone-600 hover:bg-stone-50">Todos</button>
       <div className="ml-auto flex gap-2">
         <button onClick={onArchivar} disabled={pend || n === 0} className="rounded-lg border border-amber-300 bg-amber-50 px-3.5 py-1.5 text-xs font-bold text-amber-700 hover:bg-amber-100 disabled:opacity-50">🗄️ Archivar</button>
         <button onClick={onEliminar} disabled={pend || n === 0} className="rounded-lg bg-red-500 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-red-600 disabled:opacity-50">🗑️ Eliminar</button>
-        <button onClick={onCancelar} className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-50">Cancelar</button>
+        <button onClick={onCancelar} className="rounded-lg border border-stone-200 px-3 py-1.5 text-xs font-bold text-stone-500 hover:bg-stone-50">Cancelar</button>
       </div>
     </div>
   );
@@ -176,7 +176,7 @@ function ListaEditable({ items, setItems, categorias, aprobador }: {
           {!s.modo
             ? <button onClick={() => s.setModo(true)} className="pf-chip px-3.5 py-1.5 text-xs">☑️ Seleccionar varios</button>
             : <button onClick={s.salir} className="pf-chip px-3.5 py-1.5 text-xs">Salir de selección</button>}
-          {nota && <span className="text-[12px] font-semibold text-slate-600">{nota}</span>}
+          {nota && <span className="text-[12px] font-semibold text-stone-600">{nota}</span>}
         </div>
       )}
       <div className="space-y-3">
@@ -199,16 +199,16 @@ const TIPO_INFO: Record<string, { label: string; cls: string }> = {
   crear: { label: "🆕 Nuevo", cls: "bg-emerald-100 text-emerald-700" },
   precios: { label: "💲 Precio", cls: "bg-amber-100 text-amber-700" },
   nombre: { label: "✏️ Nombre", cls: "bg-violet-100 text-violet-700" },
-  stock: { label: "📦 Inventario", cls: "bg-sky-100 text-sky-700" },
-  resurtir: { label: "🔄 Resurtido", cls: "bg-blue-100 text-blue-700" },
+  stock: { label: "📦 Inventario", cls: "bg-red-100 text-red-700" },
+  resurtir: { label: "🔄 Resurtido", cls: "bg-red-100 text-red-700" },
   liquidacion: { label: "🔥 Liquidación", cls: "bg-orange-100 text-orange-700" },
   imagen: { label: "🖼️ Foto", cls: "bg-pink-100 text-pink-700" },
-  archivar: { label: "🗄️ Archivar", cls: "bg-slate-200 text-slate-700" },
+  archivar: { label: "🗄️ Archivar", cls: "bg-stone-200 text-stone-700" },
   restaurar: { label: "♻️ Restaurar", cls: "bg-teal-100 text-teal-700" },
   eliminar: { label: "🗑️ Eliminar", cls: "bg-red-100 text-red-700" },
 };
 function TipoTag({ tipo }: { tipo: string }) {
-  const i = TIPO_INFO[tipo] || { label: tipo || "otro", cls: "bg-slate-100 text-slate-600" };
+  const i = TIPO_INFO[tipo] || { label: tipo || "otro", cls: "bg-stone-100 text-stone-600" };
   return <span className={"inline-block shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold " + i.cls}>{i.label}</span>;
 }
 
@@ -286,7 +286,7 @@ function Notif({ usuario, aprobador }: { usuario: string; aprobador: boolean }) 
     <div className="ml-auto flex items-center gap-2">
       {aviso && <span className="hidden max-w-[260px] truncate rounded-full bg-brand-light px-3 py-1 text-[11px] font-semibold text-brand-dark md:inline">{aviso}</span>}
       <button onClick={toggle} title={on ? `Notificaciones activadas${aprobador ? " (avisos de nuevas solicitudes)" : " (avisos de tus aprobaciones)"}` : "Activar notificaciones con sonido"}
-        className={"grid h-10 w-10 place-items-center rounded-full border text-lg transition " + (on ? "border-brand bg-brand-light" : "border-slate-200 bg-white opacity-70 hover:opacity-100")}>
+        className={"grid h-10 w-10 place-items-center rounded-full border text-lg transition " + (on ? "border-brand bg-brand-light" : "border-stone-200 bg-white opacity-70 hover:opacity-100")}>
         {on ? "🔔" : "🔕"}
       </button>
     </div>
@@ -481,17 +481,17 @@ function TarifasEditor({ value, onChange }: { value: TarStr[]; onChange: (v: Tar
     <div className="space-y-1.5">
       {value.map((t, i) => (
         <div key={i} className="flex items-center gap-1.5">
-          <span className="w-4 text-[12px] font-bold text-slate-400">{i + 1}.</span>
-          <span className="text-[12px] text-slate-500">Al llevar</span>
+          <span className="w-4 text-[12px] font-bold text-stone-400">{i + 1}.</span>
+          <span className="text-[12px] text-stone-500">Al llevar</span>
           <input className="pf-input w-16 px-2 py-1.5 text-center" inputMode="numeric" value={t.qty}
             onChange={(e) => set(i, "qty", e.target.value)} placeholder="pzs" />
-          <span className="text-[12px] text-slate-500">o más =</span>
-          <span className="text-slate-400">$</span>
+          <span className="text-[12px] text-stone-500">o más =</span>
+          <span className="text-stone-400">$</span>
           <input className="pf-input w-20 px-2 py-1.5" inputMode="numeric" value={t.price}
             onChange={(e) => set(i, "price", e.target.value)} placeholder="c/u" />
         </div>
       ))}
-      <p className="text-[11px] text-slate-400">Ej. 2 → $100, 3 → $80, 5 → $60. Deja vacío el que no uses. En caja se toma solo al capturar esa cantidad.</p>
+      <p className="text-[11px] text-stone-400">Ej. 2 → $100, 3 → $80, 5 → $60. Deja vacío el que no uses. En caja se toma solo al capturar esa cantidad.</p>
     </div>
   );
 }
@@ -518,19 +518,19 @@ export function Login() {
     });
   }
   const chip = "rounded-full border-2 px-3.5 py-1.5 text-sm font-bold transition";
-  const field = "w-full rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3 text-center font-semibold outline-none focus:border-[#2e6da4] focus:bg-white";
+  const field = "w-full rounded-2xl border-2 border-gray-200 bg-gray-50 px-4 py-3 text-center font-semibold outline-none focus:border-[#e10b0b] focus:bg-white";
   return (
-    <div className="font-display flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-[#0e2650] via-[#164079] to-[#2e6da4] px-4 py-10">
+    <div className="font-display flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-[#1c1717] via-[#3a0d0d] to-[#e10b0b] px-4 py-10">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/bam-blanco.png" alt="BAM!" className="mb-5 h-11 w-auto" />
       <form onSubmit={submit} className="w-full max-w-sm rounded-[28px] border-4 border-white/20 bg-white p-7 shadow-2xl">
-        <h1 className="font-display text-2xl font-bold text-[#0e2650]">Subir productos</h1>
+        <h1 className="font-display text-2xl font-bold text-[#1c1717]">Subir productos</h1>
         <p className="mt-0.5 mb-4 text-sm text-gray-500">Entra con tu nombre 👇</p>
         <p className="mb-1.5 text-sm font-bold text-gray-700">¿Quién eres?</p>
         <div className="mb-3 flex flex-wrap gap-2">
           {["Ana", "Luis"].map((n) => (
             <button key={n} type="button" onClick={() => setNombre(n)}
-              className={chip + (nombre === n ? " border-[#2e6da4] bg-[#2e6da4] text-white" : " border-gray-200 text-gray-600 hover:border-[#5ba3dc]")}>
+              className={chip + (nombre === n ? " border-[#e10b0b] bg-black text-white" : " border-gray-200 text-gray-600 hover:border-[#ff6b5e]")}>
               {n}
             </button>
           ))}
@@ -539,10 +539,10 @@ export function Login() {
         <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} placeholder="Contraseña" className={field + " mt-3"} />
         {aprob && (
           <input type="password" value={pin} onChange={(e) => setPin(e.target.value)} placeholder="PIN de aprobador"
-            className="mt-3 w-full rounded-2xl border-2 border-sky-300 bg-sky-50 px-4 py-3 text-center font-semibold outline-none focus:border-[#2e6da4] focus:bg-white" />
+            className="mt-3 w-full rounded-2xl border-2 border-red-300 bg-red-50 px-4 py-3 text-center font-semibold outline-none focus:border-[#e10b0b] focus:bg-white" />
         )}
         {err && <p className="mt-2 text-center text-sm font-semibold text-red-600">{err}</p>}
-        <button disabled={pending} className="font-display mt-5 w-full rounded-2xl bg-[#2e6da4] px-4 py-3.5 text-lg font-bold text-white shadow-lg transition hover:bg-[#0e2650] disabled:bg-gray-300">
+        <button disabled={pending} className="font-display mt-5 w-full rounded-2xl bg-black px-4 py-3.5 text-lg font-bold text-white shadow-lg transition hover:bg-neutral-700 disabled:bg-gray-300">
           {pending ? "Entrando…" : "Entrar"}
         </button>
         {aprob && <p className="mt-3 text-center text-[11px] text-gray-400">Como aprobador necesitas tu PIN.</p>}
@@ -615,11 +615,11 @@ export function Admin({ categorias, usuario, aprobador }: { categorias: Categori
       <div className="flex-1 space-y-6 overflow-y-auto px-3 pb-4">
         {nav.map((g) => (
           <div key={g.grupo}>
-            <p className="px-3 pb-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-sky-200/60">{g.grupo}</p>
+            <p className="px-3 pb-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] text-red-200/60">{g.grupo}</p>
             <div className="space-y-1">
               {g.items.map(([id, lbl]) => (
                 <button key={id} onClick={() => ir(id)}
-                  className={"flex w-full items-center gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm font-semibold transition " + (tab === id ? "bg-gradient-to-r from-[#2e6da4] to-[#5ba3dc] font-bold text-white shadow-sm" : "text-white/65 hover:bg-white/10 hover:text-white")}>
+                  className={"flex w-full items-center gap-2 rounded-2xl px-3.5 py-2.5 text-left text-sm font-semibold transition " + (tab === id ? "bg-gradient-to-r from-[#e10b0b] to-[#ff6b5e] font-bold text-white shadow-sm" : "text-white/65 hover:bg-white/10 hover:text-white")}>
                   {lbl}
                 </button>
               ))}
@@ -629,8 +629,8 @@ export function Admin({ categorias, usuario, aprobador }: { categorias: Categori
       </div>
       <div className="m-3 rounded-2xl bg-white/10 px-4 py-3">
         <p className="text-[13px] text-white/85">Hola, <b className="text-white">{usuario}</b></p>
-        {aprobador && <span className="mt-1 inline-block rounded-full bg-sky-300 px-2 py-0.5 text-[10px] font-extrabold text-[#0d2a52]">APROBADOR</span>}
-        <button onClick={() => logoutAction().then(() => router.refresh())} className="mt-2 block text-[13px] font-bold text-white/70 hover:text-white">Salir →</button>
+        {aprobador && <span className="mt-1 inline-block rounded-full bg-red-300 px-2 py-0.5 text-[10px] font-extrabold text-[#1c1717]">APROBADOR</span>}
+        <a href="/" className="mt-2 block text-[13px] font-bold text-white/70 hover:text-white">Ir al catálogo →</a>
       </div>
     </div>
   );
@@ -644,8 +644,8 @@ export function Admin({ categorias, usuario, aprobador }: { categorias: Categori
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-slate-200/70 bg-white/80 px-6 py-4 backdrop-blur">
-            <button onClick={() => setMenu(true)} aria-label="Menú" className="rounded-xl border border-slate-200 px-2.5 py-1 text-lg leading-none text-slate-600 md:hidden">☰</button>
+          <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-stone-200/70 bg-white/80 px-6 py-4 backdrop-blur">
+            <button onClick={() => setMenu(true)} aria-label="Menú" className="rounded-xl border border-stone-200 px-2.5 py-1 text-lg leading-none text-stone-600 md:hidden">☰</button>
             <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight">
               {tituloEmoji && <span>{tituloEmoji}</span>}
               <span className="grad-text">{tituloTxt}</span>
@@ -758,7 +758,7 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
               <h3 className="font-bold">{cfg.titulo} <span className="text-sm font-semibold">· {pend.length} por aprobar</span></h3>
               <div className="flex gap-2">
                 <button onClick={() => seleccionarTodas(ids)} disabled={pend.length === 0}
-                  className="rounded-lg border border-black/10 bg-white px-3 py-1 text-xs font-bold text-slate-700 disabled:opacity-50">
+                  className="rounded-lg border border-black/10 bg-white px-3 py-1 text-xs font-bold text-stone-700 disabled:opacity-50">
                   {todasSel ? "Quitar selección" : "Seleccionar todas"}
                 </button>
                 <button onClick={() => aceptarSel(ids)} disabled={pending || selN === 0}
@@ -772,8 +772,8 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
                   <li key={p.id} className={"flex items-center gap-3 px-4 py-2.5 " + (st ? "opacity-50" : "")}>
                     {!st && <input type="checkbox" checked={sel.has(p.id)} onChange={() => toggleSel(p.id)} className={"h-5 w-5 shrink-0 " + cfg.chk} />}
                     <div className="min-w-0 flex-1">
-                      <p className="text-[13px] text-slate-700">{p.resumen}</p>
-                      <p className="text-[11px] text-slate-400">{p.persona} · {fmt(p.fecha)}</p>
+                      <p className="text-[13px] text-stone-700">{p.resumen}</p>
+                      <p className="text-[11px] text-stone-400">{p.persona} · {fmt(p.fecha)}</p>
                     </div>
                     {st === "ok" ? <span className="shrink-0 rounded-lg bg-green-100 px-2.5 py-1 text-xs font-bold text-green-700">✅</span>
                       : st === "no" ? <span className="shrink-0 rounded-lg bg-red-100 px-2.5 py-1 text-xs font-bold text-red-600">❌</span>
@@ -789,18 +789,18 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
         );
       })}
 
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-stone-100">
         {(aprobador ? otros : items).map((p) => {
           if (!aprobador) return <MiPendienteRow key={p.id} p={p} onSaved={cargar} />;
           const st = estado[p.id];
           return (
             <li key={p.id} className={"flex items-start gap-3 py-3 " + (st ? "opacity-50" : "")}>
               {img(p)
-                ? <img src={`data:image/jpeg;base64,${img(p)}`} alt="" className="h-12 w-12 shrink-0 rounded-lg border border-slate-200 object-cover" />
+                ? <img src={`data:image/jpeg;base64,${img(p)}`} alt="" className="h-12 w-12 shrink-0 rounded-lg border border-stone-200 object-cover" />
                 : <span className="mt-0.5 shrink-0 rounded-full bg-brand/10 px-2 py-0.5 text-[11px] font-bold text-brand">{p.persona}</span>}
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] text-slate-700">{p.resumen}</p></div>
-                <p className="text-[11px] text-slate-400">{img(p) ? p.persona + " · " : ""}{fmt(p.fecha)}</p>
+                <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] text-stone-700">{p.resumen}</p></div>
+                <p className="text-[11px] text-stone-400">{img(p) ? p.persona + " · " : ""}{fmt(p.fecha)}</p>
               </div>
               {st === "ok" ? <span className="shrink-0 self-center rounded-lg bg-green-100 px-3 py-1 text-xs font-bold text-green-700">✅ Aprobado</span>
                 : st === "no" ? <span className="shrink-0 self-center rounded-lg bg-red-100 px-3 py-1 text-xs font-bold text-red-600">❌ Rechazado</span>
@@ -817,15 +817,15 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
       )}
 
       {!aprobador && aprobados.length > 0 && (
-        <div className="mt-5 border-t border-slate-100 pt-4">
+        <div className="mt-5 border-t border-stone-100 pt-4">
           <p className="mb-2 text-sm font-bold text-green-600">🟢 Aprobadas ({aprobados.length})</p>
-          <ul className="divide-y divide-slate-100">
+          <ul className="divide-y divide-stone-100">
             {aprobados.map((p) => (
               <li key={p.id} className="flex items-start gap-3 py-2">
                 <span className="mt-0.5 shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-[11px] font-bold text-green-700">🟢</span>
                 <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] text-slate-700">{p.resumen}</p></div>
-                  <p className="text-[11px] text-slate-400">Aprobó <b>{p.por || "?"}</b> · {fmt(p.resueltoFecha || p.fecha)}</p>
+                  <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] text-stone-700">{p.resumen}</p></div>
+                  <p className="text-[11px] text-stone-400">Aprobó <b>{p.por || "?"}</b> · {fmt(p.resueltoFecha || p.fecha)}</p>
                 </div>
               </li>
             ))}
@@ -834,7 +834,7 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
       )}
 
       {!aprobador && rechazados.length > 0 && (
-        <div className="mt-5 border-t border-slate-100 pt-4">
+        <div className="mt-5 border-t border-stone-100 pt-4">
           <p className="mb-2 text-sm font-bold text-red-600">🔴 Rechazadas — corrígelas y reenvía ({rechazados.length})</p>
           <div className="space-y-3">
             {rechazados.map((p) => <CorregirRow key={p.id} p={p} onReenviado={cargar} />)}
@@ -882,26 +882,26 @@ function CorregirRow({ p, onReenviado, modo = "rechazado" }: { p: Pendiente; onR
   const inp = "pf-input w-full px-3 py-2 text-sm";
   if (listo) return <div className="rounded-xl border border-green-200 bg-green-50 p-2 text-[13px] font-semibold text-green-700">{esRej ? "✅ Reenviado" : "✅ Guardado"} — {p.resumen}</div>;
   return (
-    <div className={"rounded-xl border p-3 " + (esRej ? "border-red-200 bg-red-50/40" : "border-slate-200 bg-slate-50/60")}>
+    <div className={"rounded-xl border p-3 " + (esRej ? "border-red-200 bg-red-50/40" : "border-stone-200 bg-stone-50/60")}>
       {esRej && (
         <>
-          <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] font-semibold text-slate-700">{p.resumen}</p></div>
-          <p className="mt-0.5 text-[11px] text-slate-400">Rechazó <b className="text-slate-500">{p.por || "?"}</b> · {fmtMx(p.resueltoFecha || p.fecha)}</p>
+          <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] font-semibold text-stone-700">{p.resumen}</p></div>
+          <p className="mt-0.5 text-[11px] text-stone-400">Rechazó <b className="text-stone-500">{p.por || "?"}</b> · {fmtMx(p.resueltoFecha || p.fecha)}</p>
           {p.motivo && <p className="mt-0.5 text-[12px] font-semibold text-red-600">Motivo: {p.motivo}</p>}
         </>
       )}
       {campos.length > 0 ? (
         <div className={(esRej ? "mt-2 " : "") + "grid gap-2 sm:grid-cols-2"}>
           {campos.map((c) => (
-            <label key={c.key} className="text-[11px] font-semibold text-slate-500">{c.label}
+            <label key={c.key} className="text-[11px] font-semibold text-stone-500">{c.label}
               <input className={inp} type={c.num ? "number" : "text"} value={vals[c.key]} onChange={(e) => setVals((s) => ({ ...s, [c.key]: e.target.value }))} />
             </label>
           ))}
         </div>
-      ) : <p className="mt-1 text-[12px] text-slate-500">Esta solicitud no tiene campos editables aquí. {esRej ? "Puedes reenviarla o pedir ayuda a Ana." : ""}</p>}
+      ) : <p className="mt-1 text-[12px] text-stone-500">Esta solicitud no tiene campos editables aquí. {esRej ? "Puedes reenviarla o pedir ayuda a Ana." : ""}</p>}
       <div className="mt-2 flex items-center gap-2">
-        {nota && <span className="text-[12px] font-semibold text-slate-600">{nota}</span>}
-        <button onClick={guardar} disabled={pend} className="ml-auto rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-white hover:bg-brand-dark disabled:bg-gray-300">{pend ? "…" : esRej ? "Reenviar corregido" : "Guardar cambios"}</button>
+        {nota && <span className="text-[12px] font-semibold text-stone-600">{nota}</span>}
+        <button onClick={guardar} disabled={pend} className="ml-auto rounded-lg bg-black px-3 py-1.5 text-xs font-bold text-white hover:bg-neutral-700 disabled:bg-gray-300">{pend ? "…" : esRej ? "Reenviar corregido" : "Guardar cambios"}</button>
       </div>
     </div>
   );
@@ -921,8 +921,8 @@ function MiPendienteRow({ p, onSaved }: { p: Pendiente; onSaved: () => void }) {
       <div className="flex items-start gap-3">
         <span className="mt-0.5 shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-700">🟡 En revisión</span>
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] text-slate-700">{p.resumen}</p></div>
-          <p className="text-[11px] text-slate-400">{fmtMx(p.fecha)}</p>
+          <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] text-stone-700">{p.resumen}</p></div>
+          <p className="text-[11px] text-stone-400">{fmtMx(p.fecha)}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2 self-center">
           {editable && (
@@ -1004,7 +1004,7 @@ function DescRow({ p, onSaved, onArchived, sel }: { p: ProdDesc; onSaved: (id: n
             <input value={nombre} maxLength={45} onChange={(e) => setNombre(e.target.value.slice(0, 45))}
               className="min-w-0 flex-1 rounded border border-gray-200 px-2 py-1 text-[13px] font-semibold text-gray-800 outline-none focus:border-brand" />
             {nombre.trim() !== p.name
-              ? <button onClick={guardarNombre} disabled={pend} className="shrink-0 rounded bg-brand px-2 py-1 text-[11px] font-bold text-white disabled:bg-gray-300">Guardar</button>
+              ? <button onClick={guardarNombre} disabled={pend} className="shrink-0 rounded bg-black px-2 py-1 text-[11px] font-bold text-white disabled:bg-gray-300">Guardar</button>
               : nmsg && <span className="shrink-0 text-[10px] font-semibold text-gray-500">{nmsg}</span>}
             <span className="shrink-0 font-mono text-[10px] text-gray-400">{p.sku}</span>
           </div>
@@ -1027,7 +1027,7 @@ function DescRow({ p, onSaved, onArchived, sel }: { p: ProdDesc; onSaved: (id: n
             {dirty && !ok && <span className="text-[11px] font-semibold text-amber-600">● sin guardar</span>}
             {ok && <span className="text-[11px] font-semibold text-green-600">guardado ✓</span>}
             <button onClick={guardar} disabled={pend || !dirty}
-              className="ml-auto rounded-lg bg-brand px-3 py-1 text-xs font-bold text-white hover:bg-brand-dark disabled:bg-gray-300">
+              className="ml-auto rounded-lg bg-black px-3 py-1 text-xs font-bold text-white hover:bg-neutral-700 disabled:bg-gray-300">
               {pend ? "…" : "Guardar"}
             </button>
           </div>
@@ -1178,7 +1178,7 @@ function DescripcionesPanel() {
         <div className="sticky bottom-3 z-20 rounded-2xl border border-brand/30 bg-white/95 p-3 shadow-[0_18px_40px_-20px_rgba(14,38,80,.6)] backdrop-blur">
           <p className="mb-1 flex items-center gap-2 font-display text-[13px] font-bold text-brand-dark">
             ✍️ Misma descripción para {seleccionados.length} producto(s)
-            <button onClick={s.limpiar} className="ml-auto rounded-lg border border-slate-200 px-2 py-0.5 text-[11px] font-bold text-slate-500 hover:bg-slate-50">Limpiar selección</button>
+            <button onClick={s.limpiar} className="ml-auto rounded-lg border border-stone-200 px-2 py-0.5 text-[11px] font-bold text-stone-500 hover:bg-stone-50">Limpiar selección</button>
           </p>
           <div className="mb-1 flex items-center gap-2">
             <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => toggleNegritasEn(bulkRef.current, bulkTxt, setBulkTxt)}
@@ -1194,9 +1194,9 @@ function DescripcionesPanel() {
               <span className="mr-1 text-[9px] font-bold uppercase tracking-wide text-gray-400">Vista previa:</span>{renderNegritas(bulkTxt)}
             </p>
           )}
-          {notaBulk && <p className="mt-1 text-[12px] font-semibold text-slate-600">{notaBulk}</p>}
+          {notaBulk && <p className="mt-1 text-[12px] font-semibold text-stone-600">{notaBulk}</p>}
           <button onClick={aplicarBulk} disabled={pendBulk || seleccionados.length === 0}
-            className="mt-2 w-full rounded-lg bg-brand px-3 py-2.5 text-sm font-bold text-white hover:bg-brand-dark disabled:bg-gray-300">
+            className="mt-2 w-full rounded-lg bg-black px-3 py-2.5 text-sm font-bold text-white hover:bg-neutral-700 disabled:bg-gray-300">
             {pendBulk ? "Aplicando…" : `Aplicar a ${seleccionados.length} producto(s)`}
           </button>
         </div>
@@ -1256,7 +1256,7 @@ function HistorialPanel() {
       <div className="mt-2 flex flex-wrap gap-1.5">
         {([["todos", "Todos"], ["pendiente", "⏳ Pendientes"], ["aprobado", "✅ Aceptados"], ["rechazado", "❌ Rechazados"]] as const).map(([k, l]) => (
           <button key={k} onClick={() => setEstado(k)}
-            className={"rounded-full px-3 py-1 text-xs font-bold transition " + (estado === k ? "bg-brand text-white shadow" : "bg-white text-gray-600 ring-1 ring-slate-200 hover:ring-brand")}>{l}</button>
+            className={"rounded-full px-3 py-1 text-xs font-bold transition " + (estado === k ? "bg-black text-white shadow" : "bg-white text-gray-600 ring-1 ring-stone-200 hover:ring-brand")}>{l}</button>
         ))}
       </div>
 
@@ -1273,7 +1273,7 @@ function HistorialPanel() {
                   <li key={p.id} className="p-3">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <span className="text-sm font-bold text-[#0e2650]">{p.persona}</span>
+                        <span className="text-sm font-bold text-[#1c1717]">{p.persona}</span>
                         <span className="ml-2 text-[11px] text-gray-400">{hora(p.fecha)}</span>
                         <p className="mt-0.5 text-[13px] text-gray-700">{p.resumen}</p>
                         {p.razon && <p className="mt-0.5 text-[12px] text-gray-500">📝 <b>Razón:</b> {p.razon}</p>}
@@ -1299,10 +1299,10 @@ function HistorialPanel() {
 const fmtDelta = (d: number) => (d > 0 ? `+${d}` : String(d));
 const diaMx = (iso: string) => new Date((iso || "").replace(" ", "T") + "Z").toLocaleDateString("en-CA", { timeZone: "America/Mexico_City" });
 const horaMx = (iso: string) => new Date((iso || "").replace(" ", "T") + "Z").toLocaleTimeString("es-MX", { timeZone: "America/Mexico_City", hour: "2-digit", minute: "2-digit" });
-const PASO = "mb-1.5 mt-5 font-display text-[13px] font-bold uppercase tracking-wide text-[#0e2650]";
+const PASO = "mb-1.5 mt-5 font-display text-[13px] font-bold uppercase tracking-wide text-[#1c1717]";
 
 /* ---------- 🧾 Notas vs inventario (solo aprobadores, solo lectura) ---------- */
-// Cruza cada nota de compra que captura la tía en Odoo Compras (pedido y lo que llegó) contra lo que
+// Cruza cada nota de compra que captura el equipo en Compras (pedido y lo que llegó) contra lo que
 // se subió al inventario (ajustes a Tienda / Bodega). No cambia nada en Odoo.
 type EstadoLinea = { tono: "ok" | "warn" | "bad" | "gris"; texto: string };
 function estadoLinea(l: NotaLinea): EstadoLinea[] {
@@ -1318,7 +1318,7 @@ function estadoLinea(l: NotaLinea): EstadoLinea[] {
   return out;
 }
 const TONO: Record<EstadoLinea["tono"], string> = {
-  ok: "bg-green-100 text-green-700", warn: "bg-amber-100 text-amber-800", bad: "bg-red-100 text-red-700", gris: "bg-slate-100 text-slate-600",
+  ok: "bg-green-100 text-green-700", warn: "bg-amber-100 text-amber-800", bad: "bg-red-100 text-red-700", gris: "bg-stone-100 text-stone-600",
 };
 const notaCuadra = (n: NotaCompra) => n.lineas.every((l) => estadoLinea(l)[0].tono === "ok");
 
@@ -1348,7 +1348,7 @@ function NotasVsInventarioPanel() {
   const total = notas?.length || 0;
   const conDif = (notas || []).filter((n) => !notaCuadra(n)).length;
   const sinRec = (notas || []).filter((n) => !n.recibida).length;
-  const chip = (on: boolean) => "rounded-full px-3.5 py-1.5 text-sm font-bold transition " + (on ? "bg-brand text-white shadow" : "bg-white text-gray-600 ring-1 ring-slate-200 hover:ring-brand");
+  const chip = (on: boolean) => "rounded-full px-3.5 py-1.5 text-sm font-bold transition " + (on ? "bg-black text-white shadow" : "bg-white text-gray-600 ring-1 ring-stone-200 hover:ring-brand");
 
   return (
     <div className="space-y-4">
@@ -1362,11 +1362,11 @@ function NotasVsInventarioPanel() {
           <button type="button" onClick={() => setFiltro("todas")} className={chip(filtro === "todas")}>Todas · {total}</button>
         </div>
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por proveedor, folio o producto…" className="pf-input mt-3 w-full px-4 py-2.5 text-sm" />
-        <details className="mt-3 text-[12px] text-slate-500">
-          <summary className="cursor-pointer font-semibold text-slate-600">¿Qué significa cada columna?</summary>
+        <details className="mt-3 text-[12px] text-stone-500">
+          <summary className="cursor-pointer font-semibold text-stone-600">¿Qué significa cada columna?</summary>
           <ul className="mt-1.5 list-disc space-y-0.5 pl-5">
             <li><b>Pedido:</b> lo que dice la nota del proveedor.</li>
-            <li><b>Llegó:</b> lo que tu tía capturó al recibir (la recepción “Notas de compra”).</li>
+            <li><b>Llegó:</b> lo que el equipo capturó al recibir (la recepción “Notas de compra”).</li>
             <li><b>Subido:</b> lo que entró al inventario (Tienda + Bodega) desde 15 días antes de la nota, ya restando correcciones.</li>
             <li><b>Hoy:</b> las piezas que hay ahorita en Tienda + Bodega (ya con lo vendido).</li>
           </ul>
@@ -1376,15 +1376,15 @@ function NotasVsInventarioPanel() {
       {error && (
         <div className="pf-card p-5 text-sm text-red-600">❌ {error} <button type="button" onClick={cargar} className="ml-2 underline">Reintentar</button></div>
       )}
-      {!error && notas === null && <div className="pf-card p-6 text-center text-sm text-slate-400">Cargando notas…</div>}
+      {!error && notas === null && <div className="pf-card p-6 text-center text-sm text-stone-400">Cargando notas…</div>}
       {!error && notas !== null && total === 0 && (
-        <div className="pf-card p-6 text-center text-sm text-slate-500">
+        <div className="pf-card p-6 text-center text-sm text-stone-500">
           Todavía no hay notas de compra confirmadas en Odoo (últimos 4 meses).<br />
-          <span className="text-slate-400">En cuanto tu tía capture una nota y le dé “Confirmar pedido”, aparece aquí.</span>
+          <span className="text-stone-400">En cuanto el equipo capture una nota y le dé “Confirmar pedido”, aparece aquí.</span>
         </div>
       )}
       {!error && notas !== null && total > 0 && !lista.length && (
-        <div className="pf-card p-6 text-center text-sm text-slate-500">
+        <div className="pf-card p-6 text-center text-sm text-stone-500">
           {filtro === "dif" ? "✅ Todas las notas cuadran con el inventario." : filtro === "sinrec" ? "✅ Todas las notas ya tienen capturado lo que llegó." : "Sin resultados."}
         </div>
       )}
@@ -1394,11 +1394,11 @@ function NotasVsInventarioPanel() {
         return (
           <div key={n.id} className="pf-card overflow-hidden">
             <div className={"flex flex-wrap items-center gap-x-3 gap-y-1 px-5 py-3 " + (cuadra ? "bg-green-50" : "bg-amber-50")}>
-              <span className="font-mono text-sm font-bold text-[#0e2650]">{n.folio}</span>
-              <span className="text-sm font-semibold text-slate-700">{n.proveedor}</span>
-              {n.refProveedor && <span className="text-[12px] text-slate-500">Nota: {n.refProveedor}</span>}
-              <span className="text-[12px] text-slate-500">{diaMx(n.fecha)}</span>
-              <span className="ml-auto text-[12px] font-semibold text-slate-600">{money(n.total)}</span>
+              <span className="font-mono text-sm font-bold text-[#1c1717]">{n.folio}</span>
+              <span className="text-sm font-semibold text-stone-700">{n.proveedor}</span>
+              {n.refProveedor && <span className="text-[12px] text-stone-500">Nota: {n.refProveedor}</span>}
+              <span className="text-[12px] text-stone-500">{diaMx(n.fecha)}</span>
+              <span className="ml-auto text-[12px] font-semibold text-stone-600">{money(n.total)}</span>
               <span className={"rounded-full px-2.5 py-0.5 text-[11px] font-bold " + (cuadra ? TONO.ok : n.recibida ? TONO.bad : TONO.gris)}>
                 {cuadra ? "✅ Cuadra" : n.recibida ? "⚠️ Con diferencias" : "📦 Falta recibir"}
               </span>
@@ -1406,7 +1406,7 @@ function NotasVsInventarioPanel() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] text-sm">
                 <thead>
-                  <tr className="border-b border-slate-100 text-left text-[11px] uppercase tracking-wide text-slate-400">
+                  <tr className="border-b border-stone-100 text-left text-[11px] uppercase tracking-wide text-stone-400">
                     <th className="px-4 py-2 font-semibold">Producto</th>
                     <th className="px-2 py-2 text-center font-semibold">Pedido</th>
                     <th className="px-2 py-2 text-center font-semibold">Llegó</th>
@@ -1417,22 +1417,22 @@ function NotasVsInventarioPanel() {
                 </thead>
                 <tbody>
                   {n.lineas.map((l, i) => (
-                    <tr key={i} className="border-b border-slate-50 last:border-0">
+                    <tr key={i} className="border-b border-stone-50 last:border-0">
                       <td className="px-4 py-2">
                         <div className="flex items-center gap-2.5">
                           {l.imageUrl
                             ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={l.imageUrl} alt="" className="h-9 w-9 shrink-0 rounded-lg border object-cover" />
-                            : <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-100 text-xs">📦</span>}
+                            : <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-stone-100 text-xs">📦</span>}
                           <span className="min-w-0">
-                            <span className="block text-[12.5px] font-bold leading-tight text-slate-700">{l.nombre}</span>
-                            <span className="block font-mono text-[10.5px] text-slate-400">{l.sku}{l.precio ? ` · ${money(l.precio)} c/u` : ""}</span>
+                            <span className="block text-[12.5px] font-bold leading-tight text-stone-700">{l.nombre}</span>
+                            <span className="block font-mono text-[10.5px] text-stone-400">{l.sku}{l.precio ? ` · ${money(l.precio)} c/u` : ""}</span>
                           </span>
                         </div>
                       </td>
                       <td className="px-2 py-2 text-center font-semibold">{l.pedido}</td>
                       <td className="px-2 py-2 text-center font-semibold">{l.llego || "—"}</td>
                       <td className="px-2 py-2 text-center font-semibold">{l.subido}</td>
-                      <td className="px-2 py-2 text-center text-slate-500">{l.stockHoy}</td>
+                      <td className="px-2 py-2 text-center text-stone-500">{l.stockHoy}</td>
                       <td className="px-4 py-2">
                         <div className="flex flex-wrap gap-1">
                           {estadoLinea(l).map((e, j) => <span key={j} className={"rounded-full px-2 py-0.5 text-[11px] font-bold " + TONO[e.tono]}>{e.texto}</span>)}
@@ -1517,19 +1517,19 @@ function ConteosAjustesPanel() {
       const nuevo = { ...p, cantTienda: b === "tienda" ? g.despues : p.cantTienda, cantBodega: b === "bodega" ? g.despues : p.cantBodega, cantidad: p.cantidad + g.delta };
       setProd(nuevo);
       setRes((rs) => rs.map((x) => (x.id === p.id ? nuevo : x)));
-      setAviso({ ok: true, t: `✅ Aplicado en Odoo: ${g.nombre} · ${g.bodega} ${g.antes} → ${g.despues} pzs (${fmtDelta(g.delta)})${g.delta === 0 ? " · conteo sin diferencia, quedó registrado" : ""}.` });
+      setAviso({ ok: true, t: `✅ Aplicado: ${g.nombre} · ${g.bodega} ${g.antes} → ${g.despues} pzs (${fmtDelta(g.delta)})${g.delta === 0 ? " · conteo sin diferencia, quedó registrado" : ""}.` });
       setCant(""); setNota(""); setQuien(""); setProveedor("");
       setHist((h) => [g, ...h]);
     });
   }
 
-  const chip = (on: boolean, color = "bg-brand") => "rounded-full px-3.5 py-1.5 text-sm font-bold transition " + (on ? color + " text-white shadow" : "bg-white text-gray-600 ring-1 ring-slate-200 hover:ring-brand");
+  const chip = (on: boolean, color = "bg-black") => "rounded-full px-3.5 py-1.5 text-sm font-bold transition " + (on ? color + " text-white shadow" : "bg-white text-gray-600 ring-1 ring-stone-200 hover:ring-brand");
 
   return (
     <div className="space-y-4">
       <div className="pf-card p-5">
         <PanelHead emoji="📋" titulo="Conteos y ajustes"
-          sub="Solo Ana y Luis. Se aplica directo en Odoo y queda en el historial quién lo hizo, qué día y a qué hora." />
+          sub="Solo Ana y Luis. Se aplica directo y queda en el historial quién lo hizo, qué día y a qué hora." />
 
         <p className={PASO + " mt-0"}>1 · Producto</p>
         <form onSubmit={buscar} className="flex gap-2">
@@ -1538,17 +1538,17 @@ function ConteosAjustesPanel() {
         </form>
         {buscado && !res.length && <p className="mt-2 text-sm text-gray-400">Sin resultados.</p>}
         {res.length > 1 && (
-          <ul className="mt-2 max-h-72 divide-y divide-slate-100 overflow-y-auto rounded-2xl border border-slate-100">
+          <ul className="mt-2 max-h-72 divide-y divide-stone-100 overflow-y-auto rounded-2xl border border-stone-100">
             {res.map((r) => (
               <li key={r.id}>
-                <button type="button" onClick={() => elegir(r)} className={"flex w-full items-center gap-3 px-3 py-2 text-left transition " + (prod?.id === r.id ? "bg-sky-50" : "hover:bg-slate-50")}>
+                <button type="button" onClick={() => elegir(r)} className={"flex w-full items-center gap-3 px-3 py-2 text-left transition " + (prod?.id === r.id ? "bg-red-50" : "hover:bg-stone-50")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={r.imageUrl} alt="" className="h-10 w-10 shrink-0 rounded-lg border object-cover" />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-bold text-slate-700">{r.name}{!r.activo && <span className="ml-1 rounded bg-amber-200 px-1 text-[10px] text-amber-800">archivado</span>}</span>
-                    <span className="block font-mono text-[11px] text-slate-400">{r.sku}</span>
+                    <span className="block truncate text-[13px] font-bold text-stone-700">{r.name}{!r.activo && <span className="ml-1 rounded bg-amber-200 px-1 text-[10px] text-amber-800">archivado</span>}</span>
+                    <span className="block font-mono text-[11px] text-stone-400">{r.sku}</span>
                   </span>
-                  <span className="shrink-0 text-right text-[11px] text-slate-500">🏠 {r.cantTienda}<br />🆕 {r.cantBodega}</span>
+                  <span className="shrink-0 text-right text-[11px] text-stone-500">🏠 {r.cantTienda}<br />🆕 {r.cantBodega}</span>
                 </button>
               </li>
             ))}
@@ -1557,12 +1557,12 @@ function ConteosAjustesPanel() {
 
         {prod && (
           <>
-            <div className="mt-3 flex items-center gap-3 rounded-2xl bg-sky-50 p-3 ring-1 ring-sky-100">
+            <div className="mt-3 flex items-center gap-3 rounded-2xl bg-red-50 p-3 ring-1 ring-red-100">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={prod.imageUrl} alt="" className="h-14 w-14 shrink-0 rounded-lg border object-cover" />
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-[#0e2650]">{prod.name}</p>
-                <p className="font-mono text-[11px] text-slate-500">{prod.sku}</p>
+                <p className="text-sm font-bold text-[#1c1717]">{prod.name}</p>
+                <p className="font-mono text-[11px] text-stone-500">{prod.sku}</p>
               </div>
               <button type="button" onClick={recargar} disabled={pending} className={REFRESH}>↻ Recargar</button>
             </div>
@@ -1577,12 +1577,12 @@ function ConteosAjustesPanel() {
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {MOTIVOS_AJUSTE.map((x) => (
                 <button key={x.id} type="button" onClick={() => { setMotivo(x.id); setAviso(null); }}
-                  className={"rounded-2xl px-3.5 py-2.5 text-left transition " + (motivo === x.id ? "bg-brand text-white shadow" : "bg-white ring-1 ring-slate-200 hover:ring-brand")}>
+                  className={"rounded-2xl px-3.5 py-2.5 text-left transition " + (motivo === x.id ? "bg-black text-white shadow" : "bg-white ring-1 ring-stone-200 hover:ring-brand")}>
                   <span className="flex items-center gap-2 text-sm font-bold">
                     {x.emoji} {x.label}
-                    <span className={"rounded-full px-1.5 text-[11px] font-extrabold " + (motivo === x.id ? "bg-white/25" : x.signo === "-" ? "bg-red-100 text-red-600" : "bg-sky-100 text-sky-700")}>{x.signo === "-" ? "−" : "+/−"}</span>
+                    <span className={"rounded-full px-1.5 text-[11px] font-extrabold " + (motivo === x.id ? "bg-white/25" : x.signo === "-" ? "bg-red-100 text-red-600" : "bg-red-100 text-red-700")}>{x.signo === "-" ? "−" : "+/−"}</span>
                   </span>
-                  <span className={"mt-0.5 block text-[11.5px] " + (motivo === x.id ? "text-white/85" : "text-slate-500")}>{x.ayuda}</span>
+                  <span className={"mt-0.5 block text-[11.5px] " + (motivo === x.id ? "text-white/85" : "text-stone-500")}>{x.ayuda}</span>
                 </button>
               ))}
             </div>
@@ -1599,31 +1599,31 @@ function ConteosAjustesPanel() {
                   )}
                   <input type="number" min={0} step={1} inputMode="numeric" value={cant} onChange={(e) => setCant(e.target.value)}
                     className="pf-input w-32 px-4 py-2.5 text-center text-lg font-bold" placeholder="0" />
-                  <span className="text-[12px] text-slate-500">Hoy hay <b>{actual}</b> en {nomBodega}</span>
+                  <span className="text-[12px] text-stone-500">Hoy hay <b>{actual}</b> en {nomBodega}</span>
                 </div>
 
                 {m.extra === "quien" && (
                   <div className="mt-3">
-                    <label className="text-[12px] font-semibold text-slate-600">¿Quién lo usó? <span className="text-red-500">*</span></label>
+                    <label className="text-[12px] font-semibold text-stone-600">¿Quién lo usó? <span className="text-red-500">*</span></label>
                     <div className="mt-1 flex flex-wrap gap-1.5">
-                      {QUIENES_USO.map((w) => <button key={w} type="button" onClick={() => setQuien(w)} className={"rounded-full px-3 py-1 text-xs font-bold transition " + (quien === w ? "bg-brand text-white" : "bg-white text-gray-600 ring-1 ring-slate-200")}>{w}</button>)}
+                      {QUIENES_USO.map((w) => <button key={w} type="button" onClick={() => setQuien(w)} className={"rounded-full px-3 py-1 text-xs font-bold transition " + (quien === w ? "bg-black text-white" : "bg-white text-gray-600 ring-1 ring-stone-200")}>{w}</button>)}
                     </div>
                     <input value={quien} onChange={(e) => setQuien(e.target.value)} maxLength={60} placeholder="…u otro nombre" className="pf-input mt-1.5 w-full px-3 py-2 text-sm" />
                   </div>
                 )}
                 {m.extra === "proveedor" && (
                   <div className="mt-3">
-                    <label className="text-[12px] font-semibold text-slate-600">Proveedor <span className="text-red-500">*</span></label>
+                    <label className="text-[12px] font-semibold text-stone-600">Proveedor <span className="text-red-500">*</span></label>
                     <input value={proveedor} onChange={(e) => setProveedor(e.target.value)} maxLength={80} placeholder="Ej. Meliza, Zebra Home…" className="pf-input mt-1 w-full px-3 py-2 text-sm" />
                   </div>
                 )}
                 <div className="mt-3">
-                  <label className="text-[12px] font-semibold text-slate-600">Nota {m.notaObligatoria ? <span className="text-red-500">*</span> : <span className="font-normal text-slate-400">(opcional)</span>}</label>
+                  <label className="text-[12px] font-semibold text-stone-600">Nota {m.notaObligatoria ? <span className="text-red-500">*</span> : <span className="font-normal text-stone-400">(opcional)</span>}</label>
                   <textarea value={nota} onChange={(e) => setNota(e.target.value)} maxLength={300} rows={2} placeholder={m.placeholder} className="pf-input mt-1 w-full px-3 py-2 text-sm" />
                 </div>
 
                 {delta != null && despues != null && despues >= 0 && (
-                  <div className={"mt-3 rounded-2xl px-4 py-3 text-sm font-semibold ring-1 " + (delta < 0 ? "bg-red-50 text-red-700 ring-red-100" : delta > 0 ? "bg-green-50 text-green-700 ring-green-100" : "bg-slate-50 text-slate-600 ring-slate-200")}>
+                  <div className={"mt-3 rounded-2xl px-4 py-3 text-sm font-semibold ring-1 " + (delta < 0 ? "bg-red-50 text-red-700 ring-red-100" : delta > 0 ? "bg-green-50 text-green-700 ring-green-100" : "bg-stone-50 text-stone-600 ring-stone-200")}>
                     {nomBodega}: {actual} → <b className="text-base">{despues}</b> pzs ({fmtDelta(delta)}){delta === 0 && " · sin diferencia (solo se registra el conteo)"}
                   </div>
                 )}
@@ -1676,13 +1676,13 @@ function AjustesHistorial({ hist, cargando, onRecargar }: { hist: AjusteRegistro
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {resumen.map(({ m, n, sale, entra, valor }) => (
           <button key={m.id} type="button" onClick={() => setFm(fm === m.id ? "todos" : m.id)}
-            className={"rounded-2xl p-3 text-left transition " + (fm === m.id ? "bg-brand text-white shadow" : "bg-white ring-1 ring-slate-200 hover:ring-brand")}>
+            className={"rounded-2xl p-3 text-left transition " + (fm === m.id ? "bg-black text-white shadow" : "bg-white ring-1 ring-stone-200 hover:ring-brand")}>
             <p className="text-[12px] font-bold">{m.emoji} {m.label}</p>
             <p className="mt-1 text-lg font-bold leading-none">
               {sale > 0 && <span>−{sale}</span>}{sale > 0 && entra > 0 && <span className="text-sm"> / </span>}{entra > 0 && <span>+{entra}</span>}{!sale && !entra && <span className="opacity-40">0</span>}
               <span className="ml-1 text-[11px] font-semibold opacity-70">pzs</span>
             </p>
-            <p className={"mt-0.5 text-[11px] " + (fm === m.id ? "text-white/80" : "text-slate-500")}>{n} mov. · ≈ {money(valor)}</p>
+            <p className={"mt-0.5 text-[11px] " + (fm === m.id ? "text-white/80" : "text-stone-500")}>{n} mov. · ≈ {money(valor)}</p>
           </button>
         ))}
       </div>
@@ -1697,7 +1697,7 @@ function AjustesHistorial({ hist, cargando, onRecargar }: { hist: AjusteRegistro
                 <li key={h.id || h.fecha + h.sku} className="p-3">
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
-                      <span className="text-sm font-bold text-[#0e2650]">{h.persona}</span>
+                      <span className="text-sm font-bold text-[#1c1717]">{h.persona}</span>
                       <span className="ml-2 text-[11px] text-gray-400">{horaMx(h.fecha)}</span>
                       <p className="mt-0.5 text-[13px] text-gray-700"><b>{h.nombre}</b> <span className="font-mono text-[11px] text-gray-400">{h.sku}</span></p>
                       <p className="text-[12.5px] text-gray-600">
@@ -1709,7 +1709,7 @@ function AjustesHistorial({ hist, cargando, onRecargar }: { hist: AjusteRegistro
                       {h.proveedor && <p className="text-[12px] text-gray-500">🚚 Proveedor: <b>{h.proveedor}</b></p>}
                       {h.nota && <p className="text-[12px] text-gray-500">📝 {h.nota}</p>}
                     </div>
-                    <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10.5px] font-bold text-slate-600">{MOTIVO[h.motivo]?.emoji} {MOTIVO[h.motivo]?.label || h.motivo}</span>
+                    <span className="shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-[10.5px] font-bold text-stone-600">{MOTIVO[h.motivo]?.emoji} {MOTIVO[h.motivo]?.label || h.motivo}</span>
                   </div>
                 </li>
               ))}
@@ -1793,7 +1793,7 @@ function SaldosForm({ categorias }: { categorias: Categoria[] }) {
     });
   }
   const inp = "pf-input w-full px-3 py-2";
-  const lab = "mb-1 block font-display text-[15px] font-bold text-[#0e2650]";
+  const lab = "mb-1 block font-display text-[15px] font-bold text-[#1c1717]";
 
   return (
     <form onSubmit={submit} className="space-y-4 pf-card p-5">
@@ -1810,12 +1810,12 @@ function SaldosForm({ categorias }: { categorias: Categoria[] }) {
       <div>
         <label className={lab}>Descripción <span className="font-normal text-gray-400">— opcional, sale en el catálogo</span></label>
         <textarea className={inp} rows={3} value={descripcion} onChange={(e) => setDescripcion(e.target.value)} placeholder="Ej. Suave, 100% algodón. Incluye 2 fundas." />
-        <p className="mt-1 text-[11px] text-slate-400">Tip: lo que pongas entre *asteriscos* sale en <b>negritas</b>.</p>
+        <p className="mt-1 text-[11px] text-stone-400">Tip: lo que pongas entre *asteriscos* sale en <b>negritas</b>.</p>
       </div>
       <div>
         <label className={lab}>⚠️ Detalle del producto (por qué está rebajado)</label>
         <textarea className={inp} rows={2} value={detalle} onChange={(e) => setDetalle(e.target.value)} placeholder="Ej. Tiene una mancha pequeña / le falta un botón / caja maltratada" />
-        <p className="mt-1 text-[11px] text-slate-400">Esto se ve en la ficha del catálogo para que el cliente sepa.</p>
+        <p className="mt-1 text-[11px] text-stone-400">Esto se ve en la ficha del catálogo para que el cliente sepa.</p>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div>
@@ -1905,15 +1905,15 @@ function ArchivadosPanel() {
         sub="Productos ocultos del catálogo y PdV. Puedes restaurarlos."
         right={<button onClick={cargar} disabled={pending} className={REFRESH}>{pending ? "…" : "↻ Actualizar"}</button>} />
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔎 Buscar por nombre o código…" className="pf-input mb-3 mt-3 w-full px-4 py-2.5 text-sm" />
-      {cargado && items.length === 0 && <p className="py-8 text-center text-sm text-slate-400">No hay productos archivados. 🎉</p>}
-      <ul className="divide-y divide-slate-100">
+      {cargado && items.length === 0 && <p className="py-8 text-center text-sm text-stone-400">No hay productos archivados. 🎉</p>}
+      <ul className="divide-y divide-stone-100">
         {items.filter((p) => !q.trim() || matchSearch(`${p.name} ${p.sku}`, q)).map((p) => (
           <li key={p.id} className="flex items-center gap-3 py-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.imageUrl + "?v=" + (imgV[p.id] || 0)} alt="" loading="lazy" className="h-12 w-12 shrink-0 rounded-lg border border-slate-200 object-cover" />
+            <img src={p.imageUrl + "?v=" + (imgV[p.id] || 0)} alt="" loading="lazy" className="h-12 w-12 shrink-0 rounded-lg border border-stone-200 object-cover" />
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[13px] font-semibold text-slate-700">{p.name}</p>
-              <p className="font-mono text-[11px] text-slate-400">{p.sku}</p>
+              <p className="truncate text-[13px] font-semibold text-stone-700">{p.name}</p>
+              <p className="font-mono text-[11px] text-stone-400">{p.sku}</p>
               <div className="mt-1 flex flex-wrap items-center gap-3">
                 <label className="cursor-pointer text-[11px] font-semibold text-brand underline">
                   Cambiar foto
@@ -1921,9 +1921,9 @@ function ArchivadosPanel() {
                 </label>
                 <button type="button" onClick={() => pegarFoto(p)} disabled={pending} className="text-[11px] font-semibold text-brand underline disabled:opacity-50">📋 Pegar</button>
               </div>
-              {nota[p.id] && <p className="mt-0.5 text-[11px] font-semibold text-slate-500">{nota[p.id]}</p>}
+              {nota[p.id] && <p className="mt-0.5 text-[11px] font-semibold text-stone-500">{nota[p.id]}</p>}
             </div>
-            <button onClick={() => restaurar(p)} disabled={pending} className="shrink-0 rounded-lg bg-brand px-3 py-1.5 text-xs font-bold text-white hover:bg-brand-dark disabled:opacity-50">♻️ Restaurar</button>
+            <button onClick={() => restaurar(p)} disabled={pending} className="shrink-0 rounded-lg bg-black px-3 py-1.5 text-xs font-bold text-white hover:bg-neutral-700 disabled:opacity-50">♻️ Restaurar</button>
           </li>
         ))}
       </ul>
@@ -1945,14 +1945,14 @@ function EliminadosPanel() {
         sub="Productos borrados definitivamente: qué, quién y cuándo."
         right={<button onClick={cargar} disabled={pending} className={REFRESH}>{pending ? "…" : "↻ Actualizar"}</button>} />
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="🔎 Buscar por producto o persona…" className="pf-input mb-3 mt-3 w-full px-4 py-2.5 text-sm" />
-      {cargado && items.length === 0 && <p className="py-8 text-center text-sm text-slate-400">Todavía no se ha eliminado ningún producto.</p>}
-      <ul className="divide-y divide-slate-100">
+      {cargado && items.length === 0 && <p className="py-8 text-center text-sm text-stone-400">Todavía no se ha eliminado ningún producto.</p>}
+      <ul className="divide-y divide-stone-100">
         {items.filter((e) => !q.trim() || matchSearch(`${e.texto} ${e.persona}`, q)).map((e, i) => (
           <li key={i} className="flex items-start gap-3 py-2">
             <span className="mt-0.5 shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-[11px] font-bold text-red-600">{e.persona}</span>
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] text-slate-700">{e.texto}</p>
-              <p className="text-[11px] text-slate-400">{fmtMx(e.fecha)}</p>
+              <p className="text-[13px] text-stone-700">{e.texto}</p>
+              <p className="text-[11px] text-stone-400">{fmtMx(e.fecha)}</p>
             </div>
           </li>
         ))}
@@ -2004,8 +2004,8 @@ function AjustesPanel() {
         <PanelHead emoji="🖼️" titulo="Portada del catálogo"
           sub="La imagen grande de arriba del catálogo. Sube la de este mes (ej. “BAM! · Drop de octubre”)." />
         {portadaUrl
-          ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={portadaUrl} alt="" className="mb-3 max-h-60 w-full rounded-2xl border border-slate-200 object-cover" />
-          : <p className="mb-3 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-400">Ahora se muestra la portada por defecto (degradado + mes actual).</p>}
+          ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={portadaUrl} alt="" className="mb-3 max-h-60 w-full rounded-2xl border border-stone-200 object-cover" />
+          : <p className="mb-3 rounded-2xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-400">Ahora se muestra la portada por defecto (degradado + mes actual).</p>}
         <div className="flex flex-wrap items-center gap-2">
           <label className="pf-btn inline-block cursor-pointer px-4 py-2.5 text-sm">
             {portadaUrl ? "Cambiar portada" : "Subir portada"}
@@ -2023,13 +2023,13 @@ function AjustesPanel() {
             {banners.map((b) => (
               <div key={b.id} className="relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={b.url} alt="" className="h-24 w-full rounded-xl border border-slate-200 object-cover" />
+                <img src={b.url} alt="" className="h-24 w-full rounded-xl border border-stone-200 object-cover" />
                 <button onClick={() => quitarBanner(b.id)} disabled={pending} title="Quitar banner"
                   className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-red-500 text-xs font-bold text-white shadow">✕</button>
               </div>
             ))}
           </div>
-        ) : <p className="mb-3 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-400">Aún no hay banners. Si no subes ninguno, no aparece el carrusel.</p>}
+        ) : <p className="mb-3 rounded-2xl border border-dashed border-stone-200 bg-stone-50 p-6 text-center text-sm text-stone-400">Aún no hay banners. Si no subes ninguno, no aparece el carrusel.</p>}
         <label className="pf-btn inline-block cursor-pointer px-4 py-2.5 text-sm">
           + Agregar banner(s)
           <input ref={bannerRef} type="file" accept="image/*" multiple className="hidden" onChange={subirBanners} />
@@ -2042,10 +2042,10 @@ function AjustesPanel() {
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
           {TEMAS.map((t) => (
             <button key={t.id} onClick={() => elegir(t.id)} disabled={pending}
-              className={"flex items-center gap-2 rounded-2xl border-2 p-2.5 text-left transition " + (tema === t.id ? "border-brand bg-brand-light" : "border-slate-200 bg-white hover:border-brand")}>
+              className={"flex items-center gap-2 rounded-2xl border-2 p-2.5 text-left transition " + (tema === t.id ? "border-brand bg-brand-light" : "border-stone-200 bg-white hover:border-brand")}>
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xl text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${t.swatch[0]}, ${t.swatch[1]})` }}>{t.emoji}</span>
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-bold text-[#0e2650]">{t.label}</span>
+                <span className="block truncate text-sm font-bold text-[#1c1717]">{t.label}</span>
                 <span className="block truncate text-[12px] leading-none">{t.caen.join(" ") || "Clásico"}</span>
               </span>
               {tema === t.id && <span className="text-brand-dark">✓</span>}
@@ -2053,7 +2053,7 @@ function AjustesPanel() {
           ))}
         </div>
       </div>
-      {nota && <p className="text-center text-[13px] font-semibold text-slate-600">{nota}</p>}
+      {nota && <p className="text-center text-[13px] font-semibold text-stone-600">{nota}</p>}
     </div>
   );
 }
@@ -2076,12 +2076,12 @@ function UltimosModelosPanel() {
   return (
     <div className="space-y-4">
       <div className="pf-card p-5">
-        <PanelHead emoji="🔢" tono="bg-sky-100" titulo="Últimos modelos"
+        <PanelHead emoji="🔢" tono="bg-red-100" titulo="Últimos modelos"
           sub="El último número (M#) de cada línea de producto, para saber cuál sigue al subir un modelo nuevo — sin repetir ni brincarte números." />
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar producto, código o categoría… (ej. mantel, CSI-CSE)"
           className="pf-input mt-1 w-full px-3 py-2.5 text-sm" />
         {err
-          ? <p className="mt-3 text-sm text-red-600">No se pudo cargar (Odoo tardó). <button onClick={cargar} className="font-bold underline">Reintentar</button></p>
+          ? <p className="mt-3 text-sm text-red-600">No se pudo cargar (tardó demasiado). <button onClick={cargar} className="font-bold underline">Reintentar</button></p>
           : rows === null || pend
           ? <p className="mt-3 text-sm text-gray-500">Cargando…</p>
           : <p className="mt-2 text-[12px] text-gray-400">{vis.length} línea(s) con modelos numerados. La columna <b>Sigue</b> es el número que va al crear el próximo.</p>}
@@ -2102,7 +2102,7 @@ function UltimosModelosPanel() {
             <tbody>
               {vis.map((r) => (
                 <tr key={r.linea} className="border-t border-gray-100 align-top">
-                  <td className="px-2 py-2 font-semibold text-[#0e2650]">{r.nombre} <span className="font-normal text-gray-400">({r.cuantos})</span></td>
+                  <td className="px-2 py-2 font-semibold text-[#1c1717]">{r.nombre} <span className="font-normal text-gray-400">({r.cuantos})</span></td>
                   <td className="px-2 font-mono text-[12px] text-gray-500">{r.linea}</td>
                   <td className="hidden px-2 text-gray-500 sm:table-cell">{r.categoria}</td>
                   <td className="px-2 text-center font-bold text-gray-700">M{r.ultimo}</td>
@@ -2167,26 +2167,26 @@ function SinFotoBodegaPanel() {
           sub="Lo que ya se subió a Bodega y le falta foto. Tómala y yo le quito el fondo."
           right={<button onClick={cargar} disabled={pending} className={REFRESH}>{pending ? "…" : "↻ Actualizar"}</button>} />
         {hechas > 0 && <p className="mb-2 text-center text-[13px] font-bold text-emerald-600">🎉 {hechas} foto(s) subida(s) — ¡vas muy bien!</p>}
-        {msg && <p className="mb-2 text-center text-[13px] font-semibold text-slate-600">{msg}</p>}
-        {!cargado && <p className="py-10 text-center text-sm text-slate-400">Cargando…</p>}
+        {msg && <p className="mb-2 text-center text-[13px] font-semibold text-stone-600">{msg}</p>}
+        {!cargado && <p className="py-10 text-center text-sm text-stone-400">Cargando…</p>}
         {cargado && err && (
-          <p className="py-8 text-center text-sm text-red-600">No se pudo cargar (Odoo tardó). <button onClick={cargar} className="font-bold underline">Reintentar</button></p>
+          <p className="py-8 text-center text-sm text-red-600">No se pudo cargar (tardó demasiado). <button onClick={cargar} className="font-bold underline">Reintentar</button></p>
         )}
         {cargado && !err && items.length === 0 && (
-          <p className="py-12 text-center text-sm text-slate-400">🎉 Todo lo de Bodega ya tiene foto.<br />Nada pendiente por ahora.</p>
+          <p className="py-12 text-center text-sm text-stone-400">🎉 Todo lo de Bodega ya tiene foto.<br />Nada pendiente por ahora.</p>
         )}
         {items.length > 0 && (
           <>
             <p className="mb-3 text-center text-[13px] font-bold text-amber-600">📷 {items.length} producto(s) sin foto</p>
             <div className="space-y-2.5">
               {items.map((p) => (
-                <div key={p.id} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-2.5">
-                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-slate-100 text-2xl">📦</div>
+                <div key={p.id} className="flex items-center gap-3 rounded-2xl border border-stone-200 bg-white p-2.5">
+                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-stone-100 text-2xl">📦</div>
                   <div className="min-w-0 flex-1">
-                    <p className="line-clamp-2 font-display text-[15px] font-bold leading-tight text-[#0e2650]">{p.name}</p>
-                    <p className="truncate font-mono text-[11px] text-slate-400">{p.sku}</p>
+                    <p className="line-clamp-2 font-display text-[15px] font-bold leading-tight text-[#1c1717]">{p.name}</p>
+                    <p className="truncate font-mono text-[11px] text-stone-400">{p.sku}</p>
                   </div>
-                  <label className={"shrink-0 cursor-pointer select-none rounded-2xl px-4 py-3 text-sm font-bold text-white shadow-sm transition " + (subiendo === p.id ? "bg-slate-300" : "bg-brand hover:bg-brand-dark active:scale-95")}>
+                  <label className={"shrink-0 cursor-pointer select-none rounded-2xl px-4 py-3 text-sm font-bold text-white shadow-sm transition " + (subiendo === p.id ? "bg-stone-300" : "bg-black hover:bg-neutral-700 active:scale-95")}>
                     {subiendo === p.id ? "Subiendo…" : "📸 Foto"}
                     <input type="file" accept="image/*" className="hidden" disabled={subiendo != null}
                       onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
@@ -2211,9 +2211,9 @@ function DestinoBodega({ value, onChange }: { value: number | undefined; onChang
   return (
     <div className="mb-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="font-display text-[15px] font-bold text-[#0e2650]">¿A qué bodega?</span>
+        <span className="font-display text-[15px] font-bold text-[#1c1717]">¿A qué bodega?</span>
         <button type="button" onClick={() => onChange(undefined)}
-          className={"rounded-full px-3 py-1.5 text-sm font-bold transition " + (!torres ? "bg-brand text-white shadow" : "bg-white text-gray-600 ring-1 ring-gray-200 hover:ring-brand")}>🏠 Tienda</button>
+          className={"rounded-full px-3 py-1.5 text-sm font-bold transition " + (!torres ? "bg-black text-white shadow" : "bg-white text-gray-600 ring-1 ring-gray-200 hover:ring-brand")}>🏠 Tienda</button>
         <button type="button" onClick={() => onChange(BODEGA_TORRES)}
           className={"rounded-full px-3 py-1.5 text-sm font-bold transition " + (torres ? "bg-amber-500 text-white shadow" : "bg-white text-gray-600 ring-1 ring-gray-200 hover:ring-amber-400")}>🆕 Bodega</button>
       </div>
@@ -2296,7 +2296,7 @@ function ResurtirPanel({ soloBodega = false }: { soloBodega?: boolean }) {
           </>
         ) : (
           <>
-            <PanelHead emoji="🔄" tono="bg-sky-100" titulo="Resurtir inventario"
+            <PanelHead emoji="🔄" tono="bg-red-100" titulo="Resurtir inventario"
               sub="Súmale piezas a productos que YA existen." />
             <DestinoBodega value={destino} onChange={setDestino} />
           </>
@@ -2306,7 +2306,7 @@ function ResurtirPanel({ soloBodega = false }: { soloBodega?: boolean }) {
           placeholder={"CSA-CHE-M1-CAF 20\nCOL-NEN-ROS-K 50\nMAN-RED-BEI x8"}
           className="w-full pf-input p-3 font-mono text-xs" />
         <div className="mt-3 flex flex-wrap items-center gap-3">
-          <span className="font-display text-[15px] font-bold text-[#0e2650]">La cantidad es para:</span>
+          <span className="font-display text-[15px] font-bold text-[#1c1717]">La cantidad es para:</span>
           <label className="flex items-center gap-1 text-sm"><input type="radio" checked={modo === "sumar"} onChange={() => setModo("sumar")} className="accent-brand" /> Sumar a lo que hay</label>
           <label className="flex items-center gap-1 text-sm"><input type="radio" checked={modo === "poner"} onChange={() => setModo("poner")} className="accent-brand" /> Poner ese total exacto</label>
         </div>
@@ -2318,7 +2318,7 @@ function ResurtirPanel({ soloBodega = false }: { soloBodega?: boolean }) {
 
       {rows.length > 0 && (
         <div className="pf-card p-5">
-          <p className="mb-1 font-display text-[15px] font-bold text-[#0e2650]">Revisa y aplica ({rows.length})</p>
+          <p className="mb-1 font-display text-[15px] font-bold text-[#1c1717]">Revisa y aplica ({rows.length})</p>
           {noEnc > 0 && <p className="mb-2 text-[12px] font-semibold text-red-600">⛔ {noEnc} SKU no existe(n) — revisa el código (esos no se tocan).</p>}
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
@@ -2453,11 +2453,11 @@ function CrearForm({ categorias }: { categorias: Categoria[] }) {
   }
 
   const inp = "pf-input w-full px-3 py-2";
-  const lab = "mb-1 block font-display text-[15px] font-bold text-[#0e2650]";
+  const lab = "mb-1 block font-display text-[15px] font-bold text-[#1c1717]";
 
   return (
     <form onSubmit={submit} className="space-y-4 pf-card p-5">
-      <PanelHead emoji="➕" tono="bg-sky-100" titulo="Crear un producto"
+      <PanelHead emoji="➕" tono="bg-red-100" titulo="Crear un producto"
         sub="Uno por uno, con su foto. Queda en inventario y en el catálogo." />
       <div>
         <label className={lab}>Nombre del producto <span className={"font-normal " + (name.length >= 45 ? "text-red-500" : "text-gray-400")}>({name.length}/45)</span></label>
@@ -2489,7 +2489,7 @@ function CrearForm({ categorias }: { categorias: Categoria[] }) {
           <input className={inp} type="number" inputMode="numeric" value={miembro} onChange={(e) => setMiembro(e.target.value)} placeholder="0" />
         </div>
       </div>
-      <div className="rounded-2xl bg-sky-50/60 p-3">
+      <div className="rounded-2xl bg-red-50/60 p-3">
         <label className={lab}>Precios por mayoreo <span className="font-normal text-gray-400">— opcional (hasta 3; aplican en tienda y catálogo)</span></label>
         <TarifasEditor value={tarifas} onChange={setTarifas} />
       </div>
@@ -2571,7 +2571,7 @@ function BuscarPanel({ categorias, aprobador }: { categorias: Categoria[]; aprob
         <form onSubmit={buscar} className="flex gap-2">
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por nombre o código…"
             className="flex-1 pf-input px-4 py-3" />
-          <button disabled={pending} className="font-display shrink-0 rounded-2xl bg-brand px-6 py-3 font-bold text-white shadow-[0_10px_22px_-8px_rgba(46,109,164,.7)] transition hover:-translate-y-0.5 hover:bg-brand-dark disabled:translate-y-0 disabled:bg-gray-300 disabled:shadow-none">
+          <button disabled={pending} className="font-display shrink-0 rounded-2xl bg-black px-6 py-3 font-bold text-white shadow-[0_10px_22px_-8px_rgba(46,109,164,.7)] transition hover:-translate-y-0.5 hover:bg-neutral-700 disabled:translate-y-0 disabled:bg-gray-300 disabled:shadow-none">
             {pending ? "…" : "Buscar"}
           </button>
         </form>
@@ -2579,18 +2579,18 @@ function BuscarPanel({ categorias, aprobador }: { categorias: Categoria[]; aprob
       {buscado && items.length === 0 && <p className="py-8 text-center text-gray-400">Sin resultados.</p>}
       {activos.length > 0 && (
         <div className="space-y-3">
-          <h3 className="flex items-center gap-2 px-1 pt-1 text-sm font-bold text-slate-700">
+          <h3 className="flex items-center gap-2 px-1 pt-1 text-sm font-bold text-stone-700">
             <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700">✅ No archivados</span>
-            <span className="text-xs font-semibold text-slate-400">{activos.length}</span>
+            <span className="text-xs font-semibold text-stone-400">{activos.length}</span>
           </h3>
           <ListaEditable items={activos} setItems={setItems} categorias={categorias} aprobador={aprobador} />
         </div>
       )}
       {archivados.length > 0 && (
         <div className="space-y-3">
-          <h3 className="flex items-center gap-2 px-1 pt-2 text-sm font-bold text-slate-700">
+          <h3 className="flex items-center gap-2 px-1 pt-2 text-sm font-bold text-stone-700">
             <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-700">🗄️ Archivados</span>
-            <span className="text-xs font-semibold text-slate-400">{archivados.length}</span>
+            <span className="text-xs font-semibold text-stone-400">{archivados.length}</span>
           </h3>
           <ListaEditable items={archivados} setItems={setItems} categorias={categorias} aprobador={aprobador} />
         </div>
@@ -2628,7 +2628,7 @@ function ProductosPanel({ categorias, aprobador }: { categorias: Categoria[]; ap
         <div className="flex flex-wrap gap-2">
           {TABS.map(([id, lbl]) => (
             <button key={id} onClick={() => ir(id)}
-              className={"rounded-full px-4 py-2 text-sm font-bold transition " + (tab === id ? "bg-brand text-white shadow" : "bg-white text-gray-600 ring-1 ring-slate-200 hover:ring-brand")}>{lbl}</button>
+              className={"rounded-full px-4 py-2 text-sm font-bold transition " + (tab === id ? "bg-black text-white shadow" : "bg-white text-gray-600 ring-1 ring-stone-200 hover:ring-brand")}>{lbl}</button>
           ))}
         </div>
         {tab === "normales" && (
@@ -2643,12 +2643,12 @@ function ProductosPanel({ categorias, aprobador }: { categorias: Categoria[]; ap
             Salen del catálogo y del PdV, y se restauran en <b>🗄️ Archivados</b>. Si les vuelves a meter mercancía con Resurtir, se reactivan solos.
           </p>
         )}
-        <p className="mt-2 text-[12px] text-slate-500">
+        <p className="mt-2 text-[12px] text-stone-500">
           {pending ? "Cargando…" : cargado ? `${items.length} producto(s)` : tab === "normales" ? "Escribe algo y pica Buscar." : ""}
         </p>
       </div>
       {cargado && items.length === 0 && tab !== "normales" && (
-        <p className="rounded-2xl border border-slate-100 bg-white p-8 text-center text-sm text-slate-400">No hay productos en esta lista.</p>
+        <p className="rounded-2xl border border-stone-100 bg-white p-8 text-center text-sm text-stone-400">No hay productos en esta lista.</p>
       )}
       <ListaEditable items={items} setItems={setItems} categorias={categorias} aprobador={aprobador} />
     </div>
@@ -2760,7 +2760,7 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
     <div tabIndex={0} onPaste={onPasteImg} title="Tip: haz clic en la tarjeta y pega la foto con Ctrl+V"
       className={"rounded-2xl border p-3 shadow-sm outline-none transition focus-within:ring-2 focus-within:ring-brand/30 " + (sel?.checked ? "border-brand ring-2 ring-brand/40 " : "") + (activo ? "border-gray-100 bg-white" : "border-amber-200 bg-amber-50")}>
       {sel?.on && (
-        <label className="mb-2 flex cursor-pointer items-center gap-2 rounded-xl bg-slate-50 px-3 py-2 text-[13px] font-bold text-slate-600">
+        <label className="mb-2 flex cursor-pointer items-center gap-2 rounded-xl bg-stone-50 px-3 py-2 text-[13px] font-bold text-stone-600">
           <input type="checkbox" checked={sel.checked} onChange={sel.toggle} className="h-5 w-5 accent-brand" />
           {sel.checked ? "Seleccionado ✓" : "Seleccionar este"}
         </label>
@@ -2774,7 +2774,7 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
             <input value={nombre} onChange={(e) => setNombre(e.target.value)}
               className="w-full rounded-lg border border-gray-200 px-2 py-1 text-sm font-bold text-gray-800 outline-none focus:border-brand" />
             {nombre.trim() !== p.name && (
-              <button onClick={guardarNombre} disabled={pend} className={"shrink-0 rounded-lg px-3 py-1 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("nombre", "bg-brand hover:bg-brand-dark")}>{pend ? "…" : okTxt("nombre", "Guardar")}</button>
+              <button onClick={guardarNombre} disabled={pend} className={"shrink-0 rounded-lg px-3 py-1 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("nombre", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okTxt("nombre", "Guardar")}</button>
             )}
           </div>
           <div className="mt-0.5 flex items-center gap-1">
@@ -2782,7 +2782,7 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
             <input value={sku} onChange={(e) => setSku(e.target.value.toUpperCase())}
               className="min-w-0 flex-1 rounded border border-gray-200 px-1.5 py-0.5 font-mono text-[11px] text-gray-600 outline-none focus:border-brand" />
             {sku.trim() !== p.sku && sku.trim() && (
-              <button onClick={guardarSku} disabled={pend} className={"shrink-0 rounded px-2 py-0.5 text-[10px] font-bold text-white transition disabled:bg-gray-300 " + okBg("sku", "bg-brand hover:bg-brand-dark")}>{pend ? "…" : okOK("sku")}</button>
+              <button onClick={guardarSku} disabled={pend} className={"shrink-0 rounded px-2 py-0.5 text-[10px] font-bold text-white transition disabled:bg-gray-300 " + okBg("sku", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okOK("sku")}</button>
             )}
             {!activo && <span className="rounded bg-amber-200 px-1 text-[10px] font-bold text-amber-800">archivado</span>}
           </div>
@@ -2805,7 +2805,7 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
           <label className="text-[11px] text-gray-500">Inventario</label>
           <div className="flex gap-1">
             <input className={inp} type="number" value={qty} onChange={(e) => setQty(e.target.value)} />
-            <button onClick={guardarStock} disabled={pend} className={"rounded-lg px-2 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("stock", "bg-brand hover:bg-brand-dark")}>{pend ? "…" : okOK("stock")}</button>
+            <button onClick={guardarStock} disabled={pend} className={"rounded-lg px-2 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("stock", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okOK("stock")}</button>
           </div>
         </div>
         <div>
@@ -2816,7 +2816,7 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
           <label className="text-[11px] text-gray-500">Miembros</label>
           <div className="flex gap-1">
             <input className={inp} type="number" value={mem} onChange={(e) => setMem(e.target.value)} />
-            <button onClick={guardarPrecios} disabled={pend} className={"rounded-lg px-2 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("precios", "bg-brand hover:bg-brand-dark")}>{pend ? "…" : okOK("precios")}</button>
+            <button onClick={guardarPrecios} disabled={pend} className={"rounded-lg px-2 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("precios", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okOK("precios")}</button>
           </div>
         </div>
         <div>
@@ -2841,32 +2841,32 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
             const on = tags.has(t.tagId);
             return (
               <button key={t.tagId} type="button" onClick={() => toggleTemporada(t.tagId, t.id)} disabled={pend}
-                className={"rounded-full px-3.5 py-1.5 text-sm font-bold transition disabled:opacity-50 " + (on ? "bg-brand text-white shadow" : "bg-white text-gray-600 ring-1 ring-slate-200 hover:ring-brand")}>
+                className={"rounded-full px-3.5 py-1.5 text-sm font-bold transition disabled:opacity-50 " + (on ? "bg-black text-white shadow" : "bg-white text-gray-600 ring-1 ring-stone-200 hover:ring-brand")}>
                 {t.emoji} {t.id}{on ? " ✓" : ""}
               </button>
             );
           })}
         </div>
       </div>
-      <div className="mt-3 rounded-xl bg-sky-50/60 p-2.5">
+      <div className="mt-3 rounded-xl bg-red-50/60 p-2.5">
         <label className="text-[11px] font-semibold text-gray-600">Precios por mayoreo <span className="font-normal text-gray-400">(hasta 3; vacío = quitar)</span></label>
         <div className="mt-1"><TarifasEditor value={tarifas} onChange={setTarifas} /></div>
-        <button onClick={guardarTarifas} disabled={pend} className={"mt-1.5 rounded-lg px-3 py-1.5 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("tarifas", "bg-brand hover:bg-brand-dark")}>{pend ? "…" : okTxt("tarifas", "Guardar mayoreo")}</button>
+        <button onClick={guardarTarifas} disabled={pend} className={"mt-1.5 rounded-lg px-3 py-1.5 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("tarifas", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okTxt("tarifas", "Guardar mayoreo")}</button>
       </div>
       <div className="mt-3">
         <label className="text-[11px] text-gray-500">Descripción (se ve en el catálogo)</label>
         <textarea value={desc} onChange={(e) => setDesc(e.target.value)} rows={2}
           className="pf-input mt-0.5 w-full px-3 py-2 text-sm" placeholder="Escribe la descripción del producto…" />
         {desc.trim() !== (p.descripcion || "").trim() && (
-          <button onClick={guardarDesc} disabled={pend} className={"mt-1 rounded-lg px-3 py-1 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("desc", "bg-brand hover:bg-brand-dark")}>{pend ? "…" : okTxt("desc", "Guardar descripción")}</button>
+          <button onClick={guardarDesc} disabled={pend} className={"mt-1 rounded-lg px-3 py-1 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("desc", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okTxt("desc", "Guardar descripción")}</button>
         )}
       </div>
-      <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2">
-        <label className="text-[11px] font-semibold text-slate-500">📝 Motivo del cambio <span className="font-normal text-slate-400">(opcional)</span></label>
+      <div className="mt-3 rounded-xl bg-stone-50 px-3 py-2">
+        <label className="text-[11px] font-semibold text-stone-500">📝 Motivo del cambio <span className="font-normal text-stone-400">(opcional)</span></label>
         <input value={motivo} onChange={(e) => setMotivo(e.target.value)} maxLength={140}
           placeholder="Ej. llegó mercancía, se rompió una pieza, error de conteo…"
           className="pf-input mt-0.5 w-full px-3 py-1.5 text-[13px]" />
-        <p className="mt-1 text-[11px] text-slate-400">
+        <p className="mt-1 text-[11px] text-stone-400">
           Si escribes algo aquí, se guarda en el historial junto al cambio que hagas (inventario, nombre, código, precios o liquidación).
         </p>
       </div>
@@ -3071,43 +3071,43 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
         <PanelHead emoji="⚡" titulo="Carga rápida"
           sub="Pega la lista de WhatsApp — o arma la lista a mano llenando los campos. La subo de un jalón." />
         <DestinoBodega value={destino} onChange={setDestino} />
-        <p className="mb-1 font-display text-[15px] font-bold text-[#0e2650]">1. Pega la lista — <b>un producto por renglón</b></p>
-        <p className="mb-2 text-[12px] text-slate-500">
-          Cada renglón: <b className="text-slate-700">NOMBRE (con modelo/color/diseño)</b> <b className="text-[#2e6da4]">$público/$miembro</b> <b className="text-[#2e6da4]">x cantidad</b> y si tiene, <b className="text-[#2e6da4]">L:precio liquidación</b>. La foto la subes después en cada renglón.
+        <p className="mb-1 font-display text-[15px] font-bold text-[#1c1717]">1. Pega la lista — <b>un producto por renglón</b></p>
+        <p className="mb-2 text-[12px] text-stone-500">
+          Cada renglón: <b className="text-stone-700">NOMBRE (con modelo/color/diseño)</b> <b className="text-[#e10b0b]">$público/$miembro</b> <b className="text-[#e10b0b]">x cantidad</b> y si tiene, <b className="text-[#e10b0b]">L:precio liquidación</b>. La foto la subes después en cada renglón.
         </p>
-        <details className="mb-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] text-slate-500">
-          <summary className="cursor-pointer font-semibold text-slate-700">📏 Cómo escribir cada producto</summary>
-          <p className="mt-2 rounded-lg bg-slate-100 px-2 py-1 font-mono text-[11px] text-[#2e6da4]">CUBRESALA CHENILLA M1 CAFÉ $530/$430 x30 L:300</p>
+        <details className="mb-3 rounded-xl border border-stone-200 bg-stone-50 px-3 py-2 text-[12px] text-stone-500">
+          <summary className="cursor-pointer font-semibold text-stone-700">📏 Cómo escribir cada producto</summary>
+          <p className="mt-2 rounded-lg bg-stone-100 px-2 py-1 font-mono text-[11px] text-[#e10b0b]">CUBRESALA CHENILLA M1 CAFÉ $530/$430 x30 L:300</p>
           <ul className="mt-2 space-y-1">
-            <li><b className="text-slate-700">Precio:</b> <b>$público/$miembro</b> — ej. <b>$530/$430</b>. (obligatorio)</li>
-            <li><b className="text-slate-700">Cantidad:</b> <b>x</b> y el número — ej. <b>x30</b>.</li>
-            <li><b className="text-slate-700">Liquidación</b> (si tiene): <b>L:</b> y el precio — ej. <b>L:300</b>.</li>
-            <li><b className="text-slate-700">Modelo:</b> <b>M1</b>, <b>M2</b>… (también “modelo 1” o “M-1”).</li>
-            <li><b className="text-slate-700">Color:</b> por nombre (<b>café</b>, <b>gris oscuro</b>, <b>azul rey</b>) o código (<b>CAF</b>, <b>GRO</b>, <b>AZR</b>).</li>
-            <li><b className="text-slate-700">Diseño:</b> el código tal cual: <b>D099</b>, <b>DK094</b>.</li>
-            <li><b className="text-slate-700">Tamaño:</b> King/Matrimonial/Queen/Individual. <b>Plazas:</b> 2 plazas / 3 plazas.</li>
+            <li><b className="text-stone-700">Precio:</b> <b>$público/$miembro</b> — ej. <b>$530/$430</b>. (obligatorio)</li>
+            <li><b className="text-stone-700">Cantidad:</b> <b>x</b> y el número — ej. <b>x30</b>.</li>
+            <li><b className="text-stone-700">Liquidación</b> (si tiene): <b>L:</b> y el precio — ej. <b>L:300</b>.</li>
+            <li><b className="text-stone-700">Modelo:</b> <b>M1</b>, <b>M2</b>… (también “modelo 1” o “M-1”).</li>
+            <li><b className="text-stone-700">Color:</b> por nombre (<b>café</b>, <b>gris oscuro</b>, <b>azul rey</b>) o código (<b>CAF</b>, <b>GRO</b>, <b>AZR</b>).</li>
+            <li><b className="text-stone-700">Diseño:</b> el código tal cual: <b>D099</b>, <b>DK094</b>.</li>
+            <li><b className="text-stone-700">Tamaño:</b> King/Matrimonial/Queen/Individual. <b>Plazas:</b> 2 plazas / 3 plazas.</li>
           </ul>
-          <p className="mt-2 text-[11px] text-slate-400">El orden no importa: puedes poner el precio, la x y la L: donde caigan. Igual revisas todo en la tabla antes de crear.</p>
+          <p className="mt-2 text-[11px] text-stone-400">El orden no importa: puedes poner el precio, la x y la L: donde caigan. Igual revisas todo en la tabla antes de crear.</p>
         </details>
         <textarea value={texto} onChange={(e) => setTexto(e.target.value)} rows={8}
           placeholder={"CUBRESALA CHENILLA M1 CAFÉ $530/$430 x30\nCUBRESALA CHENILLA M1 GRIS $530/$430 x50\nMANTEL REDONDO BEIGE $420/$320 x8 L:250\nMOSAICO 3D D777 $99/$59 x40"}
           className="pf-input w-full p-3 font-mono text-xs" />
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <div>
-            <p className="mb-1 font-display text-[15px] font-bold text-[#0e2650]">Categoría por defecto</p>
+            <p className="mb-1 font-display text-[15px] font-bold text-[#1c1717]">Categoría por defecto</p>
             <select className="pf-input w-full px-3 py-2.5 text-sm" value={defCateg} onChange={(e) => setDefCateg(Number(e.target.value))}>
               {categorias.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
-            <p className="mt-1 text-[11px] text-slate-400">Se usa cuando no la adivino sola. Editable por fila.</p>
+            <p className="mt-1 text-[11px] text-stone-400">Se usa cuando no la adivino sola. Editable por fila.</p>
           </div>
           <div>
-            <p className="mb-1 font-display text-[15px] font-bold text-[#0e2650]">Cantidad por defecto</p>
+            <p className="mb-1 font-display text-[15px] font-bold text-[#1c1717]">Cantidad por defecto</p>
             <input className="pf-input w-full px-3 py-2.5 text-sm" type="number" value={defQty} onChange={(e) => setDefQty(e.target.value)} placeholder="0" />
-            <p className="mt-1 text-[11px] text-slate-400">Solo para las líneas sin cantidad.</p>
+            <p className="mt-1 text-[11px] text-stone-400">Solo para las líneas sin cantidad.</p>
           </div>
         </div>
         {restaurado && (
-          <p className="mt-3 rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-center text-[12px] font-semibold text-blue-700">
+          <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-center text-[12px] font-semibold text-red-700">
             💾 Recuperé tu borrador de la última vez. Las fotos sí hay que volver a subirlas.
           </p>
         )}
@@ -3121,8 +3121,8 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
             </button>
           )}
         </div>
-        <div className="mt-3 flex items-center gap-2 text-[12px] font-semibold text-slate-400">
-          <span className="h-px flex-1 bg-slate-200" />o arma la lista a mano<span className="h-px flex-1 bg-slate-200" />
+        <div className="mt-3 flex items-center gap-2 text-[12px] font-semibold text-stone-400">
+          <span className="h-px flex-1 bg-stone-200" />o arma la lista a mano<span className="h-px flex-1 bg-stone-200" />
         </div>
         <button type="button" onClick={agregarFila} className="pf-btn-ghost mt-3 w-full px-4 py-2.5 text-sm">
           ＋ Agregar producto en blanco
@@ -3134,23 +3134,23 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
 
       {rows.length > 0 && (
         <div className="pf-card p-5">
-          <p className="mb-1 font-display text-[15px] font-bold text-[#0e2650]">
+          <p className="mb-1 font-display text-[15px] font-bold text-[#1c1717]">
             2. Revisa ({rows.length} productos), sube la foto de cada uno y crea.
           </p>
-          <p className="mb-2 text-[12px] text-slate-500">📌 <b className="text-slate-700">Fotos:</b> puedes poner <b className="text-slate-700">varias por producto</b> — la <b className="text-slate-700">1ª</b> es la principal y las demás salen en la galería del catálogo. Pica <b>＋foto</b> (puedes elegir varias a la vez), o copia una y <b>pégala</b> (📋 o Ctrl+V en el renglón resaltado).</p>
+          <p className="mb-2 text-[12px] text-stone-500">📌 <b className="text-stone-700">Fotos:</b> puedes poner <b className="text-stone-700">varias por producto</b> — la <b className="text-stone-700">1ª</b> es la principal y las demás salen en la galería del catálogo. Pica <b>＋foto</b> (puedes elegir varias a la vez), o copia una y <b>pégala</b> (📋 o Ctrl+V en el renglón resaltado).</p>
           <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px] font-semibold">
-            {sinFoto > 0 && <span className="text-slate-500">📷 {sinFoto} sin foto</span>}
+            {sinFoto > 0 && <span className="text-stone-500">📷 {sinFoto} sin foto</span>}
             {sinCant > 0 && <span className="text-amber-600">⚠️ {sinCant} sin cantidad (se suben en 0)</span>}
             {dupCount > 0 && <span className="text-red-600">⛔ {dupCount} código(s) repetido(s) — cámbialos antes de crear</span>}
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
-              <thead className="text-left text-slate-400">
+              <thead className="text-left text-stone-400">
                 <tr><th className="px-1 py-1"></th><th className="px-1">Foto</th><th className="px-1">Nombre</th><th className="px-1">Descripción</th><th className="px-1">SKU</th><th className="px-1">Categoría</th><th className="px-1">Cant.</th><th className="px-1">Púb</th><th className="px-1">Miem</th><th className="px-1">Liq 🔥</th><th className="px-1">Mayoreo</th><th className="px-1">Estado</th><th className="px-1"></th></tr>
               </thead>
               <tbody>
                 {rows.map((r, i) => (
-                  <tr key={i} className="border-t border-slate-100">
+                  <tr key={i} className="border-t border-stone-100">
                     <td className="px-1 py-1"><input type="checkbox" checked={r.incluir} onChange={(e) => upd(i, { incluir: e.target.checked })} className="accent-brand" /></td>
                     <td className="px-1 py-1" onClick={() => activar(i)}>
                       <div className="flex w-[132px] flex-col items-center gap-1">
@@ -3158,27 +3158,27 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
                           {r.urls.map((u, k) => (
                             <span key={k} className="relative">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src={u} alt="" className="h-11 w-11 rounded-lg border border-slate-200 object-cover" />
+                              <img src={u} alt="" className="h-11 w-11 rounded-lg border border-stone-200 object-cover" />
                               <button type="button" onClick={(e) => { e.stopPropagation(); removeRowFile(i, k); }} title="Quitar esta foto"
                                 className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-red-500 text-[8px] font-bold text-white">✕</button>
-                              {k === 0 && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded bg-brand px-1 text-[7px] font-bold text-white">1ª</span>}
+                              {k === 0 && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded bg-black px-1 text-[7px] font-bold text-white">1ª</span>}
                             </span>
                           ))}
-                          <label className={"flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border bg-slate-50 hover:border-brand " + (filaActiva === i ? "border-brand ring-2 ring-brand/40" : "border-slate-200")} title="Agregar foto(s) — o pega con Ctrl+V">
-                            <span className="text-center text-[9px] font-semibold leading-tight text-slate-400">＋<br />foto</span>
+                          <label className={"flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border bg-stone-50 hover:border-brand " + (filaActiva === i ? "border-brand ring-2 ring-brand/40" : "border-stone-200")} title="Agregar foto(s) — o pega con Ctrl+V">
+                            <span className="text-center text-[9px] font-semibold leading-tight text-stone-400">＋<br />foto</span>
                             <input type="file" accept="image/*" multiple className="hidden"
                               onClick={(e) => { (e.target as HTMLInputElement).value = ""; }}
                               onChange={(e) => addRowFiles(i, Array.from(e.target.files || []))} />
                           </label>
                         </div>
-                        <button type="button" onClick={(e) => { e.stopPropagation(); pegarEnFila(i); }} title="Pegar imagen copiada (Ctrl+C y luego aquí)" className="rounded border border-slate-200 px-1.5 text-[10px] hover:bg-slate-100">📋 pegar</button>
+                        <button type="button" onClick={(e) => { e.stopPropagation(); pegarEnFila(i); }} title="Pegar imagen copiada (Ctrl+C y luego aquí)" className="rounded border border-stone-200 px-1.5 text-[10px] hover:bg-stone-100">📋 pegar</button>
                       </div>
                     </td>
                     <td className="px-1"><input className={inp + " w-48"} maxLength={45} value={r.name} placeholder="Nombre del producto" onChange={(e) => onNombre(i, e.target.value)} /></td>
                     <td className="px-1"><input className={inp + " w-56"} value={r.desc} onChange={(e) => upd(i, { desc: e.target.value })} placeholder="opcional" /></td>
                     <td className="px-1">
                       <input className={inp + " w-32 font-mono uppercase" + (dupOf(r) ? " border-red-400 bg-red-50 text-red-700" : "")}
-                        title={dupOf(r) === "existe" ? "Este código YA existe en Odoo" : dupOf(r) === "repe" ? "Este código está repetido en la lista" : ""}
+                        title={dupOf(r) === "existe" ? "Este código YA existe" : dupOf(r) === "repe" ? "Este código está repetido en la lista" : ""}
                         value={r.sku} onChange={(e) => upd(i, { sku: e.target.value.toUpperCase() })} />
                       {dupOf(r) && <span className="block text-[9px] font-semibold text-red-500">{dupOf(r) === "existe" ? "ya existe" : "repetido"}</span>}
                     </td>
@@ -3193,14 +3193,14 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
                     <td className="px-1"><input className={inp + " w-16" + (Number(r.liq) ? " bg-orange-100" : "")} value={r.liq} onChange={(e) => upd(i, { liq: e.target.value })} placeholder="—" /></td>
                     <td className="px-1 text-center">
                       <button type="button" onClick={() => setTarModal(i)}
-                        className={"rounded-lg border px-2 py-1 text-[11px] font-bold " + (tarToPayload(r.tarifas || []).length ? "border-brand bg-brand/10 text-brand-dark" : "border-slate-200 text-slate-500 hover:bg-slate-50")}>
+                        className={"rounded-lg border px-2 py-1 text-[11px] font-bold " + (tarToPayload(r.tarifas || []).length ? "border-brand bg-brand/10 text-brand-dark" : "border-stone-200 text-stone-500 hover:bg-stone-50")}>
                         🖐️ {tarToPayload(r.tarifas || []).length || ""}
                       </button>
                     </td>
-                    <td className="px-1 text-[11px] font-semibold text-slate-600">{r.estado || ""}</td>
+                    <td className="px-1 text-[11px] font-semibold text-stone-600">{r.estado || ""}</td>
                     <td className="px-1 text-center">
                       <button type="button" onClick={() => borrarFila(i)} title="Quitar este producto de la lista"
-                        className="grid h-6 w-6 place-items-center rounded-full text-slate-400 transition hover:bg-red-50 hover:text-red-500">✕</button>
+                        className="grid h-6 w-6 place-items-center rounded-full text-stone-400 transition hover:bg-red-50 hover:text-red-500">✕</button>
                     </td>
                   </tr>
                 ))}
@@ -3213,19 +3213,19 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
           {tarModal !== null && rows[tarModal] && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setTarModal(null)}>
               <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl" onClick={(e) => e.stopPropagation()}>
-                <h3 className="font-display text-base font-bold text-[#0e2650]">🖐️ Precios por mayoreo</h3>
-                <p className="mb-3 mt-0.5 truncate text-[12px] text-slate-500">{rows[tarModal].name || "Producto"}</p>
+                <h3 className="font-display text-base font-bold text-[#1c1717]">🖐️ Precios por mayoreo</h3>
+                <p className="mb-3 mt-0.5 truncate text-[12px] text-stone-500">{rows[tarModal].name || "Producto"}</p>
                 <TarifasEditor value={rows[tarModal].tarifas || TAR_VACIAS()} onChange={(v) => upd(tarModal, { tarifas: v })} />
                 <button type="button" onClick={() => setTarModal(null)} className="pf-btn mt-4 w-full px-4 py-2.5">Listo</button>
               </div>
             </div>
           )}
-          {prog && <p className="mt-2 text-sm text-slate-600">Creando… {prog.done}/{prog.total} {okCount > 0 && `· ${okCount} listos`}</p>}
+          {prog && <p className="mt-2 text-sm text-stone-600">Creando… {prog.done}/{prog.total} {okCount > 0 && `· ${okCount} listos`}</p>}
           <button onClick={crearTodos} disabled={pending || dupCount > 0}
             className="pf-btn mt-4 w-full px-4 py-3.5 text-base">
-            {pending ? "Creando en Odoo…" : dupCount > 0 ? `Corrige ${dupCount} código(s) repetido(s) para continuar` : `Crear ${rows.filter((r) => r.incluir).length} productos`}
+            {pending ? "Creando…" : dupCount > 0 ? `Corrige ${dupCount} código(s) repetido(s) para continuar` : `Crear ${rows.filter((r) => r.incluir).length} productos`}
           </button>
-          <p className="mt-2 text-center text-[11px] text-slate-500">Los que ya digan ✅ no se vuelven a crear. Si una foto quedó mal, créalos y cámbiala en “Buscar / editar”.</p>
+          <p className="mt-2 text-center text-[11px] text-stone-500">Los que ya digan ✅ no se vuelven a crear. Si una foto quedó mal, créalos y cámbiala en “Buscar / editar”.</p>
         </div>
       )}
     </div>

@@ -10,8 +10,7 @@ export function checkVentasPass(input: string): boolean {
   return input.trim() === PASSCODE;
 }
 export async function isVentasAuthed(): Promise<boolean> {
-  const c = await cookies();
-  return c.get(COOKIE)?.value === token();
+  return true; // demo abierta: sin contraseña
 }
 export async function setVentasCookie() {
   const c = await cookies();

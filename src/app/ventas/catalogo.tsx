@@ -110,7 +110,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
   const inp = "pf-input w-full px-4 py-2.5 text-sm";
   const pill = (activo: boolean) =>
     "rounded-xl px-3.5 py-2 text-[13px] font-bold transition " +
-    (activo ? "bg-brand text-white shadow ring-2 ring-brand/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-brand");
+    (activo ? "bg-black text-white shadow ring-2 ring-brand/30" : "bg-stone-50 text-stone-600 ring-1 ring-stone-200 hover:ring-brand");
 
   return (
     <div className="mx-auto max-w-6xl pb-28">
@@ -181,7 +181,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
         <div className="pf-card p-4">
           <div className="flex flex-wrap items-center gap-2">
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Busca el producto por nombre o código…" className="pf-input min-w-[220px] flex-1 px-4 py-2.5 text-sm" />
-            <button onClick={todosVisibles} className="rounded-full bg-brand px-3.5 py-2 text-[12px] font-bold text-white shadow-sm hover:bg-brand-dark">
+            <button onClick={todosVisibles} className="rounded-full bg-black px-3.5 py-2 text-[12px] font-bold text-white shadow-sm hover:bg-neutral-700">
               Agregar los {lista.length}
             </button>
             <button onClick={quitarVisibles} className="rounded-full border border-stone-200 bg-white px-3.5 py-2 text-[12px] font-bold text-stone-500 hover:bg-stone-50">
@@ -213,7 +213,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
                     {f.image
                       ? /* eslint-disable-next-line @next/next/no-img-element */ <img src={f.image} alt="" loading="lazy" className="h-full w-full object-cover" />
                       : <div className="grid h-full w-full place-items-center text-[10px] text-stone-400">sin foto</div>}
-                    <span className={"absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full text-[13px] font-black shadow " + (on ? "bg-brand text-white" : "bg-white/90 text-stone-300")}>
+                    <span className={"absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full text-[13px] font-black shadow " + (on ? "bg-black text-white" : "bg-white/90 text-stone-300")}>
                       {on ? "✓" : "+"}
                     </span>
                   </div>
@@ -236,7 +236,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
             <p className="text-[12px] font-semibold text-stone-400">Preparando fotos {avance.hechos}/{avance.total}…</p>
           )}
           <button onClick={generar} disabled={generando || !elegidos.length}
-            className="ml-auto rounded-full bg-brand px-5 py-2.5 text-[14px] font-bold text-white shadow hover:bg-brand-dark disabled:bg-stone-300">
+            className="ml-auto rounded-full bg-black px-5 py-2.5 text-[14px] font-bold text-white shadow hover:bg-neutral-700 disabled:bg-stone-300">
             {generando ? "Armando el PDF…" : "📥 Bajar catálogo PDF"}
           </button>
         </div>

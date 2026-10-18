@@ -46,9 +46,9 @@ export function checkPasscodeFor(nombre: string, input: string): boolean {
   return input.trim() === PASSCODE;
 }
 
+// Demo abierta: sin contraseña. Todos entran como aprobadores.
 export async function isAuthed(): Promise<boolean> {
-  const c = await cookies();
-  return c.get(COOKIE)?.value === token();
+  return true;
 }
 
 export async function setAuthCookie() {
@@ -79,7 +79,7 @@ export async function setUserCookie(nombre: string) {
 
 export async function getUsuario(): Promise<string> {
   const c = await cookies();
-  return c.get(USER_COOKIE)?.value || "";
+  return c.get(USER_COOKIE)?.value || "Ana";
 }
 
 // Rol: "aprobador" (Ana/Luis con PIN) o "colab" (Sofía/Mario/otros → van a revisión)
@@ -91,6 +91,5 @@ export async function setRoleCookie(rol: "aprobador" | "colab") {
 }
 
 export async function esAprobador(): Promise<boolean> {
-  const c = await cookies();
-  return c.get(ROLE_COOKIE)?.value === "aprobador";
+  return true;
 }

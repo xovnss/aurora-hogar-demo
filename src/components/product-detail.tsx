@@ -273,7 +273,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
                 <p className="text-[11px] leading-snug text-stone-500">🧡 {SITE.memberNote}</p>
                 {SITE.communityUrl && (
                   <a href={SITE.communityUrl} target="_blank" rel="noopener"
-                     className="shrink-0 rounded-full bg-brand-dark px-3 py-1 text-[11px] font-bold text-white hover:opacity-90">
+                     className="shrink-0 rounded-full bg-black px-3 py-1 text-[11px] font-bold text-white hover:opacity-90">
                     Unirme →
                   </a>
                 )}

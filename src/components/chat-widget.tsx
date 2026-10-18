@@ -66,7 +66,7 @@ export default function ChatWidget() {
         <button
           onClick={() => setAbierto(true)}
           aria-label="Abrir el asistente de BAM!"
-          className="fixed bottom-20 right-4 z-40 flex items-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-extrabold uppercase tracking-wide text-white shadow-lg shadow-black/30 transition hover:bg-brand-dark sm:right-5"
+          className="fixed bottom-20 right-4 z-40 flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-extrabold uppercase tracking-wide text-white shadow-lg shadow-black/30 transition hover:bg-neutral-700 sm:right-5"
         >
           <span aria-hidden>💬</span> ¿Qué talla soy?
         </button>
@@ -87,7 +87,7 @@ export default function ChatWidget() {
           <div className="flex-1 space-y-2 overflow-y-auto bg-neutral-50 px-3 py-3">
             {msgs.map((m, i) => (
               <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
-                <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-snug ${m.role === "user" ? "bg-brand text-white" : "border border-black/10 bg-white text-neutral-900"}`}>
+                <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-snug ${m.role === "user" ? "bg-black text-white" : "border border-black/10 bg-white text-neutral-900"}`}>
                   <Texto t={m.content} />
                 </div>
               </div>
@@ -96,7 +96,7 @@ export default function ChatWidget() {
             {msgs.length === 1 && (
               <div className="flex flex-wrap gap-2 pt-1">
                 {SUGERENCIAS.map((s) => (
-                  <button key={s} onClick={() => enviar(s)} className="rounded-full border border-brand/40 bg-white px-3 py-1.5 text-xs font-semibold text-brand hover:bg-brand hover:text-white">{s}</button>
+                  <button key={s} onClick={() => enviar(s)} className="rounded-full border border-brand/40 bg-white px-3 py-1.5 text-xs font-semibold text-brand hover:bg-black hover:text-white">{s}</button>
                 ))}
               </div>
             )}
@@ -110,7 +110,7 @@ export default function ChatWidget() {
               placeholder="Ej. mido 1.75 y peso 72 kg"
               className="min-w-0 flex-1 rounded-full border border-black/15 px-4 py-2 text-base outline-none focus:border-brand sm:text-sm"
             />
-            <button disabled={cargando || !texto.trim()} className="rounded-full bg-brand px-4 py-2 text-sm font-bold text-white disabled:opacity-40">Enviar</button>
+            <button disabled={cargando || !texto.trim()} className="rounded-full bg-black px-4 py-2 text-sm font-bold text-white disabled:opacity-40">Enviar</button>
           </form>
         </div>
       )}
