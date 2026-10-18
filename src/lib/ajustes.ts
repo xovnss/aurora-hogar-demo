@@ -1,5 +1,5 @@
 // Motivos de "📋 Conteos y ajustes" (solo Ximena y Carlos). Compartido entre la app (ui) y el
-// servidor (odoo-write), por eso no importa nada del servidor.
+// servidor, por eso no importa nada del servidor.
 //   signo "±" → puede sumar o restar (ajuste de inventario con el motivo como referencia)
 //   signo "-" → solo resta; en Odoo es un traslado real a su ubicación virtual (Merma, Hurto…)
 export type MotivoAjuste = "conteo" | "merma" | "hurto" | "devolucion" | "uso" | "correccion";

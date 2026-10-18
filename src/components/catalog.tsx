@@ -486,7 +486,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
             {buscando && <button onClick={() => setQ("")} className="mt-2 block w-full font-semibold text-brand underline">Limpiar búsqueda</button>}
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-4">
             {visibles.map((g) => <ProductCard key={g.key} g={g} onOpen={() => abrir(g)} />)}
           </div>
         )}

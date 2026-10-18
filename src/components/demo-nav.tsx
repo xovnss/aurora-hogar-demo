@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-// Barra de la demo: la plataforma tiene tres pantallas y las dos internas piden contraseña.
+// Barra de la demo: el catálogo es público y las fichas de ventas piden contraseña.
 export default function DemoNav() {
   const item = "rounded-full px-3 py-1 transition hover:bg-white/15";
   return (
@@ -11,8 +11,7 @@ export default function DemoNav() {
       <span className="px-2 text-white/60">Demo</span>
       <Link href="/" className={item}>Catálogo</Link>
       <Link href="/ventas" className={item}>Fichas de ventas</Link>
-      <Link href="/caja" className={item}>Caja</Link>
-      <span className="hidden px-2 text-white/60 sm:inline">contraseña: demo</span>
+      <span className="hidden px-2 text-white/60 sm:inline">fichas: contraseña demo</span>
     </nav>
   );
 }

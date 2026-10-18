@@ -1,7 +1,7 @@
 # BAM! — demo
 
-Tienda de playeras oversize con mensaje (**«a brand made for you»**) con catálogo, fichas de ventas,
-caja y un **chatbot de ayuda**. Es una demo: los datos son de ejemplo (sucursales, existencias y precios
+Tienda de ropa y accesorios con mensaje (**«a brand made for you»**) con catálogo, fichas de ventas
+y un **chatbot de ayuda**. Es una demo: los datos son de ejemplo (sucursales, existencias y precios
 inventados); las 11 playeras y las fotos son del catálogo real de la marca.
 
 ## Cómo correrla
@@ -17,7 +17,6 @@ Y se abre en `http://localhost:3000`.
 |---|---|---|
 | Catálogo | `/` | — |
 | Fichas para ventas | `/ventas` | `demo` |
-| Corte de caja | `/caja` | `demo` |
 
 ## El chatbot
 
@@ -45,5 +44,3 @@ Cómo funciona (`src/app/api/chat/route.ts` + `src/lib/chat-tools.ts`):
 ## Variables de entorno
 
 Ver `.env.example`. La llave de IA **nunca** se guarda en el repo: se agrega en el panel de Vercel.
-
-Lo que se capture en caja vive en memoria del servidor y se borra al reiniciar, así que la demo siempre arranca limpia.

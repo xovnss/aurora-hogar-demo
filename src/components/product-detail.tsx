@@ -4,6 +4,7 @@ import type { ProductGroup, Variant } from "@/lib/group";
 import { SITE } from "@/lib/config";
 import { useCart } from "./cart-context";
 import { renderNegritas } from "@/lib/richtext";
+import { SUCURSALES } from "@/lib/tallas";
 
 const money = (n: number) => "$" + Math.round(n).toLocaleString("es-MX");
 // Ordena como la gente espera: Modelo 2 antes que Modelo 10, no alfabético ("10" < "2").
@@ -98,13 +99,13 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
-      <div className="relative z-10 flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl sm:flex-row">
+      <div className="relative z-10 flex h-[100dvh] w-full max-w-4xl flex-col overflow-y-auto bg-white shadow-2xl sm:h-auto sm:max-h-[92vh] sm:flex-row sm:overflow-hidden sm:rounded-3xl">
         <button
           onClick={onClose}
           aria-label="Cerrar"
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-lg text-stone-600 shadow hover:bg-white"
+          className="absolute right-3 top-3 z-20 max-sm:fixed flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-lg text-stone-600 shadow hover:bg-white"
         >
           ✕
         </button>
@@ -114,23 +115,23 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
           onClick={compartir}
           aria-label="Compartir este producto"
           title="Copiar el link de este producto"
-          className="absolute right-14 top-3 z-20 flex h-9 items-center gap-1 rounded-full bg-white/90 px-3 text-[13px] font-bold text-brand-dark shadow hover:bg-white"
+          className="absolute right-14 top-3 z-20 max-sm:fixed flex h-9 items-center gap-1 rounded-full bg-white/90 px-3 text-[13px] font-bold text-brand-dark shadow hover:bg-white"
         >
           {copiado ? "✓ Link copiado" : "🔗 Compartir"}
         </button>
 
         {/* Imagen grande + galería (izquierda) */}
-        <div className="flex flex-col items-center justify-center gap-2 bg-brand-light/40 p-2 sm:w-1/2 sm:gap-3 sm:p-5">
+        <div className="flex shrink-0 flex-col items-center justify-center gap-2 bg-stone-100 sm:w-1/2 sm:gap-3 sm:p-5">
           {/* Foto + flechitas para pasar de un modelo a otro sin abrir el desplegable */}
           <div className="relative w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {/* Clic en la foto = verla en grande: aquí el estampado es lo que vende. */}
             {shownImg ? (
               <img src={shownImg} alt={g.base} onClick={() => setZoom(shownImg)}
-                   className="max-h-[26vh] w-full cursor-zoom-in object-contain sm:max-h-[72vh]" />
+                   className="max-h-[62vh] w-full cursor-zoom-in object-contain sm:max-h-[72vh]" />
             ) : (
               /* Sin foto: antes salía el ícono de imagen rota. Mejor decirlo con todas sus letras. */
-              <div className="grid aspect-square max-h-[26vh] w-full place-items-center rounded-xl bg-white/70 text-[12px] font-semibold text-stone-400 sm:max-h-[72vh]">
+              <div className="grid aspect-square max-h-[62vh] w-full place-items-center rounded-xl bg-white/70 text-[12px] font-semibold text-stone-400 sm:max-h-[72vh]">
                 Este modelo aún no tiene foto
               </div>
             )}
@@ -164,27 +165,34 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
         </div>
 
         {/* Info (derecha) */}
-        <div className="flex flex-1 flex-col overflow-y-auto p-4 sm:w-1/2 sm:p-6">
+        <div className="flex flex-1 flex-col p-5 sm:w-1/2 sm:overflow-y-auto sm:p-6">
           {sel.precioLiquidacion != null && (
             <span className="mb-2 w-fit rounded-full bg-red-500 px-2 py-0.5 text-[11px] font-bold text-white">🔥 LIQUIDACIÓN</span>
           )}
-          <h2 className="font-display pr-28 text-xl font-bold leading-tight text-brand-deep sm:pr-32 sm:text-2xl">{g.base}</h2>
+          <h2 className="font-display text-2xl font-black uppercase leading-[1.05] tracking-tight text-neutral-900 sm:pr-32 sm:text-3xl">{g.base}</h2>
           <p className="mt-0.5 text-[11px] text-stone-400">{sel.sku}</p>
 
           {/* Selector: MEDIDA y COLOR / DISEÑO como menús desplegables */}
           {multi && (
             <div className={"order-2 mt-3 gap-2.5 " + (hasSizeStep && hasColorStep ? "grid grid-cols-1 sm:grid-cols-2" : "space-y-2.5")}>
               {hasSizeStep && (
-                <label className="block">
-                  <span className="mb-1 block text-sm font-semibold text-stone-700">Elige tu talla</span>
-                  <select value={sel.size} onChange={(e) => pickSize(e.target.value)} className={SEL}>
+                <div className="block">
+                  <span className="mb-2 block text-[11px] font-extrabold uppercase tracking-widest text-neutral-500">Elige tu talla</span>
+                  <div className="flex flex-wrap gap-2">
                     {sizeList.map((s) => {
-                      const ps = g.variants.filter((v) => v.size === s).map((v) => v.precioPublico);
-                      const min = Math.min(...ps), max = Math.max(...ps);
-                      return <option key={s} value={s}>{s} — {min === max ? money(min) : `desde ${money(min)}`}</option>;
+                      const sinStock = !SITE.ignoreStock && g.variants.filter((v) => v.size === s).every((v) => v.stock <= 0);
+                      const activa = sel.size === s;
+                      return (
+                        <button key={s} type="button" onClick={() => pickSize(s)}
+                          className={"min-w-[3.25rem] border px-4 py-2.5 text-sm font-extrabold uppercase tracking-wide transition " +
+                            (activa ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-300 bg-white text-neutral-900 hover:border-neutral-900") +
+                            (sinStock ? " text-neutral-300 line-through" : "")}>
+                          {s}
+                        </button>
+                      );
                     })}
-                  </select>
-                </label>
+                  </div>
+                </div>
               )}
 
               {hasColorStep && (
@@ -278,6 +286,23 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             <p className="order-4 mt-3 text-center text-[13px] font-semibold text-brand-dark">
               📦 Quedan {sel.stock} {sel.stock === 1 ? "pieza" : "piezas"}
             </p>
+          )}
+          {sel.stockSucursal && !SITE.ignoreStock && (
+            <div className="order-4 mt-3 rounded-xl border border-neutral-200 p-3">
+              <p className="text-[11px] font-extrabold uppercase tracking-widest text-neutral-500">Disponible en tienda</p>
+              <ul className="mt-2 space-y-1">
+                {SUCURSALES.map((su) => {
+                  const n = sel.stockSucursal?.[su.id] ?? 0;
+                  return (
+                    <li key={su.id} className="flex items-center justify-between text-[13px]">
+                      <span className="text-neutral-700">{su.nombre.replace("BAM! ", "")} · {su.ciudad}</span>
+                      <span className={n > 0 ? "font-bold text-neutral-900" : "text-neutral-400"}>{n > 0 ? (n <= 3 ? `Últimas ${n}` : `${n} piezas`) : "Agotado"}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="mt-2 text-[11px] text-neutral-400">¿No sabes tu talla? Pregúntale al chat 💬</p>
+            </div>
           )}
           <button
             disabled={agotado}

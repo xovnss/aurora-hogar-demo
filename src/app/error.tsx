@@ -1,6 +1,6 @@
 "use client";
 
-// Red de seguridad para cualquier ruta sin su propio error.tsx (fichas, caja, corte, reportes,
+// Red de seguridad para cualquier ruta sin su propio error.tsx (fichas, reportes,
 // catálogo). Evita la pantalla cruda de error de Vercel; ofrece reintentar/recargar.
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
