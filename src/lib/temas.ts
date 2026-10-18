@@ -7,7 +7,7 @@ export type Tema = {
   id: string;
   label: string;
   emoji: string; // para el botón en /subir
-  // Overrides de variables CSS (recolorean todo lo que usa aurora / brand-deep, etc.)
+  // Overrides de variables CSS (recolorean todo lo que usa brand / brand-deep, etc.)
   vars: Record<string, string>;
   hero: string; // portada grande (con el texto ya incluido en la imagen)
   logo: string; // logo BAM! en el color del tema
