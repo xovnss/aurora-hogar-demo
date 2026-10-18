@@ -16,12 +16,17 @@ export const GUIA: Record<Talla, { pecho: [number, number]; cintura: [number, nu
 export type Ajuste = "oversize" | "ajustado";
 
 // Recomienda talla con las medidas que haya (pecho manda; si no hay, altura y peso aproximan).
-export function recomendarTalla(m: { pecho?: number; cintura?: number; altura?: number; peso?: number; ajuste?: Ajuste }): {
+export type Prenda = "playera" | "sudadera" | "pantalon";
+export function recomendarTalla(m: { pecho?: number; cintura?: number; altura?: number; peso?: number; ajuste?: Ajuste; prenda?: Prenda }): {
   talla: Talla; alternativa: Talla | null; porque: string; faltan: string[];
 } {
   const ajuste = m.ajuste || "oversize";
   let idx = -1; let porque = "";
-  if (m.pecho && m.pecho > 40) {
+  if (m.prenda === "pantalon" && m.cintura && m.cintura > 40) {
+    const i = TALLAS.findIndex((t) => m.cintura! <= GUIA[t].cintura[1]);
+    idx = i === -1 ? TALLAS.length - 1 : i;
+    porque = `tu cintura de ${m.cintura} cm cae en la talla ${TALLAS[idx]} (${GUIA[TALLAS[idx]].cintura[0]}–${GUIA[TALLAS[idx]].cintura[1]} cm)`;
+  } else if (m.pecho && m.pecho > 40) {
     const i = TALLAS.findIndex((t) => m.pecho! <= GUIA[t].pecho[1]);
     idx = i === -1 ? TALLAS.length - 1 : i;
     porque = `tu pecho de ${m.pecho} cm cae en la talla ${TALLAS[idx]} (${GUIA[TALLAS[idx]].pecho[0]}–${GUIA[TALLAS[idx]].pecho[1]} cm)`;

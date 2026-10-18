@@ -24,12 +24,14 @@ const RANGOS: { id: string; label: string; min: number; max: number }[] = [
 // Una "sección" es una categoría padre del archivo (Recámara, Baño…) o una especial
 // (Ofertas / Liquidación / Navidad / Halloween).
 type SeccionMeta = { id: string; emoji: string; special?: "oferta" | "liq" | "navidad" | "halloween" | "novedad" };
-const EMOJI: Record<string, string> = { "Al frente": "👕", "En la espalda": "🔙", "Novedades": "🆕" };
+const EMOJI: Record<string, string> = { "Al frente": "👕", "En la espalda": "🔙", "Sudaderas": "🧥", "Pantalones": "👖", "Novedades": "🆕" };
 // Pestañas del menú de arriba. sec = sección a la que llevan (si no, baja a las categorías).
 const TABS: { label: string; sec?: string }[] = [
   { label: "Todo" },
   { label: "Al frente", sec: "Al frente" },
   { label: "En la espalda", sec: "En la espalda" },
+  { label: "Sudaderas", sec: "Sudaderas" },
+  { label: "Pantalones", sec: "Pantalones" },
   { label: "Novedades", sec: "Novedades" },
   { label: "Liquidación", sec: "Liquidación" },
 ];
@@ -37,6 +39,8 @@ const TABS: { label: string; sec?: string }[] = [
 const CAT_IMG: Record<string, string> = {
   "Al frente": "/categorias/frente.jpg",
   "En la espalda": "/categorias/espalda.jpg",
+  "Sudaderas": "/categorias/sudaderas.jpg",
+  "Pantalones": "/categorias/pantalones.jpg",
   "Novedades": "/categorias/novedades.jpg",
   "Liquidación": "/categorias/liquidacion.jpg",
 };
@@ -512,7 +516,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={t.logo} alt="BAM!" className="h-10 w-auto" />
             </span>
-            <p className="mt-3 max-w-xs text-sm text-stone-500">Playeras oversize con mensaje. a brand made for you.</p>
+            <p className="mt-3 max-w-xs text-sm text-stone-500">Playeras, sudaderas y pantalones oversize con mensaje. a brand made for you.</p>
           </div>
           <div>
             <p className="text-[13px] font-bold uppercase tracking-wide text-[#2b1111]">Categorías</p>

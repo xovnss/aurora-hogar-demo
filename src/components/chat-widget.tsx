@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const SUGERENCIAS = ["¿Qué talla soy?", "¿Quedan Spirit Being en M?", "¿Hacen envíos?", "¿Dónde están las tiendas?"];
+const SUGERENCIAS = ["¿Qué talla soy?", "¿Quedan Spirit Being en M?", "¿Qué talla de pantalón soy?", "¿Hacen envíos?", "¿Dónde están las tiendas?"];
 const SALUDO: Msg = {
   role: "assistant",
   content: "¡Hola! Soy el asistente de BAM! 👋 Te ayudo a elegir **talla**, a ver **cuántas piezas quedan en cada sucursal** y con tus **envíos**.",

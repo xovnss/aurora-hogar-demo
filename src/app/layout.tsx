@@ -11,7 +11,7 @@ const fraunces = Fraunces({ subsets: ["latin"], weight: ["500", "600", "700"], v
 
 export const metadata: Metadata = {
   title: "BAM! — a brand made for you",
-  description: "BAM! · Playeras oversize con mensaje. Demo de tienda con chatbot de tallas, existencias por sucursal y envíos.",
+  description: "BAM! · Playeras, sudaderas y pantalones oversize con mensaje. Demo de tienda con chatbot de tallas, existencias por sucursal y envíos.",
 };
 
 export default function RootLayout({

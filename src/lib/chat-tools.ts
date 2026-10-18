@@ -2,7 +2,7 @@
 // ejemplo, la guía de tallas y las políticas de envío. Las usan los dos "cerebros" del chat:
 // el modelo de IA (por function calling) y el modo por reglas (cuando no hay llave de IA).
 import { demoProductos, disenos, FAMILIAS } from "./demo-datos";
-import { ENVIOS, GUIA, SUCURSALES, TALLAS, recomendarTalla, type Ajuste, type Talla } from "./tallas";
+import { ENVIOS, GUIA, SUCURSALES, TALLAS, recomendarTalla, type Ajuste, type Prenda, type Talla } from "./tallas";
 
 export type ToolSpec = { name: string; description: string; parameters: Record<string, unknown> };
 
@@ -30,17 +30,19 @@ export function buscarDiseno(texto: string) {
 }
 
 // ---------- 1) recomendar talla ----------
-export function toolRecomendarTalla(a: { pecho_cm?: number; cintura_cm?: number; altura_cm?: number; peso_kg?: number; ajuste?: string }) {
+export function toolRecomendarTalla(a: { pecho_cm?: number; cintura_cm?: number; altura_cm?: number; peso_kg?: number; ajuste?: string; prenda?: string }) {
+  const prenda: Prenda = a.prenda === "pantalon" ? "pantalon" : a.prenda === "sudadera" ? "sudadera" : "playera";
   const ajuste: Ajuste = a.ajuste === "ajustado" ? "ajustado" : "oversize";
-  const r = recomendarTalla({ pecho: a.pecho_cm, cintura: a.cintura_cm, altura: a.altura_cm, peso: a.peso_kg, ajuste });
+  const r = recomendarTalla({ pecho: a.pecho_cm, cintura: a.cintura_cm, altura: a.altura_cm, peso: a.peso_kg, ajuste, prenda });
   if (r.faltan.length) {
-    return { necesito: "Para recomendar talla necesito al menos una de estas: contorno de pecho en cm, o altura en cm (y de preferencia peso en kg).", guia: guiaTallas() };
+    return { necesito: prenda === "pantalon" ? "Para el pantalón necesito tu cintura en cm (o tu altura y peso)." : "Para recomendar talla necesito al menos una de estas: contorno de pecho en cm, o altura en cm (y de preferencia peso en kg).", guia: guiaTallas() };
   }
   const g = GUIA[r.talla];
   return {
     talla_recomendada: r.talla,
     porque: r.porque,
-    corte: "Las playeras BAM! son oversize: tu talla de siempre queda holgada como en las fotos.",
+    prenda,
+    corte: prenda === "pantalon" ? "Los pantalones BAM! son wide leg (pierna muy ancha) y de tiro medio: la talla se elige por cintura; el bajo se dobla o se arrastra, como en las fotos." : "Las prendas BAM! son oversize: tu talla de siempre queda holgada como en las fotos.",
     si_la_quieres_mas_pegada: ajuste === "ajustado" ? r.alternativa : TALLAS[Math.max(0, TALLAS.indexOf(r.talla) - 1)],
     si_la_quieres_mas_holgada: ajuste === "oversize" ? r.alternativa : TALLAS[Math.min(TALLAS.length - 1, TALLAS.indexOf(r.talla) + 1)],
     medidas_de_la_prenda_cm: { ancho_pecho: g.ancho, largo: g.largo },
@@ -75,7 +77,7 @@ export function toolExistencias(a: { diseno: string; talla?: string; sucursal?: 
     });
   const precio = f.liquidacion ?? f.publico;
   return {
-    diseno: f.nombre, color: f.color, precio_publico: f.publico, precio_socios: f.socio, precio_liquidacion: f.liquidacion ?? null, precio_vigente: precio,
+    diseno: f.nombre, tipo: f.prenda || "playera", color: f.color, precio_publico: f.publico, precio_socios: f.socio, precio_liquidacion: f.liquidacion ?? null, precio_vigente: precio,
     existencias_por_talla: filas,
     nota: "Piezas disponibles ahora. 0 = agotado en esa sucursal. «envío a domicilio» es la bodega, de donde salen los paquetes.",
   };
@@ -83,7 +85,7 @@ export function toolExistencias(a: { diseno: string; talla?: string; sucursal?: 
 
 // ---------- 3) catálogo ----------
 export function toolListarDisenos() {
-  return disenos().map((d) => ({ diseno: d.nombre, color: d.color, donde_va_el_estampado: d.catalogo.toLowerCase().includes("espalda") ? "espalda" : "frente", precio: d.liquidacion ?? d.precio, precio_socios: d.precioSocio, en_liquidacion: d.liquidacion != null }));
+  return disenos().map((d) => ({ diseno: d.nombre, color: d.color, tipo: d.prenda, donde_va_el_estampado: d.catalogo.toLowerCase().includes("espalda") ? "espalda" : "frente", precio: d.liquidacion ?? d.precio, precio_socios: d.precioSocio, en_liquidacion: d.liquidacion != null }));
 }
 
 // ---------- 4) envíos, recoger y cambios ----------
@@ -105,13 +107,14 @@ export function toolEnvios(a: { ciudad?: string; total_pedido?: number }) {
 export const TOOLS: ToolSpec[] = [
   {
     name: "recomendar_talla",
-    description: "Recomienda la talla de playera (XS–XL) a partir de las medidas del cliente. Úsala en cuanto el cliente dé pecho, altura, peso o cintura.",
+    description: "Recomienda la talla (XS–XL) de playera, sudadera o pantalón a partir de las medidas del cliente. Úsala en cuanto dé pecho, altura, peso o cintura. Para pantalones lo que manda es la cintura.",
     parameters: { type: "object", properties: {
       pecho_cm: { type: "number", description: "Contorno de pecho en cm" },
       cintura_cm: { type: "number", description: "Contorno de cintura en cm" },
       altura_cm: { type: "number", description: "Altura en cm (1.75 m = 175)" },
       peso_kg: { type: "number", description: "Peso en kg" },
       ajuste: { type: "string", enum: ["oversize", "ajustado"], description: "Cómo la quiere: holgada (por defecto) o más pegada" },
+      prenda: { type: "string", enum: ["playera", "sudadera", "pantalon"], description: "Qué prenda es; por defecto playera" },
     } },
   },
   {
@@ -123,7 +126,7 @@ export const TOOLS: ToolSpec[] = [
       sucursal: { type: "string", description: "Sucursal o ciudad, si el cliente la mencionó" },
     }, required: ["diseno"] },
   },
-  { name: "listar_disenos", description: "Lista todos los diseños de playera con color, precio y si están en liquidación.", parameters: { type: "object", properties: {} } },
+  { name: "listar_disenos", description: "Lista todos los diseños (playeras, sudaderas y pantalones) con color, precio y si están en liquidación.", parameters: { type: "object", properties: {} } },
   {
     name: "info_envios",
     description: "Costos y tiempos de envío, recoger en sucursal, cambios y formas de pago.",
@@ -134,7 +137,7 @@ export const TOOLS: ToolSpec[] = [
 export function ejecutar(nombre: string, args: Record<string, unknown>): unknown {
   const num = (v: unknown) => (typeof v === "number" && isFinite(v) ? v : typeof v === "string" && v.trim() && isFinite(Number(v)) ? Number(v) : undefined);
   switch (nombre) {
-    case "recomendar_talla": return toolRecomendarTalla({ pecho_cm: num(args.pecho_cm), cintura_cm: num(args.cintura_cm), altura_cm: num(args.altura_cm), peso_kg: num(args.peso_kg), ajuste: String(args.ajuste || "") });
+    case "recomendar_talla": return toolRecomendarTalla({ pecho_cm: num(args.pecho_cm), cintura_cm: num(args.cintura_cm), altura_cm: num(args.altura_cm), peso_kg: num(args.peso_kg), ajuste: String(args.ajuste || ""), prenda: String(args.prenda || "") });
     case "consultar_existencias": return toolExistencias({ diseno: String(args.diseno || ""), talla: args.talla ? String(args.talla) : undefined, sucursal: args.sucursal ? String(args.sucursal) : undefined });
     case "listar_disenos": return toolListarDisenos();
     case "info_envios": return toolEnvios({ ciudad: args.ciudad ? String(args.ciudad) : undefined, total_pedido: num(args.total_pedido) });
@@ -181,11 +184,12 @@ export function responderPorReglas(historial: Msg[]): string {
   }
   // talla
   const med = medidas(users);
+  const prenda = /(pantalon|jean|mezclilla|cargo|denim)/.test(norm(todo)) ? "pantalon" : /(sudadera|hoodie|crewneck|chamarra)/.test(norm(todo)) ? "sudadera" : "playera";
   if (/(talla|medida|mido|peso|pecho|cintura|me queda|me va|oversize|que size)/.test(q) || med.altura_cm || med.pecho_cm) {
-    if (!med.altura_cm && !med.pecho_cm && !med.cintura_cm) return "Para recomendarte talla dime tu **altura** y **peso** (por ejemplo «mido 1.75 y peso 72 kg») o tu **pecho en cm**. Las playeras son oversize: tu talla de siempre queda holgada como en las fotos.";
-    const r = toolRecomendarTalla({ ...med, ajuste: /(pegad|ajustad|justa|slim)/.test(q) ? "ajustado" : "oversize" }) as { talla_recomendada?: string; porque?: string; si_la_quieres_mas_pegada?: string; si_la_quieres_mas_holgada?: string; necesito?: string };
+    if (!med.altura_cm && !med.pecho_cm && !med.cintura_cm) return "Para recomendarte talla dime tu **altura** y **peso** (por ejemplo «mido 1.75 y peso 72 kg») o tu **pecho en cm**; para pantalones, tu **cintura en cm**. Todo es oversize: tu talla de siempre queda holgada como en las fotos.";
+    const r = toolRecomendarTalla({ ...med, prenda, ajuste: /(pegad|ajustad|justa|slim)/.test(q) ? "ajustado" : "oversize" }) as { talla_recomendada?: string; porque?: string; si_la_quieres_mas_pegada?: string; si_la_quieres_mas_holgada?: string; necesito?: string };
     if (!r.talla_recomendada) return r.necesito || AYUDA;
-    return `Te recomiendo **${r.talla_recomendada}** (${r.porque}). Es oversize, así que queda holgada como en las fotos.\n• Más pegada: **${r.si_la_quieres_mas_pegada}**\n• Más holgada: **${r.si_la_quieres_mas_holgada}**\n\nSi no te convence, el cambio de talla es gratis (15 días). ¿Quieres que revise si hay en alguna sucursal?`;
+    return `Te recomiendo **${r.talla_recomendada}** (${r.porque}). Es oversize/wide leg, así que queda holgada como en las fotos.\n• Más pegada: **${r.si_la_quieres_mas_pegada}**\n• Más holgada: **${r.si_la_quieres_mas_holgada}**\n\nSi no te convence, el cambio de talla es gratis (15 días). ¿Quieres que revise si hay en alguna sucursal?`;
   }
   // envíos
   if (/(envio|envian|mandan|domicilio|paqueteria|llega|tardan|dias|costo|gratis|recoger|recojo)/.test(q)) {
@@ -197,7 +201,7 @@ export function responderPorReglas(historial: Msg[]): string {
   if (/(precio|cuanto|cuesta|socio|club)/.test(q)) {
     const f = diseno;
     if (f) return `**${f.nombre}**: $${f.liquidacion ?? f.publico} público · **$${f.socio} socios**.`;
-    return "Las playeras van de **$599 a $649** (público) y **$499 a $549** para socios. Con 3 o más piezas hay un descuento extra.";
+    return "Playeras de **$599 a $649**, sudaderas **$899** y pantalones **$1,099** (público); para socios **$499–$549**, **$799** y **$949**. Con 3 o más piezas hay un descuento extra.";
   }
   if (/^(hola|buenas|hey|hi|que tal|buen dia|buenos dias)\b/.test(q)) return "¡Hola! Soy el asistente de BAM! 👋 " + AYUDA;
   return AYUDA;

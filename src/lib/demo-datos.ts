@@ -6,6 +6,7 @@ import type { Product } from "./types";
 import { SUCURSALES } from "./tallas";
 
 type Familia = {
+  prenda?: "playera" | "sudadera" | "pantalon"; // por defecto playera
   linea: string;          // prefijo del código (SKU): dos bloques, p. ej. BAM-SPI
   nombre: string;
   catalogo: string;       // sección: Playeras…
@@ -22,6 +23,26 @@ type Familia = {
 };
 
 const M = (s: string) => s.toUpperCase();
+
+const TALLAS_ROPA = ["XS", "S", "M", "L", "XL"];
+
+// Pantalones y sudaderas comparten el mismo formato; sólo cambian nombre, color y estampado.
+function pantalon(linea: string, nombre: string, color: string, foto: string, bordado: string, extra: Partial<Familia> = {}): Familia {
+  return {
+    prenda: "pantalon", linea, nombre, catalogo: "Pantalones", categoria: "Denim oversize",
+    publico: 1099, socio: 949, medidas: TALLAS_ROPA, colores: [""], color, foto,
+    descripcion: `👖 *Pantalón wide leg*\n🎨 *Color:* ${color}\n🧵 *Tela:* mezclilla 100% algodón de 12 oz, lavado en prenda.\n🪡 *Detalle:* ${bordado}\n📏 *Corte:* tiro medio, pierna muy ancha. La talla se elige por cintura; pregúntale al chat.`,
+    ...extra,
+  };
+}
+function sudadera(linea: string, nombre: string, color: string, foto: string, estampado: string, extra: Partial<Familia> = {}): Familia {
+  return {
+    prenda: "sudadera", linea, nombre, catalogo: "Sudaderas", categoria: "Hoodies y crewnecks",
+    publico: 899, socio: 799, medidas: TALLAS_ROPA, colores: [""], color, foto,
+    descripcion: `🧥 *Sudadera oversize*\n🎨 *Color:* ${color}\n🧵 *Tela:* felpa de algodón de 400 g, lavado en prenda.\n🖨️ *Estampado:* ${estampado}\n📏 *Corte:* holgado, hombros caídos; mira la guía de tallas o pregúntale al chat.`,
+    ...extra,
+  };
+}
 
 export const FAMILIAS: Familia[] = [
   {
@@ -94,6 +115,21 @@ export const FAMILIAS: Familia[] = [
     tags: [4],
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Café lavado\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Manos abiertas con un sol, STILL HELD en azul polvo sobre café lavado. «Even here».\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
+  // ── Pantalones ──
+  pantalon("BAM-CAR", "Evergreen Cargo", "Verde olivo", "cargo-olivo", "Rama de hojas bordada en la pierna y en el bolsillo cargo; estrella en la bolsa.", { tags: [4] }),
+  pantalon("BAM-ORB", "Orbit Stars", "Azul claro", "orbit-stars", "Estrellas con órbita bordadas en vino sobre azul desgastado."),
+  pantalon("BAM-WIN", "Winged Denim", "Café lavado", "winged-denim", "Alas de plumas en crema sobre toda la pierna y corazón en el bolsillo.", { tags: [4] }),
+  pantalon("BAM-FLA", "Holy Fire", "Gris humo", "holy-fire", "Flamas azules bordadas en los dos bajos; flama pequeña en el bolsillo."),
+  pantalon("BAM-LUN", "Moon & Stars", "Crudo", "moon-and-stars", "Luna y estrellas bordadas en negro, con trayecto de puntadas."),
+  pantalon("BAM-THO", "Thorn Star", "Morado lavado", "thorn-star", "Estrellas rojas y corona de espinas bordada en relieve.", { liquidacion: 849 }),
+  pantalon("BAM-KOI", "Koi Stream", "Azul índigo", "koi-stream", "Dos carpas koi estampadas con efecto grabado y agua en puntadas."),
+  // ── Sudaderas ──
+  sudadera("BAM-ZIP", "Starbound Zip", "Ciruela lavado", "starbound-zip", "Estrellas con borde deshilachado en el pecho y la manga; cierre completo.", { tags: [4] }),
+  sudadera("BAM-LOV", "Still Loved", "Crema", "still-loved", "Corazón con espinas bordado en vino y «STILL LOVED» debajo.", { categoria: "Crewneck" }),
+  sudadera("BAM-GRO", "Grow in Grace", "Verde salvia", "grow-in-grace", "«GROW IN GRACE» en vino con ramas bordadas en crema.", { categoria: "Crewneck" }),
+  sudadera("BAM-FAI", "Faith Over Fear", "Negro lavado", "faith-over-fear", "Tipografía gigante en crema con brochazo rojo y estrellas en las mangas."),
+  sudadera("BAM-HSE", "Heaven Sent", "Azul rey", "heaven-sent", "«HEAVEN SENT — NOT BY CHANCE» en amarillo en la espalda y estrella en la manga.", { tags: [4] }),
+  sudadera("BAM-UND", "Under His Wings", "Café", "under-his-wings", "Alas de plumas en crema por toda la espalda y «UNDER HIS WINGS» en azul."),
 ];
 
 // Números "al azar" pero SIEMPRE los mismos: así la demo no cambia de un refresco a otro.
@@ -162,6 +198,6 @@ export function demoProductos(): Product[] {
 }
 
 // Para el chatbot: ¿qué diseños hay y cuántas piezas quedan por talla y sucursal?
-export function disenos(): { nombre: string; linea: string; color: string; catalogo: string; categoria: string; precio: number; precioSocio: number; liquidacion: number | null; descripcion: string }[] {
-  return FAMILIAS.map((f) => ({ nombre: f.nombre, linea: f.linea, color: f.color, catalogo: f.catalogo, categoria: f.categoria, precio: f.publico, precioSocio: f.socio, liquidacion: f.liquidacion ?? null, descripcion: f.descripcion }));
+export function disenos(): { nombre: string; prenda: string; linea: string; color: string; catalogo: string; categoria: string; precio: number; precioSocio: number; liquidacion: number | null; descripcion: string }[] {
+  return FAMILIAS.map((f) => ({ nombre: f.nombre, prenda: f.prenda || "playera", linea: f.linea, color: f.color, catalogo: f.catalogo, categoria: f.categoria, precio: f.publico, precioSocio: f.socio, liquidacion: f.liquidacion ?? null, descripcion: f.descripcion }));
 }
