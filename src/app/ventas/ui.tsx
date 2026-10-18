@@ -396,7 +396,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
                   {asesor ? <p className="text-[11px] font-semibold text-white/90">Te atendió: {asesor}</p> : null}
                 </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/bam-logo.png" alt="BAM!" className="h-9 w-auto shrink-0 object-contain" />
+                <img src="/bam-blanco.png" alt="BAM!" className="h-9 w-auto shrink-0 object-contain" />
               </div>
 
               <div className="divide-y divide-stone-100 px-4 py-1">
@@ -428,7 +428,7 @@ function CotizacionView({ fichas }: { fichas: Ficha[] }) {
               <div className="flex items-center justify-between gap-2 px-5 py-3 text-white" style={{ background: "#1c1717" }}>
                 <div className="min-w-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/bam-logo.png" alt="BAM!" className="h-9 w-auto object-contain" />
+                  <img src="/bam-blanco.png" alt="BAM!" className="h-9 w-auto object-contain" />
                   <p className="mt-0.5 text-[9px] font-semibold text-white/70">Cotización — no aparta el producto. Precios sujetos a disponibilidad.</p>
                 </div>
                 {WHATSAPP ? (
@@ -591,7 +591,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
                 <h1 className="text-xl font-black leading-tight">{f.base}</h1>
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bam-logo.png" alt="BAM!" className="x-marca h-9 w-auto shrink-0 object-contain" />
+              <img src="/bam-blanco.png" alt="BAM!" className="x-marca h-9 w-auto shrink-0 object-contain" />
             </div>
             {conMedida && <span className="mt-1.5 inline-block rounded-full bg-white/20 px-3 py-0.5 text-[11px] font-bold backdrop-blur">Talla: {size}</span>}
           </div>
@@ -674,7 +674,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
           <div className="x-marca flex items-center justify-between gap-2 bg-gradient-to-r from-[#2b1111] to-brand px-5 py-3 text-white">
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bam-logo.png" alt="BAM!" className="h-11 w-auto object-contain" />
+              <img src="/bam-blanco.png" alt="BAM!" className="h-11 w-auto object-contain" />
               <p className="mt-0.5 text-[10px] font-semibold text-white/70">a brand made for you</p>
             </div>
             {WHATSAPP && (
