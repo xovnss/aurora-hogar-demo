@@ -17,6 +17,7 @@ Y se abre en `http://localhost:3000`.
 |---|---|---|
 | Catálogo | `/` | — |
 | Fichas para ventas | `/ventas` | `demo` |
+| Subir productos | `/subir` | usuario `Ana` o `Luis`, contraseña `demo`, PIN `1234` (todo en memoria, se reinicia) |
 
 ## El chatbot
 

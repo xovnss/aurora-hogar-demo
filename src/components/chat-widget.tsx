@@ -36,7 +36,7 @@ export default function ChatWidget() {
 
   useEffect(() => { fin.current?.scrollIntoView({ block: "end" }); }, [msgs, cargando, abierto]);
 
-  if (pathname.startsWith("/ventas")) return null;
+  if (pathname.startsWith("/ventas") || pathname.startsWith("/subir")) return null;
 
   async function enviar(contenido: string) {
     const limpio = contenido.trim().slice(0, 500);

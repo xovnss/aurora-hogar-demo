@@ -11,7 +11,8 @@ export default function DemoNav() {
       <span className="px-2 text-white/60">Demo</span>
       <Link href="/" className={item}>Catálogo</Link>
       <Link href="/ventas" className={item}>Fichas de ventas</Link>
-      <span className="hidden px-2 text-white/60 sm:inline">fichas: contraseña demo</span>
+      <Link href="/subir" className={item}>Subir productos</Link>
+      <span className="hidden px-2 text-white/60 sm:inline">contraseña: demo</span>
     </nav>
   );
 }
