@@ -63,10 +63,10 @@ export function toolExistencias(a: { diseno: string; talla?: string; sucursal?: 
     ? SUCURSALES.find((s) => [s.id, norm(s.nombre), norm(s.ciudad)].some((x) => x && (sNorm.includes(x) || x.includes(sNorm)))) ||
       (/(roma|df|mexico|cdmx)/.test(sNorm) ? SUCURSALES[0] : /(gdl|guadalajara|jalisco)/.test(sNorm) ? SUCURSALES[1] : /(mty|monterrey|nuevo leon|san pedro)/.test(sNorm) ? SUCURSALES[2] : null)
     : null;
-  const prods = demoProductos().filter((p) => p.sku.startsWith(f.linea + "-"));
+  const prods = demoProductos().filter((p) => p.sku === f.linea || p.sku.startsWith(f.linea + "-"));
   const filas = prods
-    .map((p) => ({ talla: (p.sku.split("-").pop() || "") as Talla, p }))
-    .filter((x) => !talla || x.talla === talla)
+    .map((p) => { const ult = p.sku.split("-").pop() || ""; return { talla: ((TALLAS as string[]).includes(ult) ? ult : "Única") as Talla, p }; })
+    .filter((x) => !talla || x.talla === "Única" as Talla || x.talla === talla)
     .sort((x, y) => TALLAS.indexOf(x.talla) - TALLAS.indexOf(y.talla))
     .map(({ talla: t, p }) => {
       const s = p.stockSucursal || {};

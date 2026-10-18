@@ -6,7 +6,7 @@ import type { Product } from "./types";
 import { SUCURSALES } from "./tallas";
 
 type Familia = {
-  prenda?: "playera" | "sudadera" | "pantalon"; // por defecto playera
+  prenda?: "playera" | "sudadera" | "pantalon" | "accesorio"; // por defecto playera
   linea: string;          // prefijo del código (SKU): dos bloques, p. ej. BAM-SPI
   nombre: string;
   catalogo: string;       // sección: Playeras…
@@ -32,6 +32,22 @@ function pantalon(linea: string, nombre: string, color: string, foto: string, bo
     prenda: "pantalon", linea, nombre, catalogo: "Pantalones", categoria: "Denim oversize",
     publico: 1099, socio: 949, medidas: TALLAS_ROPA, colores: [""], color, foto,
     descripcion: `👖 *Pantalón wide leg*\n🎨 *Color:* ${color}\n🧵 *Tela:* mezclilla 100% algodón de 12 oz, lavado en prenda.\n🪡 *Detalle:* ${bordado}\n📏 *Corte:* tiro medio, pierna muy ancha. La talla se elige por cintura; pregúntale al chat.`,
+    ...extra,
+  };
+}
+function bolsa(linea: string, nombre: string, color: string, foto: string, material: string, detalle: string, publico: number, socio: number, extra: Partial<Familia> = {}): Familia {
+  return {
+    prenda: "accesorio", linea, nombre, catalogo: "Accesorios", categoria: "Bolsas",
+    publico, socio, colores: [""], color, foto,
+    descripcion: `👜 *Bolsa*\n🎨 *Color:* ${color}\n🧵 *Material:* ${material}\n🪡 *Detalle:* ${detalle}\n📏 *Talla única.* Etiqueta BAM! en rojo.`,
+    ...extra,
+  };
+}
+function lentes(linea: string, nombre: string, color: string, foto: string, armazon: string, lente: string, publico: number, socio: number, extra: Partial<Familia> = {}): Familia {
+  return {
+    prenda: "accesorio", linea, nombre, catalogo: "Accesorios", categoria: "Lentes",
+    publico, socio, colores: [""], color, foto,
+    descripcion: `🕶️ *Lentes de sol*\n🎨 *Color:* ${color}\n🧵 *Armazón:* ${armazon}\n🔍 *Lente:* ${lente}, protección UV400.\n📏 *Talla única.* Incluye estuche y paño.`,
     ...extra,
   };
 }
@@ -123,6 +139,18 @@ export const FAMILIAS: Familia[] = [
   pantalon("BAM-LUN", "Moon & Stars", "Crudo", "moon-and-stars", "Luna y estrellas bordadas en negro, con trayecto de puntadas."),
   pantalon("BAM-THO", "Thorn Star", "Morado lavado", "thorn-star", "Estrellas rojas y corona de espinas bordada en relieve.", { liquidacion: 849 }),
   pantalon("BAM-KOI", "Koi Stream", "Azul índigo", "koi-stream", "Dos carpas koi estampadas con efecto grabado y agua en puntadas."),
+  // ── Accesorios ──
+  bolsa("BAM-EVT", "Evergreen Tote", "Verde olivo", "evergreen-tote", "lona encerada con base y asas de piel sintética negra.", "Dos bolsas con broche y rama de hojas bordada en crema; cierre completo.", 1499, 1299, { tags: [4] }),
+  bolsa("BAM-WSA", "Wing Satchel", "Vino", "wing-satchel", "piel sintética lisa, herrajes plateados y patas metálicas.", "Ala bordada en relieve al tono, placa BAM! y asas rígidas.", 1799, 1549),
+  bolsa("BAM-MNB", "Moonlight Box", "Crema y negro", "moonlight-box", "piel sintética granulada con vivos negros.", "Luna y estrellas bordadas en negro con trayecto de puntadas; asa rígida.", 1299, 1149, { tags: [4] }),
+  bolsa("BAM-SLH", "Starlight Hobo", "Negro", "starlight-hobo", "piel sintética grabada, cierre metálico.", "Tres estrellas bordadas con contorno crema y etiqueta roja BAM!.", 1199, 1049),
+  bolsa("BAM-SUE", "Suede Star Tote", "Chocolate", "suede-star-tote", "ante sintético con asas de piel sintética.", "Estrella bordada al tono, placa redonda BAM! y forro interior.", 1699, 1499),
+  lentes("BAM-IVR", "Ivory Frame", "Marfil", "ivory-frame", "acetato grueso facetado con remache rojo.", "café sólido", 799, 699, { tags: [4] }),
+  lentes("BAM-HAV", "Havana Oval", "Carey", "havana-oval", "acetato carey con remaches dorados.", "verde G-15", 699, 599),
+  lentes("BAM-BOR", "Bordeaux Cat", "Vino translúcido", "bordeaux-cat", "acetato translúcido tipo cat-eye con estrella plateada.", "café degradado", 799, 699),
+  lentes("BAM-SMK", "Smoke Shield", "Humo", "smoke-shield", "máscara de una sola pieza en policarbonato translúcido.", "café espejado", 899, 799, { tags: [4] }),
+  lentes("BAM-NOI", "Noir Frame", "Negro", "noir-frame", "acetato negro con placas plateadas en las esquinas.", "gris oscuro", 749, 649),
+  lentes("BAM-CHR", "Chrome Wrap", "Plata cepillada", "chrome-wrap", "metal cepillado envolvente con puntas de silicón.", "gris espejado", 999, 899),
   // ── Sudaderas ──
   sudadera("BAM-ZIP", "Starbound Zip", "Ciruela lavado", "starbound-zip", "Estrellas con borde deshilachado en el pecho y la manga; cierre completo.", { tags: [4] }),
   sudadera("BAM-LOV", "Still Loved", "Crema", "still-loved", "Corazón con espinas bordado en vino y «STILL LOVED» debajo.", { categoria: "Crewneck" }),
