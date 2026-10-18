@@ -364,14 +364,14 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
 
       {menuOpen && <div onClick={() => setMenuOpen(false)} className="fixed inset-0 z-20 bg-black/20 xl:hidden" aria-hidden />}
 
-      {/* Portada: en celular la portada completa (vertical); en compu un recorte horizontal.
+      {/* Portada: la misma foto horizontal en celular y en compu (en compu se recorta un poco abajo).
           Abajo, un bloque negro con el mensaje y los botones, centrados. */}
       <section>
         <div className="relative overflow-hidden bg-stone-300">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={portadaUrl || "/portada.jpg"} alt="BAM! — catálogo" className="block w-full md:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={portadaUrl || "/portada-ancha.jpg"} alt="" aria-hidden className="hidden h-[min(70vh,600px)] w-full object-cover object-[50%_32%] md:block" />
+          <img src={portadaUrl || "/portada-ancha.jpg"} alt="" aria-hidden className="hidden max-h-[78vh] w-full object-cover object-[50%_15%] md:block" />
         </div>
         <div className="bg-brand-deep px-4 py-9 text-center text-white sm:py-12">
           <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-white/60">a brand made for you</p>
