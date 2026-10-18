@@ -9,7 +9,7 @@
 // por sección con número de hoja.
 import { jsPDF } from "jspdf";
 
-const NAVY: [number, number, number] = [80, 45, 14];
+const NAVY: [number, number, number] = [28, 23, 23];
 const GRIS: [number, number, number] = [150, 125, 110];
 const GRIS_SUAVE: [number, number, number] = [240, 229, 222];
 const NEGRO_SUAVE: [number, number, number] = [60, 49, 40];
@@ -47,6 +47,21 @@ export type CatOpts = {
 
 /* ---------- fotos: las bajamos y las encogemos para que el PDF no pese de más ---------- */
 const cache = new Map<string, string | null>();
+
+// Carga la portada tal cual (JPEG a sangre, sin recortar a cuadro).
+async function portadaArte(url: string): Promise<string | null> {
+  try {
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    const blob = await r.blob();
+    return await new Promise<string | null>((res) => {
+      const fr = new FileReader();
+      fr.onload = () => res(typeof fr.result === "string" ? fr.result : null);
+      fr.onerror = () => res(null);
+      fr.readAsDataURL(blob);
+    });
+  } catch { return null; }
+}
 
 async function foto(url: string | null, px: number): Promise<string | null> {
   if (!url) return null;
@@ -174,7 +189,7 @@ export async function armaCatalogo(opts: CatOpts): Promise<{ doc: jsPDF; nombre:
       colores: p.colores.map((c) => ({ ...c, nombre: limpia(c.nombre) })),
     })),
   };
-  const logo = opts.marca ? await cargarLogo() : null;
+  const logo = opts.marca ? await cargarLogo() : null; // logo del encabezado de cada hoja
   const grupos = agrupa(opts.productos);
 
   // cuántas fotos vamos a necesitar (para la barra de avance)
@@ -184,44 +199,34 @@ export async function armaCatalogo(opts: CatOpts): Promise<{ doc: jsPDF; nombre:
   let hechas = 0;
   const avisa = () => opts.onProgress?.(++hechas, total);
 
-  /* ----- portada: mosaico de fotos + título (10-oct-2026, la anterior era un rectángulo vacío) ----- */
+  /* ----- portada: foto a sangre (con logo BAM! si es catálogo con marca; sin logo si es de marca blanca) ----- */
   if (opts.portada) {
-    doc.setFillColor(...NAVY).rect(0, 0, W, H, "F");
-    // Mosaico: hasta 6 fotos de los propios productos, arriba, a sangre.
-    const conFoto = opts.productos.filter((p) => p.image).slice(0, 6);
-    const mw = (W - 2 * 10 - 2 * 4) / 3;          // 3 columnas con 4mm de aire
-    const filas = conFoto.length > 3 ? 2 : 1;
-    const my0 = 16;
-    for (let i = 0; i < conFoto.length; i++) {
-      const im = await foto(conFoto[i].image, 620);
-      const fx = 10 + (i % 3) * (mw + 4);
-      const fy = my0 + Math.floor(i / 3) * (mw + 4);
-      if (im) doc.addImage(im, "JPEG", fx, fy, mw, mw);
+    const arte = await portadaArte(opts.marca ? "/portada-catalogo-con-logo.jpg" : "/portada-catalogo-sin-logo.jpg");
+    if (arte) doc.addImage(arte, "JPEG", 0, 0, W, H);
+    else doc.setFillColor(...NAVY).rect(0, 0, W, H, "F");
+
+    // Franja oscura abajo para que el texto se lea sobre la foto.
+    const conNombre = !!tienda;
+    const alto = 30 + (conNombre ? 12 : 0) + (opts.contacto ? 16 : 0);
+    doc.saveGraphicsState();
+    doc.setGState(new (doc as unknown as { GState: new (o: { opacity: number }) => unknown }).GState({ opacity: 0.62 }) as never);
+    doc.setFillColor(0, 0, 0).rect(0, H - alto, W, alto, "F");
+    doc.restoreGraphicsState();
+
+    let y = H - alto + 11;
+    if (conNombre) {
+      doc.setFont("helvetica", "bold").setFontSize(22).setTextColor(255, 255, 255);
+      const t = corta(doc, tienda, W - 44, 1);
+      doc.text(t, W / 2, y, { align: "center" });
+      y += 11;
     }
-    const yTitulo = my0 + filas * (mw + 4) + 26;
-
-    doc.setFont("helvetica", "normal").setFontSize(10).setTextColor(150, 180, 215);
-    doc.text("CATÁLOGO", W / 2, yTitulo - 12, { align: "center", charSpace: 2.2 });
-    doc.setFont("helvetica", "bold").setFontSize(30).setTextColor(255, 255, 255);
-    const t = corta(doc, tienda || "BAM!", W - 44, 2);
-    doc.text(t, W / 2, yTitulo, { align: "center" });
-
-    const yReg = yTitulo + t.length * 10 + 2;
-    doc.setDrawColor(150, 180, 215).setLineWidth(0.6).line(W / 2 - 18, yReg, W / 2 + 18, yReg);
-
-    doc.setFont("helvetica", "normal").setFontSize(10.5).setTextColor(185, 208, 232);
-    doc.text(`${opts.productos.length} ${opts.productos.length === 1 ? "producto" : "productos"}   ·   ${fechaLarga(hoy)}`,
-      W / 2, yReg + 11, { align: "center" });
-
+    doc.setFont("helvetica", "normal").setFontSize(9.5).setTextColor(255, 255, 255);
+    doc.text(`CATÁLOGO   ·   ${opts.productos.length} ${opts.productos.length === 1 ? "producto" : "productos"}   ·   ${fechaLarga(hoy)}`,
+      W / 2, y, { align: "center", charSpace: 0.8 });
     if (opts.contacto) {
-      doc.setFillColor(255, 255, 255).roundedRect(W / 2 - 42, H - 38, 84, 14, 7, 7, "F");
-      doc.setFont("helvetica", "bold").setFontSize(12).setTextColor(...NAVY);
-      doc.text(opts.contacto, W / 2, H - 28.6, { align: "center" });
-    }
-    if (logo) {
-      const pr = doc.getImageProperties(logo);
-      const h = 14, w = (pr.width / pr.height) * h;
-      doc.addImage(logo, "PNG", (W - w) / 2, H - (opts.contacto ? 60 : 44), w, h);
+      doc.setFillColor(255, 255, 255).roundedRect(W / 2 - 42, y + 5, 84, 11, 5.5, 5.5, "F");
+      doc.setFont("helvetica", "bold").setFontSize(11).setTextColor(17, 17, 17);
+      doc.text(opts.contacto, W / 2, y + 12, { align: "center" });
     }
     doc.addPage();
   }
