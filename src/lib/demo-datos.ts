@@ -9,7 +9,7 @@ type Familia = {
   prenda?: "playera" | "sudadera" | "pantalon" | "accesorio"; // por defecto playera
   linea: string;          // prefijo del código (SKU): dos bloques, p. ej. BAM-SPI
   nombre: string;
-  catalogo: string;       // sección: Playeras…
+  catalogo: string;       // sección: Playeras, Sudaderas, Pantalones o Accesorios
   categoria: string;      // subcategoría
   publico: number;
   socio: number;
@@ -62,70 +62,70 @@ function sudadera(linea: string, nombre: string, color: string, foto: string, es
 
 export const FAMILIAS: Familia[] = [
   {
-    linea: "BAM-BDA", nombre: "Better Days Ahead", catalogo: "Al frente", categoria: "Algodón clásico",
+    linea: "BAM-BDA", nombre: "Better Days Ahead", catalogo: "Playeras", categoria: "Al frente",
     publico: 599, socio: 499, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Crema", foto: "better-days-ahead",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Crema\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Estampado de colores al frente: BETTER en rojo sobre óvalo amarillo, Days en azul y Ahead en verde. «For God has promised better days — Jeremiah 29:11».\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-SPI", nombre: "Spirit Being", catalogo: "Al frente", categoria: "Algodón clásico",
+    linea: "BAM-SPI", nombre: "Spirit Being", catalogo: "Playeras", categoria: "Al frente",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Rojo", foto: "spirit-being",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Rojo\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Tipografía gigante en crema sobre rojo intenso. «Spirit over everything».\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-JES", nombre: "Jesus Saves", catalogo: "Al frente", categoria: "Algodón clásico",
+    linea: "BAM-JES", nombre: "Jesus Saves", catalogo: "Playeras", categoria: "Al frente",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Negro", foto: "jesus-saves",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Negro\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* JESUS en rojo y una S pintada a mano en dorado. Negro lavado, tacto suave.\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-MER", nombre: "Mercy Over Ego", catalogo: "Al frente", categoria: "Teñida en prenda",
+    linea: "BAM-MER", nombre: "Mercy Over Ego", catalogo: "Playeras", categoria: "Al frente",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Negro lavado", foto: "mercy-over-ego",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Negro lavado\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Letras en crema con textura gastada y una pincelada roja. Teñido en prenda.\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-HEA", nombre: "Heaven Knows", catalogo: "Al frente", categoria: "Algodón clásico",
+    linea: "BAM-HEA", nombre: "Heaven Knows", catalogo: "Playeras", categoria: "Al frente",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Crema", foto: "heaven-knows",
     tags: [4],
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Crema\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Corazón con alas en tinta, HEAVEN KNOWS en vino y «Keep the faith».\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-GRA", nombre: "Grace in the Chaos", catalogo: "Al frente", categoria: "Teñida en prenda",
+    linea: "BAM-GRA", nombre: "Grace in the Chaos", catalogo: "Playeras", categoria: "Al frente",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Gris lavado", foto: "grace-in-the-chaos",
     tags: [4],
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Gris lavado\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Tipografía alta en morado oscuro y una etiqueta «in the» pegada. Gris lavado tipo piedra.\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-CHO", nombre: "Chosen", catalogo: "En la espalda", categoria: "Algodón clásico",
+    linea: "BAM-CHO", nombre: "Chosen", catalogo: "Playeras", categoria: "En la espalda",
     publico: 599, socio: 499, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Azul rey", foto: "chosen",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Azul rey\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Etiqueta «Hello my name is CHOSEN» en la espalda. «You are a chosen people — 1 Peter 2:9».\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-CHI", nombre: "Child of God", catalogo: "En la espalda", categoria: "Algodón clásico",
+    linea: "BAM-CHI", nombre: "Child of God", catalogo: "Playeras", categoria: "En la espalda",
     publico: 599, socio: 499, liquidacion: 399, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Crema", foto: "child-of-god",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Crema\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* Trazos azules a mano, carita con estrellas y «I am a child of God» en la espalda.\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-FUL", nombre: "Full of Grace", catalogo: "En la espalda", categoria: "Teñida en prenda",
+    linea: "BAM-FUL", nombre: "Full of Grace", catalogo: "Playeras", categoria: "En la espalda",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Rosa lavado", foto: "full-of-grace",
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Rosa lavado\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* FULL ♥ OF GRACE en rojo coral sobre rosa lavado, con texto pequeño en el hombro.\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-NOT", nombre: "Not Alone", catalogo: "En la espalda", categoria: "Teñida en prenda",
+    linea: "BAM-NOT", nombre: "Not Alone", catalogo: "Playeras", categoria: "En la espalda",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Azul marino lavado", foto: "not-alone",
     tags: [4],
     descripcion: "👕 *Playera oversize*\n🎨 *Color:* Azul marino lavado\n🧵 *Tela:* algodón 100% de 220 g, cuello reforzado y hombros caídos.\n🖨️ *Estampado:* NOT ALONE en amarillo mantequilla con las manos que se sostienen. «You never walk alone».\n📏 *Corte:* holgado; mira la guía de tallas o pregúntale al chat.",
   },
   {
-    linea: "BAM-STI", nombre: "Still Held", catalogo: "En la espalda", categoria: "Teñida en prenda",
+    linea: "BAM-STI", nombre: "Still Held", catalogo: "Playeras", categoria: "En la espalda",
     publico: 649, socio: 549, medidas: ["XS", "S", "M", "L", "XL"],
     colores: [""], color: "Café lavado", foto: "still-held",
     tags: [4],

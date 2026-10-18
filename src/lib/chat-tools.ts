@@ -85,7 +85,7 @@ export function toolExistencias(a: { diseno: string; talla?: string; sucursal?: 
 
 // ---------- 3) catálogo ----------
 export function toolListarDisenos() {
-  return disenos().map((d) => ({ diseno: d.nombre, color: d.color, tipo: d.prenda, donde_va_el_estampado: d.catalogo.toLowerCase().includes("espalda") ? "espalda" : "frente", precio: d.liquidacion ?? d.precio, precio_socios: d.precioSocio, en_liquidacion: d.liquidacion != null }));
+  return disenos().map((d) => ({ diseno: d.nombre, color: d.color, tipo: d.prenda, donde_va_el_estampado: d.categoria.toLowerCase().includes("espalda") ? "espalda" : "frente", precio: d.liquidacion ?? d.precio, precio_socios: d.precioSocio, en_liquidacion: d.liquidacion != null }));
 }
 
 // ---------- 4) envíos, recoger y cambios ----------

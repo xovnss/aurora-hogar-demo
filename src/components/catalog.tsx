@@ -24,22 +24,17 @@ const RANGOS: { id: string; label: string; min: number; max: number }[] = [
 // Una "sección" es una categoría padre del archivo (Recámara, Baño…) o una especial
 // (Ofertas / Liquidación / Navidad / Halloween).
 type SeccionMeta = { id: string; emoji: string; special?: "oferta" | "liq" | "navidad" | "halloween" | "novedad" };
-const EMOJI: Record<string, string> = { "Al frente": "👕", "En la espalda": "🔙", "Sudaderas": "🧥", "Pantalones": "👖", "Accesorios": "👜", "Novedades": "🆕" };
+const EMOJI: Record<string, string> = { "Playeras": "👕", "Sudaderas": "🧥", "Pantalones": "👖", "Accesorios": "👜", "Novedades": "🆕" };
 // Pestañas del menú de arriba. sec = sección a la que llevan (si no, baja a las categorías).
 const TABS: { label: string; sec?: string }[] = [
-  { label: "Todo" },
-  { label: "Al frente", sec: "Al frente" },
-  { label: "En la espalda", sec: "En la espalda" },
+  { label: "Playeras", sec: "Playeras" },
   { label: "Sudaderas", sec: "Sudaderas" },
   { label: "Pantalones", sec: "Pantalones" },
   { label: "Accesorios", sec: "Accesorios" },
-  { label: "Novedades", sec: "Novedades" },
-  { label: "Liquidación", sec: "Liquidación" },
 ];
 // Fotos (cuadradas) para los círculos de categoría — en /public/categorias/
 const CAT_IMG: Record<string, string> = {
-  "Al frente": "/categorias/frente.jpg",
-  "En la espalda": "/categorias/espalda.jpg",
+  "Playeras": "/categorias/frente.jpg",
   "Sudaderas": "/categorias/sudaderas.jpg",
   "Pantalones": "/categorias/pantalones.jpg",
   "Accesorios": "/categorias/accesorios.jpg",
@@ -211,12 +206,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
   const sec = secciones.find((s) => s.id === secId) || secciones[0];
 
   // Pestañas del menú = las fijas + temporadas presentes (al final, en el orden del catálogo)
-  const tabsShow = useMemo<{ label: string; sec?: string }[]>(() => {
-    const temp = secciones
-      .filter((s) => s.special === "navidad" || s.special === "halloween")
-      .map((s) => ({ label: `${s.emoji} ${s.id}`, sec: s.id }));
-    return [...TABS, ...temp];
-  }, [secciones]);
+  const tabsShow = TABS; // solo las cuatro categorías de ropa y accesorios
 
 
   const hayLiq = secciones.some((s) => s.special === "liq");
