@@ -114,7 +114,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
 
   return (
     <div className="mx-auto max-w-6xl pb-28">
-      <div className="mb-3 rounded-2xl bg-red-50 px-4 py-3 ring-1 ring-red-100">
+      <div className="mb-3 rounded-2xl bg-stone-50 px-4 py-3 ring-1 ring-red-100">
         <p className="text-[13px] font-bold text-brand-dark">📒 Catálogo para compartir</p>
         <p className="mt-0.5 text-[12px] leading-snug text-stone-500">
           Elige los productos y baja un PDF. Como viene <b>sin precios y sin la marca</b>, la revendedora
@@ -197,7 +197,7 @@ export function CatalogoView({ fichas }: { fichas: Ficha[] }) {
               </button>
             ))}
             {sel.size > 0 && (
-              <button onClick={() => setSel(new Set())} className="ml-auto rounded-full bg-red-50 px-3 py-1.5 text-[12px] font-bold text-red-600 ring-1 ring-red-200 hover:bg-red-100">
+              <button onClick={() => setSel(new Set())} className="ml-auto rounded-full bg-stone-50 px-3 py-1.5 text-[12px] font-bold text-red-600 ring-1 ring-red-200 hover:bg-stone-100">
                 Vaciar selección ({sel.size})
               </button>
             )}

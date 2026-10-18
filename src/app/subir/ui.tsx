@@ -199,13 +199,13 @@ const TIPO_INFO: Record<string, { label: string; cls: string }> = {
   crear: { label: "🆕 Nuevo", cls: "bg-emerald-100 text-emerald-700" },
   precios: { label: "💲 Precio", cls: "bg-amber-100 text-amber-700" },
   nombre: { label: "✏️ Nombre", cls: "bg-violet-100 text-violet-700" },
-  stock: { label: "📦 Inventario", cls: "bg-red-100 text-red-700" },
-  resurtir: { label: "🔄 Resurtido", cls: "bg-red-100 text-red-700" },
+  stock: { label: "📦 Inventario", cls: "bg-stone-100 text-red-700" },
+  resurtir: { label: "🔄 Resurtido", cls: "bg-stone-100 text-red-700" },
   liquidacion: { label: "🔥 Liquidación", cls: "bg-orange-100 text-orange-700" },
   imagen: { label: "🖼️ Foto", cls: "bg-pink-100 text-pink-700" },
   archivar: { label: "🗄️ Archivar", cls: "bg-stone-200 text-stone-700" },
   restaurar: { label: "♻️ Restaurar", cls: "bg-teal-100 text-teal-700" },
-  eliminar: { label: "🗑️ Eliminar", cls: "bg-red-100 text-red-700" },
+  eliminar: { label: "🗑️ Eliminar", cls: "bg-stone-100 text-red-700" },
 };
 function TipoTag({ tipo }: { tipo: string }) {
   const i = TIPO_INFO[tipo] || { label: tipo || "otro", cls: "bg-stone-100 text-stone-600" };
@@ -284,9 +284,9 @@ function Notif({ usuario, aprobador }: { usuario: string; aprobador: boolean }) 
 
   return (
     <div className="ml-auto flex items-center gap-2">
-      {aviso && <span className="hidden max-w-[260px] truncate rounded-full bg-brand-light px-3 py-1 text-[11px] font-semibold text-brand-dark md:inline">{aviso}</span>}
+      {aviso && <span className="hidden max-w-[260px] truncate rounded-full bg-stone-100 px-3 py-1 text-[11px] font-semibold text-brand-dark md:inline">{aviso}</span>}
       <button onClick={toggle} title={on ? `Notificaciones activadas${aprobador ? " (avisos de nuevas solicitudes)" : " (avisos de tus aprobaciones)"}` : "Activar notificaciones con sonido"}
-        className={"grid h-10 w-10 place-items-center rounded-full border text-lg transition " + (on ? "border-brand bg-brand-light" : "border-stone-200 bg-white opacity-70 hover:opacity-100")}>
+        className={"grid h-10 w-10 place-items-center rounded-full border text-lg transition " + (on ? "border-brand bg-stone-100" : "border-stone-200 bg-white opacity-70 hover:opacity-100")}>
         {on ? "🔔" : "🔕"}
       </button>
     </div>
@@ -539,7 +539,7 @@ export function Login() {
         <input type="password" value={pass} onChange={(e) => setPass(e.target.value)} placeholder="Contraseña" className={field + " mt-3"} />
         {aprob && (
           <input type="password" value={pin} onChange={(e) => setPin(e.target.value)} placeholder="PIN de aprobador"
-            className="mt-3 w-full rounded-2xl border-2 border-red-300 bg-red-50 px-4 py-3 text-center font-semibold outline-none focus:border-[#e10b0b] focus:bg-white" />
+            className="mt-3 w-full rounded-2xl border-2 border-red-300 bg-stone-50 px-4 py-3 text-center font-semibold outline-none focus:border-[#e10b0b] focus:bg-white" />
         )}
         {err && <p className="mt-2 text-center text-sm font-semibold text-red-600">{err}</p>}
         <button disabled={pending} className="font-display mt-5 w-full rounded-2xl bg-black px-4 py-3.5 text-lg font-bold text-white shadow-lg transition hover:bg-neutral-700 disabled:bg-gray-300">
@@ -776,10 +776,10 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
                       <p className="text-[11px] text-stone-400">{p.persona} · {fmt(p.fecha)}</p>
                     </div>
                     {st === "ok" ? <span className="shrink-0 rounded-lg bg-green-100 px-2.5 py-1 text-xs font-bold text-green-700">✅</span>
-                      : st === "no" ? <span className="shrink-0 rounded-lg bg-red-100 px-2.5 py-1 text-xs font-bold text-red-600">❌</span>
+                      : st === "no" ? <span className="shrink-0 rounded-lg bg-stone-100 px-2.5 py-1 text-xs font-bold text-red-600">❌</span>
                       : <div className="flex shrink-0 gap-1">
                           <button onClick={() => aprobar(p.id)} disabled={pending} className="rounded-lg bg-green-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-green-700 disabled:opacity-50">Aprobar</button>
-                          <button onClick={() => rechazar(p.id)} disabled={pending} className="rounded-lg border border-red-200 px-2.5 py-1 text-xs font-bold text-red-500 hover:bg-red-50 disabled:opacity-50">Rechazar</button>
+                          <button onClick={() => rechazar(p.id)} disabled={pending} className="rounded-lg border border-red-200 px-2.5 py-1 text-xs font-bold text-red-500 hover:bg-stone-50 disabled:opacity-50">Rechazar</button>
                         </div>}
                   </li>
                 );
@@ -803,10 +803,10 @@ function AprobacionesPanel({ aprobador }: { aprobador: boolean }) {
                 <p className="text-[11px] text-stone-400">{img(p) ? p.persona + " · " : ""}{fmt(p.fecha)}</p>
               </div>
               {st === "ok" ? <span className="shrink-0 self-center rounded-lg bg-green-100 px-3 py-1 text-xs font-bold text-green-700">✅ Aprobado</span>
-                : st === "no" ? <span className="shrink-0 self-center rounded-lg bg-red-100 px-3 py-1 text-xs font-bold text-red-600">❌ Rechazado</span>
+                : st === "no" ? <span className="shrink-0 self-center rounded-lg bg-stone-100 px-3 py-1 text-xs font-bold text-red-600">❌ Rechazado</span>
                   : <div className="flex shrink-0 gap-2">
                       <button onClick={() => aprobar(p.id)} disabled={pending} className="rounded-lg bg-green-600 px-3 py-1 text-xs font-bold text-white hover:bg-green-700 disabled:opacity-50">Aprobar</button>
-                      <button onClick={() => rechazar(p.id)} disabled={pending} className="rounded-lg border border-red-200 px-3 py-1 text-xs font-bold text-red-500 hover:bg-red-50 disabled:opacity-50">Rechazar</button>
+                      <button onClick={() => rechazar(p.id)} disabled={pending} className="rounded-lg border border-red-200 px-3 py-1 text-xs font-bold text-red-500 hover:bg-stone-50 disabled:opacity-50">Rechazar</button>
                     </div>}
             </li>
           );
@@ -882,7 +882,7 @@ function CorregirRow({ p, onReenviado, modo = "rechazado" }: { p: Pendiente; onR
   const inp = "pf-input w-full px-3 py-2 text-sm";
   if (listo) return <div className="rounded-xl border border-green-200 bg-green-50 p-2 text-[13px] font-semibold text-green-700">{esRej ? "✅ Reenviado" : "✅ Guardado"} — {p.resumen}</div>;
   return (
-    <div className={"rounded-xl border p-3 " + (esRej ? "border-red-200 bg-red-50/40" : "border-stone-200 bg-stone-50/60")}>
+    <div className={"rounded-xl border p-3 " + (esRej ? "border-red-200 bg-stone-50" : "border-stone-200 bg-stone-50/60")}>
       {esRej && (
         <>
           <div className="flex flex-wrap items-center gap-2"><TipoTag tipo={p.tipo} /><p className="text-[13px] font-semibold text-stone-700">{p.resumen}</p></div>
@@ -930,7 +930,7 @@ function MiPendienteRow({ p, onSaved }: { p: Pendiente; onSaved: () => void }) {
               {editar ? "Cerrar" : "✏️ Editar"}
             </button>
           )}
-          <button onClick={cancelar} disabled={pend} className="rounded-lg border border-red-200 px-3 py-1 text-xs font-bold text-red-500 transition hover:bg-red-50 disabled:opacity-50">
+          <button onClick={cancelar} disabled={pend} className="rounded-lg border border-red-200 px-3 py-1 text-xs font-bold text-red-500 transition hover:bg-stone-50 disabled:opacity-50">
             {pend ? "…" : "Cancelar"}
           </button>
         </div>
@@ -1099,7 +1099,7 @@ function DescripcionesPanel() {
   return (
     <div className="space-y-3">
       <div className="pf-card p-5">
-        <PanelHead emoji="📝" tono="bg-brand-light" titulo="Descripciones"
+        <PanelHead emoji="📝" tono="bg-stone-100" titulo="Descripciones"
           sub="Escríbelas y se ven en el catálogo al momento (no pasan por revisión)."
           right={<button onClick={cargar} disabled={pending} className={REFRESH}>{pending ? "…" : "↻ Actualizar"}</button>} />
         <p className="mt-1 text-[12px] text-gray-500">
@@ -1221,7 +1221,7 @@ function HistorialPanel() {
   const hora = (iso: string) => new Date((iso || "").replace(" ", "T") + "Z").toLocaleTimeString("es-MX", { timeZone: "America/Mexico_City", hour: "2-digit", minute: "2-digit" });
   const diaLargo = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString("es-MX", { timeZone: "America/Mexico_City", weekday: "long", day: "numeric", month: "long" });
   const badge = (e?: string) => e === "aprobado" ? { t: "✅ Aceptado", c: "bg-green-100 text-green-700" }
-    : e === "rechazado" ? { t: "❌ Rechazado", c: "bg-red-100 text-red-700" }
+    : e === "rechazado" ? { t: "❌ Rechazado", c: "bg-stone-100 text-red-700" }
     : { t: "⏳ Pendiente", c: "bg-amber-100 text-amber-700" };
 
   const filtrados = items.filter((p) => {
@@ -1238,7 +1238,7 @@ function HistorialPanel() {
 
   return (
     <div className="pf-card p-5">
-      <PanelHead emoji="📜" tono="bg-brand-light" titulo="Historial"
+      <PanelHead emoji="📜" tono="bg-stone-100" titulo="Historial"
         sub="Qué se solicitó, quién lo pidió, la razón, y quién lo aceptó o rechazó."
         right={<button onClick={cargar} disabled={pending} className={REFRESH}>{pending ? "…" : "↻ Actualizar"}</button>} />
       <div className="mt-3 space-y-2">
@@ -1318,7 +1318,7 @@ function estadoLinea(l: NotaLinea): EstadoLinea[] {
   return out;
 }
 const TONO: Record<EstadoLinea["tono"], string> = {
-  ok: "bg-green-100 text-green-700", warn: "bg-amber-100 text-amber-800", bad: "bg-red-100 text-red-700", gris: "bg-stone-100 text-stone-600",
+  ok: "bg-green-100 text-green-700", warn: "bg-amber-100 text-amber-800", bad: "bg-stone-100 text-red-700", gris: "bg-stone-100 text-stone-600",
 };
 const notaCuadra = (n: NotaCompra) => n.lineas.every((l) => estadoLinea(l)[0].tono === "ok");
 
@@ -1541,7 +1541,7 @@ function ConteosAjustesPanel() {
           <ul className="mt-2 max-h-72 divide-y divide-stone-100 overflow-y-auto rounded-2xl border border-stone-100">
             {res.map((r) => (
               <li key={r.id}>
-                <button type="button" onClick={() => elegir(r)} className={"flex w-full items-center gap-3 px-3 py-2 text-left transition " + (prod?.id === r.id ? "bg-red-50" : "hover:bg-stone-50")}>
+                <button type="button" onClick={() => elegir(r)} className={"flex w-full items-center gap-3 px-3 py-2 text-left transition " + (prod?.id === r.id ? "bg-stone-50" : "hover:bg-stone-50")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={r.imageUrl} alt="" className="h-10 w-10 shrink-0 rounded-lg border object-cover" />
                   <span className="min-w-0 flex-1">
@@ -1557,7 +1557,7 @@ function ConteosAjustesPanel() {
 
         {prod && (
           <>
-            <div className="mt-3 flex items-center gap-3 rounded-2xl bg-red-50 p-3 ring-1 ring-red-100">
+            <div className="mt-3 flex items-center gap-3 rounded-2xl bg-stone-50 p-3 ring-1 ring-red-100">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={prod.imageUrl} alt="" className="h-14 w-14 shrink-0 rounded-lg border object-cover" />
               <div className="min-w-0 flex-1">
@@ -1580,7 +1580,7 @@ function ConteosAjustesPanel() {
                   className={"rounded-2xl px-3.5 py-2.5 text-left transition " + (motivo === x.id ? "bg-black text-white shadow" : "bg-white ring-1 ring-stone-200 hover:ring-brand")}>
                   <span className="flex items-center gap-2 text-sm font-bold">
                     {x.emoji} {x.label}
-                    <span className={"rounded-full px-1.5 text-[11px] font-extrabold " + (motivo === x.id ? "bg-white/25" : x.signo === "-" ? "bg-red-100 text-red-600" : "bg-red-100 text-red-700")}>{x.signo === "-" ? "−" : "+/−"}</span>
+                    <span className={"rounded-full px-1.5 text-[11px] font-extrabold " + (motivo === x.id ? "bg-white/25" : x.signo === "-" ? "bg-stone-100 text-red-600" : "bg-stone-100 text-red-700")}>{x.signo === "-" ? "−" : "+/−"}</span>
                   </span>
                   <span className={"mt-0.5 block text-[11.5px] " + (motivo === x.id ? "text-white/85" : "text-stone-500")}>{x.ayuda}</span>
                 </button>
@@ -1623,7 +1623,7 @@ function ConteosAjustesPanel() {
                 </div>
 
                 {delta != null && despues != null && despues >= 0 && (
-                  <div className={"mt-3 rounded-2xl px-4 py-3 text-sm font-semibold ring-1 " + (delta < 0 ? "bg-red-50 text-red-700 ring-red-100" : delta > 0 ? "bg-green-50 text-green-700 ring-green-100" : "bg-stone-50 text-stone-600 ring-stone-200")}>
+                  <div className={"mt-3 rounded-2xl px-4 py-3 text-sm font-semibold ring-1 " + (delta < 0 ? "bg-stone-50 text-red-700 ring-red-100" : delta > 0 ? "bg-green-50 text-green-700 ring-green-100" : "bg-stone-50 text-stone-600 ring-stone-200")}>
                     {nomBodega}: {actual} → <b className="text-base">{despues}</b> pzs ({fmtDelta(delta)}){delta === 0 && " · sin diferencia (solo se registra el conteo)"}
                   </div>
                 )}
@@ -1636,7 +1636,7 @@ function ConteosAjustesPanel() {
             )}
           </>
         )}
-        {aviso && <p className={"mt-3 rounded-xl px-3 py-2 text-[13px] font-semibold " + (aviso.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700")}>{aviso.t}</p>}
+        {aviso && <p className={"mt-3 rounded-xl px-3 py-2 text-[13px] font-semibold " + (aviso.ok ? "bg-green-50 text-green-700" : "bg-stone-50 text-red-700")}>{aviso.t}</p>}
       </div>
 
       <AjustesHistorial hist={hist} cargando={histPend} onRecargar={cargarHist} />
@@ -1836,7 +1836,7 @@ function SaldosForm({ categorias }: { categorias: Categoria[] }) {
         {imgPrev && (
           <div className="mt-2 flex items-center gap-3">
             <img src={imgPrev} alt="" className="h-24 w-24 rounded-xl border object-cover" />
-            <button type="button" onClick={quitarFoto} className="rounded-lg border border-red-200 px-3 py-1.5 text-sm font-semibold text-red-500 hover:bg-red-50">✕ Quitar foto</button>
+            <button type="button" onClick={quitarFoto} className="rounded-lg border border-red-200 px-3 py-1.5 text-sm font-semibold text-red-500 hover:bg-stone-50">✕ Quitar foto</button>
           </div>
         )}
       </div>
@@ -1949,7 +1949,7 @@ function EliminadosPanel() {
       <ul className="divide-y divide-stone-100">
         {items.filter((e) => !q.trim() || matchSearch(`${e.texto} ${e.persona}`, q)).map((e, i) => (
           <li key={i} className="flex items-start gap-3 py-2">
-            <span className="mt-0.5 shrink-0 rounded-full bg-red-100 px-2 py-0.5 text-[11px] font-bold text-red-600">{e.persona}</span>
+            <span className="mt-0.5 shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-[11px] font-bold text-red-600">{e.persona}</span>
             <div className="min-w-0 flex-1">
               <p className="text-[13px] text-stone-700">{e.texto}</p>
               <p className="text-[11px] text-stone-400">{fmtMx(e.fecha)}</p>
@@ -2042,7 +2042,7 @@ function AjustesPanel() {
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
           {TEMAS.map((t) => (
             <button key={t.id} onClick={() => elegir(t.id)} disabled={pending}
-              className={"flex items-center gap-2 rounded-2xl border-2 p-2.5 text-left transition " + (tema === t.id ? "border-brand bg-brand-light" : "border-stone-200 bg-white hover:border-brand")}>
+              className={"flex items-center gap-2 rounded-2xl border-2 p-2.5 text-left transition " + (tema === t.id ? "border-brand bg-stone-100" : "border-stone-200 bg-white hover:border-brand")}>
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xl text-white shadow-sm" style={{ background: `linear-gradient(135deg, ${t.swatch[0]}, ${t.swatch[1]})` }}>{t.emoji}</span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-bold text-[#1c1717]">{t.label}</span>
@@ -2076,7 +2076,7 @@ function UltimosModelosPanel() {
   return (
     <div className="space-y-4">
       <div className="pf-card p-5">
-        <PanelHead emoji="🔢" tono="bg-red-100" titulo="Últimos modelos"
+        <PanelHead emoji="🔢" tono="bg-stone-100" titulo="Últimos modelos"
           sub="El último número (M#) de cada línea de producto, para saber cuál sigue al subir un modelo nuevo — sin repetir ni brincarte números." />
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar producto, código o categoría… (ej. mantel, CSI-CSE)"
           className="pf-input mt-1 w-full px-3 py-2.5 text-sm" />
@@ -2296,7 +2296,7 @@ function ResurtirPanel({ soloBodega = false }: { soloBodega?: boolean }) {
           </>
         ) : (
           <>
-            <PanelHead emoji="🔄" tono="bg-red-100" titulo="Resurtir inventario"
+            <PanelHead emoji="🔄" tono="bg-stone-100" titulo="Resurtir inventario"
               sub="Súmale piezas a productos que YA existen." />
             <DestinoBodega value={destino} onChange={setDestino} />
           </>
@@ -2313,7 +2313,7 @@ function ResurtirPanel({ soloBodega = false }: { soloBodega?: boolean }) {
         <button onClick={analizar} disabled={pending} className="mt-3 w-full pf-btn px-4 py-3 text-base disabled:bg-gray-300">
           {pending && !prog ? "Buscando…" : "Buscar productos →"}
         </button>
-        {aviso === "no-entendi" && <p className="mt-2 rounded-lg bg-red-50 px-3 py-2 text-center text-[13px] font-semibold text-red-600">Pega al menos un SKU con su cantidad.</p>}
+        {aviso === "no-entendi" && <p className="mt-2 rounded-lg bg-stone-50 px-3 py-2 text-center text-[13px] font-semibold text-red-600">Pega al menos un SKU con su cantidad.</p>}
       </div>
 
       {rows.length > 0 && (
@@ -2327,7 +2327,7 @@ function ResurtirPanel({ soloBodega = false }: { soloBodega?: boolean }) {
               </thead>
               <tbody>
                 {rows.map((r, i) => (
-                  <tr key={i} className={"border-t border-gray-100 " + (r.id == null ? "bg-red-50" : "")}>
+                  <tr key={i} className={"border-t border-gray-100 " + (r.id == null ? "bg-stone-50" : "")}>
                     <td className="px-1 py-1 font-mono">{r.sku}</td>
                     <td className="px-1 text-gray-700">{r.id != null ? r.name : <span className="font-semibold text-red-500">no existe</span>}</td>
                     <td className="px-1 text-center text-gray-500">{r.id != null ? r.actual : "—"}</td>
@@ -2457,7 +2457,7 @@ function CrearForm({ categorias }: { categorias: Categoria[] }) {
 
   return (
     <form onSubmit={submit} className="space-y-4 pf-card p-5">
-      <PanelHead emoji="➕" tono="bg-red-100" titulo="Crear un producto"
+      <PanelHead emoji="➕" tono="bg-stone-100" titulo="Crear un producto"
         sub="Uno por uno, con su foto. Queda en inventario y en el catálogo." />
       <div>
         <label className={lab}>Nombre del producto <span className={"font-normal " + (name.length >= 45 ? "text-red-500" : "text-gray-400")}>({name.length}/45)</span></label>
@@ -2489,11 +2489,11 @@ function CrearForm({ categorias }: { categorias: Categoria[] }) {
           <input className={inp} type="number" inputMode="numeric" value={miembro} onChange={(e) => setMiembro(e.target.value)} placeholder="0" />
         </div>
       </div>
-      <div className="rounded-2xl bg-red-50/60 p-3">
+      <div className="rounded-2xl bg-stone-50 p-3">
         <label className={lab}>Precios por mayoreo <span className="font-normal text-gray-400">— opcional (hasta 3; aplican en tienda y catálogo)</span></label>
         <TarifasEditor value={tarifas} onChange={setTarifas} />
       </div>
-      <div className="rounded-2xl bg-red-50/60 p-3">
+      <div className="rounded-2xl bg-stone-50 p-3">
         <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold text-red-700">
           <input type="checkbox" checked={enLiq} onChange={(e) => setEnLiq(e.target.checked)} className="h-4 w-4 accent-red-500" />
           🔥 En liquidación
@@ -2520,7 +2520,7 @@ function CrearForm({ categorias }: { categorias: Categoria[] }) {
       {imgPrev && (
         <div className="flex items-center gap-3">
           <img src={imgPrev} alt="" className="h-28 w-28 rounded-xl border object-cover" />
-          <button type="button" onClick={quitarFoto} className="rounded-lg border border-red-200 px-3 py-1.5 text-sm font-semibold text-red-500 hover:bg-red-50">✕ Quitar foto principal</button>
+          <button type="button" onClick={quitarFoto} className="rounded-lg border border-red-200 px-3 py-1.5 text-sm font-semibold text-red-500 hover:bg-stone-50">✕ Quitar foto principal</button>
         </div>
       )}
       <div>
@@ -2566,7 +2566,7 @@ function BuscarPanel({ categorias, aprobador }: { categorias: Categoria[]; aprob
   return (
     <div className="space-y-3">
       <div className="pf-card p-5">
-        <PanelHead emoji="🔎" tono="bg-brand-light" titulo="Buscar y editar"
+        <PanelHead emoji="🔎" tono="bg-stone-100" titulo="Buscar y editar"
           sub="Encuentra un producto para cambiar precio, inventario, foto o nombre. La búsqueda incluye archivados y no archivados." />
         <form onSubmit={buscar} className="flex gap-2">
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar por nombre o código…"
@@ -2848,7 +2848,7 @@ function EditCard({ p, categorias, sel, aprobador }: { p: ProductoBuscado; categ
           })}
         </div>
       </div>
-      <div className="mt-3 rounded-xl bg-red-50/60 p-2.5">
+      <div className="mt-3 rounded-xl bg-stone-50 p-2.5">
         <label className="text-[11px] font-semibold text-gray-600">Precios por mayoreo <span className="font-normal text-gray-400">(hasta 3; vacío = quitar)</span></label>
         <div className="mt-1"><TarifasEditor value={tarifas} onChange={setTarifas} /></div>
         <button onClick={guardarTarifas} disabled={pend} className={"mt-1.5 rounded-lg px-3 py-1.5 text-xs font-bold text-white transition disabled:bg-gray-300 " + okBg("tarifas", "bg-black hover:bg-neutral-700")}>{pend ? "…" : okTxt("tarifas", "Guardar mayoreo")}</button>
@@ -3107,7 +3107,7 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
           </div>
         </div>
         {restaurado && (
-          <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-center text-[12px] font-semibold text-red-700">
+          <p className="mt-3 rounded-xl border border-red-200 bg-stone-50 px-3 py-2 text-center text-[12px] font-semibold text-red-700">
             💾 Recuperé tu borrador de la última vez. Las fotos sí hay que volver a subirlas.
           </p>
         )}
@@ -3128,7 +3128,7 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
           ＋ Agregar producto en blanco
         </button>
         {aviso === "no-entendi"
-          ? <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-center text-[13px] font-semibold text-red-600">No detecté productos. Revisa que cada uno traiga su nombre (y su precio así: <b>$530/$430</b>).</p>
+          ? <p className="mt-3 rounded-xl border border-red-200 bg-stone-50 px-3 py-2 text-center text-[13px] font-semibold text-red-600">No detecté productos. Revisa que cada uno traiga su nombre (y su precio así: <b>$530/$430</b>).</p>
           : aviso && <p className="mt-3 text-center text-[13px] font-bold text-emerald-600">✓ {aviso}</p>}
       </div>
 
@@ -3177,7 +3177,7 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
                     <td className="px-1"><input className={inp + " w-48"} maxLength={45} value={r.name} placeholder="Nombre del producto" onChange={(e) => onNombre(i, e.target.value)} /></td>
                     <td className="px-1"><input className={inp + " w-56"} value={r.desc} onChange={(e) => upd(i, { desc: e.target.value })} placeholder="opcional" /></td>
                     <td className="px-1">
-                      <input className={inp + " w-32 font-mono uppercase" + (dupOf(r) ? " border-red-400 bg-red-50 text-red-700" : "")}
+                      <input className={inp + " w-32 font-mono uppercase" + (dupOf(r) ? " border-red-400 bg-stone-50 text-red-700" : "")}
                         title={dupOf(r) === "existe" ? "Este código YA existe" : dupOf(r) === "repe" ? "Este código está repetido en la lista" : ""}
                         value={r.sku} onChange={(e) => upd(i, { sku: e.target.value.toUpperCase() })} />
                       {dupOf(r) && <span className="block text-[9px] font-semibold text-red-500">{dupOf(r) === "existe" ? "ya existe" : "repetido"}</span>}
@@ -3200,7 +3200,7 @@ function CargaRapida({ categorias }: { categorias: Categoria[] }) {
                     <td className="px-1 text-[11px] font-semibold text-stone-600">{r.estado || ""}</td>
                     <td className="px-1 text-center">
                       <button type="button" onClick={() => borrarFila(i)} title="Quitar este producto de la lista"
-                        className="grid h-6 w-6 place-items-center rounded-full text-stone-400 transition hover:bg-red-50 hover:text-red-500">✕</button>
+                        className="grid h-6 w-6 place-items-center rounded-full text-stone-400 transition hover:bg-stone-50 hover:text-red-500">✕</button>
                     </td>
                   </tr>
                 ))}

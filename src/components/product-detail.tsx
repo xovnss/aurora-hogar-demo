@@ -235,7 +235,7 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
                 <p className="mt-0.5 text-2xl font-extrabold text-brand-dark">{money(sel.precioPublico)}</p>
               </div>
               {sel.precioMiembro != null ? (
-                <div className="rounded-xl bg-brand-light/70 p-3 text-center shadow-sm">
+                <div className="rounded-xl bg-stone-100 p-3 text-center shadow-sm">
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand">Socios</p>
                   <p className="mt-0.5 text-2xl font-extrabold text-brand">{money(sel.precioMiembro)}</p>
                 </div>
@@ -248,14 +248,14 @@ export default function ProductDetail({ g, skuInicial, onClose }: { g: ProductGr
             </div>
 
             {sel.precioLiquidacion != null && (
-              <div className="flex items-center justify-between rounded-xl bg-red-50 px-3 py-2">
+              <div className="flex items-center justify-between rounded-xl bg-stone-50 px-3 py-2">
                 <span className="text-sm font-bold text-red-600">🔥 Liquidación</span>
                 <span className="text-xl font-extrabold text-red-600">{money(sel.precioLiquidacion)}</span>
               </div>
             )}
 
             {sel.tarifas.length > 0 && (
-              <div className="rounded-xl bg-brand-light/70 px-3 py-2">
+              <div className="rounded-xl bg-stone-100 px-3 py-2">
                 <p className="text-sm font-bold text-brand-dark">🖐️ Precios por mayoreo</p>
                 <div className="mt-1 space-y-0.5">
                   {sel.tarifas.map((t) => (

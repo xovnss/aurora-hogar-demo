@@ -46,7 +46,7 @@ export const TEMAS: Tema[] = [
     id: "ninguno", label: "Normal", emoji: "❤️",
     vars: {
       "--color-brand": "#e10b0b", "--color-brand-dark": "#b50808",
-      "--color-brand-deep": "#1c1717", "--color-brand-light": "#ffe8e6", "--color-cream": "#fffcfb",
+      "--color-brand-deep": "#1c1717", "--color-brand-light": "#f5f5f4", "--color-cream": "#ffffff",
     },
     hero: "/portada.jpg", logo: "/bam-logo.png",
     secDir: "/temas/normal/sec", secSet: SECS_FULL,

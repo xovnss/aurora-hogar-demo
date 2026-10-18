@@ -281,7 +281,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
         <div className="relative mx-auto flex max-w-7xl items-center gap-4 px-4 pt-2 pb-2.5">
           {/* Menú ☰ (celular): adentro van todas las pestañas */}
           <button onClick={() => setMenuOpen((v) => !v)} aria-label="Menú" aria-expanded={menuOpen}
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-brand-deep transition hover:bg-brand-light xl:hidden">
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-brand-deep transition hover:bg-stone-100 xl:hidden">
             {menuOpen ? (
               <span className="text-2xl leading-none">✕</span>
             ) : (
@@ -301,7 +301,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <nav className="hidden flex-1 items-center justify-center gap-2 xl:flex">
             {tabsShow.map((t) => (
               <button key={t.label} onClick={() => tabClick(t.sec)}
-                className="rounded-full px-4 py-2 text-[1.05rem] font-bold text-brand-deep transition hover:bg-brand-light">{t.label}</button>
+                className="rounded-full px-4 py-2 text-[1.05rem] font-bold text-brand-deep transition hover:bg-stone-100">{t.label}</button>
             ))}
           </nav>
 
@@ -318,7 +318,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
               </div>
             ) : (
               <button onClick={() => setSearchOpen(true)} aria-label="Buscar"
-                className="grid h-11 w-11 place-items-center rounded-full text-[1.35rem] text-brand-deep transition hover:bg-brand-light">🔍</button>
+                className="grid h-11 w-11 place-items-center rounded-full text-[1.35rem] text-brand-deep transition hover:bg-stone-100">🔍</button>
             )}
             {/* Mi lista (moderno) */}
             <button onClick={() => setCartOpen(true)}
@@ -334,12 +334,12 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
           <nav className="border-t border-black/5 bg-white px-3 pb-3 pt-2 xl:hidden">
             {tabsShow.map((t) => (
               <button key={t.label} onClick={() => { setMenuOpen(false); tabClick(t.sec); }}
-                className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-brand-deep transition active:bg-brand-light">
+                className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-brand-deep transition active:bg-stone-100">
                 {t.label}<span className="text-brand">›</span>
               </button>
             ))}
             <button onClick={() => { setMenuOpen(false); setCartOpen(true); }}
-              className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-brand-deep transition active:bg-brand-light">
+              className="flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left text-[1.15rem] font-bold text-brand-deep transition active:bg-stone-100">
               🛒 Mi lista{count > 0 && <span className="rounded-full bg-red-500 px-2 py-0.5 text-xs font-bold text-white">{count}</span>}
             </button>
             {SITE.communityUrl && (
@@ -399,7 +399,7 @@ export default function Catalog({ grupos, tema, portadaUrl, banners }: { grupos:
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img src={img} alt={s.id} className="h-full w-full object-cover" />
                     ) : (
-                      <span className="flex h-full w-full items-center justify-center bg-brand-light text-3xl">{s.emoji}</span>
+                      <span className="flex h-full w-full items-center justify-center bg-stone-100 text-3xl">{s.emoji}</span>
                     )}
                   </span>
                   <span className={"text-center text-[13px] font-bold leading-tight sm:text-sm " + (on ? "text-brand" : "text-stone-700")}>{s.id}</span>

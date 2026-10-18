@@ -598,7 +598,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
 
           <div className="px-5 py-4">
             {/* PRECIOS — Socios protagonista (azul marino), Público chico en gris */}
-            <div className="x-precio flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-br from-red-50 to-white p-4 ring-1 ring-red-100">
+            <div className="x-precio flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-gradient-to-br from-stone-50 to-white p-4 ring-1 ring-red-100">
               <div>
                 {mems.length > 0 ? (
                   <>
@@ -622,7 +622,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
             </div>
 
             {f.tarifas.length > 0 && (
-              <div className="mt-3 rounded-2xl bg-red-50 p-3 ring-1 ring-red-100">
+              <div className="mt-3 rounded-2xl bg-stone-50 p-3 ring-1 ring-red-100">
                 <p className="text-[12px] font-extrabold text-brand-dark">🖐️ Precios por mayoreo</p>
                 <div className="mt-1.5 flex flex-wrap gap-2">
                   {f.tarifas.map((t) => (
@@ -656,7 +656,7 @@ function FichaView({ f, onBack }: { f: Ficha; onBack: () => void }) {
                       El desglose 🏪 Tienda / 📦 Bodega se quitó el 6-oct-2026 a petición de Ximena: toda la
                       mercancía vive en Bodega Torres, así que "Tienda: 0" salía en TODO y las asesoras
                       creían que el producto ya se había acabado en piso. */}
-                  <p className={`x-stock mt-0.5 rounded-md px-1.5 py-0.5 text-[9px] font-bold ${v.stock > 0 ? "bg-brand/10 text-brand-dark" : "bg-red-100 text-red-600"}`}>
+                  <p className={`x-stock mt-0.5 rounded-md px-1.5 py-0.5 text-[9px] font-bold ${v.stock > 0 ? "bg-brand/10 text-brand-dark" : "bg-stone-100 text-red-600"}`}>
                     {v.stock > 0 ? `Disponibles: ${v.stock} piezas` : "Sin disponibles"}
                   </p>
                   {/* Es el número de piezas APARTADAS (comprometidas en pedidos y cotizaciones), pero

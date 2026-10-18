@@ -73,7 +73,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
                       </p>
                     )}
                     {disp(i.sku) <= 0 ? (
-                      <span className="mt-0.5 inline-block rounded bg-red-100 px-1.5 py-0.5 text-[10px] font-bold text-red-600">🚫 Ya no disponible</span>
+                      <span className="mt-0.5 inline-block rounded bg-stone-100 px-1.5 py-0.5 text-[10px] font-bold text-red-600">🚫 Ya no disponible</span>
                     ) : disp(i.sku) < i.qty ? (
                       <span className="mt-0.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-700">Solo quedan {disp(i.sku)}</span>
                     ) : null}
@@ -107,7 +107,7 @@ export default function CartDrawer({ open, onClose, stock }: { open: boolean; on
                 🎉 Como socio ahorras {money(ahorro)}
               </p>
             )}
-            <p className="mb-3 rounded-lg bg-brand-light px-3 py-2 text-[11px] leading-snug text-brand-dark">
+            <p className="mb-3 rounded-lg bg-stone-100 px-3 py-2 text-[11px] leading-snug text-brand-dark">
               🧡 {SITE.memberNote}
             </p>
             <button
